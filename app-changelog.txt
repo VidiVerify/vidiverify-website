@@ -1,0 +1,196 @@
+# Changelog – VidiVerify
+
+Alle nennenswerten Änderungen an VidiVerify werden in dieser Datei dokumentiert.  
+Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) · Versionierung: [Semantic Versioning](https://semver.org/)
+
+---
+
+## [1.4.6] – 2026-04-19
+
+### Behoben
+- **App-Update – Prozess vollständig verifiziert** – Automatischer Update-Prozess (Download → UAC → Silent-Install → Neustart) funktioniert zuverlässig; alle Korrekturen aus v1.4.4/v1.4.5 bestätigt
+
+---
+
+## [1.4.5] – 2026-04-19
+
+### Behoben
+- **App-Update – Prozess bleibt nach Schließen im Task-Manager** – `root.after(3000, os._exit, 0)` feuerte nicht mehr, wenn Inno Setups `CloseApplications=yes` ein WM_CLOSE schickte und den tkinter-Mainloop stoppte. Fix: `threading.Timer` statt `root.after`.
+
+---
+
+## [1.4.4] – 2026-04-19
+
+### Behoben
+- **App-Update – Inno Setup lief interaktiv** – PowerShell `Start-Process -Verb RunAs` übergibt `/VERYSILENT /SUPPRESSMSGBOXES` jetzt korrekt als ArgumentList
+- **App-Update – VidiVerify.exe beim Überschreiben gesperrt** – `CloseApplications=yes` in installer.iss schließt die laufende Instanz vor der Installation
+
+### Verbessert
+- **EXE-Versionsinfo** – Wird automatisch aus `APP_VERSION` im PyInstaller-Spec generiert
+
+---
+
+
+## [1.4.2] – 2026-04-19
+
+### Verbessert
+- **App-Update – Fehlerbehandlung** – Netzwerkfehler lösen automatischen Retry aus; Fehlermeldungen sind jetzt benutzerfreundlich
+- **App-Update – Retry** – Bei Verbindungsabbruch nach Startup-Check wird 1,5 s gewartet und ein zweiter Versuch unternommen
+
+---
+
+## [1.4.1] – 2026-04-19
+
+### Neu
+- **App-Update-Funktion** – VidiVerify kann sich jetzt selbst aktualisieren: Versionsvergleich mit GitHub, Download mit Fortschrittsanzeige, SHA-256-Prüfsummen-Verifikation, automatischer Neustart
+- **Einstellungen – "Beim Start auf VidiVerify-Updates prüfen"** – Neue Checkbox + Button "Jetzt prüfen" für manuellen Check
+
+### Verbessert
+- **Typintegrität – MOD/TOD** – Camcorder-Formate korrekt als MPEG-Programmstrom erkannt (🟢 Konform)
+- **Qualitätsbewertung – RAWVIDEO** – Immer 🟢 verlustfrei (unkomprimiertes Rohmaterial)
+- **Qualitätsbewertung – MPEG1VIDEO** – Bitrateregel mit Plausibilitätsprüfung
+- **Integritätsprüfung – DVD-Menü-VOBs** – DTS-Meldungen nicht mehr als Fehler gewertet
+
+---
+
+## [1.4.0] – 2026-04-19
+
+### Verbessert
+- **Media Analyse – Format-ID** – Bewertungskugel sitzt jetzt zwischen Videocodec und Audio-Trenner: `1080p ▭ AVC ● | AAC`
+- **Einstellungen** – Diverse Korrekturen: VLC/MediaInfo-Status bleibt bei Remote-Check auf "geplant"; MediaInfo-Suchen-Button dauerhaft deaktiviert; Fenstertitel ohne "VV"-Präfix
+- **Bewertungskugeln** – Vor Dateiauswahl kein Schatten-Quadrat mehr sichtbar
+- **MediaInfo-Logo** – PNG aus /assets wird geladen
+- **Plug-in-Lizenzfenster** – Höhe um ~7 Textzeilen vergrössert
+- **PDF-Export** – TYPINTEGRITÄT-Abschnitt mit korrekten Symbolen
+
+---
+
+## [1.4.0-beta3] – 2026-04-19
+
+### Neu
+- **Typintegrität** – Neues Prüffeld im Hauptfenster: vergleicht Dateiendung mit tatsächlichem Containerformat via Magic Bytes; Bewertung 🟢 Konform / 🟡 Kompatibel / 🔴 Abweichung / ⚫ Kein Signal
+- **MAP – Abschnitt TYPINTEGRITÄT** – Neuer Abschnitt vor INTEGRITÄTSPRÜFUNG mit Dateiendung, erkanntem Format und Gesamtergebnis
+- **MAP – Legende** – Bewertungsdetails & Symbole um Typintegrität-Ampelschlüssel erweitert
+- **Menü → Hilfe → Plug-ins** – Neues Untermenü mit separaten Fenstern für FFmpeg, VLC, MediaInfo
+- **Menü → Hilfe → Offizielle Website** – Direktlink auf vidiverify.de
+- **Hauptfenster-Logo** – Klickbar, öffnet vidiverify.de
+
+### Verbessert
+- **Format-Erkennung** – Container wird via Magic Bytes erkannt statt Dateiendung (z. B. MP4 statt MKV bei umbenannter Datei)
+- **Bewertungskugeln** – Alle Kugeln außer Hauptprüfungs-Orbs einheitlich canvas-gezeichnet (Anti-Aliasing): Typintegrität + Format-ID
+- **Einstellungen** – Suchen-Buttons flacher, MediaInfo-Zeile korrekt positioniert, Checkbox-Text Plug-ins
+
+---
+
+## [1.4.0-beta3] – 2026-04-18
+
+### Neu
+- **Menü → Versionshinweise** – Zeigt das App-Changelog live aus dem GitHub-Repository
+  (URL: `raw.githubusercontent.com/VidiVerify/vidiverify-website/master/app-changelog.txt`);
+  Ladevorgang im Hintergrund, Fehleranzeige bei fehlender Verbindung
+- **Codec-Bewertungsregeln vollständig** – Qualitätsampel deckt jetzt alle gängigen Codecs ab:
+  - Video neu: VP9, AV1, MPEG-2/MPEG2VIDEO (mit SD-Standard-Fallback), MPEG-4/DivX/Xvid, WMV,
+    ProRes/DNxHD/DNxHR (immer 🟢)
+  - Audio neu: MP2, MP3, Opus, Vorbis, WMA; Lossless-Gruppe erweitert um FLAC und ALAC
+- **MPEG-2 Bitrate-Fallback** – Wenn `stream.bit_rate` nicht auslesbar ist (typisch bei .mpg),
+  wird `format.bit_rate` (Container-Gesamtbitrate) als Näherungswert verwendet, sodass die
+  echten Bitrateschwellen greifen statt des pauschalen SD-Standard-Fallbacks
+- **Bewertungsdetails → Media Analyse** – Legende um alle neuen Codec-Sektionen erweitert
+  (VP9, AV1, MPEG-2, MPEG-4, WMV, ProRes, MP2, MP3, Opus, Vorbis, WMA, FLAC/ALAC)
+- **BEWERTUNGSREGELN.txt** – Neue Entwicklerdokumentation im Source-Root; beschreibt alle
+  Codec-Schwellen, Sonderfälle (MPEG-2, ProRes) und Hinweise für neue Codec-Einträge
+
+### Verbessert
+- **Vorprüfungs-Strip** – Layout überarbeitet: Titel + Fortschrittsbalken in einer Zeile,
+  Kugel + Ergebnistext in voller Breite darunter; Ergebnistext 1 px größer (Segoe UI 9)
+- **Vorprüfungs-Strip** – Fortschrittsbalken 1 px dicker, Titeltext 2 px höher positioniert
+
+### Behoben
+- **Einstellungen → Standard-CPU-Modus** – Wurde nach dem Speichern nicht sofort im
+  Hauptfenster übernommen; `cpu_mode_var` und `_cpu_mode_last_safe` werden jetzt direkt
+  beim Speichern synchronisiert
+
+---
+
+## [1.4.0-beta1] – 2026-04-15
+
+Erster öffentlicher Beta-Release. Enthält den vollständigen Feature-Stand aus der
+Entwicklungsphase April 2026 sowie die komplette Build- und Verteilungsinfrastruktur.
+
+### Neu
+- **Drag & Drop** – Videodateien können direkt in das Programmfenster gezogen werden
+  (tkinterdnd2 / OLE IDropTarget; transparenter Fallback wenn DnD nicht verfügbar)
+- **Laufzeit-Anzeige** – Statuszeile zeigt die vergangene Prüfdauer in Echtzeit
+  (lokalisiert DE / EN / ZH)
+- **Abbruch-Bestätigung** – Sicherheitsdialog vor hartem Prüfungsabbruch
+- **Plex-Theme** – authentische Plex-Farbpalette als vierter Design-Modus
+- **Fenster „Externe Module"** – ausführliche Informationen zu FFmpeg und VLC
+  mit Logos, Lizenztexten und direktem Link zu videolan.org
+- **Fenster „Unterstützen"** – Spendenbereich mit QR-Codes (PayPal, 4Fund),
+  dreisprachig (DE / EN / ZH)
+- **Hilfe-Menü** – fünf Einträge mit Links auf vidiverify.de
+- **ModuleManager** – erweiterter Modul-Lifecycle (FFmpeg + VLC):
+  dynamische VLC-Versionserkennung via VideoLAN-Scraping,
+  FFmpeg-Versionsprüfung ohne vollständigen ZIP-Download (nur ~2 KB GitHub-API)
+- **Smooth Fade-In** beim App-Start (8 Stufen, 22 ms Intervall)
+
+### Verbessert
+- **MAP (Media-Analyse-Protokoll)**
+  - Bezeichnung durchgängig: „MEDIA-ANALYSE-PROTOKOLL | «MAP»"
+  - Copyright aktualisiert auf „© {Jahr} VidiVerify-Team | Gera/Thüringen, Germany"
+    (Jahr wird dynamisch aus dem Buildzdatum ermittelt)
+  - Versionsnummer aus der Titelzeile entfernt (steht separat eine Zeile darunter)
+  - Umlaut-Korrekturen im deutschen Block (Qualität, möglich, Auflösung, Qualitätsampel)
+- **Übersetzungen**
+  - FALLBACK_STRINGS vollständig: alle Schlüssel in DE / EN / ZH konsistent
+  - zh.json: 11 Log-Strings übersetzt, `settings_saved_restart` korrigiert
+  - Drei neue Sprachblöcke (Donate-Fenster, Externe Module VLC, Abbruchdialog)
+- **Build-Datum** – `APP_BUILD_DATE` wird dynamisch aus der mtime der .py / .exe gelesen,
+  kein manuelles Pflegen mehr nötig
+- **Schreibpfade** – Logs, Einstellungen und Cache schreiben im installierten Betrieb
+  nach `%LOCALAPPDATA%\VidiVerify` statt ins Programmverzeichnis (behebt PermissionError
+  beim Start aus `C:\Program Files`)
+- **Update-Dialog** – erscheint nicht mehr während einer laufenden Prüfung
+- **Watchdog-Timeout** – Netzwerk-Vorabprüfung nutzt kompaktes Inline-Skript
+  statt des vollständigen Hauptskripts (behebt False-Positive-Timeouts bei NAS-Last)
+- **Dialog „Über VidiVerify"** – auf relevante technische Angaben reduziert,
+  redundante Einträge entfernt; Grid-Layout für sauber ausgerichtete Info-Tabelle
+- **UI-Details** – Startbutton füllt volle Rahmenhöhe; Aktionsbuttons in akzentuiertem
+  Stahlblau (#14496e); Fensteraufbau durchgängig mit withdraw/deiconify (kein Ruckeln mehr)
+- **In-Memory-Log** – Limit von 50 000 auf 10 000 Zeilen reduziert
+
+### Behoben
+- Doppeltes Logging durch falsches `if`/`elif` in `_log()`
+- Dreiweg-Logik in `check_for_updates` (None / update / aktuell) war fehlerhaft
+- VLC-Label in den Einstellungen: „VLC (später)" → „VLC:" in allen Sprachen
+- Rekursive DnD-Widget-Registrierung erzeugte weiße Flächen → nur Root-Fenster
+
+### Build & Distribution
+- **PyInstaller-Pipeline** – `vidiverify.spec` + `build_exe.bat` erzeugen eine
+  selbstständige `.exe` (~23 MB, kein Python-Install erforderlich)
+- **Inno Setup-Pipeline** – `installer.iss` + `build_installer.bat` erzeugen einen
+  Windows-Installer (~24 MB) mit Startmenü-Integration und sauberem Deinstaller
+- **Code-Signing** – `create_cert.ps1` erstellt ein selbstsigniertes RSA-4096 / SHA-256
+  Code-Signing-Zertifikat (gültig 3 Jahre); `sign_release.bat` signiert EXE und Installer
+
+---
+
+## [1.4.0-pre Alpha 4] – 2026-04-13
+
+Initiale Git-Erfassung des Projekts. Basis-Funktionsstand vor der Entwicklungsphase
+April 2026.
+
+### Enthalten
+- Kernprüfung: Container-Integrität, Codec-Analyse, Audio-/Videoqualitätsbewertung
+- Dreisprachige Oberfläche (DE / EN / ZH) mit JSON-Sprachkatalogen und FALLBACK_STRINGS
+- Design-Modi: Light, Dark, System (Plex folgte in Beta 1)
+- MAP-Export (Media-Analyse-Protokoll) als formatiertes Textdokument
+- Modul-Verwaltung: automatischer Download / Update von FFmpeg und VLC
+- Einstellungsdialog mit Pfadkonfiguration und Sprachauswahl
+- Splash-Screen mit Fade-In-Animation
+
+---
+
+*Changelog wird mit jedem Release fortgeschrieben.*
+
+

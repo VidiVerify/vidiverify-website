@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <defs>
+
+    <filter id="ringGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+      <feOffset in="blur" dx="5" dy="8" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.32" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- ── RING ─────────────────────────────────────────────────────── -->
+    <radialGradient id="metalRing" cx="32%" cy="25%" r="74%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="10%"  stop-color="#f2f2f2"/>
+      <stop offset="26%"  stop-color="#d6d6d6"/>
+      <stop offset="46%"  stop-color="#bcbcbc"/>
+      <stop offset="64%"  stop-color="#d2d2d2"/>
+      <stop offset="82%"  stop-color="#a5a5a5"/>
+      <stop offset="100%" stop-color="#747474"/>
+    </radialGradient>
+
+    <!-- Mask: restrict ring glow to annular face only -->
+    <mask id="ringMask">
+      <circle cx="440" cy="430" r="420" fill="white"/>
+      <circle cx="440" cy="430" r="352" fill="black"/>
+    </mask>
+
+    <!-- ── FILM STRIP ─────────────────────────────────────────────── -->
+    <linearGradient id="filmBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#e8e8e8"/>
+      <stop offset="45%"  stop-color="#d6d6d6"/>
+      <stop offset="100%" stop-color="#dedede"/>
+    </linearGradient>
+    <linearGradient id="perfBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#cecece"/>
+      <stop offset="100%" stop-color="#c3c3c3"/>
+    </linearGradient>
+
+    <!-- Mask: show only the film-strip rect, punch out perforation holes.
+         Inner lens area outside the strip and the holes are both transparent. -->
+    <mask id="perfMask">
+      <!-- Film strip area visible -->
+      <rect x="188" y="235" width="504" height="390" fill="white"/>
+      <!-- Top holes – transparent (black = cut out) -->
+      <rect x="210" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="272" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="334" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="396" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="458" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="520" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="582" y="246" width="40" height="40" rx="5" fill="black"/>
+      <rect x="644" y="246" width="40" height="40" rx="5" fill="black"/>
+      <!-- Bottom holes – transparent -->
+      <rect x="210" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="272" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="334" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="396" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="458" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="520" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="582" y="574" width="40" height="40" rx="5" fill="black"/>
+      <rect x="644" y="574" width="40" height="40" rx="5" fill="black"/>
+    </mask>
+
+    <!-- ── BLUE SCREEN: sharp diagonal ──────────────────────────────── -->
+    <linearGradient id="blueScreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#4a7da0"/>
+      <stop offset="47%"  stop-color="#3e6c90"/>
+      <stop offset="53%"  stop-color="#1b486f"/>
+      <stop offset="100%" stop-color="#143d5c"/>
+    </linearGradient>
+    <linearGradient id="screenGloss" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="38%"  stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- ── HANDLE ────────────────────────────────────────────────────
+         Left end (ring-facing): concave arc R=601, sagitta≈3 px → almost
+         straight, just hinting at the ring's curvature.
+         Right end: pill semicircle R=60.
+         After rotate(45,850,840) both corners (706,780)→(790,696) and
+         (706,900)→(706,781) land at exactly 440 px from lens centre →
+         20 px gap from outer ring surface (420 px). -->
+    <linearGradient id="handleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#6aaccc"/>
+      <stop offset="18%"  stop-color="#3e6c90"/>
+      <stop offset="58%"  stop-color="#25567e"/>
+      <stop offset="100%" stop-color="#1b486f"/>
+    </linearGradient>
+    <linearGradient id="handleGloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.50"/>
+      <stop offset="60%"  stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Handle clip (same shape as body, for masking the gloss rect) -->
+    <clipPath id="handleClip">
+      <path d="M 706,780 L 846,780
+               A 60,60  0 0 1 906,840
+               A 60,60  0 0 1 846,900
+               L 706,900
+               A 601,601 0 0 0 706,780 Z"/>
+    </clipPath>
+
+  </defs>
+
+  <g filter="url(#dropShadow)">
+
+    <!-- ── HANDLE ──────────────────────────────────────────────────── -->
+    <g transform="rotate(45, 850, 840)">
+      <path d="M 706,780 L 846,780
+               A 60,60  0 0 1 906,840
+               A 60,60  0 0 1 846,900
+               L 706,900
+               A 601,601 0 0 0 706,780 Z"
+            fill="url(#handleGrad)"/>
+      <!-- Gloss on NW face (top in local space → NW after rotation) -->
+      <rect x="680" y="780" width="290" height="56"
+            fill="url(#handleGloss)" clip-path="url(#handleClip)"/>
+    </g>
+
+    <!-- ── OUTER METALLIC RING ──────────────────────────────────────
+         Outer r=420, inner r=352, ring width 68 px.
+         ringMask punches out the inner circle → centre is truly transparent. -->
+    <circle cx="440" cy="430" r="420" fill="url(#metalRing)" mask="url(#ringMask)"/>
+    <circle cx="440" cy="430" r="420" fill="none" stroke="#666" stroke-width="2" mask="url(#ringMask)"/>
+
+    <!-- Ring glow highlights, masked to ring face -->
+    <g mask="url(#ringMask)">
+      <ellipse cx="440" cy="42"  rx="235" ry="42"
+               fill="white" fill-opacity="0.60" filter="url(#ringGlow)"/>
+      <ellipse cx="248" cy="198" rx="120" ry="44"
+               fill="white" fill-opacity="0.40" filter="url(#ringGlow)"/>
+    </g>
+
+    <!-- ── INNER LENS AREA: transparent (no fill) ──────────────────
+         Area between ring and film strip is see-through. -->
+    <circle cx="440" cy="430" r="352" fill="none" stroke="#9a9a9a" stroke-width="2"/>
+
+    <!-- ── FILM STRIP ───────────────────────────────────────────────
+         perfMask makes the area outside the strip AND the holes transparent.
+         Strip: x=188–692, y=235–625. Corners at ≈319 px from centre,
+         giving ≈33 px of transparent gap to the inner ring edge (352 px). -->
+    <g mask="url(#perfMask)">
+
+      <rect x="188" y="235" width="504" height="390" fill="url(#filmBody)"/>
+
+      <!-- Top perforation band -->
+      <rect x="188" y="235" width="504" height="62" fill="url(#perfBand)"/>
+
+      <!-- Top separator -->
+      <line x1="188" y1="297" x2="692" y2="297" stroke="#b0b0b0" stroke-width="1.5"/>
+
+      <!-- Blue screen – sharp diagonal gradient -->
+      <rect x="188" y="297" width="504" height="266" fill="url(#blueScreen)"/>
+      <path d="M188,297 L692,297 L692,410 Q440,372 188,410 Z"
+            fill="url(#screenGloss)"/>
+
+      <!-- Bottom separator -->
+      <line x1="188" y1="563" x2="692" y2="563" stroke="#b0b0b0" stroke-width="1.5"/>
+
+      <!-- Bottom perforation band -->
+      <rect x="188" y="563" width="504" height="62" fill="url(#perfBand)"/>
+
+    </g>
+
+    <!-- Inner border stroke on top for crisp edge -->
+    <circle cx="440" cy="430" r="352" fill="none" stroke="#9a9a9a" stroke-width="2"/>
+
+  </g>
+
+</svg>

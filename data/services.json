@@ -1,0 +1,68 @@
+[
+   {
+      "id": 1,
+      "title": "Vorprüfung",
+      "list": [
+         "Drag & Drop Unterstützung",
+         "Schnelle Vorprüfung vor der Vollanalyse",
+         "Dateiformat-Validierung",
+         "Grössen- und Strukturprüfung",
+         "Ressourcenschonend"
+      ]
+   },
+   {
+      "id": 2,
+      "title": "Integritätsprüfung",
+      "list": [
+         "Plug-in-basierte Frame-Analyse",
+         "Erkennung von Korruption und Lesefehlern",
+         "Dekodierbarkeitstest",
+         "Prüfung auf abgebrochene Streams",
+         "Detaillierte Fehlerprotokolle"
+      ]
+   },
+   {
+      "id": 3,
+      "title": "Media Analyse",
+      "list": [
+         "Container- und Codec-Erkennung",
+         "Bitrate, Framerate und Auflösung",
+         "Audio-Track-Analyse",
+         "Metadaten-Auswertung",
+         "Mehrkanal-Unterstützung"
+      ]
+   },
+   {
+      "id": 4,
+      "title": "Formatprüfung",
+      "list": [
+         "Unterstützung für 30+ Container-Formate",
+         "Prüfung auf spezifische Codec-Anforderungen",
+         "AVC, HEVC, MPEG-4 Video",
+         "AAC, AC3, EAC3, DTS Audio",
+         "Erweiterbar durch Plug-ins"
+      ]
+   },
+   {
+      "id": 5,
+      "title": "Strukturierte Ergebnisdarstellung",
+      "list": [
+         "Übersichtliche Tabellenansicht",
+         "Farbkodierte Status-Anzeige",
+         "Filterfunktionen für Ergebnisse",
+         "Detailansicht pro Datei",
+         "Exportierbare Berichte"
+      ]
+   },
+   {
+      "id": 6,
+      "title": "Ergebnis-Dokumentation",
+      "list": [
+         "Proprietäres MAP – Media-Analyse-Protokoll",
+         "Vollständig detailliert, ablagefähig, revisionssicher",
+         "Lückenlose Nachvollziehbarkeit jedes Analysebefunds",
+         "Konzipiert für Archivare, Sammler und Kuratoren",
+         "Strukturierter Export – bereit für die Langzeitarchivierung"
+      ]
+   }
+]

@@ -1,0 +1,50 @@
+{
+   "name": "VidiVerify",
+   "title": "Der 1-Klick-Check für deine Videos",
+   "location": "Deutschland",
+   "contact": {
+      "email": "support@vidiverify.de",
+      "github": "VidiVerify"
+   },
+   "roles": [
+      "Der 1-Klick-Check für deine Videos",
+      "Integritätsprüfung. Klar und schnell.",
+      "Technische Analyse für Videodateien",
+      "Moderne Desktop-Anwendung für Windows",
+      "Praxisnah entwickelt"
+   ],
+   "about": {
+      "greeting": "Hi, hier ist VidiVerify!",
+      "current_role": "🚀 Schneller 1-Klick-Check — Videodateien prüfen, analysieren und bewerten. In wenigen Sekunden, ohne technisches Vorwissen.",
+      "education": "🖥️ Klare Desktop-Anwendung — Modern, übersichtlich und vollständig für Windows entwickelt. Lokale Verarbeitung, keine Cloud, keine Abhängigkeiten.",
+      "specialization": "🧩 Technische Transparenz — Strukturierte Ergebnisdarstellung statt unlesbarer Rohdaten. Container, Video, Audio und mehr auf einen Blick.",
+      "competitive_programming": "📦 Ausbaufähige Plattform — Externe Module, Exportfunktionen und eine zukunftsfähige Architektur. Entwickelt für realen Einsatz."
+   },
+   "statistics": {
+      "launch": "2026",
+      "formate": "29+",
+      "codezeilen": "11k+",
+      "funktionen": "58+",
+      "downloads": "350+",
+      "seitenaufrufe": "3500+"
+   },
+   "social_profiles": [
+      {
+         "id": 1,
+         "name": "Facebook",
+         "link": "https://www.facebook.com/VidiVerify",
+         "icon": "FaFacebook"
+      },
+      {
+         "id": 2,
+         "name": "GitHub",
+         "link": "https://github.com/VidiVerify",
+         "icon": "FaGithub"
+      }
+   ],
+   "site": {
+      "counter_namespace": "vidiverify",
+      "gc_code": "vidiverify",
+      "tech_stack": ["React 19", "Vite 7", "Tailwind v4", "Three.js", "Motion"]
+   }
+}

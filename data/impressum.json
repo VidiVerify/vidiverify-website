@@ -1,0 +1,39 @@
+{
+   "title": "Impressum",
+   "date": "Stand: 18.04.2026",
+   "provider": {
+      "legal_note": "Angaben gemäss § 5 DDG",
+      "name": "VidiVerify-Team",
+      "address": ["Liebestrasse 18a", "07546 Gera", "Deutschland"],
+      "represented_by": "Thomas Smektalla"
+   },
+   "contact": {
+      "email": "support@vidiverify.de",
+      "websites": ["vidiverify.de", "www.vidiverify.de"]
+   },
+   "privacy_url": "www.vidiverify.de/datenschutz",
+   "responsible": "Thomas Smektalla",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Hinweis zur Verbraucherstreitbeilegung",
+         "paragraphs": [
+            "Hinweis gemäss § 36 VSBG: Zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle ist keine Bereitschaft und keine Verpflichtung gegeben."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Urheberrecht",
+         "paragraphs": [
+            "Die auf dieser Website veröffentlichten Inhalte, Texte, Gestaltungen, Logos, Grafiken, Bilder und sonstigen Bestandteile unterliegen dem anwendbaren Urheber- und Leistungsschutzrecht, soweit nicht abweichend gekennzeichnet. Jede Verwertung ausserhalb der gesetzlich zulässigen Grenzen bedarf der vorherigen Zustimmung des jeweiligen Rechteinhabers."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Projektbezogene Hinweise",
+         "paragraphs": [
+            "VidiVerify ist ein Softwareprojekt zur technischen Analyse und Prüfung von Videodateien. Weiterführende Regelungen zur Nutzung der Software, zum Lizenzmodell, zur Haftung sowie zu Pro-Funktionen ergeben sich aus der jeweils aktuellen Endbenutzerlizenzvereinbarung (EULA) und den ergänzenden rechtlichen Hinweisen auf dieser Website."
+         ]
+      }
+   ]
+}

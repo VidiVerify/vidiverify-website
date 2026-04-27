@@ -1,0 +1,19 @@
+{
+   "headline": "VidiVerify freiwillig unterstützen",
+   "description": "VidiVerify wird mit hohem zeitlichem und technischem Aufwand entwickelt, gepflegt und weiter ausgebaut. Hinter dem Projekt steht kein grosser Konzern, sondern ein unabhängiges Team mit dem Anspruch, eine sinnvolle und verlässliche Lösung für die technische Prüfung von Videodateien bereitzustellen. Wer die Zukunft des Projekts aktiv mittragen möchte, kann die Weiterentwicklung freiwillig per Spende unterstützen.",
+   "note": "Die private Nutzung bleibt davon unabhängig kostenfrei.",
+   "ways": [
+      {
+         "id": "paypal",
+         "label": "Spenden via PayPal",
+         "icon": "FaPaypal",
+         "link": "https://www.paypal.com/donate/?hosted_button_id=ENPFWJDAVHRXJ"
+      },
+      {
+         "id": "4fund",
+         "label": "Spenden via 4fund",
+         "icon": "FaHandHoldingHeart",
+         "link": "https://4fund.com/de/g4d53t"
+      }
+   ]
+}

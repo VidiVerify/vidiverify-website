@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PAD-Datei nach ASP PAD XML Standard v4.0 -->
+<!-- Portable Application Description (PAD) für VidiVerify -->
+<!-- Hosten unter: https://vidiverify.de/pad/vidiverify.xml -->
+<XML_DIZ_INFO>
+
+  <!-- ============================================================
+       MASTER PAD INFO
+       ============================================================ -->
+  <MASTER_PAD_INFO>
+    <Spec_Version>4.0</Spec_Version>
+    <Platform_Compliant>yes</Platform_Compliant>
+    <Unique_URL>https://vidiverify.de/pad/vidiverify.xml</Unique_URL>
+    <PAD_Editor>Manually created</PAD_Editor>
+    <PAD_Info_File>https://vidiverify.de/pad/vidiverify.xml</PAD_Info_File>
+  </MASTER_PAD_INFO>
+
+  <!-- ============================================================
+       HERSTELLER / KONTAKT
+       ============================================================ -->
+  <Company_Info>
+    <Company_Name>VidiVerify-Team</Company_Name>
+    <Address_1></Address_1>
+    <Address_2></Address_2>
+    <City_Town>Gera</City_Town>
+    <State_Province>Thüringen</State_Province>
+    <Zip_Postal_Code></Zip_Postal_Code>
+    <Country>Germany</Country>
+    <Company_WebSite_URL>https://vidiverify.de</Company_WebSite_URL>
+    <Contact_Info>
+      <Author_First_Name>VidiVerify</Author_First_Name>
+      <Author_Last_Name>Team</Author_Last_Name>
+      <Author_Email>admin@vidiverify.de</Author_Email>
+      <Contact_First_Name>VidiVerify</Contact_First_Name>
+      <Contact_Last_Name>Team</Contact_Last_Name>
+      <Contact_Email>admin@vidiverify.de</Contact_Email>
+    </Contact_Info>
+    <Support_Info>
+      <Sales_Email></Sales_Email>
+      <Support_Email>support@vidiverify.de</Support_Email>
+      <General_Email>admin@vidiverify.de</General_Email>
+      <Sales_Phone></Sales_Phone>
+      <Support_Phone></Support_Phone>
+      <General_Phone></General_Phone>
+      <Support_URL>https://vidiverify.de/support</Support_URL>
+    </Support_Info>
+  </Company_Info>
+
+  <!-- ============================================================
+       PROGRAMM-INFORMATIONEN
+       ============================================================ -->
+  <Program_Info>
+    <Program_Name>VidiVerify</Program_Name>
+    <Program_Version>1.4.6</Program_Version>
+    <Program_Release_Month>04</Program_Release_Month>
+    <Program_Release_Day>19</Program_Release_Day>
+    <Program_Release_Year>2026</Program_Release_Year>
+    <Program_Cost_Dollars>0.00</Program_Cost_Dollars>
+    <Program_Cost_Other_Code>EUR</Program_Cost_Other_Code>
+    <Program_Cost_Other>0.00</Program_Cost_Other>
+    <Program_Type>Freeware</Program_Type>
+    <Program_Release_Status>New Release</Program_Release_Status>
+    <Program_Install_Support>Install and Uninstall</Program_Install_Support>
+    <Program_OS_Support>Win11,Win10</Program_OS_Support>
+    <Program_Language>German,English,Chinese</Program_Language>
+    <File_Info>
+      <!-- Dateigroesse aktualisieren nach jedem Build (dist/VidiVerify-Setup.exe) -->
+      <Filename_Versioned>VidiVerify-Setup.exe</Filename_Versioned>
+      <Filename_Previous>VidiVerify Setup 1.4.5.exe</Filename_Previous>
+      <Filename_Generic>VidiVerify-Setup.exe</Filename_Generic>
+      <Filename_Long>VidiVerify Setup 1.4.6.exe</Filename_Long>
+      <Install_File_Size_Bytes>31065920</Install_File_Size_Bytes>
+      <Install_File_Size_K>30338</Install_File_Size_K>
+      <Install_File_Size_MB>30</Install_File_Size_MB>
+      <!-- Custom Extension: SHA-256-Hash der Setup-Datei (nicht im PAD-Standard, aber von vielen Portalen ausgewertet als Integritaetsnachweis) -->
+      <File_SHA256>4e031b249774c7f4815cec97928a2a7db6f574ce3766e183ba66b4e36f689acf</File_SHA256>
+      <!-- Custom Extension: Sidecar-URL mit dem Hash als Klartext-Datei -->
+      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.6/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
+    </File_Info>
+    <Expire_Info>
+      <Has_Expire_Info>N</Has_Expire_Info>
+    </Expire_Info>
+  </Program_Info>
+
+  <!-- ============================================================
+       PROGRAMMBESCHREIBUNGEN
+       ============================================================ -->
+  <Program_Descriptions>
+
+    <!-- ── ENGLISCH ────────────────────────────────────────────── -->
+    <English>
+      <Keywords>video integrity check, video analysis, ffmpeg, file verification, codec check, video quality, damaged video, Windows video tool, freeware, free video checker</Keywords>
+
+      <!-- max. 45 Zeichen -->
+      <Char_Desc_45>Free video file integrity checker for Windows</Char_Desc_45>
+
+      <!-- max. 80 Zeichen -->
+      <Char_Desc_80>VidiVerify – Free professional video integrity analysis for Windows</Char_Desc_80>
+
+      <!-- max. 250 Zeichen -->
+      <Char_Desc_250>VidiVerify is a free Windows tool for professional video file analysis. Powered by ffmpeg, it detects codec defects, decoding errors, and structural damage in all common video formats. Clear quality ratings and technical reports in seconds.</Char_Desc_250>
+
+      <!-- max. 450 Zeichen -->
+      <Char_Desc_450>VidiVerify is a free Windows application for professional video file integrity analysis. Powered by ffmpeg, it systematically checks for codec defects, decoding errors, and structural file damage. The intuitive dark-themed interface delivers quality ratings, format metadata, and a full technical report — supporting AVC, HEVC, MPEG-2, VOB, ProRes, DNxHD, AV1, and more. Ideal for archivists, video editors, and media professionals.</Char_Desc_450>
+
+      <!-- max. 2000 Zeichen -->
+      <Char_Desc_2000>VidiVerify is a free, professional video file analysis tool for Windows. It performs a deep technical inspection of your video files using ffmpeg — the gold standard in media processing — to reliably detect file damage, codec errors, and integrity issues before they cause problems in production, archiving, or playback.
+
+Key features:
+- Full ffmpeg-based integrity scan — detects decoding errors, corrupted frames, and structural file damage
+- Pre-check (Precheck) — fast technical metadata inspection before the full scan
+- Quality rating — intelligent, codec- and format-aware evaluation (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD, and more)
+- Format ID — automatic recognition of container and stream type (MP4, MKV, MOV, AVI, VOB, TS, MXF, ...)
+- Type integrity — verifies container/codec consistency to detect mislabeled or corrupted files
+- Automatic self-update — VidiVerify checks for new versions at startup and installs them with one click
+- Support package — generate an anonymized diagnostic bundle with one click for easy troubleshooting
+- Multilingual interface — German, English, and Chinese
+- Three visual themes — Dark (default), Plex, and Windows Classic
+
+VidiVerify is completely free to use. No limitations, no nag screens, no advertising. If you find it valuable, a voluntary donation via vidiverify.de/donate is warmly appreciated.
+
+System requirements: Windows 10 or 11 (64-bit), approx. 60 MB disk space.</Char_Desc_2000>
+    </English>
+
+    <!-- ── DEUTSCH ─────────────────────────────────────────────── -->
+    <German>
+      <Keywords>Videodatei prüfen, Videointegrität, Videoanalyse, ffmpeg, Codec-Prüfung, Videoqualität, beschädigtes Video, Windows Video Tool, Freeware, kostenlos</Keywords>
+
+      <!-- max. 45 Zeichen -->
+      <Char_Desc_45>Kostenlose Videodatei-Integritätsprüfung</Char_Desc_45>
+
+      <!-- max. 80 Zeichen -->
+      <Char_Desc_80>VidiVerify – Professionelle Videoanalyse und Integritätsprüfung (Freeware)</Char_Desc_80>
+
+      <!-- max. 250 Zeichen -->
+      <Char_Desc_250>VidiVerify ist ein kostenloses Windows-Programm zur professionellen Videodatei-Analyse. Auf Basis von ffmpeg erkennt es Codec-Fehler, Dekodierfehler und Dateischäden in allen gängigen Videoformaten — mit klarer Qualitätsbewertung und Prüfbericht.</Char_Desc_250>
+
+      <!-- max. 450 Zeichen -->
+      <Char_Desc_450>VidiVerify ist ein kostenloses Windows-Programm zur professionellen Videodatei-Analyse. Auf Basis von ffmpeg prüft es systematisch auf Codec-Defekte, Dekodierfehler und strukturelle Dateischäden. Die übersichtliche Oberfläche liefert Qualitätsbewertungen, Format-Metadaten und einen detaillierten Prüfbericht — für Formate von AVC und HEVC bis hin zu MPEG-2, VOB, ProRes, DNxHD und AV1. Ideal für Archivare, Videoschnitt und Medienprofis.</Char_Desc_450>
+
+      <!-- max. 2000 Zeichen -->
+      <Char_Desc_2000>VidiVerify ist ein kostenloses, professionelles Videodatei-Analysetool für Windows. Es führt eine tiefgehende technische Prüfung von Videodateien auf Basis von ffmpeg durch — dem etablierten Standard in der Medienverarbeitung — und erkennt zuverlässig Dateischäden, Codec-Fehler und Integritätsprobleme, bevor diese in Produktion, Archivierung oder Wiedergabe zur Last werden.
+
+Kernfunktionen:
+- Vollständige ffmpeg-Integritätsprüfung — erkennt Dekodierfehler, beschädigte Frames und strukturelle Dateischäden
+- Vorprüfung (Precheck) — schnelle technische Metadaten-Inspektion vor dem eigentlichen Scan
+- Qualitätsbewertung — intelligente, codec- und formatspezifische Bewertung (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD u. v. m.)
+- Format-ID — automatische Erkennung von Container und Stream-Typ (MP4, MKV, MOV, AVI, VOB, TS, MXF, ...)
+- Typintegrität — prüft Container-/Codec-Konsistenz und erkennt falsch bezeichnete oder beschädigte Dateien
+- Automatisches Self-Update — VidiVerify prüft beim Start auf neue Versionen und installiert diese per Klick
+- Supportpaket — anonymisiertes Diagnosepaket per Knopfdruck für einfache Fehleranalyse
+- Mehrsprachige Oberfläche — Deutsch, Englisch und Chinesisch
+- Drei visuelle Designs — Dark (Standard), Plex und Windows Classic
+
+VidiVerify ist vollständig kostenlos nutzbar. Keine Einschränkungen, keine Hinweisfenster, keine Werbung. Wer das Programm nützlich findet, kann unter vidiverify.de/donate freiwillig spenden.
+
+Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 60 MB Festplattenplatz.</Char_Desc_2000>
+    </German>
+
+  </Program_Descriptions>
+
+  <!-- ============================================================
+       WEB-INFORMATIONEN / DOWNLOAD-URLS
+       ============================================================ -->
+  <Web_Info>
+    <Application_URLs>
+      <!-- Primärer Download: direkter, redirect-freier versionierter Pfad auf eigener Domain.
+           Wird von strengen Validierern (z. B. Microsoft Store) zwingend verlangt; funktioniert
+           ebenso für klassische Portale (Heise, Filehorse, Softpedia). -->
+      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.6/VidiVerify-Setup.exe</Primary_Download_URL>
+      <!-- Sekundär: GitHub-Release als kanonische Quelle (mit Changelogs, Signaturen).
+           Hinweis: liefert 302-Redirect auf objects.githubusercontent.com mit signierter,
+           kurzlebiger CDN-URL. Für Portale, die Redirects folgen, ungehinderte Quelle. -->
+      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.6/VidiVerify-Setup.exe</Secondary_Download_URL>
+      <!-- Zusätzlich: menschliche Downloadseite (Landingpage) -->
+      <Additional_Download_URL>https://vidiverify.de/download</Additional_Download_URL>
+      <Program_Info_URL>https://vidiverify.de</Program_Info_URL>
+      <Program_Info_Other_URL>https://vidiverify.de/download</Program_Info_Other_URL>
+      <Order_URL></Order_URL>
+      <Affiliates_URL></Affiliates_URL>
+      <!-- Screenshot_URL: primäres Bild (PAD-Standard v4.0) -->
+      <Screenshot_URL>https://vidiverify.de/pad/screenshot_1.png</Screenshot_URL>
+      <!-- Screenshot_URL_2–7: nicht offiziell, aber von den meisten Portalen ausgewertet -->
+      <Screenshot_URL_2>https://vidiverify.de/pad/screenshot_2.png</Screenshot_URL_2>
+      <Screenshot_URL_3>https://vidiverify.de/pad/screenshot_3.png</Screenshot_URL_3>
+      <Screenshot_URL_4>https://vidiverify.de/pad/screenshot_4.png</Screenshot_URL_4>
+      <Screenshot_URL_5>https://vidiverify.de/pad/screenshot_5.png</Screenshot_URL_5>
+      <Screenshot_URL_6>https://vidiverify.de/pad/screenshot_6.png</Screenshot_URL_6>
+      <Screenshot_URL_7>https://vidiverify.de/pad/screenshot_7.png</Screenshot_URL_7>
+      <Icon_URL>https://vidiverify.de/favicon.ico</Icon_URL>
+    </Application_URLs>
+    <Download_Requirements>
+      <OS_Requirements>Windows 10 / Windows 11 (64-bit)</OS_Requirements>
+      <Memory_Requirements>256 MB RAM</Memory_Requirements>
+      <Storage_Requirements>60 MB</Storage_Requirements>
+    </Download_Requirements>
+  </Web_Info>
+
+  <!-- ============================================================
+       NUTZUNGSRECHTE / EULA
+       ============================================================ -->
+  <Permissions>
+    <Distribution_Permissions>VidiVerify may be freely distributed via download portals, software directories, and free software platforms provided that the installer file is distributed unmodified. The software may not be sold or bundled with commercial products without prior written permission from the author.</Distribution_Permissions>
+    <EULA>End User License Agreement (EULA) - VidiVerify Basic Edition
+
+By downloading, installing, or using VidiVerify, you agree to the following terms.
+
+1. Grant of License: The Basic edition of VidiVerify may be used free of charge for private purposes. Commercial users require a separate PRO license with extended functionality.
+
+2. Distribution: Redistribution of the unmodified installer via software platforms and download portals is permitted. Sale or bundling with third-party commercial products without prior written permission from the author is prohibited.
+
+3. Restrictions: Reverse engineering, decompiling, or modifying the software is prohibited.
+
+4. Warranty and Liability: The software is provided "as is" without any express or implied warranty. The authors accept no liability for any damages arising from the use of this software.
+
+5. Privacy: Privacy information is available at https://vidiverify.de/datenschutz
+
+Copyright © 2026 VidiVerify-Team, Gera/Thüringen, Germany. All rights reserved. Contact: support@vidiverify.de</EULA>
+  </Permissions>
+
+</XML_DIZ_INFO>

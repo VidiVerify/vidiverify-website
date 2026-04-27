@@ -1,0 +1,11 @@
+{
+   "repo_owner": "VidiVerify",
+   "repo_name": "vidiverify-releases",
+   "asset_name": "VidiVerify-Setup.exe",
+   "platform": "Windows · 64-Bit",
+   "usage_note": "Die private Nutzung ist kostenfrei. Für gewerbliche Nutzung ist eine Lizenz erforderlich.",
+   "links": {
+      "all_releases": "https://github.com/VidiVerify/vidiverify-releases/releases",
+      "changelog": "https://github.com/VidiVerify/vidiverify-website/blob/master/app-changelog.txt"
+   }
+}

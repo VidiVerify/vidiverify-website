@@ -1,0 +1,162 @@
+{
+   "title": "Datenschutzerklärung",
+   "subtitle": "für die Nutzung von VidiVerify App und Website",
+   "date": "Stand: 18.04.2026",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Allgemeines",
+         "blocks": [
+            { "type": "p", "text": "Der Schutz personenbezogener Daten wird ernst genommen. Personenbezogene Daten werden nur in dem Umfang verarbeitet, der für die Bereitstellung dieser Website, die Bearbeitung von Anfragen, die technische Sicherheit sowie die im Folgenden beschriebenen Zwecke erforderlich ist. Nach Art. 13 DSGVO sind betroffene Personen insbesondere über Verantwortliche, Zwecke, Rechtsgrundlagen, Empfänger, Speicherdauer und ihre Rechte zu informieren." }
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Hosting der Website über GitHub Pages",
+         "blocks": [
+            { "type": "p", "text": "Diese Website wird über GitHub Pages bereitgestellt. GitHub Pages ist ein statischer Hosting-Dienst, der Websites aus Repository-Inhalten veröffentlicht und auch mit einer eigenen Domain betrieben werden kann. Beim Besuch einer GitHub-Pages-Website wird nach den offiziellen GitHub-Hinweisen die IP-Adresse des Besuchers zu Sicherheitszwecken protokolliert und gespeichert, unabhängig davon, ob der Besucher bei GitHub angemeldet ist oder nicht." },
+            { "type": "p", "text": "Dabei können insbesondere folgende Daten verarbeitet werden: IP-Adresse, Datum und Uhrzeit des Zugriffs, angeforderte Inhalte, Referrer-Informationen, Browsertyp, Browserversion, Betriebssystem sowie weitere technische Verbindungsdaten, soweit dies für Auslieferung, Stabilität und Sicherheit erforderlich ist. Die Verarbeitung erfolgt zur technischen Bereitstellung der Website sowie zur Gewährleistung von Stabilität und Sicherheit. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt im sicheren und funktionsfähigen Betrieb dieser Website." }
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Verantwortlicher",
+         "blocks": [
+            { "type": "p", "text": "Verantwortlicher für die Verarbeitung personenbezogener Daten im Zusammenhang mit dieser Website ist:" },
+            { "type": "address", "lines": ["VidiVerify-Team", "Thomas Smektalla", "Liebestrasse 18a", "07546 Gera", "Deutschland"] },
+            { "type": "email", "label": "Email", "address": "support@vidiverify.de" }
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Domainbetrieb und Email-Hosting über United Domains",
+         "blocks": [
+            { "type": "p", "text": "Für den Betrieb der Domain sowie für das Email-Hosting wird die united-domains GmbH, Gautinger Strasse 10, 82319 Starnberg, Deutschland, eingesetzt. United Domains veröffentlicht diese Unternehmensangaben in seinem Impressum und nennt in seinen Datenschutzinformationen zudem datenschutz@united-domains.de als Kontaktadresse für Datenschutzanliegen. United Domains gibt ausserdem an, dass die Hosting-Server für Email und Webspace in Deutschland stehen." },
+            { "type": "p", "text": "Im Zusammenhang mit Domainbetrieb und Email-Kommunikation können daher personenbezogene Daten auch über die Systeme von United Domains verarbeitet werden, insbesondere technische Verbindungsdaten, Email-Metadaten und Kommunikationsinhalte, soweit dies für Bereitstellung, Transport, Sicherheit und Verwaltung der Domain- und Email-Dienste erforderlich ist. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO sowie, soweit die Kommunikation vertragsbezogen erfolgt, Art. 6 Abs. 1 lit. b DSGVO. Das berechtigte Interesse liegt in einem zuverlässigen und sicheren Betrieb der Domain- und Email-Infrastruktur." }
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Verschlüsselte Übertragung",
+         "blocks": [
+            { "type": "p", "text": "Die Website soll ausschliesslich verschlüsselt über HTTPS bereitgestellt werden. GitHub dokumentiert, dass GitHub-Pages-Websites mit HTTPS abgesichert werden können und dass HTTPS für korrekt konfigurierte eigene Domains erzwungen werden kann. Die verschlüsselte Übertragung dient dem Schutz der Kommunikation vor unbefugtem Mitlesen oder Verändern." }
+         ]
+      },
+      {
+         "id": 6,
+         "title": "Kontaktaufnahme per Email",
+         "blocks": [
+            { "type": "p", "text": "Bei einer Kontaktaufnahme per Email an support@vidiverify.de werden die mitgeteilten personenbezogenen Daten verarbeitet, insbesondere Email-Adresse, Inhalt der Nachricht sowie alle weiteren Informationen, die freiwillig übermittelt werden." },
+            { "type": "p", "text": "Die Verarbeitung erfolgt zum Zweck der Bearbeitung von Anfragen, Supportfällen, Rückmeldungen und sonstigen projektbezogenen Anliegen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage auf die Anbahnung oder Durchführung eines Vertrags gerichtet ist, und im Übrigen Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in einer geordneten und nachvollziehbaren Kommunikation mit Interessenten und Nutzern. Die technische Übermittlung und Speicherung der Email-Kommunikation kann dabei über die Email-Infrastruktur von United Domains erfolgen." }
+         ]
+      },
+      {
+         "id": 7,
+         "title": "Support, Support-Pakete und technische Protokolle",
+         "blocks": [
+            { "type": "p", "text": "VidiVerify kann Funktionen zur Erstellung eines Support-Pakets bereitstellen. Solche Support-Pakete können insbesondere technische Protokolle, Logdateien und weitere zur Fehleranalyse geeignete Informationen enthalten. Eine Übermittlung an das VidiVerify-Team erfolgt nicht automatisch, sondern nur dann, wenn der Nutzer ein solches Paket selbst per Email einreicht." },
+            { "type": "p", "text": "Die Verarbeitung erfolgt ausschliesslich zur Bearbeitung des jeweiligen Supportfalls, zur technischen Analyse, zur Fehlerbehebung sowie zur Verbesserung von Stabilität und Funktionsfähigkeit. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Bearbeitung zur Durchführung vorvertraglicher oder vertraglicher Massnahmen erforderlich ist, und im Übrigen Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in einer wirksamen technischen Unterstützung und einer geordneten Fehleranalyse." },
+            { "type": "p", "text": "Da solche Support-Pakete je nach Einzelfall personenbezogene oder personenbeziehbare technische Informationen enthalten können, sollten Nutzer vor einer Einsendung prüfen, ob enthaltene Inhalte erforderlich sind oder gegebenenfalls anonymisiert werden sollten." }
+         ]
+      },
+      {
+         "id": 8,
+         "title": "GitHub als Projekt- und Release-Plattform",
+         "blocks": [
+            { "type": "p", "text": "Auf dieser Website können Links zu GitHub eingebunden sein, insbesondere zum Projekt, zu Releases oder zu Release Notes. GitHub bezeichnet in seiner Datenschutzerklärung GitHub, Inc. oder GitHub B.V. als datenverantwortliche Stelle für Dienste, die diese Datenschutzerklärung anzeigen. Beim blossen Besuch dieser Website wird durch einen normalen externen Link noch keine direkte Verbindung zu GitHub ausgelöst. Erst mit einem aktiven Anklicken eines solchen Links wird eine Verbindung zu GitHub hergestellt. In diesem Fall gelten ergänzend die Datenschutzbestimmungen von GitHub." }
+         ]
+      },
+      {
+         "id": 9,
+         "title": "PayPal",
+         "blocks": [
+            { "type": "p", "text": "Auf dieser Website können Spenden- oder Zahlungsoptionen über PayPal angeboten werden. Anbieter für den europäischen Raum ist nach den von PayPal veröffentlichten Informationen die PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg. Soweit auf dieser Website lediglich ein normaler externer Link zu PayPal verwendet wird, erfolgt eine Datenübermittlung an PayPal erst nach aktivem Anklicken dieses Links. Soweit ein konkreter Zahlungsvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch PayPal nach dessen eigenen Bedingungen und Datenschutzbestimmungen." },
+            { "type": "p", "text": "Rechtsgrundlage ist dann Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in der Bereitstellung einer anerkannten und nutzerfreundlichen Möglichkeit zur freiwilligen Unterstützung des Projekts. Soweit ein konkreter Zahlungsvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch PayPal nach dessen eigenen Bedingungen und Datenschutzbestimmungen." }
+         ]
+      },
+      {
+         "id": 10,
+         "title": "4Fund",
+         "blocks": [
+            { "type": "p", "text": "Auf dieser Website können Spendenoptionen über 4Fund angeboten werden. Nach den veröffentlichten Angaben wird 4Fund von der polnischen Gesellschaft Zrzutka.pl sp. z o.o. mit Sitz in Wroclaw betrieben. Soweit auf dieser Website lediglich ein normaler externer Link zu 4Fund verwendet wird, erfolgt eine Datenübermittlung an 4Fund erst nach aktivem Anklicken dieses Links. Soweit ein konkreter Spendenvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch 4Fund nach dessen eigenen Datenschutzbestimmungen und Nutzungsbedingungen." },
+            { "type": "p", "text": "Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in der Bereitstellung einer zusätzlichen Möglichkeit zur freiwilligen Unterstützung des Projekts. Soweit ein konkreter Spendenvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch 4Fund nach dessen eigenen Datenschutzbestimmungen und Nutzungsbedingungen." }
+         ]
+      },
+      {
+         "id": 11,
+         "title": "Externe Links",
+         "blocks": [
+            { "type": "p", "text": "Diese Website kann externe Links auf Angebote Dritter enthalten, insbesondere zu GitHub, PayPal und 4Fund. Externe Links führen nach dem Anklicken auf die Systeme des jeweiligen Drittanbieters. Für die Inhalte und die dortige Datenverarbeitung sind ausschliesslich die jeweiligen Betreiber verantwortlich." }
+         ]
+      },
+      {
+         "id": 12,
+         "title": "Cookies, Drittinhalte und Einwilligung",
+         "blocks": [
+            { "type": "p", "text": "Nach dem derzeit vorgesehenen Stand ist die Website als schlanke One-Page-Lösung ohne eigene Analyse- oder Marketingdienste geplant. Wenn ausschliesslich technisch notwendige Funktionen sowie normale externe Links verwendet werden und keine eingebetteten Widgets, Iframes, Tracking- oder Marketing-Komponenten geladen werden, reduziert dies die datenschutzrechtliche Komplexität erheblich." },
+            { "type": "p", "text": "Sollten künftig jedoch eingebettete Inhalte von GitHub, PayPal oder 4Fund, Analysewerkzeuge, Marketingdienste, externe Schriftarten oder andere nicht technisch notwendige Drittinhalte eingesetzt werden, ist die Datenschutzerklärung entsprechend anzupassen. Gegebenenfalls ist dann zusätzlich ein Einwilligungsmechanismus erforderlich. GitHub, PayPal und 4Fund beschreiben in ihren Datenschutzinformationen jeweils eigene Datenverarbeitungen im Zusammenhang mit ihren Diensten." }
+         ]
+      },
+      {
+         "id": 13,
+         "title": "Speicherdauer",
+         "blocks": [
+            { "type": "p", "text": "Personenbezogene Daten werden nur so lange gespeichert, wie dies für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen." },
+            { "type": "p", "text": "Technische Zugriffs- und Sicherheitsdaten im Zusammenhang mit dem Hosting werden nach Massgabe der Systeme von GitHub verarbeitet. Für deren konkrete Datenverarbeitung wird ergänzend auf die GitHub-Datenschutzhinweise verwiesen. Emails, Supportanfragen und freiwillig eingesandte Support-Pakete werden so lange gespeichert, wie dies für die Bearbeitung, Nachverfolgung und Dokumentation des jeweiligen Vorgangs erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Domain- und Email-bezogene technische Verarbeitungen können zudem über die Systeme von United Domains erfolgen." }
+         ]
+      },
+      {
+         "id": 14,
+         "title": "Empfänger personenbezogener Daten",
+         "blocks": [
+            { "type": "p", "text": "Empfänger personenbezogener Daten können insbesondere sein:" },
+            { "type": "ul", "items": [
+               "GitHub als Hostinganbieter der Website und gegebenenfalls als Plattform für Projekt- und Release-Inhalte",
+               "United Domains als Anbieter für Domain- und Email-Infrastruktur",
+               "PayPal, soweit Nutzer freiwillig einen PayPal-Link für Spenden oder Zahlungen nutzen",
+               "4Fund beziehungsweise Zrzutka.pl sp. z o.o., soweit Nutzer freiwillig einen 4Fund-Link für Spenden nutzen"
+            ]},
+            { "type": "p", "text": "Soweit weitere technische Dienstleister eingesetzt werden, etwa für Email-Zustellung, Administration oder Sicherheit, sind diese hier ergänzend aufzunehmen." }
+         ]
+      },
+      {
+         "id": 15,
+         "title": "Rechte der betroffenen Personen",
+         "blocks": [
+            { "type": "p", "text": "Betroffene Personen haben nach der DSGVO insbesondere folgende Rechte:" },
+            { "type": "ul", "items": [
+               "Recht auf Auskunft",
+               "Recht auf Berichtigung",
+               "Recht auf Löschung",
+               "Recht auf Einschränkung der Verarbeitung",
+               "Recht auf Datenübertragbarkeit",
+               "Recht auf Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen",
+               "Recht auf Widerruf einer erteilten Einwilligung mit Wirkung für die Zukunft",
+               "Recht auf Beschwerde bei einer Datenschutzaufsichtsbehörde"
+            ]},
+            { "type": "p", "text": "Die Informationspflichten und Betroffenenrechte ergeben sich aus der DSGVO und werden unter anderem auch von der BfDI erläutert." }
+         ]
+      },
+      {
+         "id": 16,
+         "title": "Widerspruchsrecht",
+         "blocks": [
+            { "type": "p", "text": "Soweit personenbezogene Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeitet werden, besteht das Recht, aus Gründen, die sich aus der besonderen Situation der betroffenen Person ergeben, jederzeit Widerspruch gegen die Verarbeitung einzulegen." }
+         ]
+      },
+      {
+         "id": 17,
+         "title": "Beschwerderecht bei einer Aufsichtsbehörde",
+         "blocks": [
+            { "type": "p", "text": "Betroffene Personen haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn sie der Ansicht sind, dass die Verarbeitung ihrer personenbezogenen Daten gegen Datenschutzrecht verstösst. Die DSGVO sieht dieses Recht ausdrücklich vor." }
+         ]
+      },
+      {
+         "id": 18,
+         "title": "Änderung dieser Datenschutzerklärung",
+         "blocks": [
+            { "type": "p", "text": "Diese Datenschutzerklärung gilt für den aktuell beschriebenen technischen Stand der VidiVerify-Website. Wenn Dienste, Einbindungsarten oder Verarbeitungszwecke geändert, erweitert oder entfernt werden, ist die Datenschutzerklärung entsprechend anzupassen. Das gilt insbesondere bei der späteren Einbindung von eingebetteten Zahlungswidgets, Analysewerkzeugen, Tracking, externen Schriftarten, Formularsystemen oder weiteren Drittanbietern." }
+         ]
+      }
+   ]
+}

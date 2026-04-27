@@ -1,0 +1,37 @@
+{
+   "contact_options": [
+      {
+         "id": 1,
+         "icon": "MdOutlineEmail",
+         "title": "Email",
+         "value": "email",
+         "link": "email",
+         "message": "Schreiben"
+      },
+      {
+         "id": 2,
+         "icon": "FaFacebook",
+         "title": "Facebook",
+         "value": "VidiVerify",
+         "link": "https://www.facebook.com/VidiVerify",
+         "message": "Folgen"
+      },
+      {
+         "id": 3,
+         "icon": "FaGithub",
+         "title": "GitHub",
+         "value": "VidiVerify",
+         "link": "https://github.com/VidiVerify",
+         "message": "Zum Projekt"
+      }
+   ],
+   "email": { "user": "support", "domain": "vidiverify.de" },
+   "trust": {
+      "heading": "Direkt und unkompliziert",
+      "text": "Hinter VidiVerify steht kein Konzern mit anonymem Ticketsystem, sondern ein unabhängiges Team mit direktem Projektbezug. Anfragen werden nach Möglichkeit zeitnah und praxisnah beantwortet."
+   },
+   "support_hint": {
+      "heading": "Support-Paket",
+      "text": "Für technische Rückfragen oder Fehlermeldungen kann in der Software ein Support-Paket erstellt werden. Der Menüpunkt \"Support-Paket erstellen\" sammelt die relevanten Protokolle in einer ZIP-Datei, die zusammen mit der Anfrage per Email eingereicht werden kann."
+   }
+}
