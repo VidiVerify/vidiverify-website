@@ -37,6 +37,12 @@
       },
       {
          "id": 2,
+         "name": "Instagram",
+         "link": "https://www.instagram.com/vidiverify/",
+         "icon": "FaInstagram"
+      },
+      {
+         "id": 3,
          "name": "GitHub",
          "link": "https://github.com/VidiVerify",
          "icon": "FaGithub"

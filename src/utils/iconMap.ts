@@ -3,9 +3,9 @@ import { SiX } from "react-icons/si";
 import type { IconMap } from "@/types";
 
 const ICON_MAP: IconMap = {
-   BsLinkedin: FaLinkedin,
+   FaLinkedin: FaLinkedin,
    FaGithub: FaGithub,
-   FiInstagram: FaInstagram,
+   FaInstagram: FaInstagram,
    FaFacebook: FaFacebook,
    SiX: SiX,
 };
