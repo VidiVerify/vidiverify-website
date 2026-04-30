@@ -55,11 +55,34 @@ function serveStatic(req, res) {
 async function prerenderRoute(browser, route) {
    const page = await browser.newPage();
    await page.setViewport({ width: 1280, height: 720 });
-   await page.goto(`http://localhost:${PORT}${route}`, {
-      waitUntil: "networkidle0",
-      timeout: 30000,
+
+   // Block all external requests (analytics, CDNs) — we only need our own
+   // bundle to render. This avoids hangs in CI where outbound traffic may
+   // be slow or restricted.
+   await page.setRequestInterception(true);
+   page.on("request", (req) => {
+      const url = req.url();
+      if (url.startsWith(`http://localhost:${PORT}`) || url.startsWith("data:")) {
+         req.continue();
+      } else {
+         req.abort();
+      }
    });
-   await new Promise((r) => setTimeout(r, 1500));
+
+   await page.goto(`http://localhost:${PORT}${route}`, {
+      waitUntil: "load",
+      timeout: 60000,
+   });
+
+   // Wait until React has mounted something into #root.
+   await page.waitForFunction(
+      () => document.getElementById("root")?.children.length > 0,
+      { timeout: 15000 },
+   );
+
+   // Grace period for lazy-loaded chunks and async effects to settle.
+   await new Promise((r) => setTimeout(r, 2000));
+
    const html = await page.content();
    await page.close();
    return html;
