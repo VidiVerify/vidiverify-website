@@ -37,6 +37,15 @@ jobs:
          - name: Install dependencies
            run: pnpm install --frozen-lockfile
 
+         - name: Cache Puppeteer Chrome
+           uses: actions/cache@v4
+           with:
+              path: ~/.cache/puppeteer
+              key: puppeteer-chrome-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+         - name: Ensure Chrome for Puppeteer is installed
+           run: pnpm exec puppeteer browsers install chrome
+
          - name: Lint code
            run: pnpm lint
 
