@@ -19,9 +19,9 @@
 
 ## 🎬 Über VidiVerify
 
-**VidiVerify** ist eine Desktop-Anwendung für Windows zur professionellen technischen Prüfung und Archivierung von Videodateien. Per 1-Klick werden Container-Integrität, Codec-Eigenschaften, Bitraten, Auflösung und Metadaten geprüft – und im proprietären **Media-Analyse-Protokoll (MAP)** revisionssicher dokumentiert.
+**VidiVerify** ist eine Desktop-Anwendung für Windows zur technischen Prüfung und Archivierung von Videodateien. Per 1-Klick werden Container-Integrität, Codec-Eigenschaften, Bitraten, Auflösung und Metadaten geprüft – und im proprietären **Media-Analyse-Protokoll (MAP)** revisionssicher dokumentiert.
 
-Entwickelt für **Archivare, Sammler und Kuratoren**, die ihre Bestände nicht dem Zufall überlassen wollen.
+Entwickelt für **Archivare, Sammler und Kuratoren** – und genauso für alle, die ihre **Plex-, Jellyfin- oder Emby-Mediathek** nicht dem Zufall überlassen wollen.
 
 ## ✨ Was die Software kann
 
