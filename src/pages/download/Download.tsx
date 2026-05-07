@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaInfoCircle, FaIdCard } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
@@ -8,7 +9,11 @@ import { staggerContainerSlow, staggerItemSlow } from "@utils/animations";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED, MONO_FONT, GLASS_BG, GLASS_BORDER } from "@/constants/theme";
 import downloadConfig from "../../../data/download.json";
 import useMediaQuery from "@utils/useMediaQuery";
+import useIsMobileNonWindows from "@utils/useIsMobileNonWindows";
 import ProBadge from "@components/ui/ProBadge";
+import MobileNoticeModal from "./MobileNoticeModal";
+
+const SHARE_URL = "https://vidiverify.de/download";
 
 const FLAGS = [
    { code: "de", label: "Deutsch" },
@@ -35,6 +40,8 @@ const Skeleton = ({ width, height = 14 }: { width: number; height?: number }) =>
 
 const Download = () => {
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isMobileNonWindows = useIsMobileNonWindows();
+   const [noticeOpen, setNoticeOpen] = useState(false);
 
    const { data, loading, error } = useLatestRelease(
       downloadConfig.repo_owner,
@@ -159,6 +166,12 @@ const Download = () => {
                   <motion.a
                      href={downloadUrl}
                      download
+                     onClick={(e) => {
+                        if (isMobileNonWindows) {
+                           e.preventDefault();
+                           setNoticeOpen(true);
+                        }
+                     }}
                      whileHover={{ scale: 1.04, y: -2 }}
                      whileTap={{ scale: 0.97 }}
                      style={{
@@ -346,6 +359,7 @@ const Download = () => {
                </div>
             </motion.div>
          </motion.div>
+         <MobileNoticeModal open={noticeOpen} onClose={() => setNoticeOpen(false)} shareUrl={SHARE_URL} />
       </PageSection>
    );
 };
