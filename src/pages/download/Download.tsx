@@ -89,7 +89,7 @@ const Download = () => {
                variants={staggerItemSlow}
                style={{
                   display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "15% 45% 40%",
+                  gridTemplateColumns: isMobile ? "1fr" : "15fr 43fr 40fr",
                   gap: 12,
                   alignItems: "stretch",
                }}
@@ -239,7 +239,7 @@ const Download = () => {
                   </div>
 
                   {/* Links */}
-                  <div style={{ display: "flex", gap: 16, flexWrap: "nowrap", justifyContent: "flex-start", width: "100%", marginTop: "auto", paddingTop: 8 }}>
+                  <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "flex-start", width: "100%", marginTop: "auto", paddingTop: 8 }}>
                      <motion.a href={downloadConfig.links.all_releases} target="_blank" rel="noopener noreferrer"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
