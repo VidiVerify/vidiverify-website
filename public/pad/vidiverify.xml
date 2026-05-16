@@ -51,9 +51,9 @@
        ============================================================ -->
   <Program_Info>
     <Program_Name>VidiVerify</Program_Name>
-    <Program_Version>1.4.6</Program_Version>
-    <Program_Release_Month>04</Program_Release_Month>
-    <Program_Release_Day>19</Program_Release_Day>
+    <Program_Version>1.4.7</Program_Version>
+    <Program_Release_Month>05</Program_Release_Month>
+    <Program_Release_Day>14</Program_Release_Day>
     <Program_Release_Year>2026</Program_Release_Year>
     <Program_Cost_Dollars>0.00</Program_Cost_Dollars>
     <Program_Cost_Other_Code>EUR</Program_Cost_Other_Code>
@@ -66,16 +66,16 @@
     <File_Info>
       <!-- Dateigroesse aktualisieren nach jedem Build (dist/VidiVerify-Setup.exe) -->
       <Filename_Versioned>VidiVerify-Setup.exe</Filename_Versioned>
-      <Filename_Previous>VidiVerify Setup 1.4.5.exe</Filename_Previous>
+      <Filename_Previous>VidiVerify Setup 1.4.6.exe</Filename_Previous>
       <Filename_Generic>VidiVerify-Setup.exe</Filename_Generic>
-      <Filename_Long>VidiVerify Setup 1.4.6.exe</Filename_Long>
-      <Install_File_Size_Bytes>31065920</Install_File_Size_Bytes>
-      <Install_File_Size_K>30338</Install_File_Size_K>
-      <Install_File_Size_MB>30</Install_File_Size_MB>
+      <Filename_Long>VidiVerify Setup 1.4.7.exe</Filename_Long>
+      <Install_File_Size_Bytes>30452264</Install_File_Size_Bytes>
+      <Install_File_Size_K>29739</Install_File_Size_K>
+      <Install_File_Size_MB>29</Install_File_Size_MB>
       <!-- Custom Extension: SHA-256-Hash der Setup-Datei (nicht im PAD-Standard, aber von vielen Portalen ausgewertet als Integritaetsnachweis) -->
-      <File_SHA256>4e031b249774c7f4815cec97928a2a7db6f574ce3766e183ba66b4e36f689acf</File_SHA256>
+      <File_SHA256>5935000DD8E9E153F33ABA75810AA786E86EAA331064E238B18EBF15B1060F27</File_SHA256>
       <!-- Custom Extension: Sidecar-URL mit dem Hash als Klartext-Datei -->
-      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.6/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
+      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.7/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
     </File_Info>
     <Expire_Info>
       <Has_Expire_Info>N</Has_Expire_Info>
@@ -98,23 +98,26 @@
       <Char_Desc_80>VidiVerify – Free professional video integrity analysis for Windows</Char_Desc_80>
 
       <!-- max. 250 Zeichen -->
-      <Char_Desc_250>VidiVerify is a free Windows tool for professional video file analysis. Powered by ffmpeg, it detects codec defects, decoding errors, and structural damage in all common video formats. Clear quality ratings and technical reports in seconds.</Char_Desc_250>
+      <Char_Desc_250>VidiVerify is a free Windows tool for professional video file analysis. Combining established and modern video plug-ins, it detects codec defects, decoding errors, and structural damage. Clear quality ratings and protocols in seconds.</Char_Desc_250>
 
       <!-- max. 450 Zeichen -->
-      <Char_Desc_450>VidiVerify is a free Windows application for professional video file integrity analysis. Powered by ffmpeg, it systematically checks for codec defects, decoding errors, and structural file damage. The intuitive dark-themed interface delivers quality ratings, format metadata, and a full technical report — supporting AVC, HEVC, MPEG-2, VOB, ProRes, DNxHD, AV1, and more. Ideal for archivists, video editors, and media professionals.</Char_Desc_450>
+      <Char_Desc_450>VidiVerify is a free Windows application for professional video file integrity analysis. A curated mix of established and modern video plug-ins (incl. FFmpeg, FFprobe, MediaInfo, Magika) systematically checks for codec defects, decoding errors, and structural file damage. The intuitive interface delivers quality ratings, format metadata, and a full technical protocol — for AVC, HEVC, MPEG-2, VOB, ProRes, DNxHD, AV1 and more.</Char_Desc_450>
 
       <!-- max. 2000 Zeichen -->
-      <Char_Desc_2000>VidiVerify is a free, professional video file analysis tool for Windows. It performs a deep technical inspection of your video files using ffmpeg — the gold standard in media processing — to reliably detect file damage, codec errors, and integrity issues before they cause problems in production, archiving, or playback.
+      <Char_Desc_2000>VidiVerify is a free, professional video file analysis tool for Windows. It performs a deep technical inspection of your video files using a curated set of established and modern video plug-ins to reliably detect file damage, codec errors, and integrity issues before they cause problems in production, archiving, or playback.
 
 Key features:
-- Full ffmpeg-based integrity scan — detects decoding errors, corrupted frames, and structural file damage
+- Full integrity scan — detects decoding errors, corrupted frames, and structural file damage
+- Diagnostics deep analysis — three-stage in-depth check (stream copy, ffprobe deep scan, decode layer) for stubborn cases such as tape grabs and damaged containers
+- Automatic escalation — flags suspicious findings and offers the in-depth diagnostic with one click
 - Pre-check (Precheck) — fast technical metadata inspection before the full scan
 - Quality rating — intelligent, codec- and format-aware evaluation (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD, and more)
-- Format ID — automatic recognition of container and stream type (MP4, MKV, MOV, AVI, VOB, TS, MXF, ...)
-- Type integrity — verifies container/codec consistency to detect mislabeled or corrupted files
-- Automatic self-update — VidiVerify checks for new versions at startup and installs them with one click
+- Type integrity — magic-bytes check plus optional Google Magika ML classification (Apache-2.0)
+- Visual preview — embedded poster, snapshot, or image series with crossfade transition
+- Live telemetry — system CPU, scan-process CPU, RAM, network, and read rate
+- Automatic self-update with SHA-256 verification — checks for new versions at startup and installs them with one click
 - Support package — generate an anonymized diagnostic bundle with one click for easy troubleshooting
-- Multilingual interface — German, English, and Chinese
+- Multilingual interface — German, English, and Chinese, system-locale aware
 - Three visual themes — Dark (default), Plex, and Windows Classic
 
 VidiVerify is completely free to use. No limitations, no nag screens, no advertising. If you find it valuable, a voluntary donation via vidiverify.de/donate is warmly appreciated.
@@ -133,23 +136,26 @@ System requirements: Windows 10 or 11 (64-bit), approx. 60 MB disk space.</Char_
       <Char_Desc_80>VidiVerify – Professionelle Videoanalyse und Integritätsprüfung (Freeware)</Char_Desc_80>
 
       <!-- max. 250 Zeichen -->
-      <Char_Desc_250>VidiVerify ist ein kostenloses Windows-Programm zur professionellen Videodatei-Analyse. Auf Basis von ffmpeg erkennt es Codec-Fehler, Dekodierfehler und Dateischäden in allen gängigen Videoformaten — mit klarer Qualitätsbewertung und Prüfbericht.</Char_Desc_250>
+      <Char_Desc_250>VidiVerify ist ein kostenloses Windows-Programm zur Videodatei-Analyse. Mit einem Verbund etablierter und moderner Video-Plug-ins erkennt es Codec-Fehler, Dekodierfehler und Dateischäden — mit klarer Bewertung und Prüfprotokoll.</Char_Desc_250>
 
       <!-- max. 450 Zeichen -->
-      <Char_Desc_450>VidiVerify ist ein kostenloses Windows-Programm zur professionellen Videodatei-Analyse. Auf Basis von ffmpeg prüft es systematisch auf Codec-Defekte, Dekodierfehler und strukturelle Dateischäden. Die übersichtliche Oberfläche liefert Qualitätsbewertungen, Format-Metadaten und einen detaillierten Prüfbericht — für Formate von AVC und HEVC bis hin zu MPEG-2, VOB, ProRes, DNxHD und AV1. Ideal für Archivare, Videoschnitt und Medienprofis.</Char_Desc_450>
+      <Char_Desc_450>VidiVerify ist ein kostenloses Windows-Programm zur professionellen Videodatei-Analyse. Ein Verbund etablierter und moderner Plug-ins (FFmpeg, FFprobe, MediaInfo, Magika) prüft systematisch auf Codec-Defekte, Dekodierfehler und strukturelle Dateischäden. Übersichtliche Bewertungen, Format-Metadaten und detaillierte Prüfprotokolle — für AVC, HEVC, MPEG-2, VOB, ProRes, DNxHD und AV1. Ideal für Archivare, Videoschnitt und Medienprofis.</Char_Desc_450>
 
       <!-- max. 2000 Zeichen -->
-      <Char_Desc_2000>VidiVerify ist ein kostenloses, professionelles Videodatei-Analysetool für Windows. Es führt eine tiefgehende technische Prüfung von Videodateien auf Basis von ffmpeg durch — dem etablierten Standard in der Medienverarbeitung — und erkennt zuverlässig Dateischäden, Codec-Fehler und Integritätsprobleme, bevor diese in Produktion, Archivierung oder Wiedergabe zur Last werden.
+      <Char_Desc_2000>VidiVerify ist ein kostenloses, professionelles Videodatei-Analysetool für Windows. Es führt eine tiefgehende technische Prüfung von Videodateien auf Basis eines kuratierten Verbunds aus etablierten und modernen Video-Plug-ins durch und erkennt zuverlässig Dateischäden, Codec-Fehler und Integritätsprobleme, bevor diese in Produktion, Archivierung oder Wiedergabe zur Last werden.
 
 Kernfunktionen:
-- Vollständige ffmpeg-Integritätsprüfung — erkennt Dekodierfehler, beschädigte Frames und strukturelle Dateischäden
+- Tiefgehende Integritätsprüfung — erkennt Dekodierfehler, beschädigte Frames und strukturelle Dateischäden
+- Diagnose-Tiefenanalyse — dreistufige Prüfung (Streamcopy, ffprobe-Tiefenanalyse, Decode-Layer) für hartnäckige Fälle wie VHS-Grabs und beschädigte Container
+- Automatische Eskalation — markiert auffällige Befunde und bietet die Tiefenanalyse mit einem Klick an
 - Vorprüfung (Precheck) — schnelle technische Metadaten-Inspektion vor dem eigentlichen Scan
 - Qualitätsbewertung — intelligente, codec- und formatspezifische Bewertung (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD u. v. m.)
-- Format-ID — automatische Erkennung von Container und Stream-Typ (MP4, MKV, MOV, AVI, VOB, TS, MXF, ...)
-- Typintegrität — prüft Container-/Codec-Konsistenz und erkennt falsch bezeichnete oder beschädigte Dateien
-- Automatisches Self-Update — VidiVerify prüft beim Start auf neue Versionen und installiert diese per Klick
+- Typintegrität — Magic-Bytes-Prüfung plus optionale Google-Magika-ML-Klassifikation (Apache-2.0)
+- Visuelle Vorschau — eingebettetes Poster, Snapshot oder Bildserie mit Crossfade-Übergang
+- Live-Telemetrie — CPU-System, CPU-Prüfprozess, RAM, Netzwerk und Leserate
+- Automatisches Self-Update mit SHA-256-Verifikation — prüft beim Start auf neue Versionen und installiert sie per Klick
 - Supportpaket — anonymisiertes Diagnosepaket per Knopfdruck für einfache Fehleranalyse
-- Mehrsprachige Oberfläche — Deutsch, Englisch und Chinesisch
+- Mehrsprachige Oberfläche — Deutsch, Englisch und Chinesisch, folgt der System-Locale
 - Drei visuelle Designs — Dark (Standard), Plex und Windows Classic
 
 VidiVerify ist vollständig kostenlos nutzbar. Keine Einschränkungen, keine Hinweisfenster, keine Werbung. Wer das Programm nützlich findet, kann unter vidiverify.de/donate freiwillig spenden.
@@ -167,11 +173,11 @@ Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 60 MB Festplattenplatz.</C
       <!-- Primärer Download: direkter, redirect-freier versionierter Pfad auf eigener Domain.
            Wird von strengen Validierern (z. B. Microsoft Store) zwingend verlangt; funktioniert
            ebenso für klassische Portale (Heise, Filehorse, Softpedia). -->
-      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.6/VidiVerify-Setup.exe</Primary_Download_URL>
+      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.7/VidiVerify-Setup.exe</Primary_Download_URL>
       <!-- Sekundär: GitHub-Release als kanonische Quelle (mit Changelogs, Signaturen).
            Hinweis: liefert 302-Redirect auf objects.githubusercontent.com mit signierter,
            kurzlebiger CDN-URL. Für Portale, die Redirects folgen, ungehinderte Quelle. -->
-      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.6/VidiVerify-Setup.exe</Secondary_Download_URL>
+      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.7/VidiVerify-Setup.exe</Secondary_Download_URL>
       <!-- Zusätzlich: menschliche Downloadseite (Landingpage) -->
       <Additional_Download_URL>https://vidiverify.de/download</Additional_Download_URL>
       <Program_Info_URL>https://vidiverify.de</Program_Info_URL>

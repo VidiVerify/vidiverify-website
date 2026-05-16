@@ -5,6 +5,30 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) · Versionierun
 
 ---
 
+## [1.4.7] – 2026-05-14
+
+### Neu
+- **Diagnose-Werkzeug** – Drei-Stufen-Tiefenanalyse (Streamcopy, ffprobe-Tiefe, Decode-Layer) für hartnäckige Fälle. Erkennt VHS-Bandfehler, defekte DVD-Grabs, abgebrochene Downloads und manipulierte Streams. Automatisches Eskalations-Angebot, wenn die Standard-Prüfung „Auffälligkeit" meldet.
+- **Magika – KI-gestützte Typintegrität** – Google Magika als optionales Plug-in (Apache 2.0, ~10 MB). Erkennt PDF, EXE, ZIP mit Video-Endung und gibt konkrete Handlungsempfehlung. Doppelte Anzeige (Magic-Bytes + Magika) im Übersicht-Tab.
+- **Übersicht-Tab – Vorschau im Foto-Look** – Klassischer Bilderrahmen mit Passepartout. Crossfade-Slideshow für Bildserien, automatische Quelle (Cover, Snapshot, Bildserie).
+- **Live-Telemetrie** – Fünf Anzeigen unter den Bedienelementen: CPU-System, CPU-Prüfprozess, RAM, Netzwerk, Leserate.
+
+### Verbessert
+- **Fortschrittsbalken** – Komplett neuer Schätzer, kontinuierlicher Lauf, keine Sprünge mehr bei 95 % oder Stillstand bei 20 %. Adaptive Wall-Clock-Schätzung, wenn ffmpeg keinen ehrlichen Fortschritt meldet.
+- **Internationalisierung** – Beim ersten Start erkennt VidiVerify die System-Sprache (DE/EN/ZH). Slogan im Hauptfenster und Splashscreen wechselt mit der Sprache.
+- **Aktive Auswahl** – Prüfstufe, Prüfmodus und CPU-Leistung erscheinen fett und in Akzent-Farbe, passend zum Design-Modus.
+- **MAP-Protokoll – Sektion „Diagnose-Tiefenanalyse"** – Symmetrisch zu Integritäts- und Vollprüfung mit Gesamtbewertung, Befund und Prüfdauer.
+- **Wording** – Durchgängig „Protokoll" statt gemischt „Bericht"/„Protokoll".
+- **MediaInfo** – Atmos- und DTS:X-Erkennung in Audio-Hauptspuren; Hauptspur-Auswahl berücksichtigt Locale und Default-Tag.
+
+### Behoben
+- **Prüfwerte nach Theme-Wechsel** – IP- und VP-Ergebnisse bleiben jetzt nach Design-Umschaltung im laufenden Betrieb erhalten.
+- **Magika-Toggle nach Update v1.4.6 → v1.4.7** – Bestands-Installationen: Toggle blieb grau, weil `module_sources.json` aus v1.4.6 den alten Default trug. One-Time-Migration hebt das Flag auf aktiv an.
+- **Vorprüfung – Nicht-Video-Dateien** – Stürzt nicht mehr ab, zeigt stattdessen 🔴 mit klarer Fehlermeldung „Keine Videodatei erkannt!".
+- **AMR-Audio** – AMR-NB und AMR-WB jetzt als 🔴 kritisch erfasst; Bitrate-Anzeige korrekt in kbit/s.
+
+---
+
 ## [1.4.6] – 2026-04-19
 
 ### Behoben
