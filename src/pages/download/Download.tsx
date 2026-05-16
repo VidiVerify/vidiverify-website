@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaInfoCircle, FaIdCard } from "react-icons/fa";
+import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaIdCard } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 import { BsCalendar3, BsFileZip } from "react-icons/bs";
 import { useLatestRelease } from "@/hooks/useLatestRelease";
@@ -10,7 +10,6 @@ import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED, MONO_FONT, GLASS_BG, GL
 import downloadConfig from "../../../data/download.json";
 import useMediaQuery from "@utils/useMediaQuery";
 import useIsMobileNonWindows from "@utils/useIsMobileNonWindows";
-import ProBadge from "@components/ui/ProBadge";
 import MobileNoticeModal from "./MobileNoticeModal";
 
 const SHARE_URL = "https://vidiverify.de/download";
@@ -308,53 +307,6 @@ const Download = () => {
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
                         <FaFileContract size={12} /> EULA
                      </motion.a>
-                  </div>
-               </div>
-            </motion.div>
-
-            {/* ── SmartScreen / Trust notice ── */}
-            <motion.div
-               variants={staggerItemSlow}
-               style={{ marginTop: 12 }}
-            >
-               <div
-                  className="glass-card"
-                  style={{
-                     padding: isMobile ? "24px 20px" : "28px 32px",
-                     borderLeft: "3px solid #f5c542",
-                     borderRadius: "0 12px 12px 0",
-                     background: "rgba(245,197,66,0.04)",
-                  }}
-               >
-                  {/* Header */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-                     <div style={{
-                        width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-                        background: "rgba(245,197,66,0.1)", border: "1px solid rgba(245,197,66,0.25)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                     }}>
-                        <FaInfoCircle size={16} color="#f5c542" />
-                     </div>
-                     <span style={{ fontSize: 11, fontWeight: 700, color: "#f5c542", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                        Hinweis zur Sicherheit und Verifizierung
-                     </span>
-                  </div>
-
-                  {/* Body */}
-                  <div style={{
-                     display: "grid",
-                     gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                     gap: isMobile ? 14 : "14px 40px",
-                  }}>
-                     <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.85, margin: 0 }}>
-                        Als junges Projekt verzichten wir aktuell bewusst auf ein kostenpflichtiges Code-Signing-Zertifikat. Ab Version VidiVerify <ProBadge /> erfolgt dann auch eine vollständige digitale Signatur.
-                     </p>
-                     <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.85, margin: 0 }}>
-                        Die Integrität der Setup-Datei wird über einen SHA256-Prüfwert gesichert — ein weltweit anerkannter kryptografischer Standard für zweifelsfreie Datei-Verifizierung.
-                     </p>
-                     <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.85, margin: 0, gridColumn: isMobile ? undefined : "1 / -1" }}>
-                        Eine eventuell angezeigte Windows-SmartScreen-Meldung ist ausschliesslich auf den fehlenden Zertifikatseintrag zurückzuführen — kein Hinweis auf eine tatsächliche Gefährdung. VidiVerify verhält sich funktional identisch zu signierten Anwendungen.
-                     </p>
                   </div>
                </div>
             </motion.div>
