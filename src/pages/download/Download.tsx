@@ -415,7 +415,7 @@ const Download = () => {
 
                      {/* heise Download */}
                      <motion.a
-                        href="https://www.heise.de/download/product/vidiverify1"
+                        href="https://www.heise.de/download/search?query=vidiverify"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
@@ -423,33 +423,41 @@ const Download = () => {
                         transition={{ duration: 0.2 }}
                         style={{
                            display: "inline-flex",
-                           alignItems: "baseline",
-                           gap: 8,
+                           alignItems: "center",
+                           gap: 10,
                            textDecoration: "none",
                            color: "#ffffff",
                            opacity: 0.88,
                         }}
                         aria-label="VidiVerify bei heise Download oeffnen"
                      >
-                        <span
-                           style={{
-                              fontSize: 16,
-                              fontWeight: 700,
-                              letterSpacing: "-0.02em",
-                              fontFamily: '"Helvetica Neue", Arial, sans-serif',
-                           }}
-                        >
-                           heise
-                        </span>
-                        <span
-                           style={{
-                              fontSize: 13,
-                              fontWeight: 400,
-                              opacity: 0.7,
-                              letterSpacing: "0.02em",
-                           }}
-                        >
-                           Download
+                        <img
+                           src="/heise_h_white.png"
+                           alt=""
+                           aria-hidden
+                           style={{ width: 20, height: 20, display: "block" }}
+                        />
+                        <span style={{ display: "inline-flex", alignItems: "baseline", gap: 6 }}>
+                           <span
+                              style={{
+                                 fontSize: 16,
+                                 fontWeight: 700,
+                                 letterSpacing: "-0.02em",
+                                 fontFamily: '"Helvetica Neue", Arial, sans-serif',
+                              }}
+                           >
+                              heise
+                           </span>
+                           <span
+                              style={{
+                                 fontSize: 13,
+                                 fontWeight: 400,
+                                 opacity: 0.7,
+                                 letterSpacing: "0.02em",
+                              }}
+                           >
+                              Download
+                           </span>
                         </span>
                      </motion.a>
                   </div>
