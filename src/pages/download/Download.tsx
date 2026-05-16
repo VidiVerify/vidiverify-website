@@ -310,6 +310,151 @@ const Download = () => {
                   </div>
                </div>
             </motion.div>
+
+            {/* ── Bekannt von / Trust-Strip ── */}
+            <motion.div
+               variants={staggerItemSlow}
+               style={{
+                  marginTop: 16,
+                  position: "relative",
+                  padding: 1,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  isolation: "isolate",
+               }}
+            >
+               {/* Rotierender Conic-Gradient-Glow als Border */}
+               <motion.div
+                  aria-hidden
+                  style={{
+                     position: "absolute",
+                     top: "-50%",
+                     left: "-50%",
+                     width: "200%",
+                     height: "200%",
+                     background: `conic-gradient(from 0deg, transparent 0deg, ${CYAN} 90deg, transparent 180deg, ${CYAN} 270deg, transparent 360deg)`,
+                     opacity: 0.55,
+                     zIndex: -1,
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+               />
+
+               {/* Inner content (deckt Gradient ab, nur 1px Rand sichtbar) */}
+               <div
+                  style={{
+                     position: "relative",
+                     background: "rgba(6,6,16,0.94)",
+                     backdropFilter: "blur(8px)",
+                     borderRadius: 15,
+                     padding: isMobile ? "20px 16px" : "22px 32px",
+                     display: "flex",
+                     flexDirection: "column",
+                     alignItems: "center",
+                     gap: 14,
+                  }}
+               >
+                  <span
+                     style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: TEXT_MUTED,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.22em",
+                     }}
+                  >
+                     Bekannt von
+                  </span>
+                  <div
+                     style={{
+                        display: "flex",
+                        flexDirection: isMobile ? "column" : "row",
+                        alignItems: "center",
+                        gap: isMobile ? 16 : 40,
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                     }}
+                  >
+                     {/* Microsoft Store */}
+                     <motion.a
+                        href="https://apps.microsoft.com/store/detail/XPDLZGLQP4LKZW"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
+                        whileTap={{ scale: 0.97 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                           display: "inline-flex",
+                           alignItems: "center",
+                           gap: 10,
+                           textDecoration: "none",
+                           color: "#ffffff",
+                           opacity: 0.88,
+                        }}
+                        aria-label="VidiVerify im Microsoft Store oeffnen"
+                     >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                           <path d="M2 3h9.5v9.5H2zM12.5 3H22v9.5h-9.5zM2 13.5h9.5V23H2zM12.5 13.5H22V23h-9.5z" />
+                        </svg>
+                        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.01em" }}>
+                           Microsoft Store
+                        </span>
+                     </motion.a>
+
+                     {/* Divider (nur Desktop) */}
+                     {!isMobile && (
+                        <span
+                           aria-hidden
+                           style={{
+                              width: 1,
+                              height: 22,
+                              background: "rgba(255,255,255,0.18)",
+                           }}
+                        />
+                     )}
+
+                     {/* heise Download */}
+                     <motion.a
+                        href="https://www.heise.de/download/product/vidiverify1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
+                        whileTap={{ scale: 0.97 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                           display: "inline-flex",
+                           alignItems: "baseline",
+                           gap: 8,
+                           textDecoration: "none",
+                           color: "#ffffff",
+                           opacity: 0.88,
+                        }}
+                        aria-label="VidiVerify bei heise Download oeffnen"
+                     >
+                        <span
+                           style={{
+                              fontSize: 16,
+                              fontWeight: 700,
+                              letterSpacing: "-0.02em",
+                              fontFamily: '"Helvetica Neue", Arial, sans-serif',
+                           }}
+                        >
+                           heise
+                        </span>
+                        <span
+                           style={{
+                              fontSize: 13,
+                              fontWeight: 400,
+                              opacity: 0.7,
+                              letterSpacing: "0.02em",
+                           }}
+                        >
+                           Download
+                        </span>
+                     </motion.a>
+                  </div>
+               </div>
+            </motion.div>
          </motion.div>
          <MobileNoticeModal open={noticeOpen} onClose={() => setNoticeOpen(false)} shareUrl={SHARE_URL} />
       </PageSection>
