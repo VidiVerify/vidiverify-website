@@ -4,6 +4,7 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
 import App from "./App";
 import "./index.css";
+import "./i18n";
 
 createRoot(document.getElementById("root")!).render(
    <StrictMode>

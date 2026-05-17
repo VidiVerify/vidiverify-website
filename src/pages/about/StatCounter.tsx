@@ -1,22 +1,16 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { staggerContainer, rotateInUp } from "@utils/animations";
 import AnimatedCounter from "@components/ui/AnimatedCounter";
-
-const STAT_LABELS: Record<string, string> = {
-   launch: "Launch",
-   formate: "Formate",
-   codezeilen: "Codezeilen",
-   funktionen: "Funktionen",
-   downloads: "Downloads",
-   seitenaufrufe: "Seitenaufrufe",
-};
 
 interface StatCounterProps {
    statEntries: [string, string][];
    isMobile: boolean;
 }
 
-const StatCounter = ({ statEntries, isMobile }: StatCounterProps) => (
+const StatCounter = ({ statEntries, isMobile }: StatCounterProps) => {
+   const { t } = useTranslation();
+   return (
    <motion.div
       style={{
          display: "grid",
@@ -52,11 +46,12 @@ const StatCounter = ({ statEntries, isMobile }: StatCounterProps) => (
                   marginTop: 8,
                }}
             >
-               {STAT_LABELS[key] ?? key.replaceAll("_", " ")}
+               {t(`hero.stats.${key}`, { defaultValue: key.replaceAll("_", " ") })}
             </p>
          </motion.div>
       ))}
    </motion.div>
-);
+   );
+};
 
 export default StatCounter;

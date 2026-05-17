@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
-import { getAbout, getStatistics, getSiteConfig } from "@data/dataLoader";
+import { useTranslation } from "react-i18next";
+import { getStatistics, getSiteConfig } from "@data/dataLoader";
 import { staggerContainer, fadeInLeft, fadeInRight } from "@utils/animations";
 import DevAvatar from "@components/ui/DevAvatar";
 import useMediaQuery from "@utils/useMediaQuery";
@@ -11,22 +12,14 @@ import { useGitHubDownloadCount } from "@/hooks/useGitHubDownloadCount";
 import { usePageViewCount } from "@/hooks/usePageViewCount";
 
 const About = () => {
-   const aboutInfo = getAbout();
+   const { t } = useTranslation();
    const statistics = getStatistics();
    const isMobile = useMediaQuery("(max-width: 768px)");
    const { counter_namespace, gc_code } = getSiteConfig();
    const { count: dlCount } = useGitHubDownloadCount("VidiVerify", "vidiverify-releases");
    const { count: pvCount } = usePageViewCount({ namespace: counter_namespace, gcCode: gc_code });
 
-   const highlights = useMemo(
-      () => [
-         aboutInfo.current_role,
-         aboutInfo.education,
-         aboutInfo.specialization,
-         aboutInfo.competitive_programming,
-      ],
-      [aboutInfo],
-   );
+   const highlights = t("highlights.cards", { returnObjects: true }) as string[];
 
    const statEntries = useMemo((): [string, string][] => {
       const entries = Object.entries(statistics) as [string, string][];
@@ -38,7 +31,7 @@ const About = () => {
    }, [statistics, dlCount, pvCount]);
 
    return (
-      <PageSection id="about" title="Highlights" subtitle="Das Wichtigste in Kürze">
+      <PageSection id="about" title={t("highlights.title")} subtitle={t("highlights.subtitle")}>
          <div style={{ maxWidth: 1152, margin: "0 auto" }}>
             <motion.div
                style={{
@@ -73,7 +66,7 @@ const About = () => {
                   >
                      {highlights.map((text, i) => (
                         <HighlightCard
-                           key={text}
+                           key={i}
                            text={text}
                            index={i}
                            isMobile={isMobile}

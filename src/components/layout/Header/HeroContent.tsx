@@ -1,15 +1,17 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { getName, getRoles } from "@data/dataLoader";
+import { useTranslation } from "react-i18next";
+import { getName } from "@data/dataLoader";
 import { staggerContainer, staggerItem } from "@utils/animations";
 import HeroStats from "./HeroStats";
 import HeroSocial from "./HeroSocial";
 import logo from "@/assets/logo.png";
 const HeroContent = () => {
+   const { t } = useTranslation();
    const [roleIndex, setRoleIndex] = useState(0);
 
    const name = useMemo(() => getName(), []);
-   const roles = useMemo(() => getRoles(), []);
+   const roles = t("hero.roles", { returnObjects: true }) as string[];
 
    useEffect(() => {
       const interval = setInterval(() => {
@@ -83,7 +85,7 @@ const HeroContent = () => {
                whileHover={{ scale: 1.04 }}
                whileTap={{ scale: 0.97 }}
             >
-               Highlights
+               {t("hero.ctaHighlights")}
             </motion.button>
             <motion.button
                onClick={scrollToDownload}
@@ -91,7 +93,7 @@ const HeroContent = () => {
                whileHover={{ scale: 1.04 }}
                whileTap={{ scale: 0.97 }}
             >
-               Download
+               {t("hero.ctaDownload")}
             </motion.button>
          </motion.div>
 

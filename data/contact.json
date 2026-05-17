@@ -23,6 +23,14 @@
          "value": "VidiVerify",
          "link": "https://github.com/VidiVerify",
          "message": "Zum Projekt"
+      },
+      {
+         "id": 4,
+         "icon": "FaInstagram",
+         "title": "Instagram",
+         "value": "vidiverify",
+         "link": "https://instagram.com/vidiverify",
+         "message": "Folgen"
       }
    ],
    "email": { "user": "support", "domain": "vidiverify.de" },

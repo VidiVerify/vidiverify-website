@@ -1,0 +1,357 @@
+{
+   "common": {
+      "languageLabel": "Language",
+      "languageGerman": "Deutsch",
+      "languageEnglish": "English",
+      "languageGermanShort": "DE",
+      "languageEnglishShort": "EN"
+   },
+   "nav": {
+      "highlights": "Highlights",
+      "features": "Features",
+      "formats": "Formats",
+      "roadmap": "Roadmap",
+      "download": "Download",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "support": "Support us"
+   },
+   "hero": {
+      "tagline": "The 1-click check for your videos",
+      "ctaHighlights": "Highlights",
+      "ctaDownload": "Download",
+      "scrollLabel": "Scroll",
+      "roles": [
+         "The 1-click check for your videos",
+         "Integrity verification. Clear and fast.",
+         "Technical analysis for video files",
+         "Modern desktop application for Windows",
+         "Built for real-world use"
+      ],
+      "stats": {
+         "launch": "Launch",
+         "formate": "Formats",
+         "codezeilen": "Lines of code",
+         "funktionen": "Features",
+         "downloads": "Downloads",
+         "seitenaufrufe": "Page views"
+      }
+   },
+   "highlights": {
+      "title": "Highlights",
+      "subtitle": "The essentials at a glance",
+      "cards": [
+         "🚀 Fast 1-click check — verify, analyze and rate video files. In seconds, with no technical knowledge required.",
+         "🖥️ Clean desktop application — modern, organized and built natively for Windows. Local processing, no cloud, no dependencies.",
+         "🧩 Technical transparency — structured result presentation instead of unreadable raw data. Container, video, audio and more at a glance.",
+         "📦 Extensible platform — external modules, export functions and a future-proof architecture. Engineered for real-world use."
+      ]
+   },
+   "features": {
+      "title": "Features",
+      "subtitle": "What VidiVerify can do",
+      "cards": [
+         {
+            "id": 1,
+            "title": "Pre-check",
+            "list": [
+               "Drag & drop support",
+               "Fast pre-check in seconds",
+               "Magic-bytes validation of the file extension",
+               "Magika deep check (ML-based, optional)",
+               "Lightweight on system resources"
+            ]
+         },
+         {
+            "id": 2,
+            "title": "Integrity check",
+            "list": [
+               "Plug-in-based frame analysis with FFmpeg",
+               "Diagnostic mode: streamcopy, ffprobe and decode layer",
+               "Auto-escalation when anomalies are detected",
+               "Cause attribution for DVD, DTS and container anomalies",
+               "Detailed error logs"
+            ]
+         },
+         {
+            "id": 3,
+            "title": "Media analysis",
+            "list": [
+               "Container and codec detection via MediaInfo",
+               "Bitrate, frame rate and resolution",
+               "Audio tracks including Atmos and DTS:X detection",
+               "Bit depth, channel layout and language flags",
+               "Transparent rating details"
+            ]
+         },
+         {
+            "id": 4,
+            "title": "Format check",
+            "list": [
+               "Support for 30+ container formats",
+               "Verification of specific codec requirements",
+               "AVC, HEVC, MPEG-4 video",
+               "AAC, AC3, EAC3, DTS audio",
+               "Extensible via plug-ins"
+            ]
+         },
+         {
+            "id": 5,
+            "title": "Structured results",
+            "list": [
+               "Overview tab with status cards per check stage",
+               "Stage cards for integrity, full check and diagnostics",
+               "Heartbeat pulse for running stages",
+               "Live telemetry: CPU, RAM, network, read rate",
+               "Theme and language switching without restart"
+            ]
+         },
+         {
+            "id": 6,
+            "title": "Result documentation",
+            "list": [
+               "Proprietary MAP — Media Analysis Protocol",
+               "New section: diagnostic deep analysis",
+               "Magika sub-block when the plug-in is active",
+               "Fully detailed, audit-ready",
+               "Multilingual: Deutsch · English · 中文"
+            ]
+         }
+      ]
+   },
+   "roadmap": {
+      "title": "Roadmap",
+      "subtitle": "Already shipped and planned",
+      "badgeDelivered": "Shipped",
+      "badgeNext": "Up next",
+      "badgePro": "PRO",
+      "labelDelivered": "Already available",
+      "labelNext": "Up next",
+      "labelPro": "PRO feature",
+      "labelBase": "Free version",
+      "tabPrefix": "Tab",
+      "items": {
+         "quick-check": {
+            "label": "Quick-Check",
+            "title": "Quick-Check in Windows Explorer",
+            "description": "Right-click on a video file in Windows Explorer — a lightweight worker component checks container structure, media data and integrity in seconds, without launching the main application. Dedicated notification window with status, finding and media data — and optional seamless handoff to the full analysis.",
+            "tags": ["Context menu", "Worker EXE", "Seconds"]
+         },
+         "media-test": {
+            "label": "Media Test",
+            "title": "Tab",
+            "description": "Embedded video preview via the VLC plug-in with playback controls plus a statistics window for frame, time, remaining time and an audio stream waveform.",
+            "tags": ["Preview", "VLC", "Statistics"]
+         },
+         "deepcheck": {
+            "label": "DeepCheck",
+            "title": "DeepCheck",
+            "description": "Content-based deep check of type integrity using the Magika plug-in. Detects mismatches between file extension, header signature and container structure.",
+            "tags": ["Magika", "Type check", "Integrity"]
+         },
+         "nfo-export": {
+            "label": "NFO export",
+            "title": "NFO export for media library managers",
+            "description": "Generates standards-compliant .nfo files for video library systems such as Kodi, Jellyfin and Emby, directly from the existing analysis results.",
+            "tags": ["Kodi", "Jellyfin", "Emby"]
+         },
+         "map-plus": {
+            "label": "MAP+",
+            "title": "MAP+ archival PDF",
+            "description": "High-quality PDF variant of the MAP as a professional archival document with extended presentation for archives, customers and long-term documentation.",
+            "tags": ["PDF", "Archive", "Report"]
+         },
+         "media-stapel": {
+            "label": "Media Stack",
+            "title": "Tab",
+            "description": "Batch processing of entire directories or file lists in a single run with live result analysis and automatically saved MAP reports per file.",
+            "tags": ["Batch", "Directories", "Automation"]
+         },
+         "diagnosemodus": {
+            "label": "Diagnostic mode",
+            "title": "Diagnostic mode",
+            "description": "In-depth FFprobe analysis with packet and frame information plus a streamcopy test. Ideal for problem files with suspicious timestamps or packet sequences. Originally planned as PRO — released straight into the free version.",
+            "tags": ["FFprobe", "Deep analysis", "Diagnostics"]
+         },
+         "vollanalyse": {
+            "label": "Full check",
+            "title": "Full-scope integrity check",
+            "description": "Complete integrity check across the entire movie — removes the 30-second sample limit of the free version. For multi-hour recordings, feature films and long-term archives that must be verified bit-accurate throughout.",
+            "tags": ["Full scope", "Feature films", "Archive"]
+         },
+         "media-repair": {
+            "label": "Media Repair",
+            "title": "Tab",
+            "description": "Rule-based repair suggestions for detected errors with probability estimates and concrete procedures. Always operates on a copy, never on the original file.",
+            "tags": ["Repair", "FFmpeg", "rule-based"]
+         },
+         "kompatibilitaet": {
+            "label": "Compatibility",
+            "title": "Compatibility rating",
+            "description": "Rule-based assessment of playback compatibility across common platforms based on FFprobe and MediaInfo data. Clear flagging of critical attributes such as codec profiles or color spaces.",
+            "tags": ["Platform", "MediaInfo", "FFprobe"]
+         },
+         "statistik": {
+            "label": "Statistics",
+            "title": "Statistics module",
+            "description": "Learning statistics system that records real check data and produces individual runtime predictions per system, differentiated by CPU mode and storage source.",
+            "tags": ["Runtime forecast", "learning", "Statistics"]
+         },
+         "vqa": {
+            "label": "VQA",
+            "title": "Perceptual quality analysis (VQA)",
+            "description": "Rates the visual quality of a video from a human point of view using OpenCV, complementing technical metrics and independent of platform ratings.",
+            "tags": ["OpenCV", "Image analysis", "visual"]
+         },
+         "ytup": {
+            "label": "Ytup",
+            "title": "Ytup: YouTube upload forecast",
+            "description": "Proprietary analysis module for technical and qualitative assessment prior to a YouTube upload, including post-reencoding quality forecast and optimization recommendations.",
+            "tags": ["YouTube", "Upload", "Forecast"]
+         },
+         "macos": {
+            "label": "macOS",
+            "title": "Port to macOS",
+            "description": "Refactoring and porting of the application to macOS with a unified user interface and comparable feature set across all supported operating systems.",
+            "tags": ["macOS", "Porting", "Refactoring"]
+         },
+         "sprachen": {
+            "label": "Languages",
+            "title": "More languages",
+            "description": "Expansion of the multilingual user interface with Spanish, Hindi, Russian, Portuguese and additional languages.",
+            "tags": ["Spanish", "Hindi", "Russian"]
+         },
+         "lizenz": {
+            "label": "Licensing",
+            "title": "Licensing module",
+            "description": "Management of PRO activation, license verification and feature unlocking, fully local without a permanent internet connection.",
+            "tags": ["License", "Activation", "local"]
+         }
+      }
+   },
+   "formats": {
+      "title": "Formats",
+      "subtitle": "Supported formats",
+      "videoContainer": "Video containers",
+      "videoCodecs": "Video formats & codecs",
+      "audioCodecs": "Audio formats & codecs",
+      "supported": "{{count}} formats supported"
+   },
+   "download": {
+      "title": "Download",
+      "subtitle": "Get VidiVerify for free",
+      "version": "Version",
+      "published": "Published",
+      "fileSize": "File size",
+      "ctaDownload": "Download now",
+      "filename": "Filename",
+      "shaAvailable": "Available after first release",
+      "linkAllReleases": "All releases",
+      "linkReleaseNotes": "Release notes",
+      "linkPad": "Digital factsheet (PAD)",
+      "licenseHeader": "License & source",
+      "licenseText1": "This page is the official source for VidiVerify. The build provided here is signed and verifiable — the SHA-256 hash matches the published installer exactly. Personal use is free. For non-private use, official licensing is provided.",
+      "licenseText2": "VidiVerify is also available via additional download portals. Regardless of source, every build's authenticity can be verified using the SHA-256 hash.",
+      "linkProjectSource": "Project source",
+      "linkPrices": "Pricing",
+      "linkDonate": "Donate",
+      "linkEula": "EULA",
+      "trustHeader": "As featured on",
+      "msStoreAria": "Open VidiVerify in the Microsoft Store",
+      "heiseAria": "Open VidiVerify on heise Download",
+      "manualSection": "Handbuch · User Manual",
+      "manualKind": "PDF · {{version}}",
+      "manualAriaDe": "Download user manual in German",
+      "manualAriaEn": "Download user manual in English"
+   },
+   "contact": {
+      "title": "Contact",
+      "subtitle": "Direct and straightforward",
+      "trustHeading": "Direct and straightforward",
+      "trustText": "Behind VidiVerify there is no corporation with an anonymous ticket system — just an independent team with a direct connection to the project. Requests are answered promptly and practically wherever possible.",
+      "github": "GitHub",
+      "githubSub": "Releases & updates",
+      "githubAction": "To the project",
+      "facebook": "Facebook",
+      "facebookSub": "News & updates",
+      "facebookAction": "Follow",
+      "instagram": "Instagram",
+      "instagramSub": "Impressions & visuals",
+      "instagramAction": "Follow",
+      "supportDivider": "Support",
+      "supportHeading": "Support package",
+      "supportItems": [
+         "Just send an email — for questions, problems & error reports",
+         "Direct answer, no anonymous ticket system",
+         "Support package can be generated within the software on request",
+         "Attach logs as ZIP for faster resolution"
+      ],
+      "emailLabel": "Email",
+      "emailSub": "Support & inquiries",
+      "emailAction": "Write us"
+   },
+   "pricing": {
+      "title": "Pricing",
+      "subtitle": "Open, fair and transparent",
+      "privateLabel": "Personal use",
+      "privateTitle": "Free",
+      "privateBadge": "€0",
+      "privateDescription": "VidiVerify is free for personal use. Access is intentionally open — no registration required, no license fee.",
+      "privateBullets": [
+         "Full feature set for personal use",
+         "No account, no registration required",
+         "Local processing — no cloud, no dependencies"
+      ],
+      "supportCta": "Support us",
+      "commercialLabel": "Commercial & professional",
+      "commercialTitle": "License",
+      "commercialBadge": "in preparation",
+      "commercialDescriptionPart1": "Anyone using VidiVerify beyond strictly private contexts needs an official license. Licensing works via a one-time fee. This also automatically unlocks all upcoming ",
+      "commercialDescriptionPart2": " features within the corresponding release series.",
+      "commercialBullets": [
+         "Official licensing — one-time fee, no subscriptions",
+         "All updates within the release series included",
+         "Additional and upcoming features of this release series included"
+      ],
+      "commercialBulletProPart1": "Foundation for later ",
+      "commercialBulletProPart2": " activation",
+      "perspectiveLabel": "Outlook",
+      "perspectiveTitle": "VidiVerify",
+      "perspectiveDescriptionPart1": "Official licensing enables use of VidiVerify — as VidiVerify ",
+      "perspectiveDescriptionPart2": " — in commercial and professional environments too. Advanced Pro features and additional functions are automatically included. Licenses secure innovation and stability of the software.",
+      "eulaLink": "License agreement (EULA)"
+   },
+   "donate": {
+      "title": "Support us",
+      "subtitle": "Thank you for your support!",
+      "headline": "Support VidiVerify voluntarily",
+      "description": "VidiVerify is developed, maintained and expanded with significant time and technical investment. Behind the project there is no large corporation — just an independent team committed to delivering a meaningful, reliable solution for technical video file verification. If you'd like to actively help shape the project's future, you can support development with a voluntary donation.",
+      "note": "Personal use remains free regardless.",
+      "waysPaypal": "PayPal",
+      "ways4fund": "4fund",
+      "reasons": [
+         {
+            "title": "Active development",
+            "text": "New features, formats and plug-ins emerge through continuous work — your support keeps the project moving."
+         },
+         {
+            "title": "Long-term care",
+            "text": "Bug fixes, compatibility updates and stable releases demand commitment well beyond the initial launch."
+         },
+         {
+            "title": "Independence",
+            "text": "No corporation backing us, no vendor lock-in. VidiVerify stays free because people stand behind it — not return expectations."
+         }
+      ]
+   },
+   "footer": {
+      "rights": "All rights reserved",
+      "imprint": "Legal notice",
+      "privacy": "Privacy policy",
+      "eula": "License agreement (EULA)"
+   },
+   "modal": {
+      "close": "Close",
+      "closeAria": "Close"
+   }
+}

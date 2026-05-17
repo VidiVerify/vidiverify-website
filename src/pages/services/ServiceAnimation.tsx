@@ -1,12 +1,12 @@
-import { iconMap } from "./servicesConstants";
+import { iconMapById, fallbackIcon } from "./servicesConstants";
 
 interface ServiceAnimationProps {
-   title: string;
+   id: number;
    color: string;
 }
 
-const ServiceAnimation = ({ title, color }: ServiceAnimationProps) => {
-   const IconComponent = iconMap[title] || iconMap._fallback;
+const ServiceAnimation = ({ id, color }: ServiceAnimationProps) => {
+   const IconComponent = iconMapById[id] || fallbackIcon;
 
    return (
       <IconComponent

@@ -1,204 +1,149 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { scaleRotateIn } from "@utils/animations";
 import {
    FaDesktop, FaSearch, FaFileAlt, FaFilePdf, FaCopy,
    FaBug, FaWrench, FaCheckCircle, FaChartBar, FaEye,
-   FaYoutube, FaApple, FaGlobe, FaKey,
+   FaYoutube, FaApple, FaGlobe, FaKey, FaBolt, FaExpand, FaCheck,
 } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import useMediaQuery from "@utils/useMediaQuery";
-import { CYAN, TEXT_SECONDARY, TEXT_MUTED, MONO_FONT } from "@/constants/theme";
+import { CYAN, GREEN, TEXT_SECONDARY, TEXT_MUTED, MONO_FONT } from "@/constants/theme";
 import type { ReactNode } from "react";
 
 const PRO_COLOR = "#f5c542";
+const NEXT_COLOR = "#a78bfa"; // sanftes Violett für "als Nächstes"
 
-const ProBadge = () => (
+const ProBadge = ({ label }: { label: string }) => (
    <span style={{
       fontSize: 9, fontWeight: 800, letterSpacing: "0.1em",
       padding: "2px 7px", borderRadius: 5,
       background: PRO_COLOR, color: "#111",
       textTransform: "uppercase" as const, lineHeight: 1.6,
       display: "inline-block", verticalAlign: "middle", marginLeft: 8,
-   }}>PRO</span>
+   }}>{label}</span>
+);
+
+const DeliveredBadge = ({ label, version }: { label: string; version: string }) => (
+   <span style={{
+      fontSize: 9, fontWeight: 800, letterSpacing: "0.08em",
+      padding: "2px 7px", borderRadius: 5,
+      background: GREEN, color: "#062014",
+      textTransform: "uppercase" as const, lineHeight: 1.6,
+      display: "inline-flex", alignItems: "center", gap: 4,
+      verticalAlign: "middle", marginLeft: 8,
+   }}>
+      <FaCheck size={8} /> {label} · {version}
+   </span>
+);
+
+const NextBadge = ({ label }: { label: string }) => (
+   <motion.span
+      animate={{ boxShadow: [`0 0 0 0 ${NEXT_COLOR}66`, `0 0 0 6px ${NEXT_COLOR}00`] }}
+      transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+      style={{
+         fontSize: 9, fontWeight: 800, letterSpacing: "0.08em",
+         padding: "2px 7px", borderRadius: 5,
+         background: NEXT_COLOR, color: "#1a0f3a",
+         textTransform: "uppercase" as const, lineHeight: 1.6,
+         display: "inline-block", verticalAlign: "middle", marginLeft: 8,
+      }}
+   >
+      {label}
+   </motion.span>
 );
 
 interface Item {
    id: string;
-   label: string;
-   title: string;
-   tabName?: string;
-   description: string;
-   tags: string[];
    pro: boolean;
+   delivered?: { version: string };
+   next?: boolean;
+   isTab?: boolean;
    icon: ReactNode;
 }
 
+// Items tragen nur Metadaten (id, Icon, Flags); alle Texte (label, title,
+// description, tags) kommen aus den i18n-Übersetzungen, gelookt-uppt via id.
 const ITEMS: Item[] = [
-   {
-      id: "media-test",
-      label: "Media Test",
-      title: "Reiter",
-      tabName: "Media Test",
-      description: "Eingebettete Videovorschau über das VLC-Plug-in mit Wiedergabe-Controls sowie einem Statistikfenster für Frame, Zeit, Restzeit und einer Audiostream-Wellenform.",
-      tags: ["Vorschau", "VLC", "Statistik"],
-      pro: false,
-      icon: <FaDesktop size={15} />,
-   },
-   {
-      id: "deepcheck",
-      label: "DeepCheck",
-      title: "DeepCheck",
-      description: "Inhaltsbasierte Tiefenprüfung der Typintegrität mit dem Magika-Plug-in. Erkennt Abweichungen zwischen Dateiendung, Kopfsignatur und Containerstruktur.",
-      tags: ["Magika", "Typprüfung", "Integrität"],
-      pro: false,
-      icon: <FaSearch size={14} />,
-   },
-   {
-      id: "nfo-export",
-      label: "NFO-Export",
-      title: "NFO-Export für Medienverwaltung",
-      description: "Erzeugt standardkonforme .nfo-Dateien für Videoverwaltungssysteme wie Kodi, Jellyfin und Emby direkt aus den vorhandenen Analyseergebnissen.",
-      tags: ["Kodi", "Jellyfin", "Emby"],
-      pro: false,
-      icon: <FaFileAlt size={15} />,
-   },
-   {
-      id: "map-plus",
-      label: "MAP+",
-      title: "MAP+ Archivierungs-PDF",
-      description: "Hochwertige PDF-Variante des MAP als professionelles Archivierungsdokument mit erweiterter Darstellung für Archive, Kunden und langfristige Dokumentation.",
-      tags: ["PDF", "Archiv", "Bericht"],
-      pro: true,
-      icon: <FaFilePdf size={15} />,
-   },
-   {
-      id: "media-stapel",
-      label: "Media Stapel",
-      title: "Reiter",
-      tabName: "Media Stapel",
-      description: "Stapelverarbeitung ganzer Verzeichnisse oder Dateilisten in einem Durchlauf mit laufender Ergebnisanalyse und automatisch gespeicherten MAP-Berichten pro Datei.",
-      tags: ["Batch", "Verzeichnisse", "Automatisierung"],
-      pro: true,
-      icon: <FaCopy size={14} />,
-   },
-   {
-      id: "diagnosemodus",
-      label: "Diagnosemodus",
-      title: "Diagnosemodus",
-      description: "Vertiefte FFprobe-Analyse mit Paket- und Frame-Informationen sowie einem Streamcopy-Test. Ideal für Problemdateien mit auffälligen Zeitstempeln oder Paketfolgen.",
-      tags: ["FFprobe", "Tiefenanalyse", "Diagnose"],
-      pro: true,
-      icon: <FaBug size={15} />,
-   },
-   {
-      id: "media-repair",
-      label: "Media Repair",
-      title: "Reiter",
-      tabName: "Media Repair",
-      description: "Regelbasierte Reparaturvorschläge bei erkannten Fehlern mit Wahrscheinlichkeitsangabe und konkretem Verfahren. Arbeitet stets auf einer Kopie, nie an der Originaldatei.",
-      tags: ["Reparatur", "FFmpeg", "regelbasiert"],
-      pro: true,
-      icon: <FaWrench size={14} />,
-   },
-   {
-      id: "kompatibilitaet",
-      label: "Kompatibilität",
-      title: "Kompatibilitätsbewertung",
-      description: "Regelbasierte Einschätzung der Abspielbarkeit auf typischen Plattformen anhand von FFprobe- und MediaInfo-Daten. Klare Kennzeichnung kritischer Merkmale wie Codec-Profile oder Farbräume.",
-      tags: ["Plattform", "MediaInfo", "FFprobe"],
-      pro: false,
-      icon: <FaCheckCircle size={14} />,
-   },
-   {
-      id: "statistik",
-      label: "Statistik",
-      title: "Statistik-Modul",
-      description: "Lernendes Statistiksystem, das reale Prüfungsdaten erfasst und individuelle Laufzeitprognosen pro System erstellt, differenziert nach CPU-Modus und Speicherquelle.",
-      tags: ["Laufzeitprognose", "lernend", "Statistik"],
-      pro: true,
-      icon: <FaChartBar size={15} />,
-   },
-   {
-      id: "vqa",
-      label: "VQA",
-      title: "Perzeptuelle Qualitätsanalyse (VQA)",
-      description: "Bewertet die visuelle Qualität eines Videos aus menschlicher Sicht mit OpenCV, ergänzend zu technischen Kennzahlen und unabhängig von Plattformbewertungen.",
-      tags: ["OpenCV", "Bildanalyse", "visuell"],
-      pro: true,
-      icon: <FaEye size={15} />,
-   },
-   {
-      id: "ytup",
-      label: "Ytup",
-      title: "Ytup: YouTube-Upload-Prognose",
-      description: "Proprietäres Analysemodul zur technischen und qualitativen Bewertung vor einem YouTube-Upload inklusive Qualitätsprognose nach der Neukodierung und Optimierungsempfehlungen.",
-      tags: ["YouTube", "Upload", "Prognose"],
-      pro: true,
-      icon: <FaYoutube size={15} />,
-   },
-   {
-      id: "macos",
-      label: "macOS",
-      title: "Portierung für macOS",
-      description: "Refactoring und Portierung der Anwendung für macOS mit einheitlicher Bedienoberfläche und vergleichbarem Funktionsumfang über alle unterstützten Betriebssysteme hinweg.",
-      tags: ["macOS", "Portierung", "Refactoring"],
-      pro: false,
-      icon: <FaApple size={15} />,
-   },
-   {
-      id: "sprachen",
-      label: "Sprachen",
-      title: "Weitere Sprachen",
-      description: "Erweiterung der mehrsprachigen Benutzeroberfläche um Spanisch, Hindi, Russisch, Portugiesisch und weitere Sprachen.",
-      tags: ["Spanisch", "Hindi", "Russisch"],
-      pro: false,
-      icon: <FaGlobe size={14} />,
-   },
-   {
-      id: "lizenz",
-      label: "Lizenzierung",
-      title: "Lizenzierungsmodul",
-      description: "Verwaltung der PRO-Aktivierung, Lizenzprüfung und Funktionsfreischaltung, vollständig lokal ohne dauerhafte Internetverbindung.",
-      tags: ["Lizenz", "Aktivierung", "lokal"],
-      pro: false,
-      icon: <FaKey size={14} />,
-   },
+   { id: "quick-check",    pro: false, next: true,                              icon: <FaBolt size={14} /> },
+   { id: "media-test",     pro: false, isTab: true,                             icon: <FaDesktop size={15} /> },
+   { id: "deepcheck",      pro: false, delivered: { version: "v1.4.7" },        icon: <FaSearch size={14} /> },
+   { id: "nfo-export",     pro: false,                                          icon: <FaFileAlt size={15} /> },
+   { id: "map-plus",       pro: true,                                           icon: <FaFilePdf size={15} /> },
+   { id: "media-stapel",   pro: true,  isTab: true,                             icon: <FaCopy size={14} /> },
+   { id: "diagnosemodus",  pro: false, delivered: { version: "v1.4.7" },        icon: <FaBug size={15} /> },
+   { id: "vollanalyse",    pro: true,                                           icon: <FaExpand size={14} /> },
+   { id: "media-repair",   pro: true,  isTab: true,                             icon: <FaWrench size={14} /> },
+   { id: "kompatibilitaet", pro: false,                                         icon: <FaCheckCircle size={14} /> },
+   { id: "statistik",      pro: true,                                           icon: <FaChartBar size={15} /> },
+   { id: "vqa",            pro: true,                                           icon: <FaEye size={15} /> },
+   { id: "ytup",           pro: true,                                           icon: <FaYoutube size={15} /> },
+   { id: "macos",          pro: false,                                          icon: <FaApple size={15} /> },
+   { id: "sprachen",       pro: false,                                          icon: <FaGlobe size={14} /> },
+   { id: "lizenz",         pro: false,                                          icon: <FaKey size={14} /> },
 ];
 
 const scrollTo = (id: string) => {
    document.getElementById(`roadmap-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
 };
 
+// Akzent-Auflösung — Priorität: delivered > next > pro > default
+const accentFor = (item: Item): { color: string; alpha: string } => {
+   if (item.delivered) return { color: GREEN, alpha: "rgba(34,197,94," };
+   if (item.next) return { color: NEXT_COLOR, alpha: "rgba(167,139,250," };
+   if (item.pro) return { color: PRO_COLOR, alpha: "rgba(245,197,66," };
+   return { color: CYAN, alpha: "rgba(106,172,204," };
+};
+
+const topBarFor = (item: Item): string => {
+   if (item.delivered) return `linear-gradient(to right, ${GREEN}, #15803d)`;
+   if (item.next) return `linear-gradient(to right, ${NEXT_COLOR}, #7c3aed)`;
+   if (item.pro) return "linear-gradient(to right, #f5c542, #d97706)";
+   return `linear-gradient(to right, ${CYAN}, #4a7da0)`;
+};
+
 const Roadmap = () => {
+   const { t } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
 
+   const bottomLabelFor = (item: Item): string => {
+      if (item.delivered) return t("roadmap.labelDelivered");
+      if (item.next) return t("roadmap.labelNext");
+      if (item.pro) return t("roadmap.labelPro");
+      return t("roadmap.labelBase");
+   };
+
    return (
-      <PageSection id="roadmap" title="Roadmap" subtitle="Geplante Erweiterungen und Ausblick">
+      <PageSection id="roadmap" title={t("roadmap.title")} subtitle={t("roadmap.subtitle")}>
          <div style={{ maxWidth: 1152, margin: "0 auto" }}>
 
             {/* Quick-nav chips */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginBottom: 56 }}>
-               {ITEMS.map((item) => (
-                  <motion.button
-                     key={item.id}
-                     onClick={() => scrollTo(item.id)}
-                     whileHover={{ scale: 1.06, y: -2 }}
-                     whileTap={{ scale: 0.96 }}
-                     style={{
-                        display: "inline-flex", alignItems: "center", gap: 6,
-                        padding: "5px 14px", borderRadius: 999, cursor: "pointer",
-                        background: item.pro ? "rgba(245,197,66,0.07)" : "rgba(106,172,204,0.07)",
-                        border: `1px solid ${item.pro ? "rgba(245,197,66,0.22)" : "rgba(106,172,204,0.22)"}`,
-                        color: item.pro ? PRO_COLOR : CYAN,
-                        fontSize: 11, fontWeight: 600,
-                        fontFamily: MONO_FONT,
-                        letterSpacing: "0.03em",
-                     }}
-                  >
-                     <span style={{ opacity: 0.8 }}>{item.icon}</span>
-                     {item.label}
-                  </motion.button>
-               ))}
+               {ITEMS.map((item) => {
+                  const { color, alpha } = accentFor(item);
+                  return (
+                     <motion.button
+                        key={item.id}
+                        onClick={() => scrollTo(item.id)}
+                        whileHover={{ scale: 1.06, y: -2 }}
+                        whileTap={{ scale: 0.96 }}
+                        style={{
+                           display: "inline-flex", alignItems: "center", gap: 6,
+                           padding: "5px 14px", borderRadius: 999, cursor: "pointer",
+                           background: `${alpha}0.07)`,
+                           border: `1px solid ${alpha}0.22)`,
+                           color,
+                           fontSize: 11, fontWeight: 600,
+                           fontFamily: MONO_FONT,
+                           letterSpacing: "0.03em",
+                        }}
+                     >
+                        <span style={{ opacity: 0.8 }}>{item.icon}</span>
+                        {t(`roadmap.items.${item.id}.label`)}
+                        {item.delivered && <FaCheck size={9} style={{ opacity: 0.9 }} />}
+                     </motion.button>
+                  );
+               })}
             </div>
 
             {/* Timeline */}
@@ -221,8 +166,7 @@ const Roadmap = () => {
 
                {ITEMS.map((item, idx) => {
                   const isLeft = !isMobile && idx % 2 === 0;
-                  const accent = item.pro ? PRO_COLOR : CYAN;
-                  const accentAlpha = item.pro ? "rgba(245,197,66," : "rgba(106,172,204,";
+                  const { color: accent, alpha: accentAlpha } = accentFor(item);
 
                   return (
                      <motion.div
@@ -299,9 +243,7 @@ const Roadmap = () => {
                            {/* Accent top bar */}
                            <div style={{
                               height: 3,
-                              background: item.pro
-                                 ? "linear-gradient(to right, #f5c542, #d97706)"
-                                 : `linear-gradient(to right, ${CYAN}, #4a7da0)`,
+                              background: topBarFor(item),
                               borderRadius: "12px 12px 0 0",
                            }} />
 
@@ -318,32 +260,38 @@ const Roadmap = () => {
                                     {item.icon}
                                  </div>
                                  <h3 style={{ margin: 0, lineHeight: 1.4 }}>
-                                    {item.tabName ? (
+                                    {item.isTab ? (
                                        <>
                                           <span style={{ fontSize: 10, fontWeight: 600, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                                             Reiter{" "}
+                                             {t("roadmap.tabPrefix")}{" "}
                                           </span>
                                           <span style={{ fontSize: 13, fontWeight: 700, color: "#eeeef5", fontFamily: MONO_FONT }}>
-                                             {item.tabName}
+                                             {t(`roadmap.items.${item.id}.label`)}
                                           </span>
                                        </>
                                     ) : (
                                        <span style={{ fontSize: 13, fontWeight: 700, color: "#eeeef5" }}>
-                                          {item.title}
+                                          {t(`roadmap.items.${item.id}.title`)}
                                        </span>
                                     )}
-                                    {item.pro && <ProBadge />}
+                                    {item.delivered ? (
+                                       <DeliveredBadge label={t("roadmap.badgeDelivered")} version={item.delivered.version} />
+                                    ) : item.next ? (
+                                       <NextBadge label={t("roadmap.badgeNext")} />
+                                    ) : item.pro ? (
+                                       <ProBadge label={t("roadmap.badgePro")} />
+                                    ) : null}
                                  </h3>
                               </div>
 
                               {/* Description */}
                               <p style={{ fontSize: 12, color: TEXT_SECONDARY, lineHeight: 1.75, margin: "0 0 12px" }}>
-                                 {item.description}
+                                 {t(`roadmap.items.${item.id}.description`)}
                               </p>
 
                               {/* Tags */}
                               <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                                 {item.tags.map((tag) => (
+                                 {(t(`roadmap.items.${item.id}.tags`, { returnObjects: true }) as string[]).map((tag) => (
                                     <span key={tag} style={{
                                        fontFamily: MONO_FONT, fontSize: 10,
                                        padding: "2px 8px", borderRadius: 5,
@@ -361,7 +309,7 @@ const Roadmap = () => {
                                     color: TEXT_MUTED,
                                     border: "1px solid rgba(255,255,255,0.06)",
                                  }}>
-                                    {item.pro ? "PRO-Feature" : "Basisversion"}
+                                    {bottomLabelFor(item)}
                                  </span>
                               </div>
                            </div>

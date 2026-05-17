@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import useMediaQuery from "@utils/useMediaQuery";
 import NavBar from "./NavBar";
 import MobileMenu from "./MobileMenu";
@@ -8,24 +9,30 @@ interface NavSection {
    label: string;
 }
 
-const NAV_SECTIONS: NavSection[] = [
-   { id: "highlights", label: "Highlights" },
-   { id: "funktionen", label: "Features" },
-   { id: "formate", label: "Formate" },
-   { id: "roadmap", label: "Roadmap" },
-   { id: "download", label: "Download" },
-   { id: "preise", label: "Preise" },
-   { id: "kontakt", label: "Kontakt" },
-   { id: "spenden", label: "Unterstützen" },
+const NAV_KEYS: { id: string; key: string }[] = [
+   { id: "highlights", key: "highlights" },
+   { id: "funktionen", key: "features" },
+   { id: "formate", key: "formats" },
+   { id: "roadmap", key: "roadmap" },
+   { id: "download", key: "download" },
+   { id: "preise", key: "pricing" },
+   { id: "kontakt", key: "contact" },
+   { id: "spenden", key: "support" },
 ];
 
 const Nav = () => {
+   const { t } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 1023px)");
    const [activeSection, setActiveSection] = useState("hero");
    const [sectionProgress, setSectionProgress] = useState(0);
    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
    const [scrolled, setScrolled] = useState(false);
    const activeSectionRef = useRef("hero");
+
+   const NAV_SECTIONS: NavSection[] = useMemo(
+      () => NAV_KEYS.map(({ id, key }) => ({ id, label: t(`nav.${key}`) })),
+      [t],
+   );
 
    // Lightweight scroll listener for nav background only
    useEffect(() => {

@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { CYAN, TEXT_SECONDARY } from "@/constants/theme";
 import logo from "@/assets/logo.svg";
 import DesktopNav from "./DesktopNav";
+import LanguageToggle from "@components/ui/LanguageToggle";
 
 interface NavSection {
    id: string;
@@ -88,20 +89,25 @@ const NavBar = ({
                </span>
             </button>
 
-            {/* Desktop nav links */}
+            {/* Desktop nav links + language toggle */}
             {!isMobile && (
-               <DesktopNav
-                  sections={sections}
-                  activeSection={activeSection}
-                  sectionProgress={sectionProgress}
-                  onNavigate={onNavigate}
-               />
+               <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <DesktopNav
+                     sections={sections}
+                     activeSection={activeSection}
+                     sectionProgress={sectionProgress}
+                     onNavigate={onNavigate}
+                  />
+                  <LanguageToggle />
+               </div>
             )}
 
-            {/* Mobile hamburger */}
+            {/* Mobile language toggle + hamburger */}
             {isMobile && (
-               <button
-                  onClick={onToggleMenu}
+               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <LanguageToggle compact />
+                  <button
+                     onClick={onToggleMenu}
                   style={{
                      width: 40,
                      height: 40,
@@ -125,6 +131,7 @@ const NavBar = ({
                >
                   {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
                </button>
+               </div>
             )}
          </div>
       </motion.nav>

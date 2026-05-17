@@ -1,19 +1,21 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { getName } from "@data/dataLoader";
 import { staggerItem } from "@utils/animations";
 import { MONO_FONT } from "@/constants/theme";
 import FooterSocial from "./FooterSocial";
 import logo from "@assets/logo.png";
 
-const LEGAL_LINKS = [
-   { label: "Datenschutzerklärung", href: "#datenschutz" },
-   { label: "Lizenzvereinbarung (EULA)", href: "#eula" },
-   { label: "Impressum", href: "#impressum" },
-];
-
 const FooterContent = () => {
+   const { t } = useTranslation();
    const name = useMemo(() => getName(), []);
+
+   const LEGAL_LINKS = [
+      { label: t("footer.privacy"), href: "#datenschutz" },
+      { label: t("footer.eula"), href: "#eula" },
+      { label: t("footer.imprint"), href: "#impressum" },
+   ];
 
    return (
       <>

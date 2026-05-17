@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { X, Scale, Mail, Globe, ShieldCheck, User } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import data from "../../../data/impressum.json";
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const ImpressumModal = ({ open, onClose }: Props) => {
+   const { t } = useTranslation();
    const scrollRef = useRef<HTMLDivElement>(null);
 
    useEffect(() => {
@@ -317,7 +319,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                               fontSize: 12, fontWeight: 600, color: CYAN, cursor: "pointer",
                            }}
                         >
-                           Schliessen
+                           {t("modal.close")}
                         </motion.button>
                      </div>
 

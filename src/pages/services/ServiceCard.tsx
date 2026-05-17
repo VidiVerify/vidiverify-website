@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Code } from "lucide-react";
 import type { Variants } from "motion/react";
 import type { Service } from "@/types";
 import useMediaQuery from "@utils/useMediaQuery";
 import GlassCard from "@components/ui/GlassCard";
-import { iconMap, ACCENT_COLORS } from "./servicesConstants";
+import { iconMapById, fallbackIcon, ACCENT_COLORS } from "./servicesConstants";
 import ServiceAnimation from "./ServiceAnimation";
 
 interface ServiceCardProps {
@@ -26,7 +25,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
    const [isHovered, setIsHovered] = useState(false);
    const isMobile = useMediaQuery("(max-width: 768px)");
    const colors = ACCENT_COLORS[index % ACCENT_COLORS.length];
-   const IconComponent = iconMap[service.title] || Code;
+   const IconComponent = iconMapById[service.id] || fallbackIcon;
 
    return (
       <GlassCard
@@ -49,8 +48,8 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
             {/* Left: Animation */}
             <div
                style={{
-                  width: isMobile ? "100%" : 150,
-                  minHeight: isMobile ? 100 : "auto",
+                  width: isMobile ? "100%" : 128,
+                  minHeight: isMobile ? 88 : "auto",
                   flexShrink: 0,
                   display: "flex",
                   alignItems: "center",
@@ -74,26 +73,26 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                      pointerEvents: "none",
                   }}
                />
-               <ServiceAnimation title={service.title} color={colors.icon} />
+               <ServiceAnimation id={service.id} color={colors.icon} />
             </div>
 
             {/* Right: Content */}
-            <div style={{ flex: 1, padding: "18px 20px" }}>
+            <div style={{ flex: 1, padding: "12px 18px" }}>
                <h3
                   style={{
-                     fontSize: 15,
+                     fontSize: 14,
                      fontWeight: 700,
                      color: "#eeeef5",
-                     marginBottom: 10,
+                     marginBottom: 6,
                      display: "flex",
                      alignItems: "center",
-                     gap: 8,
+                     gap: 6,
                   }}
                >
                   <IconComponent
                      style={{
-                        width: 16,
-                        height: 16,
+                        width: 14,
+                        height: 14,
                         color: colors.icon,
                         flexShrink: 0,
                      }}
@@ -105,7 +104,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                   style={{
                      display: "flex",
                      flexDirection: "column",
-                     gap: 6,
+                     gap: 3,
                   }}
                >
                   {service.list.map((item) => (
@@ -116,8 +115,8 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                            alignItems: "flex-start",
                            gap: 8,
                            color: "#a5a5c0",
-                           fontSize: 13,
-                           lineHeight: 1.5,
+                           fontSize: 12,
+                           lineHeight: 1.45,
                         }}
                      >
                         <span
@@ -125,7 +124,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                               width: 4,
                               height: 4,
                               borderRadius: "50%",
-                              marginTop: 7,
+                              marginTop: 6,
                               flexShrink: 0,
                               backgroundColor: colors.dot,
                            }}

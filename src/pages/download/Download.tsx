@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaIdCard } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 import { BsCalendar3, BsFileZip } from "react-icons/bs";
@@ -11,6 +12,7 @@ import downloadConfig from "../../../data/download.json";
 import useMediaQuery from "@utils/useMediaQuery";
 import useIsMobileNonWindows from "@utils/useIsMobileNonWindows";
 import MobileNoticeModal from "./MobileNoticeModal";
+import ManualDownload from "./ManualDownload";
 
 const SHARE_URL = "https://vidiverify.de/download";
 
@@ -26,9 +28,10 @@ const formatBytes = (bytes: number): string => {
    return `${bytes} B`;
 };
 
-const formatDate = (iso: string): string => {
+const formatDate = (iso: string, locale: string): string => {
    if (!iso) return "—";
-   return new Date(iso).toLocaleDateString("de-DE", {
+   const dateLocale = locale.startsWith("de") ? "de-DE" : "en-US";
+   return new Date(iso).toLocaleDateString(dateLocale, {
       day: "2-digit", month: "long", year: "numeric",
    });
 };
@@ -38,6 +41,7 @@ const Skeleton = ({ width, height = 14 }: { width: number; height?: number }) =>
 );
 
 const Download = () => {
+   const { t, i18n } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
    const isMobileNonWindows = useIsMobileNonWindows();
    const [noticeOpen, setNoticeOpen] = useState(false);
@@ -55,28 +59,28 @@ const Download = () => {
       {
          id: "version",
          icon: <MdVerified size={18} color={CYAN} />,
-         label: "Version",
+         label: t("download.version"),
          value: loading ? <Skeleton width={64} /> : error ? "—" : data?.version ?? "—",
          mono: true,
       },
       {
          id: "datum",
          icon: <BsCalendar3 size={16} color={CYAN} />,
-         label: "Veröffentlicht",
-         value: loading ? <Skeleton width={100} /> : formatDate(data?.publishedAt ?? ""),
+         label: t("download.published"),
+         value: loading ? <Skeleton width={100} /> : formatDate(data?.publishedAt ?? "", i18n.language),
          mono: false,
       },
       {
          id: "groesse",
          icon: <BsFileZip size={18} color={CYAN} />,
-         label: "Dateigrösse",
+         label: t("download.fileSize"),
          value: loading ? <Skeleton width={56} /> : data?.fileSize ? formatBytes(data.fileSize) : "—",
          mono: false,
       },
    ];
 
    return (
-      <PageSection id="download" title="Download" subtitle="VidiVerify kostenfrei herunterladen">
+      <PageSection id="download" title={t("download.title")} subtitle={t("download.subtitle")}>
          <motion.div
             style={{ maxWidth: 1152, margin: "0 auto" }}
             variants={staggerContainerSlow}
@@ -184,7 +188,7 @@ const Download = () => {
                      }}
                   >
                      <FaDownload size={16} />
-                     Jetzt herunterladen
+                     {t("download.ctaDownload")}
                   </motion.a>
 
                   {/* Divider */}
@@ -195,7 +199,7 @@ const Download = () => {
                      {/* Dateiname */}
                      <div style={{ textAlign: "left" }}>
                         <span style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>
-                           Dateiname
+                           {t("download.filename")}
                         </span>
                         <div style={{ marginTop: 4 }}>
                            <span style={{
@@ -230,7 +234,7 @@ const Download = () => {
                                  background: "rgba(106,172,204,0.06)", border: "1px solid rgba(106,172,204,0.15)",
                                  fontSize: 11, color: TEXT_MUTED, fontFamily: MONO_FONT,
                               }}>
-                                 Verfügbar nach erstem Release
+                                 {t("download.shaAvailable")}
                               </span>
                            )}
                         </div>
@@ -242,17 +246,17 @@ const Download = () => {
                      <motion.a href={downloadConfig.links.all_releases} target="_blank" rel="noopener noreferrer"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaGithub size={13} /> Alle Releases
+                        <FaGithub size={13} /> {t("download.linkAllReleases")}
                      </motion.a>
                      <motion.a href={downloadConfig.links.changelog} target="_blank" rel="noopener noreferrer"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaScroll size={12} /> Release Notes
+                        <FaScroll size={12} /> {t("download.linkReleaseNotes")}
                      </motion.a>
                      <motion.a href="https://vidiverify.de/pad/vidiverify.xml" target="_blank" rel="noopener noreferrer"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaIdCard size={12} /> Digitaler Steckbrief (PAD)
+                        <FaIdCard size={12} /> {t("download.linkPad")}
                      </motion.a>
                   </div>
                </div>
@@ -277,38 +281,43 @@ const Download = () => {
                         <FaShieldAlt size={15} color={CYAN} />
                      </div>
                      <span style={{ fontSize: 11, fontWeight: 700, color: CYAN, textTransform: "uppercase", letterSpacing: "0.08em" }}>
-                        Lizenz & Bezug
+                        {t("download.licenseHeader")}
                      </span>
                   </div>
                   <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.8, margin: 0 }}>
-                     Diese Seite ist die offizielle Quelle für VidiVerify. Der hier bereitgestellte Build ist signiert und verifizierbar – der SHA-256-Prüfwert entspricht exakt dem veröffentlichten Installer. Die private Nutzung ist kostenfrei. Für nicht ausschliesslich private Nutzung ist eine offizielle Lizenzierung vorgesehen.
+                     {t("download.licenseText1")}
                   </p>
                   <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.8, margin: 0 }}>
-                     VidiVerify ist ausserdem über weitere Downloadportale erhältlich. Unabhängig vom Bezugsweg lässt sich die Echtheit jedes Builds anhand des SHA-256-Prüfwerts nachvollziehen.
+                     {t("download.licenseText2")}
                   </p>
                   <div style={{ display: "flex", flexWrap: "nowrap", gap: 16, marginTop: "auto" }}>
                      <motion.a href="https://github.com/VidiVerify" target="_blank" rel="noopener noreferrer"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaGithub size={13} /> Projektquelle
+                        <FaGithub size={13} /> {t("download.linkProjectSource")}
                      </motion.a>
                      <motion.a href="#preise"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaTag size={12} /> Preise
+                        <FaTag size={12} /> {t("download.linkPrices")}
                      </motion.a>
                      <motion.a href="#spenden"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaHeart size={12} /> Spenden
+                        <FaHeart size={12} /> {t("download.linkDonate")}
                      </motion.a>
                      <motion.a href="#eula"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaFileContract size={12} /> EULA
+                        <FaFileContract size={12} /> {t("download.linkEula")}
                      </motion.a>
                   </div>
                </div>
+            </motion.div>
+
+            {/* ── Handbuch / User Manual ── */}
+            <motion.div variants={staggerItemSlow}>
+               <ManualDownload />
             </motion.div>
 
             {/* ── Bekannt von / Trust-Strip ── */}
@@ -363,7 +372,7 @@ const Download = () => {
                         letterSpacing: "0.22em",
                      }}
                   >
-                     Bekannt von
+                     {t("download.trustHeader")}
                   </span>
                   <div
                      style={{
@@ -391,7 +400,7 @@ const Download = () => {
                            color: "#ffffff",
                            opacity: 0.88,
                         }}
-                        aria-label="VidiVerify im Microsoft Store oeffnen"
+                        aria-label={t("download.msStoreAria")}
                      >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                            <path d="M2 3h9.5v9.5H2zM12.5 3H22v9.5h-9.5zM2 13.5h9.5V23H2zM12.5 13.5H22V23h-9.5z" />
@@ -429,7 +438,7 @@ const Download = () => {
                            color: "#ffffff",
                            opacity: 0.88,
                         }}
-                        aria-label="VidiVerify bei heise Download oeffnen"
+                        aria-label={t("download.heiseAria")}
                      >
                         <img
                            src="/heise_h_white.png"

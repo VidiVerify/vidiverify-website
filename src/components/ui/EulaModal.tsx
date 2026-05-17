@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { X, ScrollText } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import eulaData from "../../../data/eula.json";
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const EulaModal = ({ open, onClose }: Props) => {
+   const { t } = useTranslation();
    const scrollRef = useRef<HTMLDivElement>(null);
 
    useEffect(() => {
@@ -198,7 +200,7 @@ const EulaModal = ({ open, onClose }: Props) => {
                               fontSize: 12, fontWeight: 600, color: CYAN, cursor: "pointer",
                            }}
                         >
-                           Schliessen
+                           {t("modal.close")}
                         </motion.button>
                      </div>
                   </div>

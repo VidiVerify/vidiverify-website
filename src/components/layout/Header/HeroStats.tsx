@@ -1,21 +1,14 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { getStatistics, getSiteConfig } from "@data/dataLoader";
 import { staggerItem } from "@utils/animations";
 import AnimatedCounter from "@components/ui/AnimatedCounter";
 import { useGitHubDownloadCount } from "@/hooks/useGitHubDownloadCount";
 import { usePageViewCount } from "@/hooks/usePageViewCount";
 
-const LABELS: Record<string, string> = {
-   launch: "Launch",
-   formate: "Formate",
-   codezeilen: "Codezeilen",
-   funktionen: "Funktionen",
-   downloads: "Downloads",
-   seitenaufrufe: "Seitenaufrufe",
-};
-
 const HeroStats = () => {
+   const { t } = useTranslation();
    const statistics = useMemo(() => getStatistics(), []);
    const { counter_namespace, gc_code } = useMemo(() => getSiteConfig(), []);
    const { count: dlCount } = useGitHubDownloadCount("VidiVerify", "vidiverify-releases");
@@ -24,13 +17,13 @@ const HeroStats = () => {
    const statsArray = useMemo(() => {
       return Object.entries(statistics).map(([key, value]) => ({
          key,
-         label: LABELS[key] ?? key.replaceAll("_", " "),
+         label: t(`hero.stats.${key}`, { defaultValue: key.replaceAll("_", " ") }),
          value:
             key === "downloads" && dlCount !== null ? `${dlCount}+` :
             key === "seitenaufrufe" && pvCount !== null ? `${pvCount}+` :
             value,
       }));
-   }, [statistics, dlCount, pvCount]);
+   }, [statistics, dlCount, pvCount, t]);
 
    return (
       <motion.div

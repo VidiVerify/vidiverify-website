@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { FaPaypal, FaHandHoldingHeart, FaHeart, FaCode, FaShieldAlt, FaLeaf } from "react-icons/fa";
 import { ArrowUpRight } from "lucide-react";
 import { getDonate } from "@data/dataLoader";
@@ -17,30 +18,27 @@ const WAY_COLORS = {
    "4fund": { accent: CYAN,      glow: "rgba(106,172,204,0.25)", gradient: `linear-gradient(135deg, ${CYAN}, #4a7da0)` },
 };
 
-const SUPPORT_REASONS = [
-   {
-      icon: <FaCode size={20} color={CYAN} />,
-      title: "Aktive Weiterentwicklung",
-      text: "Neue Features, Formate und Plug-ins entstehen durch kontinuierliche Arbeit — deine Unterstützung hält das Projekt in Bewegung.",
-   },
-   {
-      icon: <FaShieldAlt size={20} color={CYAN} />,
-      title: "Langzeitpflege",
-      text: "Bugfixes, Kompatibilitätsupdates und stabile Releases erfordern dauerhaften Einsatz weit über die erste Veröffentlichung hinaus.",
-   },
-   {
-      icon: <FaLeaf size={20} color={CYAN} />,
-      title: "Unabhängigkeit",
-      text: "Kein Konzern im Rücken, kein Vendor-Lock-in. VidiVerify bleibt frei, weil Menschen dahinterstehen — nicht Renditeerwartungen.",
-   },
+const REASON_ICONS = [
+   <FaCode size={20} color={CYAN} />,
+   <FaShieldAlt size={20} color={CYAN} />,
+   <FaLeaf size={20} color={CYAN} />,
 ];
 
 const Donate = () => {
+   const { t } = useTranslation();
    const donate = getDonate();
    const isMobile = useMediaQuery("(max-width: 768px)");
 
+   const wayLabels: Record<string, string> = {
+      paypal: t("donate.waysPaypal"),
+      "4fund": t("donate.ways4fund"),
+   };
+
+   const supportReasons = (t("donate.reasons", { returnObjects: true }) as { title: string; text: string }[])
+      .map((r, i) => ({ ...r, icon: REASON_ICONS[i] }));
+
    return (
-      <PageSection id="spenden" title="Unterstützen" subtitle="Vielen Dank für die Hilfe!">
+      <PageSection id="spenden" title={t("donate.title")} subtitle={t("donate.subtitle")}>
          <motion.div
             style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14, paddingBottom: 120 }}
             variants={staggerContainerSlow}
@@ -85,10 +83,10 @@ const Donate = () => {
                   }}
                >
                   <h3 style={{ fontSize: 17, fontWeight: 700, color: TEXT_PRIMARY, margin: 0 }}>
-                     {donate.headline}
+                     {t("donate.headline")}
                   </h3>
                   <p style={{ fontSize: 14, lineHeight: 1.85, color: TEXT_SECONDARY, margin: 0 }}>
-                     {donate.description}
+                     {t("donate.description")}
                   </p>
                </motion.div>
 
@@ -118,7 +116,7 @@ const Donate = () => {
                            }}
                         >
                            {Icon && <Icon size={20} color="#fff" />}
-                           {way.label.replace("Spenden via ", "")}
+                           {wayLabels[way.id] ?? way.label.replace("Spenden via ", "")}
                            <ArrowUpRight size={16} style={{ opacity: 0.8 }} />
                         </motion.a>
                      );
@@ -135,9 +133,9 @@ const Donate = () => {
                   gap: 12,
                }}
             >
-               {SUPPORT_REASONS.map((reason) => (
+               {supportReasons.map((reason, i) => (
                   <motion.div
-                     key={reason.title}
+                     key={i}
                      variants={staggerItemSlow}
                      whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(106,172,204,0.12)", transition: { duration: 0.3 } }}
                      className="glass-card"
@@ -174,7 +172,7 @@ const Donate = () => {
                   fontSize: 12, color: "rgba(165,165,192,0.6)", letterSpacing: "0.02em", lineHeight: 1.6,
                }}>
                   <span style={{ fontSize: 13, opacity: 0.7 }}>ℹ</span>
-                  {donate.note}
+                  {t("donate.note")}
                </span>
             </motion.div>
          </motion.div>

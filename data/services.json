@@ -4,9 +4,9 @@
       "title": "Vorprüfung",
       "list": [
          "Drag & Drop Unterstützung",
-         "Schnelle Vorprüfung vor der Vollanalyse",
-         "Dateiformat-Validierung",
-         "Grössen- und Strukturprüfung",
+         "Schnelle Vorprüfung in wenigen Sekunden",
+         "Magic-Bytes-Validierung der Datei-Endung",
+         "Magika-Tiefenprüfung (ML-basiert, optional)",
          "Ressourcenschonend"
       ]
    },
@@ -14,10 +14,10 @@
       "id": 2,
       "title": "Integritätsprüfung",
       "list": [
-         "Plug-in-basierte Frame-Analyse",
-         "Erkennung von Korruption und Lesefehlern",
-         "Dekodierbarkeitstest",
-         "Prüfung auf abgebrochene Streams",
+         "Plug-in-basierte Frame-Analyse mit FFmpeg",
+         "Diagnosemodus: Streamcopy, ffprobe und Decode-Layer",
+         "Auto-Eskalation bei Auffälligkeiten",
+         "Ursachen-Attribution für DVD-, DTS- und Container-Anomalien",
          "Detaillierte Fehlerprotokolle"
       ]
    },
@@ -25,11 +25,11 @@
       "id": 3,
       "title": "Media Analyse",
       "list": [
-         "Container- und Codec-Erkennung",
+         "Container- und Codec-Erkennung mit MediaInfo",
          "Bitrate, Framerate und Auflösung",
-         "Audio-Track-Analyse",
-         "Metadaten-Auswertung",
-         "Mehrkanal-Unterstützung"
+         "Audio-Tracks inkl. Atmos- und DTS:X-Erkennung",
+         "Bittiefe, Channel-Layout und Sprach-Flags",
+         "Nachvollziehbare Bewertungsdetails"
       ]
    },
    {
@@ -47,11 +47,11 @@
       "id": 5,
       "title": "Strukturierte Ergebnisdarstellung",
       "list": [
-         "Übersichtliche Tabellenansicht",
-         "Farbkodierte Status-Anzeige",
-         "Filterfunktionen für Ergebnisse",
-         "Detailansicht pro Datei",
-         "Exportierbare Berichte"
+         "Übersichts-Tab mit Status-Cards je Prüfstufe",
+         "Stage-Cards für Integrität, Vollprüfung und Diagnose",
+         "Heartbeat-Pulse für laufende Stufen",
+         "Live-Telemetrie: CPU, RAM, Netzwerk, Leserate",
+         "Theme- und Sprachwechsel ohne Neustart"
       ]
    },
    {
@@ -59,10 +59,10 @@
       "title": "Ergebnis-Dokumentation",
       "list": [
          "Proprietäres MAP – Media-Analyse-Protokoll",
-         "Vollständig detailliert, ablagefähig, revisionssicher",
-         "Lückenlose Nachvollziehbarkeit jedes Analysebefunds",
-         "Für Archivare, Sammler, Kuratoren und Plex-, Jellyfin- und Emby-Enthusiasten",
-         "Strukturierter Export – bereit für die Langzeitarchivierung"
+         "Neue Sektion: Diagnose-Tiefenanalyse",
+         "Magika-Sub-Block bei aktivem Plug-in",
+         "Vollständig detailliert, revisionssicher",
+         "Mehrsprachig: Deutsch · English · 中文"
       ]
    }
 ]

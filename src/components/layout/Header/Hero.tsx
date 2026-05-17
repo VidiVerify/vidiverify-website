@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { ChevronDown } from "lucide-react";
@@ -22,6 +23,7 @@ const ParticleFallback = ({
    ) : null;
 
 const Hero = () => {
+   const { t } = useTranslation();
    const { ref: sectionRef, inView } = useInView({ threshold: 0 });
    const [engineInit, setEngineInit] = useState(false);
    const [webGLSupported] = useState(() => hasWebGL());
@@ -117,7 +119,7 @@ const Hero = () => {
             aria-label="Scroll to About section"
          >
             <span className="text-xs font-mono tracking-widest uppercase">
-               Scroll
+               {t("hero.scrollLabel")}
             </span>
             <ChevronDown className="w-5 h-5 animate-scroll-hint" />
          </motion.button>

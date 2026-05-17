@@ -1,15 +1,17 @@
 import { ScanSearch, ShieldCheck, Film, FileVideo, LayoutList, ClipboardList, Code } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export const iconMap: Record<string, LucideIcon> = {
-   "Vorprüfung": ScanSearch,
-   "Integritätsprüfung": ShieldCheck,
-   "Media Analyse": Film,
-   "Formatprüfung": FileVideo,
-   "Strukturierte Ergebnisdarstellung": LayoutList,
-   "Ergebnis-Dokumentation": ClipboardList,
-   _fallback: Code,
+// Icon-Lookup via stabile Service-ID (sprachunabhängig)
+export const iconMapById: Record<number, LucideIcon> = {
+   1: ScanSearch,
+   2: ShieldCheck,
+   3: Film,
+   4: FileVideo,
+   5: LayoutList,
+   6: ClipboardList,
 };
+
+export const fallbackIcon: LucideIcon = Code;
 
 export interface AccentColor {
    iconBg: string;
