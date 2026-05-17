@@ -6,11 +6,13 @@ import de from "./locales/de.json";
 import en from "./locales/en.json";
 
 // Default-Logik:
-// 1. localStorage ("vidiverify-lang") wenn gesetzt
-// 2. Hostname: vidiverify.com → en, vidiverify.de → de (für künftige
-//    Domain-Trennung, aktuell noch ohne Auswirkung)
-// 3. navigator.language: de-* → de, sonst en
-// 4. Fallback: en
+// 1. localStorage ("vidiverify-lang") wenn gesetzt — gewinnt immer (User-Wahl)
+// 2. Querystring (?lng=en|de) — von Cloudflare Page Rule gesetzt, wenn jemand
+//    via vidiverify.com einsteigt
+// 3. Hostname: vidiverify.com → en, vidiverify.de → de (für künftige
+//    Domain-Trennung direkt auf GitHub Pages)
+// 4. navigator.language: de-* → de, sonst en
+// 5. Fallback: en
 const HOSTNAME_DETECTOR = {
    name: "hostname",
    lookup: () => {
@@ -34,9 +36,10 @@ i18n
       fallbackLng: "en",
       supportedLngs: ["de", "en"],
       detection: {
-         order: ["localStorage", "hostname", "navigator"],
+         order: ["localStorage", "querystring", "hostname", "navigator"],
          caches: ["localStorage"],
          lookupLocalStorage: "vidiverify-lang",
+         lookupQuerystring: "lng",
       },
       interpolation: {
          escapeValue: false,
