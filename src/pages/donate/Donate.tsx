@@ -19,9 +19,9 @@ const WAY_COLORS = {
 };
 
 const REASON_ICONS = [
-   <FaCode size={20} color={CYAN} />,
-   <FaShieldAlt size={20} color={CYAN} />,
-   <FaLeaf size={20} color={CYAN} />,
+   <FaCode key="code" size={20} color={CYAN} />,
+   <FaShieldAlt key="shield" size={20} color={CYAN} />,
+   <FaLeaf key="leaf" size={20} color={CYAN} />,
 ];
 
 const Donate = () => {

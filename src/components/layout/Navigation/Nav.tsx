@@ -65,8 +65,10 @@ const Nav = () => {
 
       const heroEl = document.getElementById("hero");
       if (heroEl) observer.observe(heroEl);
-      for (const section of NAV_SECTIONS) {
-         const el = document.getElementById(section.id);
+      // Stabile NAV_KEYS statt der sprachabhaengigen NAV_SECTIONS — die IDs aendern
+      // sich nicht beim Sprachwechsel, daher kann das Effekt-Deps-Array leer bleiben.
+      for (const { id } of NAV_KEYS) {
+         const el = document.getElementById(id);
          if (el) observer.observe(el);
       }
 

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { FaBookOpen, FaDownload } from "react-icons/fa";
@@ -40,13 +39,11 @@ const VARIANTS: ManualVariantStatic[] = [
 const ManualDownload = () => {
    const { t, i18n } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
-   const [primaryLang, setPrimaryLang] = useState<Lang>("en");
 
-   // Primary-Sprache folgt der aktuellen App-Sprache
-   useEffect(() => {
-      const lang = (i18n.resolvedLanguage ?? i18n.language ?? "en").toLowerCase();
-      setPrimaryLang(lang.startsWith("de") ? "de" : "en");
-   }, [i18n.resolvedLanguage, i18n.language]);
+   // Primary-Sprache folgt der aktuellen App-Sprache — direkt aus i18n abgeleitet,
+   // kein useState/useEffect noetig (useTranslation re-rendert bei Sprachwechsel).
+   const currentLang = (i18n.resolvedLanguage ?? i18n.language ?? "en").toLowerCase();
+   const primaryLang: Lang = currentLang.startsWith("de") ? "de" : "en";
 
    return (
       <div
