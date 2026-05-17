@@ -25,8 +25,14 @@ const HOSTNAME_DETECTOR = {
    cacheUserLanguage: () => undefined,
 };
 
+// Custom-Detector via Klasseninstanz VOR init registrieren — sonst wird
+// "hostname" beim initialen Detection-Run uebersprungen und der navigator-
+// Detector greift faelschlich (Browser=de-DE -> DE selbst auf vidiverify.com).
+const lngDetector = new LanguageDetector();
+lngDetector.addDetector(HOSTNAME_DETECTOR);
+
 i18n
-   .use(LanguageDetector)
+   .use(lngDetector)
    .use(initReactI18next)
    .init({
       resources: {
@@ -46,10 +52,6 @@ i18n
       },
       returnObjects: true,
    });
-
-// Custom-Detector registrieren (i18next-browser-languagedetector akzeptiert
-// addDetector erst nach init)
-(i18n.services.languageDetector as unknown as { addDetector: (d: typeof HOSTNAME_DETECTOR) => void }).addDetector(HOSTNAME_DETECTOR);
 
 // <html lang="..."> dynamisch synchron halten — wichtig für Screenreader und SEO
 const syncHtmlLang = (lng: string) => {
