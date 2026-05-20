@@ -131,6 +131,12 @@
       "labelBase": "Basisversion",
       "tabPrefix": "Reiter",
       "items": {
+         "ki-forensik": {
+            "label": "KI-Forensik",
+            "title": "Reiter",
+            "description": "Indizienbewertung technischer KI-Hinweise auf Videodateien — strikt getrennt in KI-Hinweisgrad und Vertrauensgrad. Lokal auf dem Rechner, ohne Cloud-Upload. Provenienz (C2PA Content Credentials), Metadaten- und Strukturplausibilität als wertende Ebenen.",
+            "tags": ["C2PA", "Provenienz", "Indizien", "Lokal", "Vertrauensgrad"]
+         },
          "quick-check": {
             "label": "Quick-Check",
             "title": "Quick-Check im Windows-Explorer",

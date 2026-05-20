@@ -131,6 +131,12 @@
       "labelBase": "Free version",
       "tabPrefix": "Tab",
       "items": {
+         "ki-forensik": {
+            "label": "AI Forensics",
+            "title": "Tab",
+            "description": "Indication-based assessment of technical AI markers in video files — strictly separated into AI indication level and confidence level. Local analysis on your machine, no cloud upload. Provenance (C2PA Content Credentials), metadata and structural plausibility as scoring layers.",
+            "tags": ["C2PA", "Provenance", "Indicators", "Local", "Confidence"]
+         },
          "quick-check": {
             "label": "Quick-Check",
             "title": "Quick-Check in Windows Explorer",
