@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getDonate } from "@data/dataLoader";
 import PageSection from "@components/layout/PageSection";
 import { staggerContainerSlow, staggerItemSlow } from "@utils/animations";
-import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, GLASS_BG, GLASS_BORDER } from "@/constants/theme";
+import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY } from "@/constants/theme";
 import useMediaQuery from "@utils/useMediaQuery";
 
 const ICON_MAP: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
@@ -163,18 +163,6 @@ const Donate = () => {
                ))}
             </motion.div>
 
-            {/* ── Note ── */}
-            <motion.div variants={staggerItemSlow} style={{ display: "flex", justifyContent: "center" }}>
-               <span style={{
-                  display: "inline-flex", alignItems: "center", gap: 7,
-                  padding: "8px 18px", borderRadius: 16,
-                  background: GLASS_BG, border: `1px solid ${GLASS_BORDER}`,
-                  fontSize: 12, color: "rgba(165,165,192,0.6)", letterSpacing: "0.02em", lineHeight: 1.6,
-               }}>
-                  <span style={{ fontSize: 13, opacity: 0.7 }}>ℹ</span>
-                  {t("donate.note")}
-               </span>
-            </motion.div>
          </motion.div>
       </PageSection>
    );

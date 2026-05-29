@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { fadeInUp, lineGrow } from "@utils/animations";
 import { MONO_FONT } from "@/constants/theme";
 import ScrollRevealText from "@components/ui/ScrollRevealText";
+import useMediaQuery from "@utils/useMediaQuery";
 
 interface Props {
    title: string;
@@ -9,14 +10,15 @@ interface Props {
 }
 
 const SectionHeader = ({ title, subtitle }: Props) => {
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
    return (
       <motion.div
          style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 16,
-            marginBottom: 64,
+            gap: isShortDesktop ? 10 : 16,
+            marginBottom: isShortDesktop ? 24 : 64,
             textAlign: "center",
          }}
          variants={fadeInUp}

@@ -49,7 +49,7 @@ const ManualDownload = () => {
       <div
          className="glass-card"
          style={{
-            marginTop: 16,
+            marginTop: 11,
             padding: isMobile ? "16px 18px" : "16px 24px",
             display: "flex",
             flexDirection: isMobile ? "column" : "row",

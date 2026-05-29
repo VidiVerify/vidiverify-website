@@ -20,13 +20,16 @@ const PageSection = ({
    maxWidth,
 }: PageSectionProps) => {
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
+
+   const desktopPadding = isShortDesktop ? "56px 24px 32px" : "96px 24px";
 
    return (
       <motion.section
          id={id}
          className="py-24 px-6"
          style={{
-            padding: isMobile ? "64px 16px" : "96px 24px",
+            padding: isMobile ? "64px 16px" : desktopPadding,
             scrollMarginTop: 64,
          }}
          initial="hidden"

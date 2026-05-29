@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaIdCard } from "react-icons/fa";
+import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaIdCard, FaExclamationCircle } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 import { BsCalendar3, BsFileZip } from "react-icons/bs";
 import { useLatestRelease } from "@/hooks/useLatestRelease";
@@ -13,6 +13,7 @@ import useMediaQuery from "@utils/useMediaQuery";
 import useIsMobileNonWindows from "@utils/useIsMobileNonWindows";
 import MobileNoticeModal from "./MobileNoticeModal";
 import ManualDownload from "./ManualDownload";
+import SmartScreenModal from "./SmartScreenModal";
 
 const SHARE_URL = "https://vidiverify.de/download";
 
@@ -45,6 +46,7 @@ const Download = () => {
    const isMobile = useMediaQuery("(max-width: 768px)");
    const isMobileNonWindows = useIsMobileNonWindows();
    const [noticeOpen, setNoticeOpen] = useState(false);
+   const [smartScreenOpen, setSmartScreenOpen] = useState(false);
 
    const { data, loading, error } = useLatestRelease(
       downloadConfig.repo_owner,
@@ -98,14 +100,14 @@ const Download = () => {
                }}
             >
                {/* ── Info cards stacked ── */}
-               <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                   {infoCards.map(({ id, icon, label, value, mono }) => (
                      <div
                         key={id}
                         className="glass-card"
                         style={{
                            flex: 1,
-                           padding: "5px 16px",
+                           padding: "3px 16px",
                            display: "flex",
                            alignItems: "center",
                            gap: 12,
@@ -138,7 +140,7 @@ const Download = () => {
                   style={{
                      padding: isMobile ? "12px 20px" : "14px 28px",
                      display: "flex", flexDirection: "column", alignItems: "center",
-                     justifyContent: "flex-start", gap: 12, textAlign: "center",
+                     justifyContent: "flex-start", gap: 8, textAlign: "center",
                   }}
                >
                   {/* Platform + flags */}
@@ -190,9 +192,6 @@ const Download = () => {
                      <FaDownload size={16} />
                      {t("download.ctaDownload")}
                   </motion.a>
-
-                  {/* Divider */}
-                  <div style={{ width: "100%", height: 1, background: GLASS_BORDER }} />
 
                   {/* Dateiname + SHA-256 */}
                   <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: 8 }}>
@@ -288,14 +287,34 @@ const Download = () => {
                      {t("download.licenseText1")}
                   </p>
                   <p style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.8, margin: 0 }}>
-                     {t("download.licenseText2")}
+                     {t("download.licenseSmartHintPre")}
+                     <button
+                        type="button"
+                        onClick={() => setSmartScreenOpen(true)}
+                        aria-label={t("download.licenseSmartHintAria")}
+                        style={{
+                           display: "inline-flex",
+                           alignItems: "center",
+                           gap: 4,
+                           padding: 0,
+                           border: "none",
+                           background: "transparent",
+                           color: "#f5c542",
+                           fontSize: "inherit",
+                           fontWeight: 600,
+                           fontFamily: "inherit",
+                           cursor: "pointer",
+                           lineHeight: "inherit",
+                        }}
+                     >
+                        <FaExclamationCircle size="1em" color="#f5c542" />
+                        <span style={{ textDecoration: "underline", textDecorationStyle: "dotted", textUnderlineOffset: "0.18em" }}>
+                           {t("download.licenseSmartHintLink")}
+                        </span>
+                     </button>
+                     {t("download.licenseSmartHintPost")}
                   </p>
                   <div style={{ display: "flex", flexWrap: "nowrap", gap: 16, marginTop: "auto" }}>
-                     <motion.a href="https://github.com/VidiVerify" target="_blank" rel="noopener noreferrer"
-                        whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
-                        style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaGithub size={13} /> {t("download.linkProjectSource")}
-                     </motion.a>
                      <motion.a href="#preise"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
@@ -320,11 +339,11 @@ const Download = () => {
                <ManualDownload />
             </motion.div>
 
-            {/* ── Bekannt von / Trust-Strip ── */}
+            {/* ── Trust-Strip (Microsoft Store + heise) ── */}
             <motion.div
                variants={staggerItemSlow}
                style={{
-                  marginTop: 16,
+                  marginTop: 11,
                   position: "relative",
                   padding: 1,
                   borderRadius: 16,
@@ -356,124 +375,105 @@ const Download = () => {
                      background: "rgba(6,6,16,0.94)",
                      backdropFilter: "blur(8px)",
                      borderRadius: 15,
-                     padding: isMobile ? "20px 16px" : "22px 32px",
+                     padding: isMobile ? "20px 16px" : "12px 32px 12px",
                      display: "flex",
-                     flexDirection: "column",
+                     flexDirection: isMobile ? "column" : "row",
                      alignItems: "center",
-                     gap: 14,
+                     justifyContent: "center",
+                     gap: isMobile ? 16 : 40,
+                     flexWrap: "wrap",
                   }}
                >
-                  <span
+                  {/* Microsoft Store */}
+                  <motion.a
+                     href="https://apps.microsoft.com/store/detail/XPDLZGLQP4LKZW"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
+                     whileTap={{ scale: 0.97 }}
+                     transition={{ duration: 0.2 }}
                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        color: TEXT_MUTED,
-                        textTransform: "uppercase",
-                        letterSpacing: "0.22em",
-                     }}
-                  >
-                     {t("download.trustHeader")}
-                  </span>
-                  <div
-                     style={{
-                        display: "flex",
-                        flexDirection: isMobile ? "column" : "row",
+                        display: "inline-flex",
                         alignItems: "center",
-                        gap: isMobile ? 16 : 40,
-                        flexWrap: "wrap",
-                        justifyContent: "center",
+                        gap: 10,
+                        textDecoration: "none",
+                        color: "#ffffff",
+                        opacity: 0.88,
                      }}
+                     aria-label={t("download.msStoreAria")}
                   >
-                     {/* Microsoft Store */}
-                     <motion.a
-                        href="https://apps.microsoft.com/store/detail/XPDLZGLQP4LKZW"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ duration: 0.2 }}
-                        style={{
-                           display: "inline-flex",
-                           alignItems: "center",
-                           gap: 10,
-                           textDecoration: "none",
-                           color: "#ffffff",
-                           opacity: 0.88,
-                        }}
-                        aria-label={t("download.msStoreAria")}
-                     >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                           <path d="M2 3h9.5v9.5H2zM12.5 3H22v9.5h-9.5zM2 13.5h9.5V23H2zM12.5 13.5H22V23h-9.5z" />
-                        </svg>
-                        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.01em" }}>
-                           Microsoft Store
-                        </span>
-                     </motion.a>
+                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                        <path d="M2 3h9.5v9.5H2zM12.5 3H22v9.5h-9.5zM2 13.5h9.5V23H2zM12.5 13.5H22V23h-9.5z" />
+                     </svg>
+                     <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.01em" }}>
+                        Microsoft Store
+                     </span>
+                  </motion.a>
 
-                     {/* Divider (nur Desktop) */}
-                     {!isMobile && (
+                  {/* Divider (nur Desktop) */}
+                  {!isMobile && (
+                     <span
+                        aria-hidden
+                        style={{
+                           width: 1,
+                           height: 22,
+                           background: "rgba(255,255,255,0.18)",
+                        }}
+                     />
+                  )}
+
+                  {/* heise Download */}
+                  <motion.a
+                     href="https://www.heise.de/download/search?query=vidiverify"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
+                     whileTap={{ scale: 0.97 }}
+                     transition={{ duration: 0.2 }}
+                     style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 10,
+                        textDecoration: "none",
+                        color: "#ffffff",
+                        opacity: 0.88,
+                     }}
+                     aria-label={t("download.heiseAria")}
+                  >
+                     <img
+                        src="/heise_h_white.png"
+                        alt=""
+                        aria-hidden
+                        style={{ width: 20, height: 20, display: "block" }}
+                     />
+                     <span style={{ display: "inline-flex", alignItems: "baseline", gap: 6 }}>
                         <span
-                           aria-hidden
                            style={{
-                              width: 1,
-                              height: 22,
-                              background: "rgba(255,255,255,0.18)",
+                              fontSize: 16,
+                              fontWeight: 700,
+                              letterSpacing: "-0.02em",
+                              fontFamily: '"Helvetica Neue", Arial, sans-serif',
                            }}
-                        />
-                     )}
-
-                     {/* heise Download */}
-                     <motion.a
-                        href="https://www.heise.de/download/search?query=vidiverify"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ duration: 0.2 }}
-                        style={{
-                           display: "inline-flex",
-                           alignItems: "center",
-                           gap: 10,
-                           textDecoration: "none",
-                           color: "#ffffff",
-                           opacity: 0.88,
-                        }}
-                        aria-label={t("download.heiseAria")}
-                     >
-                        <img
-                           src="/heise_h_white.png"
-                           alt=""
-                           aria-hidden
-                           style={{ width: 20, height: 20, display: "block" }}
-                        />
-                        <span style={{ display: "inline-flex", alignItems: "baseline", gap: 6 }}>
-                           <span
-                              style={{
-                                 fontSize: 16,
-                                 fontWeight: 700,
-                                 letterSpacing: "-0.02em",
-                                 fontFamily: '"Helvetica Neue", Arial, sans-serif',
-                              }}
-                           >
-                              heise
-                           </span>
-                           <span
-                              style={{
-                                 fontSize: 13,
-                                 fontWeight: 400,
-                                 opacity: 0.7,
-                                 letterSpacing: "0.02em",
-                              }}
-                           >
-                              Download
-                           </span>
+                        >
+                           heise
                         </span>
-                     </motion.a>
-                  </div>
+                        <span
+                           style={{
+                              fontSize: 13,
+                              fontWeight: 400,
+                              opacity: 0.7,
+                              letterSpacing: "0.02em",
+                           }}
+                        >
+                           Download
+                        </span>
+                     </span>
+                  </motion.a>
                </div>
             </motion.div>
          </motion.div>
          <MobileNoticeModal open={noticeOpen} onClose={() => setNoticeOpen(false)} shareUrl={SHARE_URL} />
+         <SmartScreenModal open={smartScreenOpen} onClose={() => setSmartScreenOpen(false)} />
       </PageSection>
    );
 };

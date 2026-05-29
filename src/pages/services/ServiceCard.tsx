@@ -24,6 +24,7 @@ const bentoEntry: Variants = {
 const ServiceCard = ({ service, index }: ServiceCardProps) => {
    const [isHovered, setIsHovered] = useState(false);
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
    const colors = ACCENT_COLORS[index % ACCENT_COLORS.length];
    const IconComponent = iconMapById[service.id] || fallbackIcon;
 
@@ -77,13 +78,13 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
             </div>
 
             {/* Right: Content */}
-            <div style={{ flex: 1, padding: "12px 18px" }}>
+            <div style={{ flex: 1, padding: isShortDesktop ? "6px 14px" : "12px 18px" }}>
                <h3
                   style={{
                      fontSize: 14,
                      fontWeight: 700,
                      color: "#eeeef5",
-                     marginBottom: 6,
+                     marginBottom: isShortDesktop ? 2 : 6,
                      display: "flex",
                      alignItems: "center",
                      gap: 6,
@@ -104,7 +105,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                   style={{
                      display: "flex",
                      flexDirection: "column",
-                     gap: 3,
+                     gap: isShortDesktop ? 1 : 3,
                   }}
                >
                   {service.list.map((item) => (
@@ -115,7 +116,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                            alignItems: "flex-start",
                            gap: 8,
                            color: "#a5a5c0",
-                           fontSize: 12,
+                           fontSize: isShortDesktop ? 11 : 12,
                            lineHeight: 1.45,
                         }}
                      >
@@ -124,7 +125,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                               width: 4,
                               height: 4,
                               borderRadius: "50%",
-                              marginTop: 6,
+                              marginTop: isShortDesktop ? 5 : 6,
                               flexShrink: 0,
                               backgroundColor: colors.dot,
                            }}

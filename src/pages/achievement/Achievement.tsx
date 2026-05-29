@@ -7,6 +7,9 @@ import { SiApple, SiGoogle, SiDolby, SiDts } from "react-icons/si";
 import { getFormats } from "@data/dataLoader";
 import PageSection from "@components/layout/PageSection";
 import { slideInLeft, rotateInUp, slideInRight } from "@utils/animations";
+import useMediaQuery from "@utils/useMediaQuery";
+
+const SHORT_DESKTOP_QUERY = "(max-height: 820px) and (min-width: 1024px)";
 
 interface FormatEntry {
    name: string;
@@ -111,6 +114,7 @@ interface FormatGroupProps {
 const FormatGroup = ({ title, icon, iconColor, formats, accentColor, anim, direction }: FormatGroupProps) => {
    const { t } = useTranslation();
    const [manualOffset, setManualOffset] = useState(0);
+   const isShortDesktop = useMediaQuery(SHORT_DESKTOP_QUERY);
 
    // Marquee-Dauer berechnen: Breite EINER Kopie / Geschwindigkeit
    // (Track ist 3× kopiert — Animation läuft genau über eine Kopien-Breite = 33.33%)
@@ -137,7 +141,7 @@ const FormatGroup = ({ title, icon, iconColor, formats, accentColor, anim, direc
          initial="hidden"
          whileInView="visible"
          viewport={{ once: true, margin: "0px 0px -80px 0px" }}
-         style={{ display: "flex", flexDirection: "column", gap: 8 }}
+         style={{ display: "flex", flexDirection: "column", gap: isShortDesktop ? 6 : 8 }}
       >
          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{
@@ -177,8 +181,8 @@ const FormatGroup = ({ title, icon, iconColor, formats, accentColor, anim, direc
                      className={`marquee-track marquee-${direction}`}
                      style={{
                         gap: TILE_GAP,
-                        paddingTop: 14,
-                        paddingBottom: 8,
+                        paddingTop: isShortDesktop ? 6 : 14,
+                        paddingBottom: isShortDesktop ? 4 : 8,
                         animationDuration: `${durationSec}s`,
                      }}
                   >
@@ -209,10 +213,11 @@ const FormatGroup = ({ title, icon, iconColor, formats, accentColor, anim, direc
 const Achievement = () => {
    const { t } = useTranslation();
    const formats = useMemo(() => getFormats(), []);
+   const isShortDesktop = useMediaQuery(SHORT_DESKTOP_QUERY);
 
    return (
       <PageSection id="achievements" title={t("formats.title")} subtitle={t("formats.subtitle")}>
-         <div style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: 18 }}>
+         <div style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: isShortDesktop ? 12 : 18 }}>
             <FormatGroup title={t("formats.videoContainer")} icon={<Box size={18} />}   iconColor="#6aaccc" formats={formats.containers}  accentColor="#6aaccc" anim={slideInLeft}  direction="left"  />
             <FormatGroup title={t("formats.videoCodecs")}    icon={<Film size={18} />}  iconColor="#22c55e" formats={formats.videoCodecs} accentColor="#9cc7e0" anim={rotateInUp}   direction="right" />
             <FormatGroup title={t("formats.audioCodecs")}    icon={<Music size={18} />} iconColor="#f59e0b" formats={formats.audioCodecs} accentColor="#4a7da0" anim={slideInRight} direction="left"  />

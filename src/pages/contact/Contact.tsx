@@ -14,42 +14,46 @@ import contactData from "../../../data/contact.json";
 
 const SUPPORT_GREEN = "#22c55e";
 
-const tileStyle = {
-   padding: "14px 14px",
-   textAlign: "center" as const,
-   textDecoration: "none",
-   cursor: "pointer",
-   display: "flex",
-   flexDirection: "column" as const,
-   alignItems: "center",
-   gap: 6,
-};
-
 // Compact inline network animation for support card
 
 const Contact = () => {
    const { t } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
    const githubUsername = getGitHubUsername();
    const email = `${contactData.email.user}@${contactData.email.domain}`;
+
+   const tileStyle = {
+      padding: isShortDesktop ? "10px 14px" : "14px 14px",
+      textAlign: "center" as const,
+      textDecoration: "none",
+      cursor: "pointer",
+      display: "flex",
+      flexDirection: "column" as const,
+      alignItems: "center",
+      gap: 6,
+   };
+   const tileMinHeight = isShortDesktop ? 100 : 120;
+   const trustPadding = isMobile ? "16px 16px" : isShortDesktop ? "10px 28px" : "18px 28px";
+   const supportContentPadding = isShortDesktop ? "10px 18px" : "14px 18px";
 
    return (
       <PageSection id="contact" title={t("contact.title")} subtitle={t("contact.subtitle")}>
          <motion.div
-            style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: 10 }}
+            style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: isShortDesktop ? 8 : 10 }}
             variants={staggerContainerSlow}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "0px 0px -80px 0px" }}
          >
             {/* ── Trust card + GitHub + Facebook ── */}
-            <motion.div variants={staggerContainerSlow} style={{ display: "flex", flexDirection: "column", gap: 15 }}>
+            <motion.div variants={staggerContainerSlow} style={{ display: "flex", flexDirection: "column", gap: isShortDesktop ? 10 : 15 }}>
                {/* Trust card — full width on mobile */}
                <motion.div
                   variants={staggerItemSlow}
                   className="glass-card"
                   style={{
-                     padding: isMobile ? "16px 16px" : "18px 28px",
+                     padding: trustPadding,
                      display: "flex", gap: 16, alignItems: "flex-start",
                      borderLeft: `3px solid ${CYAN}`, borderRadius: "0 16px 16px 0",
                   }}
@@ -72,7 +76,7 @@ const Contact = () => {
                      target="_blank" rel="noopener noreferrer"
                      className="glass-card" variants={staggerItemSlow}
                      whileHover={{ y: -4, borderColor: "rgba(165,165,192,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: 120 }}
+                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
                   >
                      <FaGithub size={22} color="#a5a5c0" />
                      <span style={{ fontSize: 11, fontWeight: 600, color: "#a5a5c0", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.github")}</span>
@@ -88,7 +92,7 @@ const Contact = () => {
                      target="_blank" rel="noopener noreferrer"
                      className="glass-card" variants={staggerItemSlow}
                      whileHover={{ y: -4, borderColor: "rgba(24,119,242,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: 120 }}
+                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
                   >
                      <FaFacebook size={22} color="#1877f2" />
                      <span style={{ fontSize: 11, fontWeight: 600, color: "#1877f2", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.facebook")}</span>
@@ -104,7 +108,7 @@ const Contact = () => {
                      target="_blank" rel="noopener noreferrer"
                      className="glass-card" variants={staggerItemSlow}
                      whileHover={{ y: -4, borderColor: "rgba(225,48,108,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: 120 }}
+                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
                   >
                      <FaInstagram size={22} color="#E1306C" />
                      <span style={{ fontSize: 11, fontWeight: 600, color: "#E1306C", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.instagram")}</span>
@@ -153,7 +157,7 @@ const Contact = () => {
                         </div>
                      </div>
                      {/* Right: content */}
-                     <div style={{ flex: 1, padding: "14px 18px" }}>
+                     <div style={{ flex: 1, padding: supportContentPadding }}>
                         <h3 style={{ fontSize: 14, fontWeight: 700, color: TEXT_PRIMARY, marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
                            <PackageSearch style={{ width: 15, height: 15, color: CYAN, flexShrink: 0 }} />
                            {t("contact.supportHeading")}

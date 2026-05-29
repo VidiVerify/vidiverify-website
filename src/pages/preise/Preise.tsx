@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { FaCheckCircle, FaKey, FaRocket, FaHeart, FaScroll } from "react-icons/fa";
+import { FaCheckCircle, FaKey, FaRocket, FaHeart } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import { staggerContainerSlow, staggerItemSlow } from "@utils/animations";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
@@ -12,13 +12,15 @@ const FREE_GREEN = "#22c55e";
 const Preise = () => {
    const { t } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
+
+   const cardPadding = isMobile ? "24px 20px" : isShortDesktop ? "14px 32px" : "28px 32px";
+   const cardGap = isShortDesktop ? 12 : 16;
+   const listGap = isShortDesktop ? 6 : 8;
+   const outerGap = isShortDesktop ? 12 : 14;
 
    const privateBullets = t("pricing.privateBullets", { returnObjects: true }) as string[];
    const commercialBullets = t("pricing.commercialBullets", { returnObjects: true }) as string[];
-   const licensePoints: React.ReactNode[] = [
-      ...commercialBullets,
-      <><span>{t("pricing.commercialBulletProPart1")}</span><ProBadge />{t("pricing.commercialBulletProPart2")}</>,
-   ];
 
    const scrollTo = (id: string) => {
       document.querySelector(`#${id}`)?.scrollIntoView({ behavior: "smooth" });
@@ -27,7 +29,7 @@ const Preise = () => {
    return (
       <PageSection id="preise" title={t("pricing.title")} subtitle={t("pricing.subtitle")}>
          <motion.div
-            style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}
+            style={{ maxWidth: 1152, margin: "0 auto", display: "flex", flexDirection: "column", gap: outerGap }}
             variants={staggerContainerSlow}
             initial="hidden"
             whileInView="visible"
@@ -36,14 +38,14 @@ const Preise = () => {
             {/* ── A + B: Privat & Lizenz ── */}
             <motion.div
                variants={staggerContainerSlow}
-               style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 14 }}
+               style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: outerGap }}
             >
                {/* A – Kostenfreie Nutzung */}
                <motion.div variants={staggerItemSlow} className="glass-card"
                   whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(34,197,94,0.1)", transition: { duration: 0.3 } }}
                   style={{
-                  padding: isMobile ? "24px 20px" : "28px 32px",
-                  display: "flex", flexDirection: "column", gap: 16,
+                  padding: cardPadding,
+                  display: "flex", flexDirection: "column", gap: cardGap,
                   borderTop: `3px solid ${FREE_GREEN}`,
                }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -71,7 +73,7 @@ const Preise = () => {
                   <p style={{ fontSize: 13.5, lineHeight: 1.8, color: TEXT_SECONDARY, margin: 0 }}>
                      {t("pricing.privateDescription")}
                   </p>
-                  <ul style={{ display: "flex", flexDirection: "column", gap: 8, margin: 0, padding: 0 }}>
+                  <ul style={{ display: "flex", flexDirection: "column", gap: listGap, margin: 0, padding: 0 }}>
                      {privateBullets.map((point) => (
                         <li key={point} style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none" }}>
                            <span style={{ width: 5, height: 5, borderRadius: "50%", background: FREE_GREEN, flexShrink: 0, marginTop: 7 }} />
@@ -96,8 +98,8 @@ const Preise = () => {
                <motion.div variants={staggerItemSlow} className="glass-card"
                   whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(106,172,204,0.12)", transition: { duration: 0.3 } }}
                   style={{
-                  padding: isMobile ? "24px 20px" : "28px 32px",
-                  display: "flex", flexDirection: "column", gap: 16,
+                  padding: cardPadding,
+                  display: "flex", flexDirection: "column", gap: cardGap,
                   borderTop: `3px solid ${CYAN}`,
                }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -125,9 +127,9 @@ const Preise = () => {
                   <p style={{ fontSize: 13.5, lineHeight: 1.8, color: TEXT_SECONDARY, margin: 0 }}>
                      {t("pricing.commercialDescriptionPart1")}<ProBadge />{t("pricing.commercialDescriptionPart2")}
                   </p>
-                  <ul style={{ display: "flex", flexDirection: "column", gap: 8, margin: 0, padding: 0 }}>
-                     {licensePoints.map((point, i) => (
-                        <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none" }}>
+                  <ul style={{ display: "flex", flexDirection: "column", gap: listGap, margin: 0, padding: 0 }}>
+                     {commercialBullets.map((point) => (
+                        <li key={point} style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none" }}>
                            <span style={{ width: 5, height: 5, borderRadius: "50%", background: CYAN, flexShrink: 0, marginTop: 7 }} />
                            <span style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.6 }}>{point}</span>
                         </li>
@@ -142,8 +144,8 @@ const Preise = () => {
                <motion.div variants={staggerItemSlow} className="glass-card"
                   whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(106,172,204,0.12)", transition: { duration: 0.3 } }}
                   style={{
-                  padding: isMobile ? "24px 20px" : "28px 32px",
-                  display: "flex", flexDirection: "column", gap: 16,
+                  padding: cardPadding,
+                  display: "flex", flexDirection: "column", gap: cardGap,
                   borderLeft: `3px solid rgba(106,172,204,0.3)`, borderRadius: "0 14px 14px 0",
                }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -166,17 +168,6 @@ const Preise = () => {
                   <p style={{ fontSize: 13.5, lineHeight: 1.8, color: TEXT_SECONDARY, margin: 0 }}>
                      {t("pricing.perspectiveDescriptionPart1")}<ProBadge />{t("pricing.perspectiveDescriptionPart2")}
                   </p>
-                  <motion.a
-                     href="#eula"
-                     whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
-                     style={{
-                        alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 7,
-                        fontSize: 12.5, fontWeight: 600, color: CYAN, textDecoration: "none", cursor: "pointer",
-                     }}
-                  >
-                     <FaScroll size={13} color={CYAN} />
-                     {t("pricing.eulaLink")}
-                  </motion.a>
                </motion.div>
             </motion.div>
          </motion.div>

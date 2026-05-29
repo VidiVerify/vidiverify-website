@@ -10,6 +10,7 @@ const Services = () => {
    const { t } = useTranslation();
    const services = t("features.cards", { returnObjects: true }) as Service[];
    const isMobile = useMediaQuery("(max-width: 768px)");
+   const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
 
    return (
       <PageSection id="services" title={t("features.title")} subtitle={t("features.subtitle")}>
@@ -18,7 +19,8 @@ const Services = () => {
                maxWidth: 1152,
                margin: "0 auto",
                display: "grid",
-               gap: 14,
+               columnGap: isShortDesktop ? 10 : 14,
+               rowGap: isShortDesktop ? 18 : 14,
                gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
             }}
             variants={staggerContainer}
