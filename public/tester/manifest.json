@@ -1,5 +1,7 @@
 {
   "version": 1,
+  "active": false,
+  "start_at": null,
   "zip": "tester_pack.zip",
   "zip_sha256": "8470359cf40f68ce2d6337147a8f83cbaceb2e502c67ebd7b7e0d430ea6bfcd3",
   "files": [
