@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "check_mode": "diagnose",
+  "files": [
+    {
+      "name": "01_ok_h264.mp4",
+      "sha256": "7442004f1e268aa5a3223a2785d6dfe3b43618940d01a45b1432eb53f09d4880",
+      "size": 952249,
+      "soll_ampel": "gruen",
+      "hinweis": "Sauberes Testbild (H.264/AAC) — Referenz grün"
+    },
+    {
+      "name": "02_ok_hevc.mkv",
+      "sha256": "f5351cfb56bcb7db11bc71cf9b9df4101fbc2b0863bf9d69b4328cd034a6a454",
+      "size": 2910237,
+      "soll_ampel": "gelb",
+      "hinweis": "HEVC/MKV mit DTS-Anomalie — Diagnose meldet Auffälligkeit (neutraler Gelb-Fall)"
+    },
+    {
+      "name": "03_warn_decode.mp4",
+      "sha256": "fd7b21a12bfa79c9eb04d4004928fedee1694ffd7fe53fad479df0116bb0cc5a",
+      "size": 952249,
+      "soll_ampel": "rot",
+      "hinweis": "H.264 mit Makroblock-Korruption — Decoder-Defekt (Bandfehler-Typ)"
+    },
+    {
+      "name": "04_err_truncated.mp4",
+      "sha256": "6fd8031f1747ee83149c47fd941b60cab986fa499b5c454c0f50c32cee07b549",
+      "size": 523736,
+      "soll_ampel": "rot",
+      "hinweis": "Abgeschnittene MP4 (moov fehlt) — nicht lesbar"
+    },
+    {
+      "name": "05_pdf_als_mp4.mp4",
+      "sha256": "ef74212872568b5e27dea65d3758dfc476a386c301be63447a7b6eabd50eadb7",
+      "size": 607,
+      "soll_ampel": "rot",
+      "hinweis": "PDF mit .mp4-Endung — Magika erkennt PDF (Confidence 1.00)"
+    },
+    {
+      "name": "06_txt_als_avi.avi",
+      "sha256": "f609c681d3155c8bc6f502d68fdd580e688dd45eda7dcd5ad2b1ed97b67cc4e2",
+      "size": 161,
+      "soll_ampel": "rot",
+      "hinweis": "Textdatei mit .avi-Endung — Typ-Mismatch, kein Video"
+    },
+    {
+      "name": "07_vp9_webm_als_mp4.mp4",
+      "sha256": "9785a8b04e0fa4dcb77baf46e492fcb34f31b3b23b0ce43505da47336bdc5a0a",
+      "size": 632641,
+      "soll_ampel": "gruen",
+      "hinweis": "Synthetisches VP9/WebM mit .mp4-Endung — Endungs-Mismatch, intakt"
+    },
+    {
+      "name": "08_mpeg2_ps.mpg",
+      "sha256": "5fbd614321b355f2ff0b14f61e95eaedd143006a6a775632d815053c3ef5f02c",
+      "size": 5781504,
+      "soll_ampel": "gruen",
+      "hinweis": "Altes MPEG-PS (MPEG-2, Camcorder) — intakt"
+    },
+    {
+      "name": "09_mpeg1_synth.mpg",
+      "sha256": "7b2df8061077431eef825156ace02ab79a07a96ce101271d544f798ccd43c0f1",
+      "size": 737280,
+      "soll_ampel": "gruen",
+      "hinweis": "Synthetisches MPEG-1 (320x240) — uraltes Format, intakt"
+    },
+    {
+      "name": "10_avi_alt.avi",
+      "sha256": "1e68032deafcb366cac1bb829897707eee1577813601eecc12aa9699b491f428",
+      "size": 5075652,
+      "soll_ampel": "gruen",
+      "hinweis": "AVI/MPEG-4 (Handyvideo 2007) — intakt"
+    }
+  ]
+}
