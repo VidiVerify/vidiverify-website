@@ -1,14 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "active": false,
   "start_at": null,
   "zip": "tester_pack.zip",
-  "zip_sha256": "8470359cf40f68ce2d6337147a8f83cbaceb2e502c67ebd7b7e0d430ea6bfcd3",
+  "zip_sha256": "53335865e1fb0fc3fa69bc75bfcf730ac43bc0e1d2888942ddd59ce3c13d067f",
   "files": [
     {
       "path": "anleitung/Testanleitung.pdf",
-      "size": 576353,
-      "sha256": "6a3b4e872f1f47ff79875def4e7efb738add147a671cd69111f22d99dd1f239e"
+      "size": 709744,
+      "sha256": "e78cb4bd1c35cc0810b6d7764bfbf8a28d6826af3a80d4069d7e8b2c24e24f24"
     }
   ]
 }
