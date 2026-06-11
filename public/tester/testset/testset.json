@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "check_mode": "diagnose",
   "files": [
     {
@@ -59,11 +59,11 @@
       "hinweis": "Altes MPEG-PS (MPEG-2, Camcorder) — intakt"
     },
     {
-      "name": "09_mpeg1_synth.mpg",
-      "sha256": "7b2df8061077431eef825156ace02ab79a07a96ce101271d544f798ccd43c0f1",
-      "size": 737280,
-      "soll_ampel": "gruen",
-      "hinweis": "Synthetisches MPEG-1 (320x240) — uraltes Format, intakt"
+      "name": "09_fmp4_ohne_index.mp4",
+      "sha256": "03e5a41aced94a676e88b5b8efc2b72a4ac05e007580f40df025d5634c94f51e",
+      "size": 4747805,
+      "soll_ampel": "gelb",
+      "hinweis": "Fragmentiertes Streaming-MP4 ohne Index (Kamera/NVR-Muster) — Diagnose meldet Auffälligkeit, Datei intakt. Symptom-Check: im Windows Media Player ist die Fortschrittsleiste ausgegraut."
     },
     {
       "name": "10_avi_alt.avi",
