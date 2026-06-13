@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import logo from "@/assets/logo.png";
+import softwareBox from "@/assets/software-box.png";
 
 const AvatarMonogram = () => {
    return (
@@ -17,9 +17,9 @@ const AvatarMonogram = () => {
          }}
       >
          <motion.img
-            src={logo}
-            alt="VidiVerify"
-            style={{ width: 90, height: 90, x: 3, y: 3 }}
+            src={softwareBox}
+            alt="VidiVerify Software-Box"
+            style={{ height: 188, width: "auto", maxWidth: "94%" }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{
                opacity: 1,

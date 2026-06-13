@@ -44,8 +44,18 @@
          "🚀 Schneller 1-Klick-Check — Videodateien prüfen, analysieren und bewerten. In wenigen Sekunden, ohne technisches Vorwissen.",
          "🖥️ Klare Desktop-Anwendung — Modern, übersichtlich und vollständig für Windows entwickelt. Lokale Verarbeitung, keine Cloud, keine Abhängigkeiten.",
          "🧩 Technische Transparenz — Strukturierte Ergebnisdarstellung statt unlesbarer Rohdaten. Container, Video, Audio und mehr auf einen Blick.",
-         "📦 Ausbaufähige Plattform — Externe Module, Exportfunktionen und eine zukunftsfähige Architektur. Entwickelt für realen Einsatz."
+         "📦 Ausbaufähige Plattform — Hochwertigste Plug-ins, Exportfunktionen und eine zukunftsfähige Architektur. Entwickelt für realen Einsatz."
       ]
+   },
+   "testerPromo": {
+      "kicker": "Tester-Aktion",
+      "badgeSoon": "startet bald",
+      "badgeLive": "jetzt verfügbar",
+      "headline": "Werde VidiVerify-Tester",
+      "body": "Sichere dir 1 Jahr PRO gratis — plus die Verlosung eines 100 € Amazon-Gutscheins. Anmeldung direkt in der App.",
+      "cta": "VidiVerify herunterladen",
+      "conditions": "Teilnahme ab 18 · Anmeldung bis 30.09.2026 · Rechtsweg ausgeschlossen",
+      "close": "Schliessen"
    },
    "features": {
       "title": "Features",

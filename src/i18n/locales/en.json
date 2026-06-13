@@ -44,8 +44,18 @@
          "🚀 Fast 1-click check — verify, analyze and rate video files. In seconds, with no technical knowledge required.",
          "🖥️ Clean desktop application — modern, organized and built natively for Windows. Local processing, no cloud, no dependencies.",
          "🧩 Technical transparency — structured result presentation instead of unreadable raw data. Container, video, audio and more at a glance.",
-         "📦 Extensible platform — external modules, export functions and a future-proof architecture. Engineered for real-world use."
+         "📦 Extensible platform — premium plug-ins, export functions and a future-proof architecture. Engineered for real-world use."
       ]
+   },
+   "testerPromo": {
+      "kicker": "Tester campaign",
+      "badgeSoon": "starting soon",
+      "badgeLive": "now available",
+      "headline": "Become a VidiVerify tester",
+      "body": "Get 1 year of PRO for free — plus a raffle for a €100 Amazon voucher. Sign up directly in the app.",
+      "cta": "Download VidiVerify",
+      "conditions": "18+ · Registration until 30.09.2026 · No legal recourse",
+      "close": "Close"
    },
    "features": {
       "title": "Features",

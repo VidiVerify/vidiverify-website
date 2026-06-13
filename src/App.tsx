@@ -6,6 +6,7 @@ import Footer from "@components/layout/Footer/Footer";
 import ErrorBoundary from "@components/common/ErrorBoundary";
 import ScrollProgress from "@components/ui/ScrollProgress";
 import BackToTop from "@components/ui/BackToTop";
+import TesterPromo from "@components/ui/TesterPromo";
 import KeyboardNav from "@components/ui/KeyboardNav";
 import { CYAN } from "@/constants/theme";
 import SectionTransition from "@components/ui/SectionTransition";
@@ -141,6 +142,7 @@ const App = () => {
                </main>
                <Footer />
                <BackToTop />
+               <TesterPromo />
             </div>
             <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
             <DatenschutzModal open={datenschutzOpen} onClose={() => setDatenschutzOpen(false)} />
