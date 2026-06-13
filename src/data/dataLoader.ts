@@ -13,7 +13,6 @@ import donateData from "../../data/donate.json";
 
 export const getName = (): string => personalData.name;
 export const getRoles = (): string[] => personalData.roles;
-export const getAbout = (): Record<string, string> => personalData.about;
 export const getStatistics = (): Record<string, string> =>
    personalData.statistics;
 export const getSocialProfiles = (): SocialProfile[] =>
