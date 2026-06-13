@@ -5,7 +5,7 @@ import {
    FaDesktop, FaSearch, FaFileAlt, FaFilePdf, FaCopy,
    FaBug, FaWrench, FaCheckCircle, FaChartBar, FaEye,
    FaYoutube, FaApple, FaGlobe, FaKey, FaBolt, FaExpand, FaCheck,
-   FaShieldAlt,
+   FaShieldAlt, FaStream,
 } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import useMediaQuery from "@utils/useMediaQuery";
@@ -70,12 +70,12 @@ const ITEMS: Item[] = [
    { id: "quick-check",    pro: false, next: true,                              icon: <FaBolt size={14} /> },
    { id: "media-test",     pro: false, isTab: true,                             icon: <FaDesktop size={15} /> },
    { id: "deepcheck",      pro: false, delivered: { version: "v1.4.7" },        icon: <FaSearch size={14} /> },
-   { id: "nfo-export",     pro: false,                                          icon: <FaFileAlt size={15} /> },
+   { id: "media-repair",   pro: true,  isTab: true,                             icon: <FaWrench size={14} /> },
    { id: "map-plus",       pro: true,                                           icon: <FaFilePdf size={15} /> },
    { id: "media-stapel",   pro: true,  isTab: true,                             icon: <FaCopy size={14} /> },
    { id: "diagnosemodus",  pro: false, delivered: { version: "v1.4.7" },        icon: <FaBug size={15} /> },
+   { id: "vvprogressiv",   pro: true,                                           icon: <FaStream size={14} /> },
    { id: "vollanalyse",    pro: true,                                           icon: <FaExpand size={14} /> },
-   { id: "media-repair",   pro: true,  isTab: true,                             icon: <FaWrench size={14} /> },
    { id: "kompatibilitaet", pro: false,                                         icon: <FaCheckCircle size={14} /> },
    { id: "statistik",      pro: true,                                           icon: <FaChartBar size={15} /> },
    { id: "vqa",            pro: true,                                           icon: <FaEye size={15} /> },
@@ -83,6 +83,7 @@ const ITEMS: Item[] = [
    { id: "macos",          pro: false,                                          icon: <FaApple size={15} /> },
    { id: "sprachen",       pro: false,                                          icon: <FaGlobe size={14} /> },
    { id: "lizenz",         pro: false,                                          icon: <FaKey size={14} /> },
+   { id: "nfo-export",     pro: false,                                          icon: <FaFileAlt size={15} /> },
 ];
 
 const scrollTo = (id: string) => {

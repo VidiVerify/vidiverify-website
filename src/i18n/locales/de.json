@@ -179,11 +179,17 @@
             "description": "Vertiefte FFprobe-Analyse mit Paket- und Frame-Informationen sowie einem Streamcopy-Test. Ideal für Problemdateien mit auffälligen Zeitstempeln oder Paketfolgen. Ursprünglich als PRO geplant — direkt in der Basisversion freigegeben.",
             "tags": ["FFprobe", "Tiefenanalyse", "Diagnose"]
          },
+         "vvprogressiv": {
+            "label": "VVProgressiv™",
+            "title": "VVProgressiv™ — verteilte, adaptive Prüfung",
+            "description": "Prüft kurze Sequenzen über die gesamte Laufzeit verteilt statt nur den Dateianfang — und gräbt automatisch dort tiefer, wo es verdächtig wird. Schnelle Gewissheit über die ganze Datei, besonders bei langen AV1-, HEVC- und 4K-Aufnahmen, mit transparenter Abdeckungs-Anzeige.",
+            "tags": ["verteilt", "adaptiv", "AV1/HEVC"]
+         },
          "vollanalyse": {
             "label": "Vollanalyse",
-            "title": "Integritätsprüfung im Vollumfang",
-            "description": "Vollständige Integritätsprüfung über den gesamten Film hinweg — hebt das 30-Sekunden-Schnelltest-Limit der Basisversion auf. Für mehrstündige Aufnahmen, Spielfilme und Langzeit-Archive, die durchgängig auf Bit-Genauigkeit geprüft werden müssen.",
-            "tags": ["Vollumfang", "Spielfilme", "Archiv"]
+            "title": "Lückenlose Voll-Decodierung",
+            "description": "Lückenlose Voll-Decodierung jedes einzelnen Bildes — die Maximalstufe, wenn nicht Stichprobe, sondern Vollständigkeit gefragt ist. Für Archivierung und belastbare Nachweise.",
+            "tags": ["lückenlos", "forensisch", "Archiv"]
          },
          "media-repair": {
             "label": "Media Repair",
@@ -210,8 +216,8 @@
             "tags": ["OpenCV", "Bildanalyse", "visuell"]
          },
          "ytup": {
-            "label": "Ytup",
-            "title": "Ytup: YouTube-Upload-Prognose",
+            "label": "YTUP™",
+            "title": "YTUP™ — YouTube-Upload-Prognose",
             "description": "Proprietäres Analysemodul zur technischen und qualitativen Bewertung vor einem YouTube-Upload inklusive Qualitätsprognose nach der Neukodierung und Optimierungsempfehlungen.",
             "tags": ["YouTube", "Upload", "Prognose"]
          },

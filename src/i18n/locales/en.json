@@ -179,11 +179,17 @@
             "description": "In-depth FFprobe analysis with packet and frame information plus a streamcopy test. Ideal for problem files with suspicious timestamps or packet sequences. Originally planned as PRO — released straight into the free version.",
             "tags": ["FFprobe", "Deep analysis", "Diagnostics"]
          },
+         "vvprogressiv": {
+            "label": "VVProgressiv™",
+            "title": "VVProgressiv™ — distributed, adaptive check",
+            "description": "Checks short sequences spread across the entire runtime instead of just the start of the file — and automatically digs deeper wherever something looks suspicious. Fast certainty about the whole file, especially for long AV1, HEVC and 4K recordings, with a transparent coverage readout.",
+            "tags": ["distributed", "adaptive", "AV1/HEVC"]
+         },
          "vollanalyse": {
             "label": "Full check",
-            "title": "Full-scope integrity check",
-            "description": "Complete integrity check across the entire movie — removes the 30-second sample limit of the free version. For multi-hour recordings, feature films and long-term archives that must be verified bit-accurate throughout.",
-            "tags": ["Full scope", "Feature films", "Archive"]
+            "title": "Gapless full decode",
+            "description": "Gapless full decoding of every single frame — the maximum stage when completeness rather than sampling is required. For archiving and dependable evidence.",
+            "tags": ["gapless", "forensic", "Archive"]
          },
          "media-repair": {
             "label": "Media Repair",
@@ -210,8 +216,8 @@
             "tags": ["OpenCV", "Image analysis", "visual"]
          },
          "ytup": {
-            "label": "Ytup",
-            "title": "Ytup: YouTube upload forecast",
+            "label": "YTUP™",
+            "title": "YTUP™ — YouTube upload forecast",
             "description": "Proprietary analysis module for technical and qualitative assessment prior to a YouTube upload, including post-reencoding quality forecast and optimization recommendations.",
             "tags": ["YouTube", "Upload", "Forecast"]
          },
