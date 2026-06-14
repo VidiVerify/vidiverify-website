@@ -67,8 +67,8 @@ interface Item {
 // description, tags) kommen aus den i18n-Übersetzungen, gelookt-uppt via id.
 const ITEMS: Item[] = [
    { id: "ki-forensik",    pro: true,  isTab: true,                             icon: <FaShieldAlt size={14} /> },
-   { id: "quick-check",    pro: false, next: true,                              icon: <FaBolt size={14} /> },
-   { id: "media-test",     pro: false, isTab: true,                             icon: <FaDesktop size={15} /> },
+   { id: "quick-check",    pro: false, delivered: { version: "v1.4.8" },        icon: <FaBolt size={14} /> },
+   { id: "media-test",     pro: false, isTab: true, next: true,                 icon: <FaDesktop size={15} /> },
    { id: "deepcheck",      pro: false, delivered: { version: "v1.4.7" },        icon: <FaSearch size={14} /> },
    { id: "media-repair",   pro: true,  isTab: true,                             icon: <FaWrench size={14} /> },
    { id: "map-plus",       pro: true,                                           icon: <FaFilePdf size={15} /> },
