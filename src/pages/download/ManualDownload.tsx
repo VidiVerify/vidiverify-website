@@ -6,7 +6,7 @@ import useMediaQuery from "@utils/useMediaQuery";
 
 type Lang = "de" | "en";
 
-const MANUAL_VERSION = "v1.4.7";
+const MANUAL_VERSION = "v1.4.8";
 
 interface ManualVariantStatic {
    code: Lang;
@@ -31,7 +31,7 @@ const VARIANTS: ManualVariantStatic[] = [
       label: "English",
       flagCode: "us",
       file: "/handbuch_en.pdf",
-      size: "1,8 MB",
+      size: "1,7 MB",
       ariaKey: "manualAriaEn",
    },
 ];
