@@ -51,8 +51,8 @@
        ============================================================ -->
   <Program_Info>
     <Program_Name>VidiVerify</Program_Name>
-    <Program_Version>1.4.7</Program_Version>
-    <Program_Release_Month>05</Program_Release_Month>
+    <Program_Version>1.4.8</Program_Version>
+    <Program_Release_Month>06</Program_Release_Month>
     <Program_Release_Day>14</Program_Release_Day>
     <Program_Release_Year>2026</Program_Release_Year>
     <Program_Cost_Dollars>0.00</Program_Cost_Dollars>
@@ -66,16 +66,16 @@
     <File_Info>
       <!-- Dateigroesse aktualisieren nach jedem Build (dist/VidiVerify-Setup.exe) -->
       <Filename_Versioned>VidiVerify-Setup.exe</Filename_Versioned>
-      <Filename_Previous>VidiVerify Setup 1.4.6.exe</Filename_Previous>
+      <Filename_Previous>VidiVerify Setup 1.4.7.exe</Filename_Previous>
       <Filename_Generic>VidiVerify-Setup.exe</Filename_Generic>
-      <Filename_Long>VidiVerify Setup 1.4.7.exe</Filename_Long>
-      <Install_File_Size_Bytes>30452264</Install_File_Size_Bytes>
-      <Install_File_Size_K>29739</Install_File_Size_K>
-      <Install_File_Size_MB>29</Install_File_Size_MB>
+      <Filename_Long>VidiVerify Setup 1.4.8.exe</Filename_Long>
+      <Install_File_Size_Bytes>60747096</Install_File_Size_Bytes>
+      <Install_File_Size_K>59323</Install_File_Size_K>
+      <Install_File_Size_MB>58</Install_File_Size_MB>
       <!-- Custom Extension: SHA-256-Hash der Setup-Datei (nicht im PAD-Standard, aber von vielen Portalen ausgewertet als Integritaetsnachweis) -->
-      <File_SHA256>5935000DD8E9E153F33ABA75810AA786E86EAA331064E238B18EBF15B1060F27</File_SHA256>
+      <File_SHA256>0E6D20F478D06925E4A1DE26586FE42191B0FEE571ECA65D9EA2CECF465C4941</File_SHA256>
       <!-- Custom Extension: Sidecar-URL mit dem Hash als Klartext-Datei -->
-      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.7/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
+      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.8/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
     </File_Info>
     <Expire_Info>
       <Has_Expire_Info>N</Has_Expire_Info>
@@ -110,6 +110,7 @@ Key features:
 - Full integrity scan — detects decoding errors, corrupted frames, and structural file damage
 - Diagnostics deep analysis — three-stage in-depth check (stream copy, ffprobe deep scan, decode layer) for stubborn cases such as tape grabs and damaged containers
 - Automatic escalation — flags suspicious findings and offers the in-depth diagnostic with one click
+- Quick-Check — instant pre-inspection via right-click in Windows Explorer, without opening the app
 - Pre-check (Precheck) — fast technical metadata inspection before the full scan
 - Quality rating — intelligent, codec- and format-aware evaluation (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD, and more)
 - Type integrity — magic-bytes check plus optional Google Magika ML classification (Apache-2.0)
@@ -122,7 +123,7 @@ Key features:
 
 VidiVerify is completely free to use. No limitations, no nag screens, no advertising. If you find it valuable, a voluntary donation via vidiverify.de/donate is warmly appreciated.
 
-System requirements: Windows 10 or 11 (64-bit), approx. 60 MB disk space.</Char_Desc_2000>
+System requirements: Windows 10 or 11 (64-bit), approx. 100 MB disk space (plus approx. 170 MB for the optional plug-ins).</Char_Desc_2000>
     </English>
 
     <!-- ── DEUTSCH ─────────────────────────────────────────────── -->
@@ -148,6 +149,7 @@ Kernfunktionen:
 - Tiefgehende Integritätsprüfung — erkennt Dekodierfehler, beschädigte Frames und strukturelle Dateischäden
 - Diagnose-Tiefenanalyse — dreistufige Prüfung (Streamcopy, ffprobe-Tiefenanalyse, Decode-Layer) für hartnäckige Fälle wie VHS-Grabs und beschädigte Container
 - Automatische Eskalation — markiert auffällige Befunde und bietet die Tiefenanalyse mit einem Klick an
+- Quick-Check — Sekundenschnelle Vorab-Prüfung per Rechtsklick im Windows-Explorer, ohne die App zu öffnen
 - Vorprüfung (Precheck) — schnelle technische Metadaten-Inspektion vor dem eigentlichen Scan
 - Qualitätsbewertung — intelligente, codec- und formatspezifische Bewertung (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD u. v. m.)
 - Typintegrität — Magic-Bytes-Prüfung plus optionale Google-Magika-ML-Klassifikation (Apache-2.0)
@@ -160,7 +162,7 @@ Kernfunktionen:
 
 VidiVerify ist vollständig kostenlos nutzbar. Keine Einschränkungen, keine Hinweisfenster, keine Werbung. Wer das Programm nützlich findet, kann unter vidiverify.de/donate freiwillig spenden.
 
-Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 60 MB Festplattenplatz.</Char_Desc_2000>
+Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 100 MB Festplattenplatz (zzgl. ca. 170 MB für die optionalen Plug-ins).</Char_Desc_2000>
     </German>
 
   </Program_Descriptions>
@@ -173,11 +175,11 @@ Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 60 MB Festplattenplatz.</C
       <!-- Primärer Download: direkter, redirect-freier versionierter Pfad auf eigener Domain.
            Wird von strengen Validierern (z. B. Microsoft Store) zwingend verlangt; funktioniert
            ebenso für klassische Portale (Heise, Filehorse, Softpedia). -->
-      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.7/VidiVerify-Setup.exe</Primary_Download_URL>
+      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.8/VidiVerify-Setup.exe</Primary_Download_URL>
       <!-- Sekundär: GitHub-Release als kanonische Quelle (mit Changelogs, Signaturen).
            Hinweis: liefert 302-Redirect auf objects.githubusercontent.com mit signierter,
            kurzlebiger CDN-URL. Für Portale, die Redirects folgen, ungehinderte Quelle. -->
-      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.7/VidiVerify-Setup.exe</Secondary_Download_URL>
+      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.8/VidiVerify-Setup.exe</Secondary_Download_URL>
       <!-- Zusätzlich: menschliche Downloadseite (Landingpage) -->
       <Additional_Download_URL>https://vidiverify.de/download</Additional_Download_URL>
       <Program_Info_URL>https://vidiverify.de</Program_Info_URL>
@@ -198,7 +200,7 @@ Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 60 MB Festplattenplatz.</C
     <Download_Requirements>
       <OS_Requirements>Windows 10 / Windows 11 (64-bit)</OS_Requirements>
       <Memory_Requirements>256 MB RAM</Memory_Requirements>
-      <Storage_Requirements>60 MB</Storage_Requirements>
+      <Storage_Requirements>100 MB</Storage_Requirements>
     </Download_Requirements>
   </Web_Info>
 
