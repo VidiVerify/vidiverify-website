@@ -37,6 +37,7 @@ Entwickelt für **Archivare, Kuratoren und Postproduktions-Profis** — und gena
 | | |
 |---|---|
 | 🔍 **Vorprüfung** | Drag & Drop · Magic-Bytes-Validierung · Magika-ML-Tiefenprüfung optional |
+| ⚡ **Quick-Check** | Rechtsklick im Windows-Explorer · Sekunden-Vorabprüfung ohne App-Start · Status-Orb + Befund + Mediadaten |
 | 🛡️ **Integritätsprüfung** | Plug-in-basierte Frame-Analyse via FFmpeg · Auto-Eskalation bei Auffälligkeiten |
 | 🩺 **Diagnosemodus** | Streamcopy + ffprobe-Tiefenanalyse + Decode-Layer · Ursachen-Attribution für DVD-, DTS- und Container-Anomalien |
 | 📊 **Media Analyse** | Container · Codec · Bitrate · Auflösung · Atmos- & DTS:X-Erkennung · Bittiefe · Channel-Layout |
@@ -46,14 +47,14 @@ Entwickelt für **Archivare, Kuratoren und Postproduktions-Profis** — und gena
 | 🌍 **Mehrsprachig** | App: DE · EN · 中文 · Website: DE · EN |
 | 🔐 **Verifizierbar** | Signierte Builds · SHA-256-Prüfwert je Release · lokale Verarbeitung, **keine Cloud** |
 
-## 🆕 Neu in v1.4.7
+## 🆕 Neu in v1.4.8
 
-- **Diagnosemodus als regulärer Prüfmodus** mit dreistufiger Tiefenanalyse (Streamcopy → ffprobe → Decode). Erkennt MPEG-1/2, H.264, HEVC- und AAC/MP3-spezifische Defekte. Automatische Eskalation bei 🟡/🔴-Befunden.
-- **Magika-Tiefenprüfung** (Google, Apache 2.0) als zweite Meinung zur Magic-Bytes-Prüfung — erkennt umbenannte, maskierte oder defekte Dateien zuverlässig.
-- **MAP-Protokoll** mit neuer Sektion „Diagnose-Tiefenanalyse" und Magika-Sub-Block bei aktivem Plug-in.
-- **5-fach-Telemetrie** in der Statusleiste: CPU System, CPU-Prüfprozess, RAM, Netzwerk, Leserate — live während der Analyse.
-- **Auto-Sprache** beim Erststart folgt der System-Locale. Theme- und Sprachwechsel im laufenden Betrieb ohne Neustart.
-- **Microsoft Store** seit v1.4.6 live — Installation in 2 Klicks ohne Defender-Rückfragen.
+- **Quick-Check — prüfen per Rechtsklick.** Sekundenschnelle Vorab-Prüfung direkt im Windows-Explorer, ohne die App zu öffnen: Status-Orb, Befund und Mediadaten in einem schlanken Hinweisfenster.
+- **„Öffnen mit"-Integration.** Videodatei aus dem Explorer-Kontextmenü direkt in VidiVerify öffnen — die Vorprüfung startet sofort, dein Standard-Player bleibt unangetastet.
+- **Kompatibilitäts-Hinweise.** Erkennt echte Player-Stolpersteine (fragmentiertes Streaming-MP4 ohne Index, HEVC/H.265) und erklärt sie — statt eine intakte Datei fälschlich als defekt abzustempeln.
+- **Cleanup-Center „Speicher & Wartung".** Automatische Aufräum-Routine beim Start: Update-Backups, Vorschau-Cache und Temp-Dateien konfigurierbar im Griff.
+- **MAP als designtes A4-Vektor-PDF.** Das Media-Analyse-Protokoll jetzt als randscharfes, einseitiges Archivblatt — mit echtem Chinesisch, Kyrillisch und Griechisch.
+- **Komplett signiert.** Setup, Haupt-App, Quick-Check-Worker und Shell-Erweiterung tragen alle das Sectigo-Zertifikat; Auto-Update mit SHA-256-Verifikation.
 
 ## 🚀 Bezugsquellen
 
@@ -117,6 +118,7 @@ Built for **archivists, curators, post-production professionals** — and equall
 | | |
 |---|---|
 | 🔍 **Pre-check** | Drag & drop · Magic-bytes validation · Magika ML deep check (optional) |
+| ⚡ **Quick-Check** | Right-click in Windows Explorer · seconds-fast pre-inspection without launching the app · status orb + finding + media data |
 | 🛡️ **Integrity check** | Plug-in-based frame analysis via FFmpeg · Auto-escalation on anomalies |
 | 🩺 **Diagnostic mode** | Streamcopy + ffprobe deep analysis + decode layer · Cause attribution for DVD, DTS and container anomalies |
 | 📊 **Media analysis** | Container · Codec · Bitrate · Resolution · Atmos & DTS:X detection · Bit depth · Channel layout |
@@ -126,14 +128,14 @@ Built for **archivists, curators, post-production professionals** — and equall
 | 🌍 **Multilingual** | App: DE · EN · 中文 · Website: DE · EN |
 | 🔐 **Verifiable** | Signed builds · SHA-256 hash per release · Local processing, **no cloud** |
 
-### 🆕 New in v1.4.7
+### 🆕 New in v1.4.8
 
-- **Diagnostic mode as a regular check mode** with three-stage deep analysis (Streamcopy → ffprobe → Decode). Detects MPEG-1/2, H.264, HEVC and AAC/MP3-specific defects. Automatic escalation on 🟡/🔴 findings.
-- **Magika deep check** (Google, Apache 2.0) as a second opinion to magic-bytes verification — reliably detects renamed, masked or corrupted files.
-- **MAP protocol** with new section "Diagnostic deep analysis" and Magika sub-block when the plug-in is active.
-- **5-stat telemetry** in the status bar: CPU System, CPU check process, RAM, Network, Read rate — live during analysis.
-- **Auto-language** on first launch follows the system locale. Theme and language switching on the fly without restart.
-- **Microsoft Store** live since v1.4.6 — 2-click install, no Defender prompts.
+- **Quick-Check — verify with a right-click.** Instant pre-inspection straight from Windows Explorer, without opening the app: status orb, finding and media data in a slim popup.
+- **"Open with" integration.** Open a video straight into VidiVerify from the Explorer context menu — the pre-check starts immediately, your default player stays untouched.
+- **Compatibility hints.** Spots real player pitfalls (fragmented streaming MP4 without an index, HEVC/H.265) and explains them — instead of wrongly flagging an intact file as broken.
+- **Cleanup center "Storage & maintenance".** Automatic cleanup pass at startup: update backups, preview cache and temp files kept in check with configurable limits.
+- **MAP as a designed A4 vector PDF.** The Media Analysis Protocol is now a razor-sharp single-page archive sheet — with real Chinese, Cyrillic and Greek.
+- **Fully signed.** Setup, main app, Quick-Check worker and shell extension all carry the Sectigo certificate; auto-update with SHA-256 verification.
 
 ### 🚀 Where to get it
 
