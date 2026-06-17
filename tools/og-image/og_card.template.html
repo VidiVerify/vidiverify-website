@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<!--
+  OG-Card-Template fuer vidiverify.de (1200x630).
+  Beim Release nur die markierten Textstellen anpassen (Pille-Version,
+  Headline, Subline), dann `node tools/og-image/build-og.mjs` ausfuehren.
+  __LOGO_B64__ wird vom Build-Skript durch das eingebettete Logo ersetzt.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html,body {
+  width:1200px; height:630px; overflow:hidden;
+  font-family:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+.card {
+  position:relative; width:1200px; height:630px; overflow:hidden;
+  background:
+    radial-gradient(820px 560px at 86% 30%, rgba(74,125,160,0.20), transparent 60%),
+    radial-gradient(720px 520px at 6% 4%, rgba(106,172,204,0.20), transparent 58%),
+    linear-gradient(135deg, #060610 0%, #0a0a1a 42%, #0e0e24 62%, #060610 100%);
+  color:#eeeef5;
+}
+
+/* feines Raster */
+.grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(106,172,204,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106,172,204,0.045) 1px, transparent 1px);
+  background-size:60px 60px;
+  -webkit-mask-image:radial-gradient(900px 600px at 50% 45%, #000 30%, transparent 88%);
+          mask-image:radial-gradient(900px 600px at 50% 45%, #000 30%, transparent 88%);
+}
+
+/* dezente Diagonal-Lichtkante oben */
+.sheen {
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent 6%, rgba(106,172,204,0.30) 50%, transparent 94%);
+}
+
+.inner {
+  position:absolute; inset:0; display:flex; align-items:center;
+  padding:0 76px;
+}
+
+/* linke Spalte */
+.left { width:640px; }
+
+.brandrow { display:flex; align-items:center; gap:18px; margin-bottom:34px; }
+.brandrow img { width:74px; height:74px; filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45)); }
+.wordmark {
+  font-size:50px; font-weight:800; letter-spacing:-1.2px; line-height:1;
+  background:linear-gradient(to right, #f0f7fc, #9cc7e0, #3e6c90);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+.pill {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:"JetBrains Mono", ui-monospace, monospace;
+  font-size:15px; font-weight:600; letter-spacing:0.3px;
+  color:#9cc7e0; padding:7px 14px; border-radius:999px;
+  background:rgba(106,172,204,0.10);
+  border:1px solid rgba(106,172,204,0.28);
+  box-shadow:0 0 18px rgba(106,172,204,0.10) inset;
+  margin-bottom:24px;
+}
+.pill .dot { width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e; }
+
+h1 {
+  font-size:96px; font-weight:900; letter-spacing:-3px; line-height:0.98;
+  margin-bottom:22px;
+  background:linear-gradient(120deg, #ffffff 0%, #cfe6f4 42%, #6aaccc 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  text-shadow:0 2px 40px rgba(106,172,204,0.12);
+}
+
+.sub { font-size:29px; font-weight:500; line-height:1.32; color:#c5d3e2; max-width:585px; }
+.sub b { color:#eeeef5; font-weight:700; }
+
+.meta {
+  margin-top:38px; display:flex; align-items:center; gap:16px;
+  font-family:"JetBrains Mono", ui-monospace, monospace;
+  font-size:17px; color:#8fa3bb; letter-spacing:0.2px;
+}
+.meta .sep { color:#3a4a60; }
+.meta .url { color:#9cc7e0; font-weight:600; }
+
+/* rechte Spalte: Kontextmenue-Mock */
+.right { flex:1; display:flex; align-items:center; justify-content:center; }
+
+.menu {
+  width:360px; border-radius:18px; overflow:hidden;
+  background:rgba(15,15,35,0.72);
+  border:1px solid rgba(255,255,255,0.07);
+  box-shadow:0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(106,172,204,0.05),
+             inset 0 1px 0 rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+  transform:rotate(-3deg);
+}
+.menu .fname {
+  display:flex; align-items:center; gap:11px;
+  padding:16px 18px; font-size:16px; color:#c5d3e2; font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02);
+}
+.menu .fname .ico {
+  width:26px; height:26px; border-radius:6px;
+  background:linear-gradient(135deg,#3e6c90,#6aaccc);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px;
+}
+.menu .row {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 18px; font-size:15.5px; color:#9aa6b8;
+}
+.menu .row.active {
+  color:#eef6fc; font-weight:600;
+  background:linear-gradient(90deg, rgba(106,172,204,0.22), rgba(106,172,204,0.06));
+  border-left:3px solid #6aaccc; padding-left:15px;
+}
+.menu .row img { width:22px; height:22px; }
+.menu .row .glyph { width:22px; text-align:center; opacity:0.7; }
+
+.result {
+  margin-top:14px; display:flex; align-items:center; gap:10px;
+  padding:11px 16px; border-radius:12px; width:max-content;
+  margin-left:auto; margin-right:8px;
+  background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.32);
+  color:#bff0cf; font-size:15px; font-weight:600;
+  font-family:"JetBrains Mono", ui-monospace, monospace;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  transform:rotate(-3deg);
+}
+.result .check {
+  width:22px; height:22px; border-radius:50%; background:#22c55e; color:#06210f;
+  display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900;
+  box-shadow:0 0 14px rgba(34,197,94,0.6);
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="grid"></div>
+  <div class="sheen"></div>
+  <div class="inner">
+    <div class="left">
+      <div class="brandrow">
+        <img src="__LOGO_B64__" alt="VidiVerify" />
+        <span class="wordmark">VidiVerify</span>
+      </div>
+      <!-- RELEASE: Versions-Pille anpassen -->
+      <span class="pill"><span class="dot"></span>NEU in v1.4.8</span>
+      <!-- RELEASE: Headline (Headline-Feature des Releases) -->
+      <h1>Quick&#8209;Check</h1>
+      <!-- RELEASE: Subline (kurze Nutzen-Beschreibung) -->
+      <div class="sub">Rechtsklick auf dein Video &mdash; <b>Befund in Sekunden</b>. Direkt im Explorer, ohne die App zu &ouml;ffnen.</div>
+      <div class="meta">
+        <span class="url">vidiverify.de</span>
+        <span class="sep">&middot;</span>
+        <span>Kostenlos</span>
+        <span class="sep">&middot;</span>
+        <span>Windows</span>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+        <div class="menu">
+          <div class="fname"><span class="ico">&#127916;</span>aufnahme_2026.mp4</div>
+          <div class="row"><span class="glyph">&#9655;</span>Wiedergeben</div>
+          <div class="row active"><img src="__LOGO_B64__" alt="" />VidiVerify Quick&#8209;Check</div>
+          <div class="row"><span class="glyph">&#128193;</span>&Ouml;ffnen mit&hellip;</div>
+        </div>
+        <div class="result"><span class="check">&#10003;</span>Datei intakt</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
