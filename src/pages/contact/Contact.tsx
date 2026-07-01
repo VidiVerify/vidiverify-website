@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { MdVerified } from "react-icons/md";
 import { FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
+import { SiX } from "react-icons/si";
 import { Mail, ArrowUpRight, PackageSearch } from "lucide-react";
 import { getGitHubUsername } from "@data/dataLoader";
 import PageSection from "@components/layout/PageSection";
@@ -69,8 +70,8 @@ const Contact = () => {
                   </div>
                </motion.div>
 
-               {/* GitHub + Facebook + Instagram — 3-column grid (1 on mobile) */}
-               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 14 }}>
+               {/* GitHub + Facebook + Instagram + X — 4-column grid (1 on mobile) */}
+               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 14 }}>
                   <motion.a
                      href={`https://github.com/${githubUsername}`}
                      target="_blank" rel="noopener noreferrer"
@@ -116,6 +117,22 @@ const Contact = () => {
                      <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.instagramSub")}</span>
                      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#E1306C", marginTop: 4 }}>
                         {t("contact.instagramAction")} <ArrowUpRight size={12} />
+                     </span>
+                  </motion.a>
+
+                  <motion.a
+                     href="https://x.com/VidiVerif"
+                     target="_blank" rel="noopener noreferrer"
+                     className="glass-card" variants={staggerItemSlow}
+                     whileHover={{ y: -4, borderColor: "rgba(231,231,234,0.3)" }}
+                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
+                  >
+                     <SiX size={20} color="#e7e7ea" />
+                     <span style={{ fontSize: 11, fontWeight: 600, color: "#e7e7ea", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.x")}</span>
+                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>VidiVerif</span>
+                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.xSub")}</span>
+                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#e7e7ea", marginTop: 4 }}>
+                        {t("contact.xAction")} <ArrowUpRight size={12} />
                      </span>
                   </motion.a>
                </div>

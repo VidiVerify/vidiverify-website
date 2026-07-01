@@ -339,7 +339,7 @@ const Download = () => {
                <ManualDownload />
             </motion.div>
 
-            {/* ── Trust-Strip (Microsoft Store + heise) ── */}
+            {/* ── Trust-Strip (Microsoft Store + heise + Softpedia) ── */}
             <motion.div
                variants={staggerItemSlow}
                style={{
@@ -468,6 +468,43 @@ const Download = () => {
                            Download
                         </span>
                      </span>
+                  </motion.a>
+
+                  {/* Divider (nur Desktop) */}
+                  {!isMobile && (
+                     <span
+                        aria-hidden
+                        style={{
+                           width: 1,
+                           height: 22,
+                           background: "rgba(255,255,255,0.18)",
+                        }}
+                     />
+                  )}
+
+                  {/* Softpedia */}
+                  <motion.a
+                     href="https://www.softpedia.com/get/Multimedia/Video/Other-VIDEO-Tools/VidiVerify.shtml"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     whileHover={{ scale: 1.05, filter: "brightness(1.25)" }}
+                     whileTap={{ scale: 0.97 }}
+                     transition={{ duration: 0.2 }}
+                     style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        textDecoration: "none",
+                        color: "#ffffff",
+                        opacity: 0.88,
+                     }}
+                     aria-label={t("download.softpediaAria")}
+                  >
+                     <img
+                        src="/softpedia_white.svg"
+                        alt=""
+                        aria-hidden
+                        style={{ height: 17, width: "auto", display: "block" }}
+                     />
                   </motion.a>
                </div>
             </motion.div>

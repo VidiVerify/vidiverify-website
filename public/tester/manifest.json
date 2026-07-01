@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "active": false,
-  "start_at": null,
+  "active": true,
+  "start_at": "2026-07-01",
   "zip": "tester_pack.zip",
   "zip_sha256": "53335865e1fb0fc3fa69bc75bfcf730ac43bc0e1d2888942ddd59ce3c13d067f",
   "files": [

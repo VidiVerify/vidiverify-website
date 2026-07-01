@@ -107,13 +107,13 @@
          },
          {
             "id": 5,
-            "title": "Strukturierte Ergebnisdarstellung",
+            "title": "Detail Video/Codec Labs",
             "list": [
-               "Übersichts-Tab mit Status-Cards je Prüfstufe",
-               "Stage-Cards für Integrität, Vollprüfung und Diagnose",
-               "Heartbeat-Pulse für laufende Stufen",
-               "Live-Telemetrie: CPU, RAM, Netzwerk, Leserate",
-               "Theme- und Sprachwechsel ohne Neustart"
+               "Drei Analyse-Labs im Mediatools-Menü",
+               "Codec-Berater: Empfehlung nach Ziel, Gerät, 4K",
+               "Bitrate ÄquivalenzLab: Bitraten aller Codecs + CRF",
+               "Video SizeLab: Dateigrösse je Codec schätzen",
+               "Upscaling: klassisch (UPS) vs. KI (VSR)"
             ]
          },
          {
@@ -156,8 +156,8 @@
          "media-test": {
             "label": "Media Test",
             "title": "Reiter",
-            "description": "Eingebettete Videovorschau über das VLC-Plug-in mit Wiedergabe-Controls sowie einem Statistikfenster für Frame, Zeit, Restzeit und einer Audiostream-Wellenform.",
-            "tags": ["Vorschau", "VLC", "Statistik"]
+            "description": "Eingebettete Videovorschau mit Wiedergabe-Controls sowie einem Statistikfenster für Frame, Zeit, Restzeit und einer Audiostream-Wellenform.",
+            "tags": ["Vorschau", "Wiedergabe", "Statistik"]
          },
          "deepcheck": {
             "label": "DeepCheck",
@@ -282,6 +282,7 @@
       "linkEula": "EULA",
       "msStoreAria": "VidiVerify im Microsoft Store öffnen",
       "heiseAria": "VidiVerify bei heise Download öffnen",
+      "softpediaAria": "VidiVerify bei Softpedia öffnen",
       "smartscreenModalKicker": "Hinweis",
       "smartscreenModalTitle": "Windows SmartScreen beim ersten Download",
       "smartscreenModalIntro": "Beim ersten Aufruf eines frisch heruntergeladenen Installers prüft Windows zwei Dinge unabhängig voneinander: die digitale Signatur und die Reputation der Datei. Beide Punkte sind bei VidiVerify ordentlich abgedeckt — was du möglicherweise im Schutz-Dialog siehst, ist eine reine Reputations-Aufbauphase.",
@@ -312,6 +313,9 @@
       "instagram": "Instagram",
       "instagramSub": "Eindrücke & Visuals",
       "instagramAction": "Folgen",
+      "x": "X",
+      "xSub": "Aktuelles in Echtzeit",
+      "xAction": "Folgen",
       "supportDivider": "Support",
       "supportHeading": "Support-Paket",
       "supportItems": [

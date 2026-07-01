@@ -39,6 +39,12 @@
          "name": "GitHub",
          "link": "https://github.com/VidiVerify",
          "icon": "FaGithub"
+      },
+      {
+         "id": 4,
+         "name": "X",
+         "link": "https://x.com/VidiVerif",
+         "icon": "SiX"
       }
    ],
    "site": {

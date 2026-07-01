@@ -107,13 +107,13 @@
          },
          {
             "id": 5,
-            "title": "Structured results",
+            "title": "Detail Video/Codec Labs",
             "list": [
-               "Overview tab with status cards per check stage",
-               "Stage cards for integrity, full check and diagnostics",
-               "Heartbeat pulse for running stages",
-               "Live telemetry: CPU, RAM, network, read rate",
-               "Theme and language switching without restart"
+               "Three analysis labs in the Mediatools menu",
+               "Codec Advisor: pick by target, device, 4K",
+               "Bitrate EquivalenceLab: all-codec bitrates + CRF",
+               "Video SizeLab: estimate file size per codec",
+               "Upscaling: classic (UPS) vs. AI (VSR)"
             ]
          },
          {
@@ -156,8 +156,8 @@
          "media-test": {
             "label": "Media Test",
             "title": "Tab",
-            "description": "Embedded video preview via the VLC plug-in with playback controls plus a statistics window for frame, time, remaining time and an audio stream waveform.",
-            "tags": ["Preview", "VLC", "Statistics"]
+            "description": "Embedded video preview with playback controls plus a statistics window for frame, time, remaining time and an audio stream waveform.",
+            "tags": ["Preview", "Playback", "Statistics"]
          },
          "deepcheck": {
             "label": "DeepCheck",
@@ -282,6 +282,7 @@
       "linkEula": "EULA",
       "msStoreAria": "Open VidiVerify in the Microsoft Store",
       "heiseAria": "Open VidiVerify on heise Download",
+      "softpediaAria": "Open VidiVerify on Softpedia",
       "smartscreenModalKicker": "Heads up",
       "smartscreenModalTitle": "Windows SmartScreen on first download",
       "smartscreenModalIntro": "On first launch of a freshly downloaded installer, Windows checks two things independently: the digital signature and the file's reputation. Both are properly covered for VidiVerify — what you may see in the protection dialog is purely a reputation ramp-up.",
@@ -312,6 +313,9 @@
       "instagram": "Instagram",
       "instagramSub": "Impressions & visuals",
       "instagramAction": "Follow",
+      "x": "X",
+      "xSub": "Real-time updates",
+      "xAction": "Follow",
       "supportDivider": "Support",
       "supportHeading": "Support package",
       "supportItems": [
