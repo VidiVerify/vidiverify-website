@@ -153,11 +153,17 @@
             "description": "Rechtsklick auf eine Videodatei im Windows-Explorer — eine schlanke Worker-Komponente prüft in Sekunden Containerstruktur, Mediadaten und Integrität, ohne die Hauptanwendung zu starten. Eigenes Hinweisfenster mit Status, Befund und Mediadaten — und auf Wunsch nahtloser Übergang in die Vollanalyse.",
             "tags": ["Kontextmenü", "Worker-EXE", "Sekunden"]
          },
+         "media-lab": {
+            "label": "Media Lab",
+            "title": "Reiter",
+            "description": "Deine ersten Video-Laboratorien gehen an Bord — anfassen, ausprobieren, verstehen statt nur ablesen. Drei interaktive Werkzeuge machen Codecs, Bitraten und Dateigrössen begreifbar: CodecLab empfiehlt live den passenden Codec für Ziel und Gerät, das Bitrate ÄquivalenzLab rechnet Bitraten fair zwischen den Codecs um, und das Video SizeLab schätzt die Dateigrösse bei jeder Auflösung — inklusive Up- und Downscaling. Ein Reiter, drei Labore, echter Durchblick.",
+            "tags": ["CodecLab", "Bitrate ÄquivalenzLab", "Video SizeLab"]
+         },
          "media-test": {
             "label": "Media Test",
             "title": "Reiter",
-            "description": "Eingebettete Videovorschau mit Wiedergabe-Controls sowie einem Statistikfenster für Frame, Zeit, Restzeit und einer Audiostream-Wellenform.",
-            "tags": ["Vorschau", "Wiedergabe", "Statistik"]
+            "description": "Sieh dir an, was wirklich in der Datei steckt — direkt in VidiVerify. Zwei üppige Detailfenster für Video und Audio: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
+            "tags": ["Bildgenaue Vorschau", "Wiedergabe", "Wellenform"]
          },
          "deepcheck": {
             "label": "DeepCheck",
@@ -210,8 +216,8 @@
          "kompatibilitaet": {
             "label": "Kompatibilität",
             "title": "Kompatibilitätsbewertung",
-            "description": "Regelbasierte Einschätzung der Abspielbarkeit auf typischen Plattformen anhand von FFprobe- und MediaInfo-Daten. Klare Kennzeichnung kritischer Merkmale wie Codec-Profile oder Farbräume.",
-            "tags": ["Plattform", "MediaInfo", "FFprobe"]
+            "description": "Wird deine Datei überall abgespielt? VidiVerify bewertet die Wiedergabe-Wahrscheinlichkeit gegen sechs Zielprofile — Universal, Streaming, Smart-TV, Mobil, Archiv und Broadcast — und macht das Urteil mit einer klaren Ampel sichtbar. Kritische Fallstricke wie problematische Codec-Profile oder Farbräume werden benannt, bevor sie beim Zuschauer zum schwarzen Bild werden.",
+            "tags": ["6 Zielprofile", "Ampel-Urteil", "Fallstrick-Radar"]
          },
          "statistik": {
             "label": "Statistik",

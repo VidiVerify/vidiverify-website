@@ -153,11 +153,17 @@
             "description": "Right-click on a video file in Windows Explorer — a lightweight worker component checks container structure, media data and integrity in seconds, without launching the main application. Dedicated notification window with status, finding and media data — and optional seamless handoff to the full analysis.",
             "tags": ["Context menu", "Worker EXE", "Seconds"]
          },
+         "media-lab": {
+            "label": "Media Lab",
+            "title": "Tab",
+            "description": "Your first video laboratories come aboard — hands-on tools to try, tweak and actually understand, not just read off. Three interactive labs make codecs, bitrates and file sizes tangible: CodecLab recommends the right codec for your target and device live, the Bitrate EquivalenceLab converts bitrates fairly between codecs, and the Video SizeLab estimates file size at any resolution — up- and downscaling included. One tab, three labs, real insight.",
+            "tags": ["CodecLab", "Bitrate EquivalenceLab", "Video SizeLab"]
+         },
          "media-test": {
             "label": "Media Test",
             "title": "Tab",
-            "description": "Embedded video preview with playback controls plus a statistics window for frame, time, remaining time and an audio stream waveform.",
-            "tags": ["Preview", "Playback", "Statistics"]
+            "description": "See what is really inside the file — right within VidiVerify. Two rich detail windows for video and audio: frame-accurate preview with full playback controls, live stats on frame, time and remaining time, plus a real waveform of the audio track. Check and watch in one go, with no second player.",
+            "tags": ["Frame-accurate preview", "Playback", "Waveform"]
          },
          "deepcheck": {
             "label": "DeepCheck",
@@ -210,8 +216,8 @@
          "kompatibilitaet": {
             "label": "Compatibility",
             "title": "Compatibility rating",
-            "description": "Rule-based assessment of playback compatibility across common platforms based on FFprobe and MediaInfo data. Clear flagging of critical attributes such as codec profiles or color spaces.",
-            "tags": ["Platform", "MediaInfo", "FFprobe"]
+            "description": "Will your file play everywhere? VidiVerify rates the playback likelihood against six target profiles — Universal, Streaming, Smart TV, Mobile, Archive and Broadcast — and shows the verdict at a glance with a clear traffic light. Critical pitfalls like problematic codec profiles or color spaces are named before they turn into a black screen for your audience.",
+            "tags": ["6 target profiles", "Traffic-light verdict", "Pitfall radar"]
          },
          "statistik": {
             "label": "Statistics",

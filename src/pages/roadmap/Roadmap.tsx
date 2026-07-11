@@ -5,7 +5,7 @@ import {
    FaDesktop, FaSearch, FaFileAlt, FaFilePdf, FaCopy,
    FaBug, FaWrench, FaCheckCircle, FaChartBar, FaEye,
    FaYoutube, FaApple, FaGlobe, FaKey, FaBolt, FaExpand, FaCheck,
-   FaShieldAlt, FaStream,
+   FaShieldAlt, FaStream, FaFlask,
 } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import useMediaQuery from "@utils/useMediaQuery";
@@ -68,6 +68,8 @@ interface Item {
 const ITEMS: Item[] = [
    { id: "ki-forensik",    pro: true,  isTab: true,                             icon: <FaShieldAlt size={14} /> },
    { id: "quick-check",    pro: false, delivered: { version: "v1.4.8" },        icon: <FaBolt size={14} /> },
+   { id: "media-lab",      pro: false, isTab: true, next: true,                 icon: <FaFlask size={14} /> },
+   { id: "kompatibilitaet", pro: false, next: true,                            icon: <FaCheckCircle size={14} /> },
    { id: "media-test",     pro: false, isTab: true, next: true,                 icon: <FaDesktop size={15} /> },
    { id: "deepcheck",      pro: false, delivered: { version: "v1.4.7" },        icon: <FaSearch size={14} /> },
    { id: "media-repair",   pro: true,  isTab: true,                             icon: <FaWrench size={14} /> },
@@ -76,7 +78,6 @@ const ITEMS: Item[] = [
    { id: "diagnosemodus",  pro: false, delivered: { version: "v1.4.7" },        icon: <FaBug size={15} /> },
    { id: "vvprogressiv",   pro: true,                                           icon: <FaStream size={14} /> },
    { id: "vollanalyse",    pro: true,                                           icon: <FaExpand size={14} /> },
-   { id: "kompatibilitaet", pro: false,                                         icon: <FaCheckCircle size={14} /> },
    { id: "statistik",      pro: true,                                           icon: <FaChartBar size={15} /> },
    { id: "vqa",            pro: true,                                           icon: <FaEye size={15} /> },
    { id: "ytup",           pro: true,                                           icon: <FaYoutube size={15} /> },
