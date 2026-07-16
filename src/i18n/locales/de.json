@@ -161,8 +161,8 @@
          },
          "media-test": {
             "label": "Media Test",
-            "title": "Reiter",
-            "description": "Sieh dir an, was wirklich in der Datei steckt — direkt in VidiVerify. Zwei üppige Detailfenster für Video und Audio: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
+            "title": "Video- & Audio-Detailfenster",
+            "description": "Sieh dir an, was wirklich in der Datei steckt — direkt in VidiVerify, aufrufbar aus dem Tab Media Analyse. Zwei üppige Detailfenster für Video und Audio mit noch mehr Detailtiefe: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
             "tags": ["Bildgenaue Vorschau", "Wiedergabe", "Wellenform"]
          },
          "deepcheck": {
@@ -246,8 +246,8 @@
          "sprachen": {
             "label": "Sprachen",
             "title": "Weitere Sprachen",
-            "description": "Erweiterung der mehrsprachigen Benutzeroberfläche um Spanisch, Hindi, Russisch, Portugiesisch und weitere Sprachen.",
-            "tags": ["Spanisch", "Hindi", "Russisch"]
+            "description": "Erweiterung der mehrsprachigen Benutzeroberfläche um Hindi, Russisch, Portugiesisch und weitere Sprachen.",
+            "tags": ["Hindi", "Russisch", "Portugiesisch"]
          },
          "lizenz": {
             "label": "Lizenzierung",

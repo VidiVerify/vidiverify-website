@@ -20,6 +20,7 @@ const SHARE_URL = "https://vidiverify.de/download";
 const FLAGS = [
    { code: "de", label: "Deutsch" },
    { code: "us", label: "English" },
+   { code: "es", label: "Español" },
    { code: "cn", label: "中文" },
 ];
 
