@@ -209,11 +209,11 @@ Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 100 MB Festplattenplatz (z
        ============================================================ -->
   <Permissions>
     <Distribution_Permissions>VidiVerify may be freely distributed via download portals, software directories, and free software platforms provided that the installer file is distributed unmodified. The software may not be sold or bundled with commercial products without prior written permission from the author.</Distribution_Permissions>
-    <EULA>End User License Agreement (EULA) - VidiVerify Basic Edition
+    <EULA>End User License Agreement (EULA) - VidiVerify FREE Edition
 
 By downloading, installing, or using VidiVerify, you agree to the following terms.
 
-1. Grant of License: The Basic edition of VidiVerify may be used free of charge for private purposes. Commercial users require a separate PRO license with extended functionality.
+1. Grant of License: The FREE edition of VidiVerify may be used free of charge for private purposes. Commercial users require a PRO license (valid for the major version in use) or a LIFETIME license (valid indefinitely across all future major versions) with extended functionality.
 
 2. Distribution: Redistribution of the unmodified installer via software platforms and download portals is permitted. Sale or bundling with third-party commercial products without prior written permission from the author is prohibited.
 
