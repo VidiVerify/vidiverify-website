@@ -5,6 +5,28 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) · Versionierun
 
 ---
 
+## [1.4.9] – 2026-07-16
+
+### Neu
+- **Kompatibilitätsbewertung – neuer Tab „Media Lab"** – Prüft die Wiedergabe-Wahrscheinlichkeit einer Datei gegen sechs Zielprofile (Universal, Streaming, Smart-TV, Mobil, Archiv, Broadcast) – auf einen Blick, ohne Bildqualitäts-Urteil.
+- **Drei neue Berater im Media Lab** – CodecLab (Codec-Empfehlung), Bitrate ÄquivalenzLab (Bitraten fair vergleichen) und Video SizeLab (Dateigrösse schätzen) – jetzt gebündelt an einem Ort.
+- **Neues Video-Detailfenster** – Detaillierte Bild-, Farb- und Bitraten-Analyse mit ruckelfreier, hochauflösender Live-Vorschau.
+- **Neues Audio-Detailfenster** – Pegel, Wellenform, Spektrum und Aussetzer-Erkennung – plus die Flaggschiff-Funktion: Erkennung von Transcodes mit falsch angegebener Bitrate.
+- **Spanisch als vierte Sprache** – VidiVerify spricht jetzt auch Español, komplett übersetzte Oberfläche.
+- **Audiodateien werden korrekt erkannt** – Reine Tondateien laufen nicht mehr fälschlich als „defektes Video", sondern werden von Anfang an als Audiodatei behandelt, inklusive Cover-Anzeige.
+
+### Verbessert
+- **Kompatibilitäts-Einstufung fairer** – Neue Zwischenstufe „breit unterstützt" (gelb) für moderne Formate wie AV1, HEVC oder 10-Bit, die vorher unnötig als „eingeschränkt" galten.
+- **Zuverlässigerer Erst-Start** – Plug-in-Downloads lassen sich jetzt abbrechen und erneut versuchen; bei langsamer Quelle schaltet VidiVerify automatisch auf einen schnelleren Spiegel um.
+- **Splashscreen zeigt den Lizenzstatus** – Version, Build und FREE/PRO/LIFETIME auf einen Blick.
+
+### Behoben
+- **Sicherheits-Updates** – Bekannte Schwachstellen in mehreren gebündelten Programmbibliotheken geschlossen.
+- **Genauere Wiedergabe bei DVD-Dateien (VOB)** – Zeitachse, Suchlauf und Bitratenkurve laufen jetzt exakt synchron.
+- **Chinesische Oberfläche** – letzte verbliebene deutsche Textreste übersetzt.
+
+---
+
 ## [1.4.8] – 2026-06-14
 
 ### Neu
