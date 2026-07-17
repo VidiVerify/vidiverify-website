@@ -51,9 +51,9 @@
        ============================================================ -->
   <Program_Info>
     <Program_Name>VidiVerify</Program_Name>
-    <Program_Version>1.4.8</Program_Version>
-    <Program_Release_Month>06</Program_Release_Month>
-    <Program_Release_Day>14</Program_Release_Day>
+    <Program_Version>1.4.9</Program_Version>
+    <Program_Release_Month>07</Program_Release_Month>
+    <Program_Release_Day>16</Program_Release_Day>
     <Program_Release_Year>2026</Program_Release_Year>
     <Program_Cost_Dollars>0.00</Program_Cost_Dollars>
     <Program_Cost_Other_Code>EUR</Program_Cost_Other_Code>
@@ -62,20 +62,20 @@
     <Program_Release_Status>New Release</Program_Release_Status>
     <Program_Install_Support>Install and Uninstall</Program_Install_Support>
     <Program_OS_Support>Win11,Win10</Program_OS_Support>
-    <Program_Language>German,English,Chinese</Program_Language>
+    <Program_Language>German,English,Chinese,Spanish</Program_Language>
     <File_Info>
       <!-- Dateigroesse aktualisieren nach jedem Build (dist/VidiVerify-Setup.exe) -->
       <Filename_Versioned>VidiVerify-Setup.exe</Filename_Versioned>
-      <Filename_Previous>VidiVerify Setup 1.4.7.exe</Filename_Previous>
+      <Filename_Previous>VidiVerify Setup 1.4.8.exe</Filename_Previous>
       <Filename_Generic>VidiVerify-Setup.exe</Filename_Generic>
-      <Filename_Long>VidiVerify Setup 1.4.8.exe</Filename_Long>
-      <Install_File_Size_Bytes>60747096</Install_File_Size_Bytes>
-      <Install_File_Size_K>59323</Install_File_Size_K>
-      <Install_File_Size_MB>58</Install_File_Size_MB>
+      <Filename_Long>VidiVerify Setup 1.4.9.exe</Filename_Long>
+      <Install_File_Size_Bytes>61385392</Install_File_Size_Bytes>
+      <Install_File_Size_K>59946</Install_File_Size_K>
+      <Install_File_Size_MB>59</Install_File_Size_MB>
       <!-- Custom Extension: SHA-256-Hash der Setup-Datei (nicht im PAD-Standard, aber von vielen Portalen ausgewertet als Integritaetsnachweis) -->
-      <File_SHA256>0E6D20F478D06925E4A1DE26586FE42191B0FEE571ECA65D9EA2CECF465C4941</File_SHA256>
+      <File_SHA256>86B3961239BB47699895EE0C9A6F9438BF862897B50C3D08EBE793B4928C5F11</File_SHA256>
       <!-- Custom Extension: Sidecar-URL mit dem Hash als Klartext-Datei -->
-      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.8/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
+      <File_SHA256_URL>https://vidiverify.de/releases/v1.4.9/VidiVerify-Setup.exe.sha256</File_SHA256_URL>
     </File_Info>
     <Expire_Info>
       <Has_Expire_Info>N</Has_Expire_Info>
@@ -118,7 +118,7 @@ Key features:
 - Live telemetry — system CPU, scan-process CPU, RAM, network, and read rate
 - Automatic self-update with SHA-256 verification — checks for new versions at startup and installs them with one click
 - Support package — generate an anonymized diagnostic bundle with one click for easy troubleshooting
-- Multilingual interface — German, English, and Chinese, system-locale aware
+- Multilingual interface — German, English, Chinese, and Spanish, system-locale aware
 - Three visual themes — Dark (default), Plex, and Windows Classic
 
 VidiVerify is completely free to use. No limitations, no nag screens, no advertising. If you find it valuable, a voluntary donation via vidiverify.de/donate is warmly appreciated.
@@ -157,7 +157,7 @@ Kernfunktionen:
 - Live-Telemetrie — CPU-System, CPU-Prüfprozess, RAM, Netzwerk und Leserate
 - Automatisches Self-Update mit SHA-256-Verifikation — prüft beim Start auf neue Versionen und installiert sie per Klick
 - Supportpaket — anonymisiertes Diagnosepaket per Knopfdruck für einfache Fehleranalyse
-- Mehrsprachige Oberfläche — Deutsch, Englisch und Chinesisch, folgt der System-Locale
+- Mehrsprachige Oberfläche — Deutsch, Englisch, Chinesisch und Spanisch, folgt der System-Locale
 - Drei visuelle Designs — Dark (Standard), Plex und Windows Classic
 
 VidiVerify ist vollständig kostenlos nutzbar. Keine Einschränkungen, keine Hinweisfenster, keine Werbung. Wer das Programm nützlich findet, kann unter vidiverify.de/donate freiwillig spenden.
@@ -175,11 +175,11 @@ Systemanforderungen: Windows 10 oder 11 (64-Bit), ca. 100 MB Festplattenplatz (z
       <!-- Primärer Download: direkter, redirect-freier versionierter Pfad auf eigener Domain.
            Wird von strengen Validierern (z. B. Microsoft Store) zwingend verlangt; funktioniert
            ebenso für klassische Portale (Heise, Filehorse, Softpedia). -->
-      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.8/VidiVerify-Setup.exe</Primary_Download_URL>
+      <Primary_Download_URL>https://vidiverify.de/releases/v1.4.9/VidiVerify-Setup.exe</Primary_Download_URL>
       <!-- Sekundär: GitHub-Release als kanonische Quelle (mit Changelogs, Signaturen).
            Hinweis: liefert 302-Redirect auf objects.githubusercontent.com mit signierter,
            kurzlebiger CDN-URL. Für Portale, die Redirects folgen, ungehinderte Quelle. -->
-      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.8/VidiVerify-Setup.exe</Secondary_Download_URL>
+      <Secondary_Download_URL>https://github.com/VidiVerify/vidiverify-releases/releases/download/v1.4.9/VidiVerify-Setup.exe</Secondary_Download_URL>
       <!-- Zusätzlich: menschliche Downloadseite (Landingpage) -->
       <Additional_Download_URL>https://vidiverify.de/download</Additional_Download_URL>
       <Program_Info_URL>https://vidiverify.de</Program_Info_URL>
