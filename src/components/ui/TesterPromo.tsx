@@ -20,8 +20,8 @@ const ACCENT_DARK = "#d97706";
 const STORAGE_KEY = "vv_tester_promo_v1";
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 1 Tag Ruhe nach aktivem Schliessen
 const FIRST_DELAY_MS = 8000; // verzögerte Erst-Einblendung
-const AUTO_HIDE_MS = 12000; // gleitet von selbst wieder weg
-const RESHOW_AT_MS = 60000; // einmalige Re-Einblendung für Verweildauer > 60 s
+const AUTO_HIDE_MS = 24000; // gleitet von selbst wieder weg (vorher 12s -- zu knapp zum Bemerken+Lesen+Klicken)
+const RESHOW_DELAYS_MS = [60000, 180000]; // wiederholte Re-Einblendung für länger verweilende Besucher (1 min, 3 min)
 const MANIFEST_URL = "/tester/manifest.json";
 
 type PromoState = "soon" | "live";
@@ -102,15 +102,17 @@ const TesterPromo = () => {
             }, FIRST_DELAY_MS),
          );
 
-         timers.push(
-            window.setTimeout(() => {
-               if (cancelled) return;
-               const s = readSuppress();
-               if (s.clicked || Date.now() < s.until) return; // aktiv geschlossen -> Ruhe
-               setVisible(true);
-               scheduleAutoHide();
-            }, RESHOW_AT_MS),
-         );
+         RESHOW_DELAYS_MS.forEach((delay) => {
+            timers.push(
+               window.setTimeout(() => {
+                  if (cancelled) return;
+                  const s = readSuppress();
+                  if (s.clicked || Date.now() < s.until) return; // aktiv geschlossen -> Ruhe
+                  setVisible(true);
+                  scheduleAutoHide();
+               }, delay),
+            );
+         });
       };
 
       if (forced) {
@@ -140,6 +142,17 @@ const TesterPromo = () => {
       };
    }, [override, forced, scheduleAutoHide]);
 
+   const handleMouseEnter = useCallback(() => {
+      // Auto-Hide pausieren, solange die Maus über der Karte steht -- sonst
+      // verschwindet der Teaser genau dann, wenn ein Nutzer ihn gerade bemerkt
+      // und hinschaut.
+      window.clearTimeout(hideTimer.current);
+   }, []);
+
+   const handleMouseLeave = useCallback(() => {
+      scheduleAutoHide();
+   }, [scheduleAutoHide]);
+
    const handleClose = useCallback(() => {
       setVisible(false);
       window.clearTimeout(hideTimer.current);
@@ -168,6 +181,8 @@ const TesterPromo = () => {
                transition={{ type: "spring", stiffness: 120, damping: 18 }}
                role="dialog"
                aria-label={t("testerPromo.headline")}
+               onMouseEnter={handleMouseEnter}
+               onMouseLeave={handleMouseLeave}
                style={{
                   position: "fixed",
                   bottom: 24,
