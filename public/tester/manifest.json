@@ -1,14 +1,14 @@
 {
-  "version": 2,
+  "version": 3,
   "active": true,
   "start_at": "2026-07-01",
   "zip": "tester_pack.zip",
-  "zip_sha256": "53335865e1fb0fc3fa69bc75bfcf730ac43bc0e1d2888942ddd59ce3c13d067f",
+  "zip_sha256": "65591aa901a16668798ac2d86f7dc20f2c76d42ed5341612fd097fa3f3000c2c",
   "files": [
     {
       "path": "anleitung/Testanleitung.pdf",
-      "size": 709744,
-      "sha256": "e78cb4bd1c35cc0810b6d7764bfbf8a28d6826af3a80d4069d7e8b2c24e24f24"
+      "size": 755860,
+      "sha256": "46fb1d9681e2caff3a75c88eb5db25a5b899bb7389131f47a47fe7e322fedf3b"
     }
   ]
 }
