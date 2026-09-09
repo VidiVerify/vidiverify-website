@@ -341,11 +341,17 @@
       "privateTitle": "FREE",
       "privateBadge": "€0",
       "privateDescription": "VidiVerify FREE is free for personal use, for good. Access is intentionally open — no registration required, no license fee.",
+      "communityBullet": "Stay in touch with the community",
       "privateBullets": [
          "Full feature set for personal use",
-         "No account, no registration required",
+         "Account and registration are optional",
          "Local processing — no cloud, no dependencies"
       ],
+      "priceProLabel": "PRO · one major version",
+      "priceLifetimeLabel": "LIFETIME · every major version",
+      "priceExplainer": "A new PRO major version roughly once a year; LIFETIME covers every major version of the line.",
+      "priceNote": "Retail prices including VAT. One payment, no subscription.",
+      "orderCta": "Request a licence",
       "supportCta": "Support us",
       "commercialLabel": "Commercial & professional",
       "commercialTitle": "PRO",
@@ -357,7 +363,7 @@
          "All updates within the licensed major version included",
          "Additional and upcoming features of that major version included",
          "Available as a LIFETIME licence — one-time fee, covers every future major version",
-         "Currently ordered through the app only — request by email"
+         "One-click video and audio check — an emerging industry standard"
       ],
       "perspectiveLabel": "Outlook",
       "perspectiveTitle": "VidiVerify",

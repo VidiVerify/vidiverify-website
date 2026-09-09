@@ -16,6 +16,7 @@ import ShootingStars from "@components/ui/ShootingStars";
 import EulaModal from "@components/ui/EulaModal";
 import DatenschutzModal from "@components/ui/DatenschutzModal";
 import ImpressumModal from "@components/ui/ImpressumModal";
+import LizenzAnfrageModal from "@components/ui/LizenzAnfrageModal";
 
 // Lazy Load "Below the fold" sections for massive performance gains
 const About = lazy(() => import("@pages/about/About"));
@@ -53,15 +54,28 @@ const App = () => {
    const [eulaOpen, setEulaOpen] = useState(() => window.location.hash === "#eula");
    const [datenschutzOpen, setDatenschutzOpen] = useState(() => window.location.hash === "#datenschutz");
    const [impressumOpen, setImpressumOpen] = useState(() => window.location.hash === "#impressum");
+   // Die Bestellanfrage. Sie kommt meist aus der Anwendung: Der Knopf dort
+   // fuehrt auf `/lizenz-anfrage?vvid=…`, und `public/404.html` leitet das
+   // hierher um — Abfrage inbegriffen, denn ohne sie muesste der Kunde seine
+   // Geraetekennung abtippen.
+   const [anfrageOpen, setAnfrageOpen] = useState(() => window.location.hash === "#lizenz-anfrage");
 
    useEffect(() => {
       globalThis.history.scrollRestoration = "manual";
       const hash = window.location.hash.slice(1);
-      const modalHashes = ["eula", "datenschutz", "impressum"];
-      if (hash && !modalHashes.includes(hash)) {
+      const modalHashes = ["eula", "datenschutz", "impressum", "lizenz-anfrage"];
+      // Wer bestellen will, soll HINTER dem Fenster die Preise sehen.
+      //
+      // Die Bestellanfrage kommt aus der Anwendung, und der erste Griff nach
+      // dem Öffnen ist oft nicht das Formular, sondern eine Frage: Was ist der
+      // Unterschied zwischen PRO und LIFETIME? Steht dahinter der Seitenkopf,
+      // muss er erst suchen; steht dort die Preistafel, hat er die Antwort,
+      // sobald er das Fenster schliesst.
+      const zielAnker = hash === "lizenz-anfrage" ? "preise" : hash;
+      if (zielAnker && (!modalHashes.includes(zielAnker) || zielAnker === "preise")) {
          const deadline = Date.now() + 4000;
          const tryScroll = () => {
-            const el = document.getElementById(hash);
+            const el = document.getElementById(zielAnker);
             if (el) {
                el.scrollIntoView({ behavior: "smooth" });
             } else if (Date.now() < deadline) {
@@ -82,10 +96,16 @@ const App = () => {
          if (href === "#eula") { e.preventDefault(); setEulaOpen(true); }
          if (href === "#datenschutz") { e.preventDefault(); setDatenschutzOpen(true); }
          if (href === "#impressum") { e.preventDefault(); setImpressumOpen(true); }
+         if (href === "#lizenz-anfrage") { e.preventDefault(); setAnfrageOpen(true); }
       };
       document.addEventListener("click", handler, true);
       return () => document.removeEventListener("click", handler, true);
    }, []);
+
+   // Liegt ein Fenster über der Seite, ruht die Zierde dahinter. Sie ist
+   // ohnehin verdeckt, und ihre Rechenzeit fehlt sonst dort, wo gerade
+   // getippt wird.
+   const fensterOffen = eulaOpen || datenschutzOpen || impressumOpen || anfrageOpen;
 
    return (
       <ReactLenis
@@ -98,9 +118,13 @@ const App = () => {
          <ErrorBoundary>
             <ScrollProgress />
             <KeyboardNav />
-            <AuroraBlobs />
-            <ShootingStars />
-            <ParallaxElements />
+            {!fensterOffen && (
+               <>
+                  <AuroraBlobs />
+                  <ShootingStars />
+                  <ParallaxElements />
+               </>
+            )}
             <div className="relative min-h-screen">
                <Nav />
                <main>
@@ -147,6 +171,7 @@ const App = () => {
             <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
             <DatenschutzModal open={datenschutzOpen} onClose={() => setDatenschutzOpen(false)} />
             <ImpressumModal open={impressumOpen} onClose={() => setImpressumOpen(false)} />
+            <LizenzAnfrageModal open={anfrageOpen} onClose={() => setAnfrageOpen(false)} />
          </ErrorBoundary>
       </ReactLenis>
    );

@@ -341,11 +341,17 @@
       "privateTitle": "FREE",
       "privateBadge": "0 €",
       "privateDescription": "VidiVerify FREE steht für die private Nutzung dauerhaft kostenfrei zur Verfügung. Der Zugang ist bewusst offen gestaltet — ohne Registrierungspflicht, ohne Lizenzgebühr.",
+      "communityBullet": "Halte Kontakt zur Community",
       "privateBullets": [
          "Voller Funktionsumfang für die private Nutzung",
-         "Kein Account, keine Registrierung erforderlich",
+         "Account oder Registrierung freiwillig",
          "Lokale Verarbeitung – keine Cloud, keine Abhängigkeiten"
       ],
+      "priceProLabel": "PRO · eine Hauptversion",
+      "priceLifetimeLabel": "LIFETIME · alle Hauptversionen",
+      "priceExplainer": "Eine neue PRO Hauptversion etwa jährlich, LIFETIME umfasst alle Hauptversionen der Linie.",
+      "priceNote": "Endkundenpreise inklusive Umsatzsteuer. Einmalzahlung, kein Abonnement.",
+      "orderCta": "Lizenz anfragen",
       "supportCta": "Unterstützen",
       "commercialLabel": "Gewerblich & professionell",
       "commercialTitle": "PRO",
@@ -357,7 +363,7 @@
          "Alle Updates innerhalb der jeweiligen Hauptversion enthalten",
          "Zusätzliche und künftige Funktionen dieser Hauptversion eingeschlossen",
          "Wahlweise als LIFETIME-Lizenz – einmalig, gültig über alle künftigen Hauptversionen hinweg",
-         "Aktuell ausschliesslich über die App bestellbar – Anfrage per Email"
+         "Ein-Klick Video- und Audiocheck als aufstrebender Branchenstandard"
       ],
       "perspectiveLabel": "Perspektive",
       "perspectiveTitle": "VidiVerify",

@@ -13,10 +13,22 @@
                "/support": "/#kontakt",
                "/eula": "/#eula",
                "/datenschutz": "/#datenschutz",
-               "/impressum": "/#impressum"
+               "/impressum": "/#impressum",
+               "/lizenz-anfrage": "/#lizenz-anfrage"
             };
             var target = routes[path];
             if (target) {
+               // Die Abfrage MUSS mit. Die Anwendung ruft
+               // `/lizenz-anfrage?vvid=VV-XXXXX&ver=1.5.0` auf, und ohne diese
+               // Zeile landet der Kunde vor einem leeren Kennungsfeld — genau
+               // das Abtippen, das der ganze Weg abschaffen soll.
+               var frage = location.search || "";
+               var trenner = target.indexOf("#");
+               if (frage && trenner > -1) {
+                  target = target.slice(0, trenner) + frage + target.slice(trenner);
+               } else if (frage) {
+                  target = target + frage;
+               }
                location.replace(target);
             }
          })();

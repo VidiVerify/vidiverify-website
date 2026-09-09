@@ -1,7 +1,7 @@
 {
    "title": "Datenschutzerklärung",
    "subtitle": "für die Nutzung von VidiVerify App und Website",
-   "date": "Stand: 18.04.2026",
+   "date": "Stand: 09.09.2026",
    "sections": [
       {
          "id": 1,
@@ -52,6 +52,19 @@
       },
       {
          "id": 7,
+         "title": "Bestellanfrage über das Formular „Lizenz anfragen“",
+         "blocks": [
+            { "type": "p", "text": "Über das Formular unter vidiverify.de/lizenz-anfrage kann eine Lizenz persönlich angefragt werden. Verarbeitet werden dabei die Gerätekennung (VV-ID), die Emailadresse, die gewünschte Lizenzvariante und die Programmversion sowie — soweit freiwillig angegeben — Anrede, Vor- und Nachname, Telefonnummer, Rechnungsanschrift, Steuernummer, Umsatzsteuer-Identifikationsnummer und eine Anmerkung im Freitext." },
+            { "type": "p", "text": "Zweck der Verarbeitung ist die Bearbeitung der Anfrage, die Ausstellung der Lizenz und die Rechnungsstellung. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertrag beziehungsweise vorvertragliche Massnahmen). Die Angabe der freiwilligen Felder ist für die Bearbeitung nicht erforderlich; Pflichtangaben sind allein Gerätekennung, Emailadresse und gewünschte Lizenzvariante." },
+            { "type": "p", "text": "Die VV-ID ist eine pseudonyme Gerätekennung, die auf dem Rechner des Nutzers aus einer Windows-Systemkennung berechnet wird. Sie enthält keine Klardaten und lässt für sich genommen keinen Rückschluss auf eine Person zu; im Zusammenhang mit der angegebenen Emailadresse ist sie personenbezogen." },
+            { "type": "p", "text": "Die Anfrage wird in einer Ablage (Cloudflare Workers KV) der Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA, gespeichert, die insoweit als Auftragsverarbeiter tätig wird. Die Ausstellung der Lizenz erfolgt über einen Dienst desselben Anbieters. Grundlage der Übermittlung sind die Standardvertragsklauseln der Europäischen Kommission sowie das EU-US Data Privacy Framework." },
+            { "type": "p", "text": "Zum Schutz des Formulars vor automatisierten Zusendungen wird Cloudflare Turnstile eingesetzt. Dabei werden technische Verbindungsdaten, insbesondere die IP-Adresse, sowie Angaben zum verwendeten Browser verarbeitet. Turnstile setzt keine Cookies zu Werbezwecken und führt kein geräteübergreifendes Tracking durch. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in der Abwehr missbräuchlicher Zusendungen." },
+            { "type": "p", "text": "Der Anfragedatensatz wird gelöscht, sobald der Vorgang abgeschlossen ist, spätestens jedoch automatisch nach 180 Tagen. Der zur Lizenz gehörende Eintrag (Emailadresse, VV-ID, Lizenzschlüssel) wird dauerhaft gespeichert, damit die Lizenz nach einer Neuinstallation oder einem Rechnerwechsel erneut abgerufen werden kann; er wird auf Verlangen gelöscht. Steuerlich aufbewahrungspflichtige Unterlagen unterliegen den gesetzlichen Fristen." },
+            { "type": "p", "text": "Eine Nutzung der Angaben zu Werbezwecken findet nicht statt. Ein Newsletter wird über dieses Formular nicht angeboten." }
+         ]
+      },
+      {
+         "id": 8,
          "title": "Support, Support-Pakete und technische Protokolle",
          "blocks": [
             { "type": "p", "text": "VidiVerify kann Funktionen zur Erstellung eines Support-Pakets bereitstellen. Solche Support-Pakete können insbesondere technische Protokolle, Logdateien und weitere zur Fehleranalyse geeignete Informationen enthalten. Eine Übermittlung an das VidiVerify-Team erfolgt nicht automatisch, sondern nur dann, wenn der Nutzer ein solches Paket selbst per Email einreicht." },
@@ -60,14 +73,14 @@
          ]
       },
       {
-         "id": 8,
+         "id": 9,
          "title": "GitHub als Projekt- und Release-Plattform",
          "blocks": [
             { "type": "p", "text": "Auf dieser Website können Links zu GitHub eingebunden sein, insbesondere zum Projekt, zu Releases oder zu Release Notes. GitHub bezeichnet in seiner Datenschutzerklärung GitHub, Inc. oder GitHub B.V. als datenverantwortliche Stelle für Dienste, die diese Datenschutzerklärung anzeigen. Beim blossen Besuch dieser Website wird durch einen normalen externen Link noch keine direkte Verbindung zu GitHub ausgelöst. Erst mit einem aktiven Anklicken eines solchen Links wird eine Verbindung zu GitHub hergestellt. In diesem Fall gelten ergänzend die Datenschutzbestimmungen von GitHub." }
          ]
       },
       {
-         "id": 9,
+         "id": 10,
          "title": "PayPal",
          "blocks": [
             { "type": "p", "text": "Auf dieser Website können Spenden- oder Zahlungsoptionen über PayPal angeboten werden. Anbieter für den europäischen Raum ist nach den von PayPal veröffentlichten Informationen die PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg. Soweit auf dieser Website lediglich ein normaler externer Link zu PayPal verwendet wird, erfolgt eine Datenübermittlung an PayPal erst nach aktivem Anklicken dieses Links. Soweit ein konkreter Zahlungsvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch PayPal nach dessen eigenen Bedingungen und Datenschutzbestimmungen." },
@@ -75,7 +88,7 @@
          ]
       },
       {
-         "id": 10,
+         "id": 11,
          "title": "4Fund",
          "blocks": [
             { "type": "p", "text": "Auf dieser Website können Spendenoptionen über 4Fund angeboten werden. Nach den veröffentlichten Angaben wird 4Fund von der polnischen Gesellschaft Zrzutka.pl sp. z o.o. mit Sitz in Wroclaw betrieben. Soweit auf dieser Website lediglich ein normaler externer Link zu 4Fund verwendet wird, erfolgt eine Datenübermittlung an 4Fund erst nach aktivem Anklicken dieses Links. Soweit ein konkreter Spendenvorgang ausgelöst wird, erfolgt die weitere Verarbeitung durch 4Fund nach dessen eigenen Datenschutzbestimmungen und Nutzungsbedingungen." },
@@ -83,14 +96,14 @@
          ]
       },
       {
-         "id": 11,
+         "id": 12,
          "title": "Externe Links",
          "blocks": [
             { "type": "p", "text": "Diese Website kann externe Links auf Angebote Dritter enthalten, insbesondere zu GitHub, PayPal und 4Fund. Externe Links führen nach dem Anklicken auf die Systeme des jeweiligen Drittanbieters. Für die Inhalte und die dortige Datenverarbeitung sind ausschliesslich die jeweiligen Betreiber verantwortlich." }
          ]
       },
       {
-         "id": 12,
+         "id": 13,
          "title": "Cookies, Drittinhalte und Einwilligung",
          "blocks": [
             { "type": "p", "text": "Nach dem derzeit vorgesehenen Stand ist die Website als schlanke One-Page-Lösung ohne eigene Analyse- oder Marketingdienste geplant. Wenn ausschliesslich technisch notwendige Funktionen sowie normale externe Links verwendet werden und keine eingebetteten Widgets, Iframes, Tracking- oder Marketing-Komponenten geladen werden, reduziert dies die datenschutzrechtliche Komplexität erheblich." },
@@ -98,7 +111,7 @@
          ]
       },
       {
-         "id": 13,
+         "id": 14,
          "title": "Speicherdauer",
          "blocks": [
             { "type": "p", "text": "Personenbezogene Daten werden nur so lange gespeichert, wie dies für die jeweiligen Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen." },
@@ -106,7 +119,7 @@
          ]
       },
       {
-         "id": 14,
+         "id": 15,
          "title": "Empfänger personenbezogener Daten",
          "blocks": [
             { "type": "p", "text": "Empfänger personenbezogener Daten können insbesondere sein:" },
@@ -120,7 +133,7 @@
          ]
       },
       {
-         "id": 15,
+         "id": 16,
          "title": "Rechte der betroffenen Personen",
          "blocks": [
             { "type": "p", "text": "Betroffene Personen haben nach der DSGVO insbesondere folgende Rechte:" },
@@ -138,21 +151,21 @@
          ]
       },
       {
-         "id": 16,
+         "id": 17,
          "title": "Widerspruchsrecht",
          "blocks": [
             { "type": "p", "text": "Soweit personenbezogene Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeitet werden, besteht das Recht, aus Gründen, die sich aus der besonderen Situation der betroffenen Person ergeben, jederzeit Widerspruch gegen die Verarbeitung einzulegen." }
          ]
       },
       {
-         "id": 17,
+         "id": 18,
          "title": "Beschwerderecht bei einer Aufsichtsbehörde",
          "blocks": [
             { "type": "p", "text": "Betroffene Personen haben das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren, wenn sie der Ansicht sind, dass die Verarbeitung ihrer personenbezogenen Daten gegen Datenschutzrecht verstösst. Die DSGVO sieht dieses Recht ausdrücklich vor." }
          ]
       },
       {
-         "id": 18,
+         "id": 19,
          "title": "Änderung dieser Datenschutzerklärung",
          "blocks": [
             { "type": "p", "text": "Diese Datenschutzerklärung gilt für den aktuell beschriebenen technischen Stand der VidiVerify-Website. Wenn Dienste, Einbindungsarten oder Verarbeitungszwecke geändert, erweitert oder entfernt werden, ist die Datenschutzerklärung entsprechend anzupassen. Das gilt insbesondere bei der späteren Einbindung von eingebetteten Zahlungswidgets, Analysewerkzeugen, Tracking, externen Schriftarten, Formularsystemen oder weiteren Drittanbietern." }

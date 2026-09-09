@@ -1,16 +1,21 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { FaCheckCircle, FaKey, FaRocket, FaHeart } from "react-icons/fa";
+import { FaCheckCircle, FaKey, FaHeart } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import { staggerContainerSlow, staggerItemSlow } from "@utils/animations";
-import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
+import { CYAN, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import useMediaQuery from "@utils/useMediaQuery";
+import { preisText, usePreise } from "@utils/usePreise";
 import ProBadge from "@components/ui/ProBadge";
 
 const FREE_GREEN = "#22c55e";
 
 const Preise = () => {
-   const { t } = useTranslation();
+   const { t, i18n } = useTranslation();
+   // Eine Preisquelle fuer die ganze Anwendung: der Worker. Faellt der Abruf
+   // aus, steht der eingebaute Listenpreis da — nie ein zu niedriger.
+   const { preise } = usePreise();
+   const sprache = i18n.language?.toLowerCase().startsWith("de") ? "de" : "en";
    const isMobile = useMediaQuery("(max-width: 768px)");
    const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
 
@@ -38,7 +43,7 @@ const Preise = () => {
             {/* ── A + B: Privat & Lizenz ── */}
             <motion.div
                variants={staggerContainerSlow}
-               style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: outerGap }}
+               style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: outerGap }}
             >
                {/* A – Kostenfreie Nutzung */}
                <motion.div variants={staggerItemSlow} className="glass-card"
@@ -80,6 +85,12 @@ const Preise = () => {
                            <span style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.6 }}>{point}</span>
                         </li>
                      ))}
+                     <li style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none" }}>
+                        <FaHeart size={10} color={FREE_GREEN} style={{ flexShrink: 0, marginTop: 4 }} />
+                        <span style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.6 }}>
+                           {t("pricing.communityBullet")}
+                        </span>
+                     </li>
                   </ul>
                   <motion.button
                      onClick={() => scrollTo("spenden")}
@@ -135,41 +146,63 @@ const Preise = () => {
                         </li>
                      ))}
                   </ul>
+
+                  {/* ── Was es kostet ──
+                      Bis zum 09.09.2026 stand hier keine einzige Zahl: Die
+                      Sektion hiess „Preise" und nannte keine. Wer wissen wollte,
+                      was PRO kostet, musste die Anwendung installieren und den
+                      Bestellweg öffnen. */}
+                  <div style={{
+                     display: "grid", gap: 10,
+                     gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                  }}>
+                     {([[t("pricing.priceProLabel"), preisText(preise.pro, sprache), CYAN],
+                        [t("pricing.priceLifetimeLabel"), preisText(preise.lifetime, sprache), "#f59e0b"]] as const)
+                        .map(([label, preis, farbe]) => (
+                        <div key={label} style={{
+                           padding: "12px 14px", borderRadius: 12,
+                           border: `1px solid ${farbe}33`, background: `${farbe}0a`,
+                           display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10,
+                        }}>
+                           <span style={{ fontSize: 11.5, color: TEXT_MUTED, letterSpacing: "0.02em" }}>
+                              {label}
+                           </span>
+                           <span style={{ fontSize: 16, fontWeight: 800, color: farbe, whiteSpace: "nowrap" }}>
+                              {preis}
+                           </span>
+                        </div>
+                     ))}
+                  </div>
+
+                  {/* Im Preisplan als zwingend gesetzt — überall dort, wo Preise
+                      genannt werden. Ohne sie kann ein Käufer den Wert von
+                      LIFETIME gegenüber PRO nicht abschätzen und wählt im
+                      Zweifel PRO. */}
+                  <p style={{ fontSize: 12.5, color: TEXT_SECONDARY, lineHeight: 1.7, margin: 0 }}>
+                     {t("pricing.priceExplainer")}
+                  </p>
+                  <p style={{ fontSize: 11.5, color: TEXT_MUTED, lineHeight: 1.6, margin: 0 }}>
+                     {t("pricing.priceNote")}
+                  </p>
+
+                  {/* Der Bestellweg. Er öffnet das Anfragefenster über der
+                      Seite — bewusst kein Sprung auf eine eigene Seite: Wer
+                      bestellt, klickt zwischen Formular und Preisen hin und
+                      her, und ein Wechsel der Umgebung wirkt dabei wie ein
+                      Anbieterwechsel. */}
+                  <a href="#lizenz-anfrage" style={{
+                     alignSelf: "flex-start", marginTop: 2,
+                     display: "inline-flex", alignItems: "center", gap: 8,
+                     padding: "10px 20px", borderRadius: 10,
+                     background: `linear-gradient(135deg, ${CYAN}, #4a7da0)`,
+                     color: "#08111a", fontSize: 13.5, fontWeight: 700,
+                     textDecoration: "none",
+                  }}>
+                     <FaKey size={12} /> {t("pricing.orderCta")}
+                  </a>
                </motion.div>
             </motion.div>
 
-            {/* ── C: Pro-Perspektive ── */}
-            <motion.div variants={staggerContainerSlow}>
-               {/* C – Pro-Perspektive */}
-               <motion.div variants={staggerItemSlow} className="glass-card"
-                  whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(106,172,204,0.12)", transition: { duration: 0.3 } }}
-                  style={{
-                  padding: cardPadding,
-                  display: "flex", flexDirection: "column", gap: cardGap,
-                  borderLeft: `3px solid rgba(106,172,204,0.3)`, borderRadius: "0 14px 14px 0",
-               }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                     <div style={{
-                        width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-                        background: "rgba(106,172,204,0.06)", border: "1px solid rgba(106,172,204,0.15)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                     }}>
-                        <FaRocket size={17} color={CYAN} />
-                     </div>
-                     <div>
-                        <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>
-                           {t("pricing.perspectiveLabel")}
-                        </p>
-                        <h3 style={{ fontSize: 16, fontWeight: 700, color: TEXT_PRIMARY, margin: 0, display: "flex", alignItems: "center", gap: 8 }}>
-                           {t("pricing.perspectiveTitle")} <ProBadge />
-                        </h3>
-                     </div>
-                  </div>
-                  <p style={{ fontSize: 13.5, lineHeight: 1.8, color: TEXT_SECONDARY, margin: 0 }}>
-                     {t("pricing.perspectiveDescriptionPart1")}<ProBadge />{t("pricing.perspectiveDescriptionPart2")}
-                  </p>
-               </motion.div>
-            </motion.div>
          </motion.div>
       </PageSection>
    );
