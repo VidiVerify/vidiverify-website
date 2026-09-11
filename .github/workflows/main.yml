@@ -38,7 +38,7 @@ jobs:
            run: pnpm install --frozen-lockfile
 
          - name: Cache Puppeteer Chrome
-           uses: actions/cache@v4
+           uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
            with:
               path: ~/.cache/puppeteer
               key: puppeteer-chrome-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
@@ -57,11 +57,27 @@ jobs:
          - name: Build with Vite
            run: pnpm build
 
-         - name: Security audit
+         # Zwei Stufen, und das ist der Punkt: `critical` hält den Bau an,
+         # alles darunter wird nur berichtet. Vorher lief der Schritt mit
+         # `continue-on-error` UND `|| echo` - doppelt entschärft, also eine
+         # Prüfung, die nie fehlschlagen konnte und deshalb keine war
+         # (Sicherheitsprüfung 11.09.2026, Befund 4). Das Ergebnis steht
+         # jetzt ausserdem in der Zusammenfassung des Laufs, statt nur im
+         # Protokoll, das niemand öffnet.
+         - name: Security audit (critical blocks the build)
            run: |
-              echo "Running security audit..."
-              pnpm audit --audit-level=high || echo "Security vulnerabilities found, but continuing build"
-           continue-on-error: true
+              set -o pipefail
+              if ! pnpm audit --audit-level=critical; then
+                 echo "### Sicherheitsprüfung: KRITISCHE Lücke gefunden" >> "$GITHUB_STEP_SUMMARY"
+                 pnpm audit --audit-level=critical >> "$GITHUB_STEP_SUMMARY" || true
+                 exit 1
+              fi
+              if ! pnpm audit --audit-level=high > audit_high.txt 2>&1; then
+                 echo "### Sicherheitsprüfung: Lücken unterhalb von kritisch" >> "$GITHUB_STEP_SUMMARY"
+                 cat audit_high.txt >> "$GITHUB_STEP_SUMMARY"
+              else
+                 echo "### Sicherheitsprüfung: ohne Befund" >> "$GITHUB_STEP_SUMMARY"
+              fi
 
          - name: Setup Pages
            uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6

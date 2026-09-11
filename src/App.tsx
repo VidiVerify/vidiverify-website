@@ -20,6 +20,7 @@ import AgbModal from "@components/ui/AgbModal";
 import WiderrufModal from "@components/ui/WiderrufModal";
 import LizenzAnfrageModal from "@components/ui/LizenzAnfrageModal";
 import ProKaufModal from "@components/ui/ProKaufModal";
+import { kennungAufraeumen } from "@utils/adresse";
 
 // Lazy Load "Below the fold" sections for massive performance gains
 const About = lazy(() => import("@pages/about/About"));
@@ -67,6 +68,21 @@ const App = () => {
    // `/pro?vvid=…&ver=…`. Die VV-ID MUSS dabei ankommen - ohne sie kann ein
    // Kauf keiner Installation zugeordnet werden.
    const [proOpen, setProOpen] = useState(() => window.location.hash === "#pro");
+
+   /* Gerätekennung und Version aus der Adresse nehmen, sobald sie gelesen sind.
+    *
+    * Sie müssen mitkommen - ohne sie lässt sich ein Kauf keiner Installation
+    * zuordnen -, aber sie sollen nicht stehen bleiben: In der Adresse landen
+    * sie im Browserverlauf, auf jedem Bildschirmfoto und in jedem
+    * weitergereichten Link. Wer eine VV-ID kennt, kann bei der Abholstelle das
+    * Token dazu anfordern, in dem die Emailadresse des Kunden steht
+    * (Sicherheitsprüfung 11.09.2026, Befund 3).
+    *
+    * Beide Fenster räumten die Adresse bereits auf - aber erst beim
+    * SCHLIESSEN, also nach Formular und Bezahlvorgang. Hier geschieht es vor
+    * dem ersten Blick. Die Werte selbst gehen nicht verloren: `kennungLesen()`
+    * merkt sie sich für die Sitzung. */
+   useEffect(() => { kennungAufraeumen(); }, []);
 
    useEffect(() => {
       globalThis.history.scrollRestoration = "manual";

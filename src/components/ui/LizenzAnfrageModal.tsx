@@ -43,6 +43,7 @@ import { preisText, usePreise } from "@utils/usePreise";
 import { turnstileSchluessel } from "@utils/turnstile";
 import { apiBasis } from "@utils/apiBasis";
 import { useFensterStapel } from "@utils/useFensterStapel";
+import { kennungLesen } from "@utils/adresse";
 import { emailVorschlag } from "@utils/emailVorschlag";
 import { laenderNamen, landVorschlag } from "@utils/laender";
 import agbData from "../../../data/agb.json";
@@ -239,10 +240,12 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const sitekey = turnstileSchluessel();
    const parameter = new URLSearchParams(window.location.search);
    const nurLokal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-   const appVersion = (parameter.get("ver") || "").slice(0, 32);
+   // Kennung und Version kommen aus `@utils/adresse` und nicht mehr direkt aus
+   // der Adresse: Sie wird gleich nach dem Laden aufgeräumt, und ein Lesen
+   // beim nächsten Rendern liefe sonst leer (Sicherheitsprüfung 11.09.2026).
+   const appVersion = kennungLesen().version.slice(0, 32);
 
-   const [vvid, setVvid] = useState(
-      entwurf.vvid ?? (parameter.get("vvid") || "").trim().toUpperCase());
+   const [vvid, setVvid] = useState(entwurf.vvid ?? kennungLesen().vvid);
    /* Beim Upgrade steht nur LIFETIME zur Wahl - die Anwendung hängt
     * `nur=lifetime` an, wenn PRO bereits läuft. FREE und PRO wären dort
     * Angebote, die dem Kunden nichts bringen. */
@@ -406,7 +409,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
             setAnrede("");
             setKundentyp("privat");
             setWunsch("pro");
-            setVvid((parameter.get("vvid") || "").trim().toUpperCase());
+            setVvid(kennungLesen().vvid);
             setRabattcode("");
             setAgbOk(false);
             setWiderrufOk(false);
@@ -418,7 +421,10 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
          }
          setFertig(false);
       }, 260);
-   }, [onClose]);   // eslint-disable-line react-hooks/exhaustive-deps
+   /* Die Liste ist vollständig, seit die Gerätekennung über `kennungLesen()`
+    * kommt: Vorher hing hier ein `URLSearchParams` aus dem Rendern mit drin
+    * und verlangte eine Ausnahme von der Abhängigkeitsprüfung. */
+   }, [onClose]);
 
    useFensterStapel(open, schliessen);
 

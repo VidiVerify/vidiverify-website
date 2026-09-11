@@ -45,6 +45,7 @@ import { TEXTE as ANFRAGE_TEXTE } from "./lizenzAnfrageTexte";
 import { preisText, usePreise } from "@utils/usePreise";
 import { useFensterStapel } from "@utils/useFensterStapel";
 import { turnstileSchluessel } from "@utils/turnstile";
+import { kennungLesen } from "@utils/adresse";
 import { laenderCode, laenderNamen } from "@utils/laender";
 import {
    paddleAufbau, paddleHorchen, paddleLaden,
@@ -85,10 +86,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    const t = TEXTE[sprache];
    const ta = ANFRAGE_TEXTE[sprache];
 
-   const parameter = new URLSearchParams(window.location.search);
-   const [vvid, setVvid] = useState(
-      (parameter.get("vvid") || "").trim().toUpperCase());
-   const appVersion = (parameter.get("ver") || "").trim();
+   // Kennung und Version über `@utils/adresse`: Beide werden gleich nach dem
+   // Laden aus der Adresse entfernt, und `appVersion` wird bei JEDEM Rendern
+   // neu gebildet - direkt aus der Adresse gelesen stünde hier ab dem zweiten
+   // Rendern nichts mehr, und der Kauf liefe ohne Versionsangabe
+   // (Sicherheitsprüfung 11.09.2026, Befund 3).
+   const [vvid, setVvid] = useState(kennungLesen().vvid);
+   const appVersion = kennungLesen().version;
 
    const [wahl, setWahl] = useState<Wahl>("pro");
    const [vvidFehler, setVvidFehler] = useState(false);
