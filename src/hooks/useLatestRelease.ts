@@ -14,7 +14,7 @@ interface UseLatestReleaseResult {
    error: boolean;
 }
 
-// Module-level cache — survives re-renders, cleared on page reload
+// Module-level cache - survives re-renders, cleared on page reload
 let _cache: ReleaseData | null = null;
 let _cacheTime = 0;
 const CACHE_TTL = 5 * 60 * 1000;

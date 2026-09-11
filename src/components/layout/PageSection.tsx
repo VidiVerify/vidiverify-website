@@ -22,7 +22,7 @@ const PageSection = ({
    const isMobile = useMediaQuery("(max-width: 768px)");
    const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
 
-   const desktopPadding = isShortDesktop ? "56px 24px 32px" : "96px 24px";
+   const desktopPadding = isShortDesktop ? "44px 24px 28px" : "72px 24px";
 
    return (
       <motion.section

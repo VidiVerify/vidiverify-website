@@ -12,9 +12,8 @@
       "formats": "Formate",
       "roadmap": "Roadmap",
       "download": "Download",
-      "pricing": "Preise",
-      "contact": "Kontakt",
-      "support": "Unterstützen"
+      "pricing": "Lizenzen",
+      "contact": "Kontakt"
    },
    "hero": {
       "tagline": "Der 1-Klick-Check für deine Videos",
@@ -24,9 +23,10 @@
       "roles": [
          "Der 1-Klick-Check für deine Videos",
          "Integritätsprüfung. Klar und schnell.",
-         "Technische Analyse für Videodateien",
-         "Moderne Desktop-Anwendung für Windows",
-         "Praxisnah entwickelt"
+         "Technische Analyse. Video und Audio.",
+         "Moderne Windowsanwendung. Branchenstandard.",
+         "Fehlerreparatur. Verzeichnisprüfung komplett.",
+         "Video|Audio Labor. Details & Forensik."
       ],
       "stats": {
          "launch": "Launch",
@@ -41,10 +41,10 @@
       "title": "Highlights",
       "subtitle": "Das Wichtigste in Kürze",
       "cards": [
-         "🚀 Schneller 1-Klick-Check — Videodateien prüfen, analysieren und bewerten. In wenigen Sekunden, ohne technisches Vorwissen.",
-         "🖥️ Klare Desktop-Anwendung — Modern, übersichtlich und vollständig für Windows entwickelt. Lokale Verarbeitung, keine Cloud, keine Abhängigkeiten.",
-         "🧩 Technische Transparenz — Strukturierte Ergebnisdarstellung statt unlesbarer Rohdaten. Container, Video, Audio und mehr auf einen Blick.",
-         "📦 Ausbaufähige Plattform — Hochwertigste Plug-ins, Exportfunktionen und eine zukunftsfähige Architektur. Entwickelt für realen Einsatz."
+         "🚀 Mehrstufig prüfen. Sicher beurteilen. | Vom DeepCheck bis zur Vollprüfung: mehrere Prüftiefen, die Auffälligkeiten finden und zu einem klaren Urteil führen.",
+         "🔬 Technik sichtbar bis ins Detail. | Media Analyse, Diagnose, Quick-Check sowie Video- und Audiofenster: strukturiert statt unlesbarer Rohdaten.",
+         "🧪 MediaLab statt schätzen. | Codecs, Bitraten, Dateigrössen, Kompatibilität: berechnet und vergleichbar in drei Laboren.",
+         "📦 Für Dateien. Für ganze Bestände. | Media Stapel prüft komplette Ordner, Media Repair rettet beschädigte Container. Leistungsfähig, lokal, ohne Cloud."
       ]
    },
    "testerPromo": {
@@ -52,7 +52,7 @@
       "badgeSoon": "startet bald",
       "badgeLive": "jetzt verfügbar",
       "headline": "Werde VidiVerify-Tester",
-      "body": "Sichere dir PRO gratis für die gesamte Hauptversion 1.x — plus die Verlosung eines 100 € Amazon-Gutscheins. Anmeldung direkt in der App.",
+      "body": "Sichere dir PRO gratis für die gesamte Hauptversion 1.x - plus die Verlosung eines 100 € Amazon-Gutscheins. Anmeldung direkt in der App.",
       "cta": "VidiVerify herunterladen",
       "conditions": "Teilnahme ab 18 · Anmeldung bis 31.12.2026 · Rechtsweg ausgeschlossen",
       "close": "Schliessen"
@@ -65,66 +65,80 @@
             "id": 1,
             "title": "Vorprüfung",
             "list": [
-               "Drag & Drop Unterstützung",
-               "Schnelle Vorprüfung in wenigen Sekunden",
-               "Magic-Bytes-Validierung der Datei-Endung",
-               "Magika-Tiefenprüfung (ML-basiert, optional)",
-               "Ressourcenschonend"
+               "Datei hineinziehen, Urteil in Sekunden",
+               "Magic Bytes gegen die Dateiendung geprüft",
+               "Magika-Tiefenprüfung, ML-gestützt (optional)",
+               "Quick-Check per Rechtsklick im Explorer"
             ]
          },
          {
             "id": 2,
             "title": "Integritätsprüfung",
             "list": [
-               "Plug-in-basierte Frame-Analyse mit FFmpeg",
-               "Diagnosemodus: Streamcopy, ffprobe und Decode-Layer",
-               "Auto-Eskalation bei Auffälligkeiten",
-               "Ursachen-Attribution für DVD-, DTS- und Container-Anomalien",
-               "Detaillierte Fehlerprotokolle"
+               "Frame für Frame mit FFmpeg",
+               "Diagnose in drei Stufen: Streamcopy, ffprobe, Decode",
+               "Eskaliert selbst, nennt Ursachen bei DVD, DTS, Container",
+               "Jeder Fehler im Protokoll nachlesbar"
             ]
          },
          {
             "id": 3,
             "title": "Media Analyse",
             "list": [
-               "Container- und Codec-Erkennung mit MediaInfo",
-               "Bitrate, Framerate und Auflösung",
-               "Audio-Tracks inkl. Atmos- und DTS:X-Erkennung",
-               "Bittiefe, Channel-Layout und Sprach-Flags",
-               "Nachvollziehbare Bewertungsdetails"
+               "Container und Codecs über MediaInfo",
+               "Bitrate, Framerate, Auflösung, Bittiefe",
+               "Tonspuren mit Atmos, DTS:X, Kanälen und Sprache",
+               "Jede Bewertung mit Begründung"
             ]
          },
          {
             "id": 4,
-            "title": "Formatprüfung",
+            "title": "Video-Detailfenster",
             "list": [
-               "Unterstützung für 30+ Container-Formate",
-               "Prüfung auf spezifische Codec-Anforderungen",
-               "AVC, HEVC, MPEG-4 Video",
-               "AAC, AC3, EAC3, DTS Audio",
-               "Erweiterbar durch Plug-ins"
+               "Bildgenaue Vorschau mit voller Steuerung",
+               "Frametypen I/P/B, GOP-Länge, Bitratenverlauf (CBR/VBR)",
+               "Pixelformat, Farbraum, Transfer, Primaries, HDR-Mastering",
+               "Dropouts und Blockartefakte im Bild"
             ]
          },
          {
             "id": 5,
-            "title": "Detail Video/Codec Labs",
+            "title": "Audio-Detailfenster",
             "list": [
-               "Drei Analyse-Labs im Mediatools-Menü",
-               "Codec-Berater: Empfehlung nach Ziel, Gerät, 4K",
-               "Bitrate ÄquivalenzLab: Bitraten aller Codecs + CRF",
-               "Video SizeLab: Dateigrösse je Codec schätzen",
-               "Upscaling: klassisch (UPS) vs. KI (VSR)"
+               "Echte Wellenform der Tonspur",
+               "Pegelverlauf, Dynamikumfang, sichtbares Clipping",
+               "Dropouts und Stellen ohne Signal",
+               "Frequenzspektrum mit Cutoff in kHz: Indiz für Transcoding"
             ]
          },
          {
             "id": 6,
-            "title": "Ergebnis-Dokumentation",
+            "title": "Media Lab",
             "list": [
-               "Proprietäres MAP – Media-Analyse-Protokoll",
-               "Neue Sektion: Diagnose-Tiefenanalyse",
-               "Magika-Sub-Block bei aktivem Plug-in",
-               "Vollständig detailliert, revisionssicher",
-               "Mehrsprachig: Deutsch · English · 中文"
+               "CodecLab: Empfehlung nach Ziel und Gerät",
+               "Bitrate ÄquivalenzLab: Bitraten fair umgerechnet",
+               "Video SizeLab: Dateigrösse je Auflösung, UPS und VSR",
+               "Regelwerk-Fenster: jede Regel nachlesbar"
+            ]
+         },
+         {
+            "id": 7,
+            "title": "Kompatibilität",
+            "list": [
+               "Sechs Zielprofile vom Web bis zum Archiv",
+               "Über 30 Containerformate",
+               "AVC, HEVC, MPEG-4 · AAC, AC3, EAC3, DTS",
+               "HDR und SDR getrennt bewertet, erweiterbar über Plug-ins"
+            ]
+         },
+         {
+            "id": 8,
+            "title": "Stapel, Reparatur, Nachweis",
+            "list": [
+               "Media Stapel: ganze Ordner am Stück (PRO)",
+               "Media Repair: Container retten, Tonspur gegengeprüft (PRO)",
+               "MAP, StapelMAP und RepairMAP als PDF-Nachweis",
+               "Regelstand und Werkzeugversion in jedem Bericht"
             ]
          }
       ]
@@ -144,25 +158,31 @@
          "ki-forensik": {
             "label": "KI-Forensik",
             "title": "Reiter",
-            "description": "Indizienbewertung technischer KI-Hinweise auf Videodateien — strikt getrennt in KI-Hinweisgrad und Vertrauensgrad. Lokal auf dem Rechner, ohne Cloud-Upload. Provenienz (C2PA Content Credentials), Metadaten- und Strukturplausibilität als wertende Ebenen.",
-            "tags": ["C2PA", "Provenienz", "Indizien", "Lokal", "Vertrauensgrad"]
+            "description": "Indizienbewertung technischer KI-Hinweise auf Videodateien - strikt getrennt in KI-Hinweisgrad und Vertrauensgrad. Lokal auf dem Rechner, ohne Cloud-Upload. Provenienz (C2PA Content Credentials), Metadaten- und Strukturplausibilität als wertende Ebenen.",
+            "tags": [
+               "C2PA",
+               "Provenienz",
+               "Indizien",
+               "Lokal",
+               "Vertrauensgrad"
+            ]
          },
          "quick-check": {
             "label": "Quick-Check",
             "title": "Quick-Check im Windows-Explorer",
-            "description": "Rechtsklick auf eine Videodatei im Windows-Explorer — eine schlanke Worker-Komponente prüft in Sekunden Containerstruktur, Mediadaten und Integrität, ohne die Hauptanwendung zu starten. Eigenes Hinweisfenster mit Status, Befund und Mediadaten — und auf Wunsch nahtloser Übergang in die Vollanalyse.",
+            "description": "Rechtsklick auf eine Videodatei im Windows-Explorer - eine schlanke Worker-Komponente prüft in Sekunden Containerstruktur, Mediadaten und Integrität, ohne die Hauptanwendung zu starten. Eigenes Hinweisfenster mit Status, Befund und Mediadaten - und auf Wunsch nahtloser Übergang in die Vollanalyse.",
             "tags": ["Kontextmenü", "Worker-EXE", "Sekunden"]
          },
          "media-lab": {
             "label": "Media Lab",
             "title": "Reiter",
-            "description": "Deine ersten Video-Laboratorien gehen an Bord — anfassen, ausprobieren, verstehen statt nur ablesen. Drei interaktive Werkzeuge machen Codecs, Bitraten und Dateigrössen begreifbar: CodecLab empfiehlt live den passenden Codec für Ziel und Gerät, das Bitrate ÄquivalenzLab rechnet Bitraten fair zwischen den Codecs um, und das Video SizeLab schätzt die Dateigrösse bei jeder Auflösung — inklusive Up- und Downscaling. Ein Reiter, drei Labore, echter Durchblick.",
+            "description": "Deine ersten Video-Laboratorien gehen an Bord - anfassen, ausprobieren, verstehen statt nur ablesen. Drei interaktive Werkzeuge machen Codecs, Bitraten und Dateigrössen begreifbar: CodecLab empfiehlt live den passenden Codec für Ziel und Gerät, das Bitrate ÄquivalenzLab rechnet Bitraten fair zwischen den Codecs um, und das Video SizeLab schätzt die Dateigrösse bei jeder Auflösung - inklusive Up- und Downscaling. Ein Reiter, drei Labore, echter Durchblick.",
             "tags": ["CodecLab", "Bitrate ÄquivalenzLab", "Video SizeLab"]
          },
          "media-test": {
             "label": "Media Test",
             "title": "Video- & Audio-Detailfenster",
-            "description": "Sieh dir an, was wirklich in der Datei steckt — direkt in VidiVerify, aufrufbar aus dem Tab Media Analyse. Zwei üppige Detailfenster für Video und Audio mit noch mehr Detailtiefe: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
+            "description": "Sieh dir an, was wirklich in der Datei steckt - direkt in VidiVerify, aufrufbar aus dem Tab Media Analyse. Zwei üppige Detailfenster für Video und Audio mit noch mehr Detailtiefe: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
             "tags": ["Bildgenaue Vorschau", "Wiedergabe", "Wellenform"]
          },
          "deepcheck": {
@@ -192,19 +212,19 @@
          "diagnosemodus": {
             "label": "Diagnosemodus",
             "title": "Diagnosemodus",
-            "description": "Vertiefte FFprobe-Analyse mit Paket- und Frame-Informationen sowie einem Streamcopy-Test. Ideal für Problemdateien mit auffälligen Zeitstempeln oder Paketfolgen. Ursprünglich als PRO geplant — direkt in der Basisversion freigegeben.",
+            "description": "Vertiefte FFprobe-Analyse mit Paket- und Frame-Informationen sowie einem Streamcopy-Test. Ideal für Problemdateien mit auffälligen Zeitstempeln oder Paketfolgen. Ursprünglich als PRO geplant - direkt in der Basisversion freigegeben.",
             "tags": ["FFprobe", "Tiefenanalyse", "Diagnose"]
          },
          "vvprogressiv": {
             "label": "VVProgressiv™",
-            "title": "VVProgressiv™ — verteilte, adaptive Prüfung",
-            "description": "Prüft kurze Sequenzen über die gesamte Laufzeit verteilt statt nur den Dateianfang — und gräbt automatisch dort tiefer, wo es verdächtig wird. Schnelle Gewissheit über die ganze Datei, besonders bei langen AV1-, HEVC- und 4K-Aufnahmen, mit transparenter Abdeckungs-Anzeige.",
+            "title": "VVProgressiv™ - verteilte, adaptive Prüfung",
+            "description": "Prüft kurze Sequenzen über die gesamte Laufzeit verteilt statt nur den Dateianfang - und gräbt automatisch dort tiefer, wo es verdächtig wird. Schnelle Gewissheit über die ganze Datei, besonders bei langen AV1-, HEVC- und 4K-Aufnahmen, mit transparenter Abdeckungs-Anzeige.",
             "tags": ["verteilt", "adaptiv", "AV1/HEVC"]
          },
          "vollanalyse": {
             "label": "Vollanalyse",
             "title": "Lückenlose Voll-Decodierung",
-            "description": "Lückenlose Voll-Decodierung jedes einzelnen Bildes — die Maximalstufe, wenn nicht Stichprobe, sondern Vollständigkeit gefragt ist. Für Archivierung und belastbare Nachweise.",
+            "description": "Lückenlose Voll-Decodierung jedes einzelnen Bildes - die Maximalstufe, wenn nicht Stichprobe, sondern Vollständigkeit gefragt ist. Für Archivierung und belastbare Nachweise.",
             "tags": ["lückenlos", "forensisch", "Archiv"]
          },
          "media-repair": {
@@ -216,7 +236,7 @@
          "kompatibilitaet": {
             "label": "Kompatibilität",
             "title": "Kompatibilitätsbewertung",
-            "description": "Wird deine Datei überall abgespielt? VidiVerify bewertet die Wiedergabe-Wahrscheinlichkeit gegen sechs Zielprofile — Universal, Streaming, Smart-TV, Mobil, Archiv und Broadcast — und macht das Urteil mit einer klaren Ampel sichtbar. Kritische Fallstricke wie problematische Codec-Profile oder Farbräume werden benannt, bevor sie beim Zuschauer zum schwarzen Bild werden.",
+            "description": "Wird deine Datei überall abgespielt? VidiVerify bewertet die Wiedergabe-Wahrscheinlichkeit gegen sechs Zielprofile - Universal, Streaming, Smart-TV, Mobil, Archiv und Broadcast - und macht das Urteil mit einer klaren Ampel sichtbar. Kritische Fallstricke wie problematische Codec-Profile oder Farbräume werden benannt, bevor sie beim Zuschauer zum schwarzen Bild werden.",
             "tags": ["6 Zielprofile", "Ampel-Urteil", "Fallstrick-Radar"]
          },
          "statistik": {
@@ -233,7 +253,7 @@
          },
          "ytup": {
             "label": "YTUP™",
-            "title": "YTUP™ — YouTube-Upload-Prognose",
+            "title": "YTUP™ - YouTube-Upload-Prognose",
             "description": "Proprietäres Analysemodul zur technischen und qualitativen Bewertung vor einem YouTube-Upload inklusive Qualitätsprognose nach der Neukodierung und Optimierungsempfehlungen.",
             "tags": ["YouTube", "Upload", "Prognose"]
          },
@@ -246,8 +266,8 @@
          "sprachen": {
             "label": "Sprachen",
             "title": "Weitere Sprachen",
-            "description": "Erweiterung der mehrsprachigen Benutzeroberfläche um Hindi, Russisch, Portugiesisch und weitere Sprachen.",
-            "tags": ["Hindi", "Russisch", "Portugiesisch"]
+            "description": "Erweiterung der mehrsprachigen Benutzeroberfläche um Hindi, Portugiesisch, Japanisch und weitere Sprachen.",
+            "tags": ["Hindi", "Portugiesisch", "Japanisch"]
          },
          "lizenz": {
             "label": "Lizenzierung",
@@ -281,7 +301,7 @@
       "licenseText1": "Neben weiteren Downloadportalen ist diese Seite die offizielle Quelle für VidiVerify. Die private Nutzung ist kostenfrei. Für nicht ausschliesslich private Nutzung ist eine offizielle Lizenzierung vorgesehen.",
       "licenseSmartHintPre": "Jeder Build ist mit einem Sectigo-Zertifikat signiert und über den SHA-256-Prüfwert verifizierbar. Beim ersten Download kann Windows ",
       "licenseSmartHintLink": "SmartScreen",
-      "licenseSmartHintPost": " eine kurze Reputationsabfrage zeigen — keine Gefährdungsmeldung.",
+      "licenseSmartHintPost": " eine kurze Reputationsabfrage zeigen - keine Gefährdungsmeldung.",
       "licenseSmartHintAria": "Hinweis zu Windows SmartScreen öffnen",
       "linkPrices": "Preise",
       "linkDonate": "Spenden",
@@ -291,13 +311,13 @@
       "softpediaAria": "VidiVerify bei Softpedia öffnen",
       "smartscreenModalKicker": "Hinweis",
       "smartscreenModalTitle": "Windows SmartScreen beim ersten Download",
-      "smartscreenModalIntro": "Beim ersten Aufruf eines frisch heruntergeladenen Installers prüft Windows zwei Dinge unabhängig voneinander: die digitale Signatur und die Reputation der Datei. Beide Punkte sind bei VidiVerify ordentlich abgedeckt — was du möglicherweise im Schutz-Dialog siehst, ist eine reine Reputations-Aufbauphase.",
+      "smartscreenModalIntro": "Beim ersten Aufruf eines frisch heruntergeladenen Installers prüft Windows zwei Dinge unabhängig voneinander: die digitale Signatur und die Reputation der Datei. Beide Punkte sind bei VidiVerify ordentlich abgedeckt - was du möglicherweise im Schutz-Dialog siehst, ist eine reine Reputations-Aufbauphase.",
       "smartscreenItemSignedLabel": "Signatur",
       "smartscreenSigned": "Das Setup ist mit einem Sectigo-Individual-Validation-Zertifikat digital signiert. Die vollständige Zertifikatskette und der Timestamp sind über Datei-Eigenschaften ▸ Digitale Signaturen einsehbar. Zusätzlich lässt sich die Integrität jeder Setup-Datei über den SHA-256-Prüfwert verifizieren.",
       "smartscreenItemReputationLabel": "Reputation",
-      "smartscreenReputation": "Microsoft baut Vertrauen pro Datei und Zertifikat über die Anzahl der Downloads auf. Bei neuen Builds ist diese Reputation noch nicht akkumuliert — Windows zeigt in dieser Phase einen Schutz-Dialog. Über Weitere Informationen ▸ Trotzdem ausführen startet die Installation regulär.",
+      "smartscreenReputation": "Microsoft baut Vertrauen pro Datei und Zertifikat über die Anzahl der Downloads auf. Bei neuen Builds ist diese Reputation noch nicht akkumuliert - Windows zeigt in dieser Phase einen Schutz-Dialog. Über Weitere Informationen ▸ Trotzdem ausführen startet die Installation regulär.",
       "smartscreenItemStoreLabel": "Alternative ohne Abfrage",
-      "smartscreenModalStoreBody": "Wer die SmartScreen-Abfrage von vornherein vermeiden möchte, installiert VidiVerify direkt aus dem Microsoft Store — dort entfällt die Reputationsprüfung vollständig.",
+      "smartscreenModalStoreBody": "Wer die SmartScreen-Abfrage von vornherein vermeiden möchte, installiert VidiVerify direkt aus dem Microsoft Store - dort entfällt die Reputationsprüfung vollständig.",
       "smartscreenModalStoreCta": "Im Microsoft Store öffnen",
       "smartscreenModalClose": "Hinweisfenster schliessen",
       "manualSection": "Handbuch · User Manual",
@@ -325,7 +345,7 @@
       "supportDivider": "Support",
       "supportHeading": "Support-Paket",
       "supportItems": [
-         "Einfach Email schreiben — für Fragen, Probleme & Fehlermeldungen",
+         "Einfach Email schreiben - für Fragen, Probleme & Fehlermeldungen",
          "Direkte Antwort, kein anonymes Ticketsystem",
          "Support-Paket auf Wunsch in der Software erstellbar",
          "Protokolle als ZIP beifügen für schnellere Lösung"
@@ -335,40 +355,39 @@
       "emailAction": "Schreiben"
    },
    "pricing": {
-      "title": "Preise",
+      "title": "Lizenzen & Preise",
       "subtitle": "Offen, fair und transparent",
       "privateLabel": "Privatanwender",
       "privateTitle": "FREE",
       "privateBadge": "0 €",
-      "privateDescription": "VidiVerify FREE steht für die private Nutzung dauerhaft kostenfrei zur Verfügung. Der Zugang ist bewusst offen gestaltet — ohne Registrierungspflicht, ohne Lizenzgebühr.",
+      "privateDescription": "VidiVerify FREE steht für die private Nutzung dauerhaft kostenfrei zur Verfügung. Der Zugang ist bewusst offen gestaltet - ohne Registrierungspflicht, ohne Lizenzgebühr.",
       "communityBullet": "Halte Kontakt zur Community",
       "privateBullets": [
          "Voller Funktionsumfang für die private Nutzung",
          "Account oder Registrierung freiwillig",
-         "Lokale Verarbeitung – keine Cloud, keine Abhängigkeiten"
+         "Lokale Verarbeitung - keine Cloud, keine Abhängigkeiten"
       ],
       "priceProLabel": "PRO · eine Hauptversion",
       "priceLifetimeLabel": "LIFETIME · alle Hauptversionen",
       "priceExplainer": "Eine neue PRO Hauptversion etwa jährlich, LIFETIME umfasst alle Hauptversionen der Linie.",
-      "priceNote": "Endkundenpreise inklusive Umsatzsteuer. Einmalzahlung, kein Abonnement.",
+      "priceNote": "Gesamtpreise, keine weiteren Kosten. Kein Ausweis von Umsatzsteuer nach § 19 UStG. Einmalzahlung, kein Abonnement.",
       "orderCta": "Lizenz anfragen",
-      "supportCta": "Unterstützen",
       "commercialLabel": "Gewerblich & professionell",
       "commercialTitle": "PRO",
       "commercialBadge": "Jetzt erhältlich",
       "commercialDescriptionPart1": "Wer VidiVerify nicht ausschliesslich privat verwendet oder die erweiterten Funktionen nutzen möchte, aktiviert ",
-      "commercialDescriptionPart2": ". Eine Lizenz gilt für die jeweils genutzte Hauptversion (etwa alle 1.x-Updates) – wahlweise auch als LIFETIME-Lizenz, zeitlich unbegrenzt über alle künftigen Hauptversionen hinweg.",
+      "commercialDescriptionPart2": ". Eine Lizenz gilt für die jeweils genutzte Hauptversion (etwa alle 1.x-Updates) - wahlweise auch als LIFETIME-Lizenz, zeitlich unbegrenzt über alle künftigen Hauptversionen hinweg.",
       "commercialBullets": [
-         "Offizielle Lizenzierung – einmalige Nutzungsgebühr, keine Abonnements",
+         "Offizielle Lizenzierung - einmalige Nutzungsgebühr, keine Abonnements",
          "Alle Updates innerhalb der jeweiligen Hauptversion enthalten",
          "Zusätzliche und künftige Funktionen dieser Hauptversion eingeschlossen",
-         "Wahlweise als LIFETIME-Lizenz – einmalig, gültig über alle künftigen Hauptversionen hinweg",
+         "Wahlweise als LIFETIME-Lizenz - einmalig, gültig über alle künftigen Hauptversionen hinweg",
          "Ein-Klick Video- und Audiocheck als aufstrebender Branchenstandard"
       ],
       "perspectiveLabel": "Perspektive",
       "perspectiveTitle": "VidiVerify",
-      "perspectiveDescriptionPart1": "Die offizielle Lizenzierung ermöglicht die Nutzung von VidiVerify – als VidiVerify ",
-      "perspectiveDescriptionPart2": " – auch im gewerblichen und professionellen Umfeld. Erweiterte Pro-Features und zusätzliche Funktionen sind dabei automatisch eingeschlossen. Lizenzen sichern Innovation und Stabilität der Software."
+      "perspectiveDescriptionPart1": "Die offizielle Lizenzierung ermöglicht die Nutzung von VidiVerify - als VidiVerify ",
+      "perspectiveDescriptionPart2": " - auch im gewerblichen und professionellen Umfeld. Erweiterte Pro-Features und zusätzliche Funktionen sind dabei automatisch eingeschlossen. Lizenzen sichern Innovation und Stabilität der Software."
    },
    "donate": {
       "title": "Unterstützen",
@@ -380,7 +399,7 @@
       "reasons": [
          {
             "title": "Aktive Weiterentwicklung",
-            "text": "Neue Features, Formate und Plug-ins entstehen durch kontinuierliche Arbeit — deine Unterstützung hält das Projekt in Bewegung."
+            "text": "Neue Features, Formate und Plug-ins entstehen durch kontinuierliche Arbeit - deine Unterstützung hält das Projekt in Bewegung."
          },
          {
             "title": "Langzeitpflege",
@@ -388,7 +407,7 @@
          },
          {
             "title": "Unabhängigkeit",
-            "text": "Kein Konzern im Rücken, kein Vendor-Lock-in. VidiVerify bleibt frei, weil Menschen dahinterstehen — nicht Renditeerwartungen."
+            "text": "Kein Konzern im Rücken, kein Vendor-Lock-in. VidiVerify bleibt frei, weil Menschen dahinterstehen - nicht Renditeerwartungen."
          }
       ]
    },
@@ -396,7 +415,9 @@
       "rights": "Alle Rechte vorbehalten",
       "imprint": "Impressum",
       "privacy": "Datenschutzerklärung",
-      "eula": "Lizenzvereinbarung (EULA)"
+      "eula": "Lizenzvereinbarung (EULA)",
+      "terms": "AGB",
+      "withdrawal": "Widerrufsbelehrung"
    },
    "modal": {
       "close": "Schliessen",

@@ -80,7 +80,7 @@ const ITEMS: Item[] = [
    { id: "vqa",            pro: true,                                           icon: <FaEye size={15} /> },
    { id: "sprachen",       pro: false,                                          icon: <FaGlobe size={14} /> },
    { id: "ytup",           pro: true,                                           icon: <FaYoutube size={15} /> },
-   { id: "lizenz",         pro: false,                                          icon: <FaKey size={14} /> },
+   { id: "lizenz",         pro: false, next: true,                              icon: <FaKey size={14} /> },
    { id: "vollanalyse",    pro: true,                                           icon: <FaExpand size={14} /> },
    { id: "nfo-export",     pro: false,                                          icon: <FaFileAlt size={15} /> },
    { id: "deepcheck",      pro: false, delivered: { version: "v1.4.7" },        icon: <FaSearch size={14} /> },
@@ -91,7 +91,7 @@ const scrollTo = (id: string) => {
    document.getElementById(`roadmap-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
 };
 
-// Akzent-Auflösung — Priorität: delivered > next > pro > default
+// Akzent-Auflösung - Priorität: delivered > next > pro > default
 const accentFor = (item: Item): { color: string; alpha: string } => {
    if (item.delivered) return { color: GREEN, alpha: "rgba(34,197,94," };
    if (item.next) return { color: NEXT_COLOR, alpha: "rgba(167,139,250," };

@@ -1,13 +1,13 @@
 {
    "title": "Endbenutzerlizenzvereinbarung (EULA)",
    "subtitle": "für die Nutzung von VidiVerify",
-   "date": "Stand: 18.04.2026",
+   "date": "Stand: 10.09.2026",
    "sections": [
       {
          "id": 1,
-         "title": "Vertragsgegenstand",
+         "title": "Vertragsgegenstand und Vertragspartner",
          "paragraphs": [
-            "Diese Endbenutzerlizenzvereinbarung regelt die Nutzung der Software VidiVerify zwischen dem Nutzer und dem VidiVerify-Team, Gera.",
+            "Diese Endbenutzerlizenzvereinbarung regelt die Nutzung der Software VidiVerify zwischen dem Nutzer und Thomas Smektalla, Liebestrasse 18a, 07546 Gera, Deutschland, auftretend unter der Bezeichnung „VidiVerify-Team“, im Folgenden „Anbieter“.",
             "Mit dem Download, der Installation oder der Nutzung von VidiVerify erkennt der Nutzer diese Bestimmungen an."
          ]
       },
@@ -15,99 +15,118 @@
          "id": 2,
          "title": "Zweck der Software",
          "paragraphs": [
-            "VidiVerify ist ein Softwarewerkzeug zur technischen Analyse und Prüfung von Videodateien.",
-            "Die Software dient dazu, technische Eigenschaften, Integrität, Struktur und weitere auswertbare Merkmale von Videodateien zu analysieren und in strukturierter Form darzustellen.",
-            "Alle Ausgaben, Hinweise, Bewertungen und Analyseergebnisse dienen ausschliesslich der technischen Orientierung. Sie stellen keine Garantie, Zusicherung oder verbindliche Aussage über einen bestimmten Zustand, eine bestimmte Verwendbarkeit oder eine bestimmte rechtliche Bewertung dar."
+            "VidiVerify ist ein Werkzeug zur technischen Analyse und Prüfung von Video- und Audiodateien. Die Software untersucht technische Eigenschaften, Integrität, Struktur und weitere auswertbare Merkmale und stellt das Ergebnis strukturiert dar.",
+            "Alle Ausgaben, Hinweise, Bewertungen und Analyseergebnisse dienen der technischen Orientierung. Sie sind keine Garantie, keine Zusicherung und keine verbindliche Aussage über einen bestimmten Zustand, eine bestimmte Verwendbarkeit oder eine rechtliche Bewertung.",
+            "Das gilt ausdrücklich auch für Prüfberichte, die als Nachweis verwendet werden: Sie geben wieder, was die Software mit dem jeweils angegebenen Regelstand und der angegebenen Werkzeugversion gemessen hat."
          ]
       },
       {
          "id": 3,
          "title": "Nutzungsmodell",
          "paragraphs": [
-            "VidiVerify wird in einem gestuften Nutzungsmodell bereitgestellt.",
+            "VidiVerify wird in einem gestuften Modell bereitgestellt.",
             "Die Nutzung für ausschliesslich private Zwecke ist kostenfrei zulässig.",
-            "Sobald VidiVerify nicht ausschliesslich privat genutzt wird, insbesondere im gewerblichen, beruflichen, geschäftlichen, institutionellen oder sonstigen professionellen Umfeld, ist eine offizielle Lizenz erforderlich."
+            "Sobald VidiVerify nicht ausschliesslich privat genutzt wird, insbesondere im gewerblichen, beruflichen, geschäftlichen, institutionellen oder sonstigen professionellen Umfeld, ist eine Lizenz erforderlich."
          ]
       },
       {
          "id": 4,
-         "title": "Offizielle Lizenz und Pro-Funktionen",
+         "title": "Lizenzvarianten",
          "paragraphs": [
-            "Die offizielle Lizenzierung erfolgt als einmalige Nutzungsgebühr für die jeweils freigegebene Releaseserie.",
-            "Sofern nicht abweichend ausgewiesen, umfasst die Lizenz alle Updates sowie die innerhalb dieser Releaseserie freigegebenen zusätzlichen Funktionen und Erweiterungen.",
-            "Mit der offiziellen Lizenzierung wird die jeweilige Produktversion für die lizenzierte Nutzung freigeschaltet. Erweiterte Pro-Features und zusätzliche Funktionen können dabei automatisch eingeschlossen sein, soweit sie für die jeweilige Releaseserie vorgesehen sind.",
-            "Ein Anspruch auf bestimmte künftige Funktionen, Module, Erweiterungen oder Freischaltungen besteht nur, wenn diese ausdrücklich für die jeweilige Lizenz oder Releaseserie zugesagt wurden."
+            "Die Lizenzierung erfolgt als einmalige Nutzungsgebühr, nicht als Abonnement.",
+            "PRO gilt für eine Hauptversion, etwa alle 1.x-Ausgaben, und schliesst alle Aktualisierungen sowie die innerhalb dieser Hauptversion freigegebenen zusätzlichen Funktionen ein. Eine Lizenz deckt dabei ihre Programmgeneration und alle älteren ab; die neuere Generation öffnet sie nicht.",
+            "LIFETIME gilt über alle Hauptversionen der Produktlinie hinweg.",
+            "Ein Anspruch auf bestimmte künftige Funktionen, Module oder Freischaltungen besteht nur, wenn diese für die jeweilige Lizenz oder Hauptversion ausdrücklich zugesagt wurden."
          ]
       },
       {
          "id": 5,
-         "title": "Nutzungsrechte",
+         "title": "Aktivierung, Lizenzschlüssel und Gerätebindung",
          "paragraphs": [
-            "Der Nutzer erhält ein einfaches, nicht ausschliessliches, nicht übertragbares und nicht unterlizenzierbares Recht zur Nutzung der Software im Rahmen dieser Vereinbarung.",
-            "Die kostenfreie Nutzung ist auf ausschliesslich private Zwecke beschränkt.",
-            "Die Nutzung ausserhalb des ausschliesslich privaten Bereichs ist nur mit wirksamer offizieller Lizenz zulässig.",
-            "Eine Weitergabe, Vermietung, Verleihung, Bearbeitung, Dekompilierung oder sonstige Veränderung der Software ist nicht gestattet, soweit nicht zwingende gesetzliche Vorschriften etwas anderes erlauben."
+            "Eine Lizenz wird als signierter Lizenzschlüssel ausgestellt und ist an die Gerätekennung (VV-ID) des Rechners gebunden, für den sie angefordert wurde. Der Lizenzschlüssel kann über die Anwendung aus der Ausgabestelle des Anbieters abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht.",
+            "Die Anwendung bestätigt eine vorhandene Lizenz höchstens einmal täglich beim Start im Hintergrund. Ohne Internetverbindung geschieht nichts; ein Verbindungsfehler nimmt niemandem seine Lizenz. Lässt sich über sieben Tage hinweg keine Verbindung herstellen, weist die Anwendung darauf hin und läuft bis dahin in der kostenfreien Fassung weiter; die Lizenz lebt wieder auf, sobald eine Verbindung besteht.",
+            "Der Nutzer darf den Lizenzschlüssel nicht an Dritte weitergeben, öffentlich zugänglich machen oder umgehen."
          ]
       },
       {
          "id": 6,
-         "title": "Externe Komponenten und Drittsoftware",
+         "title": "Rücknahme einer Lizenz",
          "paragraphs": [
-            "VidiVerify kann Funktionen enthalten, die den Download externer Komponenten, Plug-ins oder technischer Zusatzmodule ermöglichen.",
-            "Solche Komponenten können aus offiziellen Releasequellen bezogen, geprüft und in die Software eingebunden werden.",
-            "Für Verfügbarkeit, Funktion, Eigenschaften oder dauerhafte Bereitstellung externer Komponenten und Drittsoftware wird keine Gewähr übernommen.",
-            "Für Drittsoftware, Plug-ins und externe Komponenten gelten ausschliesslich deren eigene Lizenzbedingungen und rechtlichen Vorgaben."
+            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, oder wenn der Lizenzschlüssel entgegen dem vorstehenden Abschnitt verbreitet oder umgangen wurde.",
+            "Eine Rücknahme wirkt mit der nächsten Bestätigung. Sie wird aufgehoben, sobald der Grund entfallen ist. Für alle anderen Nutzer ändert sich dadurch nichts."
          ]
       },
       {
          "id": 7,
-         "title": "Logging, Datenverarbeitung und Support",
+         "title": "Nutzungsrechte",
          "paragraphs": [
-            "VidiVerify verarbeitet technische Daten, soweit dies für die Durchführung der vorgesehenen Funktionen erforderlich ist.",
-            "Diese Daten werden grundsätzlich lokal gespeichert. Eine automatische Übermittlung an das VidiVerify-Team erfolgt nicht.",
-            "Eine freiwillige Übermittlung durch den Nutzer, insbesondere im Rahmen von Supportanfragen, ist möglich.",
-            "Soweit VidiVerify Funktionen zur Erstellung von Support-Paketen oder technischen Protokolldateien bereitstellt, dienen diese ausschliesslich der Fehleranalyse und technischen Unterstützung.",
-            "Der Nutzer ist selbst dafür verantwortlich, vor einer freiwilligen Übermittlung zu prüfen, ob solche Dateien personenbezogene oder vertrauliche Inhalte enthalten, und diese gegebenenfalls zu anonymisieren."
+            "Der Nutzer erhält ein einfaches, nicht ausschliessliches, nicht übertragbares und nicht unterlizenzierbares Recht zur Nutzung der Software im Rahmen dieser Vereinbarung.",
+            "Die kostenfreie Nutzung ist auf ausschliesslich private Zwecke beschränkt. Die Nutzung ausserhalb des ausschliesslich privaten Bereichs ist nur mit wirksamer Lizenz zulässig.",
+            "Eine Weitergabe, Vermietung, Verleihung, Bearbeitung, Dekompilierung oder sonstige Veränderung der Software ist nicht gestattet, soweit nicht zwingende gesetzliche Vorschriften etwas anderes erlauben."
          ]
       },
       {
          "id": 8,
-         "title": "Haftung und Gewährleistung",
+         "title": "Prüfwerkzeuge und Drittsoftware",
          "paragraphs": [
-            "Die Nutzung der Software erfolgt auf eigenes Risiko.",
-            "Die Software wird im gesetzlich zulässigen Umfang ohne Gewähr bereitgestellt. Es wird keine Zusicherung hinsichtlich Verfügbarkeit, Fehlerfreiheit, ununterbrochener Nutzbarkeit oder bestimmter Ergebnisse übernommen.",
-            "Das VidiVerify-Team haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit sowie in den Fällen zwingender gesetzlicher Haftung.",
-            "Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Wesentliche Vertragspflichten sind solche Pflichten, deren Erfüllung die ordnungsgemässe Durchführung dieser Vereinbarung überhaupt erst ermöglicht und auf deren Einhaltung der Nutzer regelmässig vertrauen darf.",
-            "Im Übrigen ist die Haftung für leicht fahrlässig verursachte Schäden ausgeschlossen.",
-            "Soweit gesetzlich zulässig, wird insbesondere keine Haftung für Datenverlust, ausgebliebene wirtschaftliche Vorteile, mittelbare Schäden, Folgeschäden oder Entscheidungen übernommen, die auf Analyseergebnissen, technischen Hinweisen oder Bewertungen der Software beruhen."
+            "VidiVerify wird ohne die eigentlichen Prüfwerkzeuge ausgeliefert. Sie werden beim ersten Start bezogen und über die Startprüfung aktuell gehalten. Die Software prüft dabei nur mit dem Werkzeugstand, gegen den die jeweilige Fassung entwickelt und erprobt wurde; liegt der vorhandene Stand darunter, verlangt die Anwendung den vollständigen Bezug.",
+            "Für Verfügbarkeit, Funktion und dauerhafte Bereitstellung externer Komponenten wird keine Gewähr übernommen. Für Drittsoftware und Plug-ins gelten ausschliesslich deren eigene Lizenzbedingungen."
          ]
       },
       {
          "id": 9,
-         "title": "Spenden",
+         "title": "Veränderung von Dateien durch Media Repair",
          "paragraphs": [
-            "Freiwillige Spenden sind möglich.",
-            "Spenden erfolgen ohne Gegenleistung und begründen keinen Anspruch auf Lizenzierung, Pro-Funktionsfreischaltung, Updates, bevorzugten Support oder sonstige Leistungen."
+            "Die Reparaturfunktion schreibt neue Dateien. Sie verändert die Ausgangsdatei nicht, legt das Ergebnis aber als eigene Datei ab und kann Ausgabedateien wieder entfernen, wenn die Prüfung sie als wertlos oder schlechter als das Original beurteilt.",
+            "Der Nutzer ist für eine Sicherung seiner Daten selbst verantwortlich. Ein Reparaturversuch ersetzt keine Sicherungskopie. Ergebnisse einer Reparatur sind vom Nutzer zu prüfen, bevor er sie weiterverwendet oder das Original verwirft."
          ]
       },
       {
          "id": 10,
-         "title": "Änderungen",
+         "title": "Datenverarbeitung",
          "paragraphs": [
-            "Das VidiVerify-Team kann die Software, Funktionsumfänge, Plug-in-Anbindungen, Veröffentlichungswege, Lizenzmodelle und diese Vereinbarung mit Wirkung für die Zukunft weiterentwickeln oder anpassen.",
-            "Für bereits erteilte Lizenzen gelten die zum Zeitpunkt der Lizenzierung ausdrücklich ausgewiesenen Bedingungen der jeweiligen Releaseserie, soweit nicht zwingende gesetzliche Vorschriften entgegenstehen."
+            "Die geprüften Dateien verlassen den Rechner nicht. VidiVerify verarbeitet technische Daten lokal, soweit dies für die vorgesehenen Funktionen erforderlich ist. Eine automatische Übermittlung von Inhalten, Nutzungsstatistiken oder Prüfergebnissen an den Anbieter findet nicht statt.",
+            "Verbindungen stellt die Anwendung nur für die Prüfung auf Updates, den Bezug der Prüfwerkzeuge und für Lizenzvorgänge her. Eine Gerätekennung wird dabei nur übermittelt, wenn zuvor ein Bestellweg beschritten wurde. Einzelheiten regelt die Datenschutzerklärung.",
+            "Support-Pakete und Protokolldateien werden nur übermittelt, wenn der Nutzer sie selbst einsendet. Er prüft vorher, ob sie personenbezogene oder vertrauliche Inhalte enthalten."
          ]
       },
       {
          "id": 11,
-         "title": "Anwendbares Recht und Gerichtsstand",
+         "title": "Haftung und Gewährleistung",
          "paragraphs": [
-            "Es gilt deutsches Recht, soweit gesetzlich zulässig.",
-            "Gerichtsstand ist Gera, soweit dies rechtlich wirksam vereinbart werden kann."
+            "Die Nutzung der Software erfolgt auf eigenes Risiko. Die Software wird im gesetzlich zulässigen Umfang ohne Gewähr bereitgestellt. Es wird keine Zusicherung hinsichtlich Verfügbarkeit, Fehlerfreiheit, ununterbrochener Nutzbarkeit oder bestimmter Ergebnisse übernommen.",
+            "Der Anbieter haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit sowie in den Fällen zwingender gesetzlicher Haftung.",
+            "Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemässe Durchführung dieser Vereinbarung erst ermöglicht und auf deren Einhaltung der Nutzer regelmässig vertrauen darf.",
+            "Im Übrigen ist die Haftung für leicht fahrlässig verursachte Schäden ausgeschlossen.",
+            "Soweit gesetzlich zulässig, wird insbesondere keine Haftung übernommen für Datenverlust, ausgebliebene wirtschaftliche Vorteile, mittelbare Schäden, Folgeschäden sowie für Entscheidungen, die auf Analyseergebnissen, Prüfberichten oder Bewertungen der Software beruhen."
          ]
       },
       {
          "id": 12,
+         "title": "Spenden",
+         "paragraphs": [
+            "Freiwillige Spenden sind möglich.",
+            "Spenden erfolgen ohne Gegenleistung und begründen keinen Anspruch auf Lizenzierung, Freischaltung von PRO-Funktionen, Updates, bevorzugten Support oder sonstige Leistungen."
+         ]
+      },
+      {
+         "id": 13,
+         "title": "Änderungen",
+         "paragraphs": [
+            "Der Anbieter kann Software, Funktionsumfang, Plug-in-Anbindungen, Veröffentlichungswege, Lizenzmodelle und diese Vereinbarung mit Wirkung für die Zukunft weiterentwickeln oder anpassen.",
+            "Für bereits erteilte Lizenzen gelten die zum Zeitpunkt der Lizenzierung ausgewiesenen Bedingungen der jeweiligen Hauptversion, soweit nicht zwingende gesetzliche Vorschriften entgegenstehen."
+         ]
+      },
+      {
+         "id": 14,
+         "title": "Anwendbares Recht und Gerichtsstand",
+         "paragraphs": [
+            "Es gilt deutsches Recht. Gegenüber Verbrauchern bleiben die zwingenden Vorschriften des Staates unberührt, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat.",
+            "Gerichtsstand ist Gera, soweit dies rechtlich wirksam vereinbart werden kann."
+         ]
+      },
+      {
+         "id": 15,
          "title": "Salvatorische Klausel",
          "paragraphs": [
             "Sollten einzelne Bestimmungen dieser Vereinbarung ganz oder teilweise unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt."

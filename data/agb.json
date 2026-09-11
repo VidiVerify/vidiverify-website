@@ -1,0 +1,110 @@
+{
+   "title": "Allgemeine Geschäftsbedingungen",
+   "subtitle": "für den Erwerb von VidiVerify-Lizenzen",
+   "date": "Stand: 10.09.2026",
+   "version": "AGB-2026-09-10",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Geltungsbereich und Anbieter",
+         "paragraphs": [
+            "Diese Bedingungen gelten für den Erwerb kostenpflichtiger Lizenzen für die Software VidiVerify.",
+            "Anbieter ist Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland. Email: admin@vidiverify.de (rechtlich und wirtschaftlich), support@vidiverify.de (technisch).",
+            "Anbieter ist Thomas Smektalla als Privatperson; ein eingetragenes Unternehmen besteht nicht."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Gegenstand des Vertrages",
+         "paragraphs": [
+            "VidiVerify ist eine Software zur technischen Analyse, Prüfung und Bearbeitung von Video- und Audiodateien. Sie ist ein technisches Hilfsmittel; es wird nicht zugesichert, dass sämtliche Fehler, Kompatibilitätsprobleme oder Qualitätsbeeinträchtigungen einer Mediendatei erkannt oder behoben werden.",
+            "Erworben wird eine Lizenz, die kostenpflichtige Funktionen der Software freischaltet. Der Erwerb erfolgt als einmalige Zahlung; ein Abonnement oder eine automatische Verlängerung besteht nicht.",
+            "Die Nutzung ohne Lizenz ist für ausschliesslich private Zwecke kostenfrei zulässig. Für jede darüber hinausgehende Nutzung, insbesondere im gewerblichen, beruflichen, geschäftlichen oder institutionellen Umfeld, ist eine Lizenz erforderlich.",
+            "PRO schaltet die kostenpflichtigen Funktionen der erworbenen Hauptversion frei, beispielsweise Version 1.x, einschliesslich aller Aktualisierungen innerhalb dieser Hauptversion. Die Lizenz gilt für ihre Programmgeneration und alle älteren; eine spätere neue Hauptversion, beispielsweise 2.x, ist nicht automatisch umfasst.",
+            "LIFETIME umfasst zusätzlich die künftig veröffentlichten Hauptversionen, solange VidiVerify durch den Anbieter entwickelt oder bereitgestellt wird. Mit der Bezeichnung LIFETIME ist keine Verpflichtung verbunden, Entwicklung, Pflege oder Bereitstellung für einen bestimmten Mindestzeitraum oder dauerhaft fortzuführen.",
+            "Die Lizenz wird für ein Gerät ausgestellt und ist an dessen Gerätekennung (VV-ID) gebunden."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Bestellvorgang und Vertragsschluss",
+         "paragraphs": [
+            "Über das Formular „Lizenz anfragen“ auf vidiverify.de wird eine Anfrage abgegeben. Die Anfrage ist unverbindlich und stellt keine Bestellung dar; ein Vertrag kommt durch sie nicht zustande.",
+            "Der Vertrag kommt in drei Schritten zustande: Der Interessent sendet die Anfrage ab und erkennt dabei diese Bedingungen an. Der Anbieter prüft die Anfrage und übersendet per Email eine Rechnung; diese Rechnung ist das Angebot des Anbieters. Der Vertrag kommt mit der vollständigen Zahlung des in der Rechnung genannten Betrages zustande.",
+            "Die Rechnung wird in der Regel innerhalb von ein bis drei Werktagen nach Eingang der Anfrage übersandt.",
+            "Der Anbieter ist nicht verpflichtet, eine Anfrage anzunehmen. Er kann sie insbesondere ablehnen, wenn eine steuerliche oder rechtliche Abwicklung im Einzelfall nicht möglich ist.",
+            "Vertragssprache ist Deutsch. Korrespondenz und Support sind auch auf Englisch möglich; für den Vertragsinhalt ist die deutsche Fassung massgeblich.",
+            "Der Vertragstext wird vom Anbieter gespeichert. Diese Bedingungen und die Widerrufsbelehrung werden dem Kunden zusammen mit der Rechnung in Textform übersandt."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Preise, Steuern und Zahlung",
+         "paragraphs": [
+            "Es gelten die zum Zeitpunkt der Anfrage angegebenen Preise. Die angegebenen Beträge sind Gesamtpreise; weitere Kosten fallen nicht an.",
+            "Umsatzsteuer wird nach § 19 UStG (Kleinunternehmerregelung) nicht ausgewiesen.",
+            "Die Zahlung erfolgt auf Grundlage der übersandten Rechnung nach den dort genannten Bedingungen."
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Bereitstellung",
+         "paragraphs": [
+            "Der Lizenzschlüssel wird nach Zahlungseingang elektronisch bereitgestellt, in der Regel innerhalb von ein bis drei Werktagen. Er kann zusätzlich jederzeit über die Anwendung selbst abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Für einen dauerhaften Wechsel auf ein anderes Gerät genügt eine Mitteilung an den Anbieter.",
+            "Zur Aktivierung und zur wiederkehrenden Bestätigung der Lizenz werden die beim Erwerb angegebene Emailadresse und die Gerätekennung (VV-ID) verwendet."
+         ]
+      },
+      {
+         "id": 6,
+         "title": "Rücknahme einer Lizenz",
+         "paragraphs": [
+            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, oder wenn der Lizenzschlüssel entgegen den Bestimmungen der Endbenutzerlizenzvereinbarung verbreitet oder umgangen wird. Die Rücknahme wird aufgehoben, sobald ihr Grund entfallen ist. Weitergehende gesetzliche Rechte bleiben unberührt."
+         ]
+      },
+      {
+         "id": 7,
+         "title": "Mängelrechte",
+         "paragraphs": [
+            "Für Verbraucher gelten die gesetzlichen Rechte bei Mängeln digitaler Produkte. Der Anbieter ist insbesondere berechtigt, einen Mangel zunächst durch Aktualisierung, Fehlerbehebung oder Bereitstellung einer korrigierten Version zu beseitigen, soweit die gesetzlichen Voraussetzungen vorliegen."
+         ]
+      },
+      {
+         "id": 8,
+         "title": "Widerrufsrecht für Verbraucher",
+         "paragraphs": [
+            "Verbrauchern steht bei Fernabsatzverträgen ein gesetzliches Widerrufsrecht zu. Die Einzelheiten ergeben sich aus der Widerrufsbelehrung, die Bestandteil dieser Bedingungen ist.",
+            "Bei digitalen Inhalten erlischt dieses Widerrufsrecht vorzeitig, wenn der Verbraucher ausdrücklich zustimmt, dass mit der Bereitstellung vor Ablauf der Widerrufsfrist begonnen wird, und gleichzeitig bestätigt, dass er dadurch mit Beginn der Bereitstellung sein Widerrufsrecht verliert. Beide Erklärungen werden im Anfrageformular gesondert abgefragt."
+         ]
+      },
+      {
+         "id": 9,
+         "title": "Haftung",
+         "paragraphs": [
+            "Der Anbieter haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit, für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, bei Übernahme einer Garantie sowie nach dem Produkthaftungsgesetz.",
+            "Bei leicht fahrlässiger Verletzung einer wesentlichen Vertragspflicht ist die Haftung auf den bei Vertragsschluss vorhersehbaren, vertragstypischen Schaden begrenzt. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemässe Durchführung des Vertrages erst ermöglicht und auf deren Einhaltung der Kunde regelmässig vertrauen darf.",
+            "Im Übrigen ist die Haftung ausgeschlossen. Das gilt insbesondere für mittelbare Schäden, entgangenen Gewinn, ausgebliebene Einsparungen, Betriebsunterbrechung, Ansprüche Dritter sowie für Schäden aus Entscheidungen, die auf Analyseergebnissen, Prüfberichten, Bewertungen oder Reparaturversuchen der Software beruhen.",
+            "Die Haftung für den Verlust von Daten ist auf den Aufwand begrenzt, der bei ordnungsgemässer und regelmässiger Datensicherung durch den Kunden zur Wiederherstellung erforderlich gewesen wäre. Der Kunde ist für die Sicherung seiner Daten selbst verantwortlich, insbesondere vor der Nutzung von Funktionen, die Dateien schreiben oder verändern.",
+            "Die vorstehenden Beschränkungen gelten auch zugunsten der gesetzlichen Vertreter, Mitarbeiter und Erfüllungsgehilfen des Anbieters sowie bei Ansprüchen aus unerlaubter Handlung.",
+            "Gegenüber Unternehmern verjähren Ansprüche gegen den Anbieter in einem Jahr ab dem gesetzlichen Verjährungsbeginn; das gilt nicht für die im ersten Absatz genannten Fälle. Gegenüber Verbrauchern bleibt es bei den gesetzlichen Verjährungsfristen.",
+            "Eine Änderung der Beweislast zum Nachteil des Kunden ist mit den vorstehenden Regelungen nicht verbunden. Zwingende gesetzliche Haftungsvorschriften und die gesetzlichen Rechte bei Mängeln digitaler Produkte bleiben unberührt."
+         ]
+      },
+      {
+         "id": 10,
+         "title": "Verhältnis zur Endbenutzerlizenzvereinbarung",
+         "paragraphs": [
+            "Die Nutzung der Software richtet sich nach der Endbenutzerlizenzvereinbarung (EULA). Sie regelt insbesondere Umfang und Grenzen des Nutzungsrechts, den Bezug der Prüfwerkzeuge und der Drittsoftware, die Reparaturfunktionen sowie die Verarbeitung von Daten in der Anwendung.",
+            "Diese Bedingungen regeln den Erwerb. Bei Widersprüchen gehen für den Erwerb diese Bedingungen vor, für die Nutzung die EULA."
+         ]
+      },
+      {
+         "id": 11,
+         "title": "Schlussbestimmungen",
+         "paragraphs": [
+            "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Bei Verbrauchern gilt diese Rechtswahl nur, soweit hierdurch zwingende Verbraucherschutzvorschriften des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat, nicht eingeschränkt werden.",
+            "Zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle besteht weder Bereitschaft noch Verpflichtung (§ 36 VSBG).",
+            "Sollten einzelne Bestimmungen dieser Bedingungen unwirksam sein oder werden, bleiben die übrigen Bestimmungen davon unberührt."
+         ]
+      }
+   ]
+}

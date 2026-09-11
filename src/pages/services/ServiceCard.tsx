@@ -78,13 +78,13 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
             </div>
 
             {/* Right: Content */}
-            <div style={{ flex: 1, padding: isShortDesktop ? "6px 14px" : "12px 18px" }}>
+            <div style={{ flex: 1, padding: isShortDesktop ? "5px 14px" : "9px 18px" }}>
                <h3
                   style={{
                      fontSize: 14,
                      fontWeight: 700,
                      color: "#eeeef5",
-                     marginBottom: isShortDesktop ? 2 : 6,
+                     marginBottom: isShortDesktop ? 2 : 4,
                      display: "flex",
                      alignItems: "center",
                      gap: 6,
@@ -105,7 +105,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                   style={{
                      display: "flex",
                      flexDirection: "column",
-                     gap: isShortDesktop ? 1 : 3,
+                     gap: isShortDesktop ? 0 : 1,
                   }}
                >
                   {service.list.map((item) => (
@@ -117,7 +117,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                            gap: 8,
                            color: "#a5a5c0",
                            fontSize: isShortDesktop ? 11 : 12,
-                           lineHeight: 1.45,
+                           lineHeight: 1.35,
                         }}
                      >
                         <span
@@ -125,7 +125,7 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
                               width: 4,
                               height: 4,
                               borderRadius: "50%",
-                              marginTop: isShortDesktop ? 5 : 6,
+                              marginTop: isShortDesktop ? 4 : 5,
                               flexShrink: 0,
                               backgroundColor: colors.dot,
                            }}

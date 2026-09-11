@@ -1,15 +1,20 @@
 {
    "title": "Impressum",
-   "date": "Stand: 18.04.2026",
+   "date": "Stand: 10.09.2026",
    "provider": {
       "legal_note": "Angaben gemäss § 5 DDG",
-      "name": "VidiVerify-Team",
-      "address": ["Liebestrasse 18a", "07546 Gera", "Deutschland"],
-      "represented_by": "Thomas Smektalla"
+      "name": "Thomas Smektalla",
+      "address": [
+         "VidiVerify-Team",
+         "Liebestrasse 18a",
+         "07546 Gera",
+         "Deutschland"
+      ],
+      "represented_by": "Thomas Smektalla (Einzelperson, kein eingetragenes Unternehmen)"
    },
    "contact": {
       "email": "support@vidiverify.de",
-      "websites": ["vidiverify.de", "www.vidiverify.de"]
+      "websites": ["vidiverify.de", "vidiverify.com"]
    },
    "privacy_url": "www.vidiverify.de/datenschutz",
    "responsible": "Thomas Smektalla",

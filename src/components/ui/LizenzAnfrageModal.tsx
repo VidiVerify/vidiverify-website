@@ -1,17 +1,17 @@
 /**
- * Die Bestellanfrage — der manuelle Kaufweg, als Overlay über der Website.
+ * Die Bestellanfrage - der manuelle Kaufweg, als Overlay über der Website.
  *
  * Sie ersetzt die vorbereitete Bestell-Email aus dem Lizenzfenster der
  * Anwendung. Der Grund war handfest: Die kodierte `mailto:`-Adresse sprengte
  * auf Russisch und Chinesisch die Grenze, die Windows an das Emailprogramm
  * weiterreicht, und wurde stillschweigend abgeschnitten. Dazu drei Gründe, die
- * schwerer wiegen — ein Emailprogramm ist keine Voraussetzung, die wir stellen
+ * schwerer wiegen - ein Emailprogramm ist keine Voraussetzung, die wir stellen
  * dürfen; Preise und Erklärzeile sind Text AN den Kunden und standen in einer
  * Nachricht VOM Kunden; und wir bekamen Fliesstext statt Daten.
  *
  * **Warum ein Overlay und keine eigene Seite** (Entscheidung 09.09.2026): Die
  * erste Fassung war eine eigene Unterseite mit eigenem Bündel. Sie sah gut
- * aus und war trotzdem falsch — wer eine Software bestellt, klickt zwischen
+ * aus und war trotzdem falsch - wer eine Software bestellt, klickt zwischen
  * Formular und Website hin und her, um noch etwas nachzulesen. Springt dabei
  * das Design, wirkt es wie ein Anbieterwechsel, und das ausgerechnet im
  * Bezahlvorgang. Das Overlay verlässt den Websiteraum nicht: Nav, Hintergrund
@@ -20,7 +20,7 @@
  * Drei Dinge fallen dabei nicht weg: Die Adresse `/lizenz-anfrage` trägt
  * weiter (`public/404.html` leitet auf `/#lizenz-anfrage`, samt Abfrage), der
  * Inhalt entsteht erst beim Öffnen und landet deshalb in keinem Suchindex, und
- * die Eingaben überleben ein Schliessen — siehe `entwurf`.
+ * die Eingaben überleben ein Schliessen - siehe `entwurf`.
  *
  * WAS DIESES FENSTER NICHT TUT: Es stellt keine Lizenz aus und nimmt kein Geld
  * entgegen. Es schickt eine Anfrage an unseren Worker; alles Weitere
@@ -41,8 +41,24 @@ import {
 import { spracheAus, TEXTE } from "./lizenzAnfrageTexte";
 import { preisText, usePreise } from "@utils/usePreise";
 import { turnstileSchluessel } from "@utils/turnstile";
+import { apiBasis } from "@utils/apiBasis";
+import { useFensterStapel } from "@utils/useFensterStapel";
+import { emailVorschlag } from "@utils/emailVorschlag";
+import { laenderNamen, landVorschlag } from "@utils/laender";
+import agbData from "../../../data/agb.json";
+import widerrufData from "../../../data/widerruf.json";
 
 const VVID_RE = /^VV-[0-9A-Z]{5}$/;
+
+/* Emailprüfung: ein @, davor und danach etwas, und in der Domain ein Punkt mit
+ * einer Endung aus mindestens zwei Buchstaben.
+ *
+ * Bewusst strenger als `<input type="email">`: Der Browser lässt `max@muster`
+ * durch, weil Adressen ohne Punkt technisch zulässig sind (`root@localhost`).
+ * Für eine Rechnung, die durchs Internet gehen muss, ist das keine Adresse -
+ * und der Kunde merkt den Tippfehler erst, wenn nichts ankommt
+ * (Anwenderbefund 10.09.2026). */
+const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
 
 type Wunsch = "free" | "pro" | "lifetime";
 
@@ -59,13 +75,13 @@ declare global {
  *
  * Genau darum ging es beim Wechsel zum Overlay: Wer zwischendurch die Preise
  * nachliest, soll nicht fünfzehn Felder erneut ausfüllen. Der Entwurf steht
- * deshalb ausserhalb der Komponente — sie wird beim Schliessen abgebaut, das
+ * deshalb ausserhalb der Komponente - sie wird beim Schliessen abgebaut, das
  * Modul bleibt.
  *
  * BEWUSST NUR IM SPEICHER, nicht in `localStorage`: Hier stehen Anschrift und
  * Steuernummer. Was der Browser über die Sitzung hinaus behält, muss man
- * wieder löschen können, und für den einen Zweck — hin und her klicken, ohne
- * etwas zu verlieren — genügt der Speicher.
+ * wieder löschen können, und für den einen Zweck - hin und her klicken, ohne
+ * etwas zu verlieren - genügt der Speicher.
  */
 const entwurf: {
    felder: Record<string, string>;
@@ -132,6 +148,65 @@ function Feld({ id, titel, kind, pflicht }: {
    );
 }
 
+/* Ein Kästchen mit Beschriftung, in der Links stehen dürfen.
+ *
+ * Der Text ist BEWUSST kein `<label>`, weder verschachtelt noch über
+ * `htmlFor`: Ein Klick auf einen Link innerhalb einer Beschriftung leitet der
+ * Browser auf das zugehörige Kästchen um. Der Link wird dabei nie ausgelöst -
+ * genau das war der Befund, dass sich AGB und Widerrufsbelehrung nicht öffnen
+ * liessen (10.09.2026).
+ *
+ * Stattdessen trägt der Text seine eigene Klickbehandlung: Ein Klick schaltet
+ * das Kästchen um, ein Klick auf einen Link darin nicht. Verbunden sind beide
+ * über `aria-labelledby`, damit ein Vorleseprogramm die Beschriftung weiterhin
+ * findet. `alignItems: flex-start`, weil die Beschriftung zwei Zeilen lang
+ * wird und das Kästchen sonst mittig daneben schwebte. */
+function Kaestchen({ id, checked, onChange, children }: {
+   id: string;
+   checked: boolean;
+   onChange: (v: boolean) => void;
+   children: React.ReactNode;
+}) {
+   return (
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+         <input
+            id={id}
+            type="checkbox"
+            checked={checked}
+            onChange={(e) => onChange(e.target.checked)}
+            aria-labelledby={`${id}-text`}
+            style={{
+               width: 15, height: 15, marginTop: 2, flexShrink: 0,
+               accentColor: CYAN, cursor: "pointer",
+            }}
+         />
+         {/* Die beiden Regeln verlangen eine Tastaturbedienung an dieser
+             Stelle. Die gibt es: Das Kästchen daneben ist fokussierbar und mit
+             der Leertaste schaltbar, und über `aria-labelledby` liest ein
+             Vorleseprogramm diesen Text als seine Beschriftung vor. Der
+             Klickbereich hier ist reine Bequemlichkeit für die Maus; ihn
+             zusätzlich fokussierbar zu machen, hiesse dieselbe Bedienung
+             zweimal im Tab-Lauf. */}
+         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,
+             jsx-a11y/no-static-element-interactions */}
+         <span
+            id={`${id}-text`}
+            onClick={(e) => {
+               // Ein Link führt zu seinem Ziel und schaltet nichts um.
+               if ((e.target as HTMLElement).closest("a")) return;
+               onChange(!checked);
+            }}
+            style={{
+               fontSize: 12, color: TEXT_SECONDARY, lineHeight: 1.6,
+               cursor: "pointer",
+            }}
+         >
+            {children}
+         </span>
+      </div>
+   );
+}
+
 function Block({ titel, children }: { titel: string; children: React.ReactNode }) {
    return (
       <section style={{
@@ -156,13 +231,14 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const sprache = spracheAus(i18n.language);
    const t = TEXTE[sprache];
 
-   // Die Preise kommen vom Worker — er ist die Quelle, und er ist derselbe,
+   // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
    // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
    const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen }
-      = usePreise(open);
+      = usePreise(open, apiBasis());
 
    const sitekey = turnstileSchluessel();
    const parameter = new URLSearchParams(window.location.search);
+   const nurLokal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
    const appVersion = (parameter.get("ver") || "").slice(0, 32);
 
    const [vvid, setVvid] = useState(
@@ -171,13 +247,27 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       entwurf.wunsch ?? (parameter.get("wunsch") === "lifetime" ? "lifetime" : "pro"));
    const [anrede, setAnrede] = useState(entwurf.anrede);
    const [kundentyp, setKundentyp] = useState(entwurf.kundentyp);
-   const [felder, setFelder] = useState<Record<string, string>>(entwurf.felder);
+   /* Der Blick auf die Bestätigungsseite, ohne eine Anfrage abzusenden.
+    *
+    * Nur auf `localhost`: Die Seite zeigt Name und Adresse des Bestellers, und
+    * die stehen sonst erst da, wenn wirklich jemand bestellt hat. Zum Ansehen
+    * genügt `?danke=1&vorname=Max&nachname=Mustermann&email=max@example.de`.
+    * Auf den Wirkdomains greift der Weg nicht - dort ist `fertig` nur nach
+    * einer echten Absendung wahr. */
+   const [felder, setFelder] = useState<Record<string, string>>(() => {
+      if (!nurLokal) return entwurf.felder;
+      const probe: Record<string, string> = { ...entwurf.felder };
+      for (const name of ["vorname", "nachname", "email"]) {
+         const wert = parameter.get(name);
+         if (wert) probe[name] = wert.slice(0, 80);
+      }
+      return probe;
+   });
    const [rabattcode, setRabattcode] = useState(entwurf.felder.rabattcode || "");
 
    const [laeuft, setLaeuft] = useState(false);
    const [fertig, setFertig] = useState(
-      () => parameter.get("danke") === "1"
-         && ["localhost", "127.0.0.1"].includes(window.location.hostname));
+      () => parameter.get("danke") === "1" && nurLokal);
    const [fehler, setFehler] = useState("");
    const [vvidFehler, setVvidFehler] = useState(false);
    const [emailFehler, setEmailFehler] = useState(false);
@@ -188,13 +278,69 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const widgetRef = useRef<string | null>(null);
    const [botToken, setBotToken] = useState("");
 
+   /* Die beiden Erklärungen.
+    *
+    * Sie stehen bewusst NICHT im Entwurf, der ein Schliessen überlebt: Eine
+    * Zustimmung, die beim nächsten Öffnen schon gesetzt ist, hat niemand in
+    * diesem Moment erteilt. Sie wird jedes Mal neu abgegeben.
+    *
+    * Getrennt und nicht als ein Kästchen, weil sie Verschiedenes bedeuten: Das
+    * erste bezieht die Bedingungen ein, das zweite ist die ausdrückliche
+    * Erklärung nach § 356 Abs. 5 BGB, ohne die das Widerrufsrecht nicht
+    * vorzeitig erlischt. In einem Kästchen zusammengefasst wäre keines von
+    * beiden wirksam. */
+   /* Die beiden Vorschläge. Sie werden bei jeder Eingabe neu bestimmt - beide
+    * Rechnungen sind ein Zeichenkettenvergleich gegen eine kurze Liste und
+    * brauchen kein `useMemo`. */
+   /* Wen wir auf der Bestätigungsseite ansprechen: Vor- und Nachname, ohne
+    * Anrede.
+    *
+    * „Vielen Dank, Herr Mustermann" führt in das Sie, und zwei Zeilen später
+    * steht wieder „deine Anfrage". Der volle Name bleibt beim Du, mit dem das
+    * ganze Formular spricht. Fehlt einer der beiden Teile, steht der andere
+    * allein; fehlen beide, bleibt es beim Dank ohne Namen. */
+   const besteller = [
+      (felder.vorname || "").trim(),
+      (felder.nachname || "").trim(),
+   ].filter(Boolean).join(" ");
+
+   const emailTipp = emailVorschlag(felder.email || "");
+   const laender = laenderNamen(sprache);
+   const landTipp = landVorschlag(felder.land || "", sprache);
+
+   const [agbOk, setAgbOk] = useState(false);
+   const [widerrufOk, setWiderrufOk] = useState(false);
+   const [zustimmungFehler, setZustimmungFehler] = useState(false);
+   const zustimmungRef = useRef<HTMLDivElement>(null);
+
+   /* Welche Pflichtfelder beim Absenden leer waren.
+    *
+    * Die Prüfung liegt hier und nicht beim Browser: Dessen `required` öffnet
+    * eine Sprechblase mit Ausrufezeichen, die weder zur Oberfläche passt noch
+    * mehrere Lücken auf einmal zeigt - sie meldet immer nur das erste Feld.
+    * Ein roter Rahmen an allen fehlenden Feldern sagt dasselbe auf einen
+    * Blick (Anwenderwunsch 10.09.2026). */
+   const [leer, setLeer] = useState<string[]>([]);
+
    const setzen = (name: string) =>
-      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+         // Wer tippt, hat die Lücke geschlossen. Der Rahmen geht sofort weg,
+         // nicht erst beim nächsten Absenden.
+         if (e.target.value.trim()) setLeer((l) => l.filter((n) => n !== name));
          setFelder((alt) => {
             const neu = { ...alt, [name]: e.target.value };
             entwurf.felder = neu;
             return neu;
          });
+      };
+
+   /* Der Stil eines Pflichtfeldes: roter Rahmen, solange es fehlt. Dieselbe
+    * Farbe wie beim Emailfeld, damit „hier fehlt etwas" überall gleich
+    * aussieht. */
+   const pflichtStil = (name: string): React.CSSProperties => ({
+      ...feldStil,
+      borderColor: leer.includes(name) ? "#ef4444" : "rgba(255,255,255,0.10)",
+   });
 
    // Jede Auswahl geht sofort in den Entwurf: Er muss auch dann stimmen, wenn
    // das Fenster im nächsten Augenblick geschlossen wird.
@@ -203,19 +349,15 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    useEffect(() => { entwurf.anrede = anrede; }, [anrede]);
    useEffect(() => { entwurf.kundentyp = kundentyp; }, [kundentyp]);
 
-   // Escape schliesst, der Hintergrund rollt nicht mit — dieselbe Handhabung
-   // wie bei den Rechtstext-Fenstern.
+   // Escape schliesst, der Hintergrund rollt nicht mit - über den gemeinsamen
+   // Fensterstapel, damit die Taste NUR das oberste Fenster trifft. Vorher
+   // schloss ein Escape in der Datenschutzerklärung das Formular gleich mit,
+   // und der Kunde stand wieder auf der Seite.
+   useFensterStapel(open, onClose);
+
    useEffect(() => {
-      if (!open) return;
-      if (scrollRef.current) scrollRef.current.scrollTop = 0;
-      const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-      window.addEventListener("keydown", onKey);
-      document.body.style.overflow = "hidden";
-      return () => {
-         window.removeEventListener("keydown", onKey);
-         document.body.style.overflow = "";
-      };
-   }, [open, onClose]);
+      if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
+   }, [open]);
 
    /* Turnstile nachladen und einmal zeichnen.
     *
@@ -264,15 +406,50 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       const kennung = vvid.trim().toUpperCase();
       const email = (felder.email || "").trim();
       setVvidFehler(!VVID_RE.test(kennung));
-      setEmailFehler(!email.includes("@"));
-      if (!VVID_RE.test(kennung) || !email.includes("@")) return;
-      if (!anrede) {
-         setFehler(t.anredeFehlt);
+      setEmailFehler(!EMAIL_RE.test(email));
+
+      /* Alle leeren Pflichtfelder auf einmal, nicht eines nach dem anderen.
+       *
+       * Welche das sind, hängt vom Vorgang ab: Eine FREE-Registrierung braucht
+       * keine Anschrift, eine Firma zusätzlich die Steuerangaben. */
+      const pflicht = ["vorname", "nachname"];
+      if (brauchtAnschrift) {
+         pflicht.push("strasse", "hausnummer", "plz", "stadt", "land");
+         if (kundentyp === "gewerblich") pflicht.push("steuernummer");
+      }
+      const fehlend = pflicht.filter((n) => !(felder[n] || "").trim());
+      // Die Anrede ist kein Textfeld, sondern zwei Knöpfe - sie steht deshalb
+      // nicht in `felder` und wird gesondert geprüft, gehört aber in dieselbe
+      // Liste: Ein fehlendes Pflichtfeld ist ein fehlendes Pflichtfeld.
+      if (!anrede) fehlend.unshift("anrede");
+      setLeer(fehlend);
+
+      if (!VVID_RE.test(kennung) || !EMAIL_RE.test(email) || fehlend.length) {
+         // Zum ersten Feld, das fehlt - sonst sucht der Kunde den roten Rahmen
+         // in einem Formular, das länger ist als der Bildschirm.
+         const ziel = !VVID_RE.test(kennung) ? "f-vvid"
+            : fehlend.length && !EMAIL_RE.test(email) ? "f-email"
+            : fehlend.length ? `f-${fehlend[0]}` : "f-email";
          window.setTimeout(() => {
-            fehlerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+            document.getElementById(ziel)?.scrollIntoView({
+               behavior: "smooth", block: "center",
+            });
          }, 50);
          return;
       }
+      // Beide Erklärungen sind Voraussetzung, und zwar bevor irgendetwas den
+      // Rechner verlässt: Eine Anfrage ohne sie liesse sich später weder der
+      // Rechnung zugrunde legen noch belegen.
+      if (!agbOk || !widerrufOk) {
+         setZustimmungFehler(true);
+         setFehler(t.zustimmungFehlt);
+         window.setTimeout(() => {
+            zustimmungRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+         }, 50);
+         return;
+      }
+      setZustimmungFehler(false);
+
       if (sitekey && !botToken) {
          setFehler(t.botOffen);
          window.setTimeout(() => {
@@ -284,10 +461,15 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       setLaeuft(true);
       try {
          // Relative Adresse: Auf `.de` liegt der Worker auf derselben Zone, und
-         // auf `.com` läuft die Website über den Reverse-Proxy — beide Male
+         // auf `.com` läuft die Website über den Reverse-Proxy - beide Male
          // trifft `/api/anfrage` das Richtige, ohne dass hier eine Domain
          // festgeschrieben werden müsste.
-         const antwort = await fetch("/api/anfrage", {
+         /* Die Adresse kommt aus `apiBasis`, nicht aus dem Quelltext.
+          *
+          * Beim Entwickeln geht sie in den Sandkasten: Eine Testanfrage
+          * gehoert nicht in die Wirkablage zwischen die echten Bestellungen,
+          * und ein dort angelegter Rabattcode waere hier sonst unbekannt. */
+         const antwort = await fetch(apiBasis() + "/anfrage", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
@@ -295,12 +477,19 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                vv_id: kennung, email, lizenzwunsch: wunsch,
                app_version: appVersion, turnstile: botToken,
                rabattcode,
+               // Was der Kunde erklärt hat, und WOZU: Ohne die Fassungskennung
+               // ist die Zustimmung später wertlos, weil niemand mehr sagen
+               // kann, welcher Wortlaut galt.
+               agb_zugestimmt: agbOk,
+               widerruf_zugestimmt: widerrufOk,
+               agb_fassung: agbData.version,
+               widerruf_fassung: widerrufData.version,
             }),
          });
          if (antwort.ok) {
             // Der Entwurf hat seinen Zweck erfüllt. Ihn stehen zu lassen
             // hiesse, dass das nächste Öffnen eine bereits gesendete Anfrage
-            // zeigt — und jemand sie ein zweites Mal abschickt.
+            // zeigt - und jemand sie ein zweites Mal abschickt.
             entwurf.felder = {};
             entwurf.anrede = "";
             entwurf.wunsch = null;
@@ -314,7 +503,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
          else if (daten.error === "bad_email") setFehler(t.emailFehler);
          else setFehler(t.fehlerAllgemein);
          // Ein verbrauchtes Turnstile-Token gilt nur einmal. Ohne diesen
-         // Rücksetzer scheiterte der zweite Versuch immer — und zwar mit einer
+         // Rücksetzer scheiterte der zweite Versuch immer - und zwar mit einer
          // Meldung, die nach unserem Fehler aussieht.
          window.turnstile?.reset(widgetRef.current || undefined);
          setBotToken("");
@@ -323,7 +512,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       } finally {
          setLaeuft(false);
       }
-      // Nach dem Rendern der Meldung dorthin rollen — sonst bleibt der Klick
+      // Nach dem Rendern der Meldung dorthin rollen - sonst bleibt der Klick
       // ohne sichtbare Antwort.
       window.setTimeout(() => {
          fehlerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -440,18 +629,76 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                  display: "flex", alignItems: "center", justifyContent: "center",
                                  fontSize: 24, color: GREEN,
                               }}>✓</div>
+                              {/* Der Dank mit Namen, wenn einer da ist. Bei einer
+                                  FREE-Registrierung ist das Namensfeld oft leer -
+                                  dann bleibt es beim Dank ohne Anrede, statt eine
+                                  Lücke stehen zu lassen. */}
                               <h3 style={{ fontSize: 18, color: TEXT_PRIMARY, margin: "0 0 10px" }}>
-                                 {t.dankeTitel}
+                                 {besteller ? `${t.dankeMitName}, ${besteller}!` : t.dankeOhneName}
                               </h3>
+                              <p style={{
+                                 fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.75,
+                                 maxWidth: 480, margin: "0 auto 4px",
+                              }}>
+                                 {t.dankeTitel}
+                              </p>
                               <p style={{
                                  fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.75,
                                  maxWidth: 480, margin: "0 auto",
                               }}>
                                  {fettUmsetzen(wunsch === "free" ? t.dankeFrei : t.dankeText)}
                               </p>
+
+                              {/* Die Adresse, an die wir schreiben - hier und nicht
+                                  erst in der Rechnung. Ein Tippfehler fällt nur in
+                                  diesem Moment noch auf, in dem der Kunde etwas tun
+                                  kann. */}
+                              {(felder.email || "").trim() && (
+                                 <div style={{
+                                    // Breite Karte statt eines Kastens, der sich
+                                    // um die Adresse legt: Ein schmales Rechteck
+                                    // mitten auf einer weiten Fläche wirkt
+                                    // verloren, und die Adresse ist hier die
+                                    // wichtigste Angabe der ganzen Seite.
+                                    display: "flex", flexDirection: "column", gap: 5,
+                                    width: "100%", maxWidth: 420,
+                                    margin: "20px auto 0", padding: "14px 22px",
+                                    borderRadius: 12,
+                                    background: "rgba(106,172,204,0.06)",
+                                    border: "1px solid rgba(106,172,204,0.22)",
+                                 }}>
+                                    <span style={{
+                                       fontSize: 10, color: TEXT_MUTED,
+                                       textTransform: "uppercase", letterSpacing: "0.07em",
+                                       fontWeight: 600,
+                                    }}>
+                                       {t.dankeMeldenAn}
+                                    </span>
+                                    <span style={{
+                                       fontSize: 15, color: TEXT_PRIMARY, fontWeight: 600,
+                                       // Die Adresse darf umbrechen statt die
+                                       // Karte zu sprengen - manche sind lang.
+                                       overflowWrap: "anywhere",
+                                    }}>
+                                       {(felder.email || "").trim()}
+                                    </span>
+                                 </div>
+                              )}
+                              {(felder.email || "").trim() && (
+                                 <p style={{
+                                    ...hinweis, maxWidth: 480, margin: "10px auto 0",
+                                    fontSize: 11.5,
+                                 }}>
+                                    {t.dankeAdressePruefen}
+                                 </p>
+                              )}
                            </div>
                         ) : (
-                           <form id="anfrage-form" onSubmit={absenden}
+                           // `noValidate`: Die Sprechblase des Browsers passt
+                           // weder zur Oberfläche noch zeigt sie mehr als ein
+                           // fehlendes Feld. Geprüft wird in `absenden`,
+                           // gemeldet mit rotem Rahmen.
+                           <form id="anfrage-form" onSubmit={absenden} noValidate
                                  style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                               {!sitekey && (
                                  <div style={{
@@ -476,7 +723,6 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                  <Feld id="f-vvid" titel={t.vvidFeld} pflicht kind={
                                     <input
                                        id="f-vvid"
-                                       required
                                        value={vvid}
                                        onChange={(e) => setVvid(e.target.value.toUpperCase())}
                                        placeholder={t.vvidPlatzhalter}
@@ -523,7 +769,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                  {/* Der Rabattcode. Er aendert die ANZEIGE; was
                                      berechnet wird, rechnet der Worker beim
                                      Eingang der Anfrage noch einmal selbst nach
-                                     — ein Preis aus einem Browser ist keine
+                                     - ein Preis aus einem Browser ist keine
                                      Grundlage fuer eine Rechnung. */}
                                  <div style={{
                                     display: "grid", gap: 10, marginTop: 12,
@@ -553,7 +799,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                            maxLength={32}
                                            placeholder={t.rabattPlatzhalter}
                                            style={{
-                                              ...feldStil, flex: 1,
+                                              ...feldStil, flex: 1, minWidth: 0,
                                               fontFamily: "JetBrains Mono, ui-monospace, monospace",
                                               letterSpacing: "0.06em",
                                            }} />
@@ -571,22 +817,42 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                        {t.rabattPruefen}
                                     </button>
                                     </div>
-                                    {(rabatt || codeGrund) && (
-                                       <span style={{
-                                          fontSize: 12, marginTop: 6, display: "block",
-                                          color: rabatt ? GREEN : "#fca5a5",
-                                       }}>
-                                          {rabatt ? t.rabattGilt
-                                             : codeGrund === "abgelaufen" ? t.rabattAbgelaufen
-                                             : codeGrund === "aufgebraucht" ? t.rabattAufgebraucht
-                                             : codeGrund === "netz" ? t.rabattNetz
-                                             : t.rabattUnbekannt}
-                                       </span>
-                                    )}
+                                  </div>
+
+                                  {/* Die Rückmeldung hat ihre EIGENE Spalte, die
+                                      dritte, und teilt sich keinen Platz mit Feld und
+                                      Knopf. Beide Zwischenschritte waren falsch: unter
+                                      dem Feld schob sie die halbe Maske nach unten, in
+                                      derselben Zeile schrumpfte sie Feld und Knopf,
+                                      sobald sie erschien. Eine feste Spalte ändert
+                                      beim Erscheinen gar nichts an der Umgebung.
+                                      Der Rahmen ist derselbe wie bei der Meldung am
+                                      Ende des Formulars: grün, wenn der Code gilt, rot,
+                                      wenn nicht. */}
+                                  <div style={{ display: "flex", alignItems: "flex-end" }}>
+                                     {(rabatt || codeGrund) && (
+                                        <span style={{
+                                           display: "flex", alignItems: "center",
+                                           width: "100%", minHeight: 38,
+                                           padding: "6px 12px", borderRadius: 8,
+                                           fontSize: 12, lineHeight: 1.35,
+                                           color: rabatt ? GREEN : "#fca5a5",
+                                           background: rabatt
+                                              ? "rgba(34,197,94,0.08)" : "rgba(239,68,68,0.08)",
+                                           border: `1px solid ${rabatt
+                                              ? "rgba(34,197,94,0.25)" : "rgba(239,68,68,0.25)"}`,
+                                        }}>
+                                           {rabatt ? t.rabattGilt
+                                              : codeGrund === "abgelaufen" ? t.rabattAbgelaufen
+                                              : codeGrund === "aufgebraucht" ? t.rabattAufgebraucht
+                                              : codeGrund === "netz" ? t.rabattNetz
+                                              : t.rabattUnbekannt}
+                                        </span>
+                                     )}
                                   </div>
                                  </div>
                                  {/* Die Erklärzeile zum Verhältnis PRO/LIFETIME steht auf der
-                                     Preis-Sektion, von der der Kunde herkommt — hier wäre sie
+                                     Preis-Sektion, von der der Kunde herkommt - hier wäre sie
                                      die Wiederholung einer eben gelesenen Aussage. */}
                                  <p style={{ ...hinweis, marginTop: 12 }}>{t.preisHinweis}</p>
                               </Block>
@@ -598,19 +864,23 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     gridTemplateColumns: "150px 1fr 1fr",
                                  }}>
                                     <Feld id="f-anrede" titel={t.anrede} pflicht kind={
-                                       <div style={{ display: "flex", gap: 6 }}>
+                                       <div id="f-anrede" style={{ display: "flex", gap: 6 }}>
                                           {[t.herr, t.frau].map((wert) => (
                                              <button
                                                 key={wert}
                                                 type="button"
-                                                onClick={() => setAnrede(wert)}
+                                                onClick={() => {
+                                                   setAnrede(wert);
+                                                   setLeer((l) => l.filter((n) => n !== "anrede"));
+                                                }}
                                                 style={{
                                                    ...feldStil,
                                                    padding: "9px 0",
                                                    textAlign: "center",
                                                    cursor: "pointer",
-                                                   borderColor: anrede === wert
-                                                      ? CYAN : "rgba(255,255,255,0.10)",
+                                                   borderColor: anrede === wert ? CYAN
+                                                      : leer.includes("anrede") ? "#ef4444"
+                                                      : "rgba(255,255,255,0.10)",
                                                    background: anrede === wert
                                                       ? "rgba(106,172,204,0.10)"
                                                       : "rgba(255,255,255,0.03)",
@@ -623,19 +893,19 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                        </div>} />
                                     <Feld id="f-vorname" titel={t.vorname} pflicht kind={
                                        <input id="f-vorname" value={felder.vorname || ""}
-                                              onChange={setzen("vorname")} required maxLength={80}
-                                              style={feldStil} />} />
+                                              onChange={setzen("vorname")} maxLength={80}
+                                              style={pflichtStil("vorname")} />} />
                                     <Feld id="f-nachname" titel={t.nachname} pflicht kind={
                                        <input id="f-nachname" value={felder.nachname || ""}
-                                              onChange={setzen("nachname")} required maxLength={80}
-                                              style={feldStil} />} />
+                                              onChange={setzen("nachname")} maxLength={80}
+                                              style={pflichtStil("nachname")} />} />
                                  </div>
                                  <div style={{
                                     display: "grid", gap: 12,
                                     gridTemplateColumns: "1fr 1fr", marginTop: 12,
                                  }}>
                                     <Feld id="f-email" titel={t.email} pflicht kind={
-                                       <input id="f-email" type="email" required maxLength={254}
+                                       <input id="f-email" type="email" maxLength={254}
                                               value={felder.email || ""} onChange={setzen("email")}
                                               style={{
                                                  ...feldStil,
@@ -647,10 +917,37 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                               onChange={setzen("telefon")} maxLength={40}
                                               style={feldStil} />} />
                                  </div>
+                                 {/* Der Vorschlag bei einer vertippten Domain. Er
+                                     korrigiert nichts von selbst: `max@gmx.net` und
+                                     `max@gmx.de` sind zwei Postfächer, und welches
+                                     gemeint ist, weiss nur der Kunde. */}
+                                 {emailTipp && (
+                                    <p style={{ ...hinweis, marginTop: 9, color: AMBER }}>
+                                       {t.emailTipp}{" "}
+                                       <button
+                                          type="button"
+                                          onClick={() => {
+                                             setzen("email")({
+                                                target: { value: emailTipp },
+                                             } as React.ChangeEvent<HTMLInputElement>);
+                                             setEmailFehler(false);
+                                          }}
+                                          style={{
+                                             background: "none", border: "none", padding: 0,
+                                             color: AMBER, fontWeight: 700, fontSize: 12,
+                                             fontFamily: "inherit", cursor: "pointer",
+                                             textDecoration: "underline",
+                                          }}
+                                       >
+                                          {emailTipp}
+                                       </button>
+                                       {t.tippUebernehmen}
+                                    </p>
+                                 )}
                                  <p style={{ ...hinweis, marginTop: 9 }}>{t.emailHinweis}</p>
                               </Block>
 
-                              {/* Anschrift — nur, wenn es etwas zu berechnen gibt */}
+                              {/* Anschrift - nur, wenn es etwas zu berechnen gibt */}
                               {brauchtAnschrift && (
                                  <Block titel={t.anschriftTitel}>
                                     <div style={{ display: "flex", gap: 18, marginBottom: 14 }}>
@@ -674,12 +971,12 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     <div style={{ display: "grid", gap: 12, gridTemplateColumns: "3fr 1fr" }}>
                                        <Feld id="f-strasse" titel={t.strasse} pflicht kind={
                                           <input id="f-strasse" value={felder.strasse || ""}
-                                                 onChange={setzen("strasse")} required maxLength={120}
-                                                 style={feldStil} />} />
+                                                 onChange={setzen("strasse")} maxLength={120}
+                                                 style={pflichtStil("strasse")} />} />
                                        <Feld id="f-hausnummer" titel={t.hausnummer} pflicht kind={
                                           <input id="f-hausnummer" value={felder.hausnummer || ""}
-                                                 onChange={setzen("hausnummer")} required maxLength={20}
-                                                 style={feldStil} />} />
+                                                 onChange={setzen("hausnummer")} maxLength={20}
+                                                 style={pflichtStil("hausnummer")} />} />
                                     </div>
                                     <div style={{
                                        display: "grid", gap: 12,
@@ -687,17 +984,54 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     }}>
                                        <Feld id="f-plz" titel={t.plz} pflicht kind={
                                           <input id="f-plz" value={felder.plz || ""}
-                                                 onChange={setzen("plz")} required maxLength={16}
-                                                 style={feldStil} />} />
+                                                 onChange={setzen("plz")} maxLength={16}
+                                                 style={pflichtStil("plz")} />} />
                                        <Feld id="f-stadt" titel={t.stadt} pflicht kind={
                                           <input id="f-stadt" value={felder.stadt || ""}
-                                                 onChange={setzen("stadt")} required maxLength={80}
-                                                 style={feldStil} />} />
+                                                 onChange={setzen("stadt")} maxLength={80}
+                                                 style={pflichtStil("stadt")} />} />
+                                       {/* Vorschlagsliste statt Auswahlfeld: Wer
+                                           „Deu" tippt, hat sein Land nach drei
+                                           Anschlägen; wer ein Gebiet einträgt, das
+                                           die Liste nicht kennt, kann das trotzdem.
+                                           Die Namen kommen vom Browser, in der
+                                           Sprache des Kunden. */}
                                        <Feld id="f-land" titel={t.land} pflicht kind={
-                                          <input id="f-land" value={felder.land || ""}
-                                                 onChange={setzen("land")} required maxLength={64}
-                                                 style={feldStil} />} />
+                                          <>
+                                             <input id="f-land" value={felder.land || ""}
+                                                    onChange={setzen("land")} maxLength={64}
+                                                    list="laenderliste"
+                                                    autoComplete="country-name"
+                                                    style={pflichtStil("land")} />
+                                             <datalist id="laenderliste">
+                                                {laender.map((l) => <option key={l} value={l} />)}
+                                             </datalist>
+                                          </>} />
                                     </div>
+
+                                    {/* Und der Fall, den die Liste nicht fängt: Sie
+                                        filtert nach Wortanfang, „Deutshcland" beginnt
+                                        richtig und endet falsch. */}
+                                    {landTipp && (
+                                       <p style={{ ...hinweis, marginTop: 9, color: AMBER }}>
+                                          {t.landTipp}{" "}
+                                          <button
+                                             type="button"
+                                             onClick={() => setzen("land")({
+                                                target: { value: landTipp },
+                                             } as React.ChangeEvent<HTMLInputElement>)}
+                                             style={{
+                                                background: "none", border: "none", padding: 0,
+                                                color: AMBER, fontWeight: 700, fontSize: 12,
+                                                fontFamily: "inherit", cursor: "pointer",
+                                                textDecoration: "underline",
+                                             }}
+                                          >
+                                             {landTipp}
+                                          </button>
+                                          {t.tippUebernehmen}
+                                       </p>
+                                    )}
                                     {kundentyp === "gewerblich" && (
                                        <div style={{
                                           display: "grid", gap: 12,
@@ -705,8 +1039,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                        }}>
                                           <Feld id="f-steuernummer" titel={t.steuernummer} pflicht kind={
                                              <input id="f-steuernummer" value={felder.steuernummer || ""}
-                                                    onChange={setzen("steuernummer")} required maxLength={32}
-                                                    style={feldStil} />} />
+                                                    onChange={setzen("steuernummer")} maxLength={32}
+                                                    style={pflichtStil("steuernummer")} />} />
                                           <Feld id="f-ustid" titel={t.ustid} kind={
                                              <input id="f-ustid" value={felder.ustid || ""}
                                                     onChange={setzen("ustid")} maxLength={32}
@@ -733,13 +1067,53 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                               {/* Datenschutz: Hinweis, KEIN Kästchen.
                                   Die Verarbeitung läuft über die Vertragsanbahnung. Was
                                   dafür nötig ist, darf gar nicht per Einwilligung
-                                  abgefragt werden — ein Kästchen behauptete eine
+                                  abgefragt werden - ein Kästchen behauptete eine
                                   Freiwilligkeit, die es nicht gibt. */}
                               <p style={hinweis}>
                                  {t.datenschutz}{" "}
                                  <a href="#datenschutz" style={{ color: CYAN }}>
                                     {t.datenschutzLink}
                                  </a>.
+                              </p>
+
+                              {/* Die beiden Erklärungen. Sie stehen unmittelbar
+                                  vor dem Absenden, weil sie sich auf diesen
+                                  Vorgang beziehen und nicht auf die Seite. */}
+                              <div ref={zustimmungRef} style={{
+                                 display: "flex", flexDirection: "column", gap: 10,
+                                 padding: "13px 15px", borderRadius: 10,
+                                 background: zustimmungFehler
+                                    ? "rgba(239,68,68,0.06)" : "rgba(255,255,255,0.02)",
+                                 border: `1px solid ${zustimmungFehler
+                                    ? "rgba(239,68,68,0.3)" : "rgba(255,255,255,0.07)"}`,
+                              }}>
+                                 <Kaestchen
+                                    id="zustimmung-agb"
+                                    checked={agbOk}
+                                    onChange={(v) => { setAgbOk(v); if (v) setZustimmungFehler(false); }}
+                                 >
+                                    {t.agbTeil1}{" "}
+                                    <a href="#agb" style={{ color: CYAN }}>{t.agbLink}</a>
+                                    {t.agbTeil2}{" "}
+                                    <a href="#datenschutz" style={{ color: CYAN }}>{t.datenschutzLink}</a>
+                                    {t.agbTeil3}
+                                 </Kaestchen>
+                                 <Kaestchen
+                                    id="zustimmung-widerruf"
+                                    checked={widerrufOk}
+                                    onChange={(v) => { setWiderrufOk(v); if (v) setZustimmungFehler(false); }}
+                                 >
+                                    {t.widerrufTeil1}{" "}
+                                    <a href="#widerruf" style={{ color: CYAN }}>{t.widerrufLink}</a>
+                                    {t.widerrufTeil2}
+                                 </Kaestchen>
+                              </div>
+
+                              {/* Der Satz, der die ganze Konstruktion trägt:
+                                  Auf der Seite wird kein Vertrag geschlossen. */}
+                              <p style={{ ...hinweis, fontSize: 12.5, color: TEXT_SECONDARY }}>
+                                 <strong style={{ color: TEXT_PRIMARY }}>{t.unverbindlichFett}</strong>{" "}
+                                 {t.unverbindlichText}
                               </p>
 
                               <div ref={turnstileRef} style={{ minHeight: 4 }} />
@@ -764,7 +1138,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                      {/* ── Fussleiste ──
                          Dieselbe wie in den Rechtstext-Fenstern: links das
                          Signet, rechts die Aktion. Der Absendeknopf steht
-                         genau dort, wo dort „Schliessen" steht — und weil die
+                         genau dort, wo dort „Schliessen" steht - und weil die
                          Leiste nicht mitrollt, bleibt er auch bei
                          ausgeklappter Anschrift sichtbar. */}
                      <div style={{
@@ -860,20 +1234,26 @@ function Wahl({ gewaehlt, onClick, titel, preis, statt, text, farbe }: {
             </span>
             <span style={{ color: farbe, fontSize: 12.5, fontWeight: 700 }}>{preis}</span>
          </div>
-         {statt && (
-            <span style={{
-               fontSize: 11, color: TEXT_MUTED, textDecoration: "line-through",
-               display: "block", marginTop: 3, textAlign: "right",
-            }}>
-               {statt}
-            </span>
-         )}
+         {/* Die Zeile für den durchgestrichenen Preis steht IMMER, auch ohne
+             Rabatt - dann leer und unsichtbar. Erschiene sie erst mit einem
+             gültigen Code, wüchse die Karte in dem Moment um eine Zeile: Die
+             drei Karten stünden verschieden hoch, und der Text darunter
+             spränge in zweien von ihnen nach unten. Ein Preisnachlass darf
+             die Seite nicht in Bewegung versetzen. */}
+         <span aria-hidden={!statt} style={{
+            fontSize: 11, color: TEXT_MUTED, textDecoration: "line-through",
+            display: "block", marginTop: 3, textAlign: "right",
+            lineHeight: "14px", minHeight: 14,
+            visibility: statt ? "visible" : "hidden",
+         }}>
+            {statt || " "}
+         </span>
          <p style={{ ...hinweis, marginTop: 7 }}>{text}</p>
       </button>
    );
 }
 
-/** `**fett**` in echten Fettdruck — der Satz zum Zahlungseingang ist der, den
+/** `**fett**` in echten Fettdruck - der Satz zum Zahlungseingang ist der, den
  *  ein Kunde sonst erst aus einer Antwortmail erfährt. */
 function fettUmsetzen(text: string) {
    return text.split(/\*\*(.+?)\*\*/g).map((teil, i) =>

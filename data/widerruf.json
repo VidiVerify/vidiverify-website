@@ -1,0 +1,52 @@
+{
+   "title": "Widerrufsbelehrung",
+   "subtitle": "für Verbraucher bei Fernabsatzverträgen",
+   "date": "Stand: 10.09.2026",
+   "version": "WRB-2026-09-10",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Geltung",
+         "paragraphs": [
+            "Diese Belehrung gilt für Verbraucher. Verbraucher ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschliesst, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Widerrufsrecht",
+         "paragraphs": [
+            "Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen.",
+            "Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsschlusses. Der Vertrag kommt mit der vollständigen Zahlung des in der Rechnung genannten Betrages zustande.",
+            "Um Ihr Widerrufsrecht auszuüben, müssen Sie uns (Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland, Email: admin@vidiverify.de) mittels einer eindeutigen Erklärung, zum Beispiel ein mit der Post versandter Brief oder eine Email, über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Sie können dafür das unten stehende Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist.",
+            "Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf der Widerrufsfrist absenden."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Folgen des Widerrufs",
+         "paragraphs": [
+            "Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist.",
+            "Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Vorzeitiges Erlöschen des Widerrufsrechts",
+         "paragraphs": [
+            "VidiVerify ist ein digitaler Inhalt, der nicht auf einem körperlichen Datenträger bereitgestellt wird.",
+            "Ihr Widerrufsrecht erlischt vor Ablauf der vierzehntägigen Widerrufsfrist, wenn wir mit der Bereitstellung begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir mit der Vertragserfüllung vor Ablauf der Widerrufsfrist beginnen, und Sie bestätigt haben, dass Ihnen bekannt ist, dass Sie durch Ihre Zustimmung mit Beginn der Vertragserfüllung Ihr Widerrufsrecht verlieren.",
+            "Beide Erklärungen werden im Anfrageformular gesondert abgefragt. Solange die Bereitstellung nicht begonnen hat, bleibt Ihr Widerrufsrecht bestehen."
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Muster-Widerrufsformular",
+         "paragraphs": [
+            "Wenn Sie den Vertrag widerrufen wollen, füllen Sie bitte dieses Formular aus und senden Sie es zurück.",
+            "An: Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland, Email: admin@vidiverify.de",
+            "Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Erwerb einer Lizenz für VidiVerify.",
+            "Bestellt am / erhalten am: ______   Name des Verbrauchers: ______   Anschrift des Verbrauchers: ______   Emailadresse: ______   Datum: ______   Unterschrift des Verbrauchers (nur bei Mitteilung auf Papier): ______"
+         ]
+      }
+   ]
+}

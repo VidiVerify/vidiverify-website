@@ -13,7 +13,7 @@ const FREE_GREEN = "#22c55e";
 const Preise = () => {
    const { t, i18n } = useTranslation();
    // Eine Preisquelle fuer die ganze Anwendung: der Worker. Faellt der Abruf
-   // aus, steht der eingebaute Listenpreis da — nie ein zu niedriger.
+   // aus, steht der eingebaute Listenpreis da - nie ein zu niedriger.
    const { preise } = usePreise();
    const sprache = i18n.language?.toLowerCase().startsWith("de") ? "de" : "en";
    const isMobile = useMediaQuery("(max-width: 768px)");
@@ -24,12 +24,14 @@ const Preise = () => {
    const listGap = isShortDesktop ? 6 : 8;
    const outerGap = isShortDesktop ? 12 : 14;
 
+   // Das Herz hängt am letzten Wort, damit es nie allein in eine neue Zeile fällt.
+   const communityBullet = t("pricing.communityBullet");
+   const communityTrennung = communityBullet.lastIndexOf(" ");
+   const communityAnfang = communityTrennung === -1 ? "" : communityBullet.slice(0, communityTrennung + 1);
+   const communityEnde = communityTrennung === -1 ? communityBullet : communityBullet.slice(communityTrennung + 1);
+
    const privateBullets = t("pricing.privateBullets", { returnObjects: true }) as string[];
    const commercialBullets = t("pricing.commercialBullets", { returnObjects: true }) as string[];
-
-   const scrollTo = (id: string) => {
-      document.querySelector(`#${id}`)?.scrollIntoView({ behavior: "smooth" });
-   };
 
    return (
       <PageSection id="preise" title={t("pricing.title")} subtitle={t("pricing.subtitle")}>
@@ -45,7 +47,7 @@ const Preise = () => {
                variants={staggerContainerSlow}
                style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: outerGap }}
             >
-               {/* A – Kostenfreie Nutzung */}
+               {/* A - Kostenfreie Nutzung */}
                <motion.div variants={staggerItemSlow} className="glass-card"
                   whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(34,197,94,0.1)", transition: { duration: 0.3 } }}
                   style={{
@@ -85,27 +87,20 @@ const Preise = () => {
                            <span style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.6 }}>{point}</span>
                         </li>
                      ))}
-                     <li style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none" }}>
-                        <FaHeart size={10} color={FREE_GREEN} style={{ flexShrink: 0, marginTop: 4 }} />
+                     <li style={{ display: "flex", alignItems: "flex-start", gap: 9, listStyle: "none", marginTop: listGap + 14 }}>
+                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: FREE_GREEN, flexShrink: 0, marginTop: 7 }} />
                         <span style={{ fontSize: 13, color: TEXT_SECONDARY, lineHeight: 1.6 }}>
-                           {t("pricing.communityBullet")}
+                           {communityAnfang}
+                           <span style={{ whiteSpace: "nowrap" }}>
+                              {communityEnde}
+                              <FaHeart size={10} color={FREE_GREEN} style={{ display: "inline-block", marginLeft: 6, verticalAlign: "baseline" }} />
+                           </span>
                         </span>
                      </li>
                   </ul>
-                  <motion.button
-                     onClick={() => scrollTo("spenden")}
-                     whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
-                     style={{
-                        alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 7,
-                        padding: 0, background: "none", border: "none", cursor: "pointer",
-                        fontSize: 12, fontWeight: 600, color: FREE_GREEN, marginTop: "auto",
-                     }}
-                  >
-                     <FaHeart size={12} color={FREE_GREEN} /> {t("pricing.supportCta")}
-                  </motion.button>
                </motion.div>
 
-               {/* B – Lizenzierte Nutzung */}
+               {/* B - Lizenzierte Nutzung */}
                <motion.div variants={staggerItemSlow} className="glass-card"
                   whileHover={{ y: -4, boxShadow: "0 8px 32px rgba(106,172,204,0.12)", transition: { duration: 0.3 } }}
                   style={{
@@ -174,7 +169,7 @@ const Preise = () => {
                      ))}
                   </div>
 
-                  {/* Im Preisplan als zwingend gesetzt — überall dort, wo Preise
+                  {/* Im Preisplan als zwingend gesetzt - überall dort, wo Preise
                       genannt werden. Ohne sie kann ein Käufer den Wert von
                       LIFETIME gegenüber PRO nicht abschätzen und wählt im
                       Zweifel PRO. */}
@@ -186,7 +181,7 @@ const Preise = () => {
                   </p>
 
                   {/* Der Bestellweg. Er öffnet das Anfragefenster über der
-                      Seite — bewusst kein Sprung auf eine eigene Seite: Wer
+                      Seite - bewusst kein Sprung auf eine eigene Seite: Wer
                       bestellt, klickt zwischen Formular und Preisen hin und
                       her, und ein Wechsel der Umgebung wirkt dabei wie ein
                       Anbieterwechsel. */}

@@ -16,14 +16,16 @@ import ShootingStars from "@components/ui/ShootingStars";
 import EulaModal from "@components/ui/EulaModal";
 import DatenschutzModal from "@components/ui/DatenschutzModal";
 import ImpressumModal from "@components/ui/ImpressumModal";
+import AgbModal from "@components/ui/AgbModal";
+import WiderrufModal from "@components/ui/WiderrufModal";
 import LizenzAnfrageModal from "@components/ui/LizenzAnfrageModal";
+import ProKaufModal from "@components/ui/ProKaufModal";
 
 // Lazy Load "Below the fold" sections for massive performance gains
 const About = lazy(() => import("@pages/about/About"));
 const Services = lazy(() => import("@pages/services/Services"));
 const Achievement = lazy(() => import("@pages/achievement/Achievement"));
 const Contact = lazy(() => import("@pages/contact/Contact"));
-const Donate = lazy(() => import("@pages/donate/Donate"));
 const Roadmap = lazy(() => import("@pages/roadmap/Roadmap"));
 const Download = lazy(() => import("@pages/download/Download"));
 const Preise = lazy(() => import("@pages/preise/Preise"));
@@ -54,16 +56,22 @@ const App = () => {
    const [eulaOpen, setEulaOpen] = useState(() => window.location.hash === "#eula");
    const [datenschutzOpen, setDatenschutzOpen] = useState(() => window.location.hash === "#datenschutz");
    const [impressumOpen, setImpressumOpen] = useState(() => window.location.hash === "#impressum");
+   const [agbOpen, setAgbOpen] = useState(() => window.location.hash === "#agb");
+   const [widerrufOpen, setWiderrufOpen] = useState(() => window.location.hash === "#widerruf");
    // Die Bestellanfrage. Sie kommt meist aus der Anwendung: Der Knopf dort
    // fuehrt auf `/lizenz-anfrage?vvid=…`, und `public/404.html` leitet das
-   // hierher um — Abfrage inbegriffen, denn ohne sie muesste der Kunde seine
+   // hierher um - Abfrage inbegriffen, denn ohne sie müsste der Kunde seine
    // Geraetekennung abtippen.
    const [anfrageOpen, setAnfrageOpen] = useState(() => window.location.hash === "#lizenz-anfrage");
+   // Die Kaufseite. Sie kommt ebenso aus der Anwendung: „PRO holen" fuehrt auf
+   // `/pro?vvid=…&ver=…`. Die VV-ID MUSS dabei ankommen - ohne sie kann ein
+   // Kauf keiner Installation zugeordnet werden.
+   const [proOpen, setProOpen] = useState(() => window.location.hash === "#pro");
 
    useEffect(() => {
       globalThis.history.scrollRestoration = "manual";
       const hash = window.location.hash.slice(1);
-      const modalHashes = ["eula", "datenschutz", "impressum", "lizenz-anfrage"];
+      const modalHashes = ["eula", "datenschutz", "impressum", "agb", "widerruf", "lizenz-anfrage", "pro"];
       // Wer bestellen will, soll HINTER dem Fenster die Preise sehen.
       //
       // Die Bestellanfrage kommt aus der Anwendung, und der erste Griff nach
@@ -71,7 +79,7 @@ const App = () => {
       // Unterschied zwischen PRO und LIFETIME? Steht dahinter der Seitenkopf,
       // muss er erst suchen; steht dort die Preistafel, hat er die Antwort,
       // sobald er das Fenster schliesst.
-      const zielAnker = hash === "lizenz-anfrage" ? "preise" : hash;
+      const zielAnker = (hash === "lizenz-anfrage" || hash === "pro") ? "preise" : hash;
       if (zielAnker && (!modalHashes.includes(zielAnker) || zielAnker === "preise")) {
          const deadline = Date.now() + 4000;
          const tryScroll = () => {
@@ -96,7 +104,10 @@ const App = () => {
          if (href === "#eula") { e.preventDefault(); setEulaOpen(true); }
          if (href === "#datenschutz") { e.preventDefault(); setDatenschutzOpen(true); }
          if (href === "#impressum") { e.preventDefault(); setImpressumOpen(true); }
+         if (href === "#agb") { e.preventDefault(); setAgbOpen(true); }
+         if (href === "#widerruf") { e.preventDefault(); setWiderrufOpen(true); }
          if (href === "#lizenz-anfrage") { e.preventDefault(); setAnfrageOpen(true); }
+         if (href === "#pro") { e.preventDefault(); setProOpen(true); }
       };
       document.addEventListener("click", handler, true);
       return () => document.removeEventListener("click", handler, true);
@@ -105,7 +116,12 @@ const App = () => {
    // Liegt ein Fenster über der Seite, ruht die Zierde dahinter. Sie ist
    // ohnehin verdeckt, und ihre Rechenzeit fehlt sonst dort, wo gerade
    // getippt wird.
-   const fensterOffen = eulaOpen || datenschutzOpen || impressumOpen || anfrageOpen;
+   // Das Kauffenster gehört mit in diese Liste - es fehlte bis zum
+   // 11.09.2026. Ausgerechnet dort ist die Rechenzeit am nötigsten: Die Seite
+   // erhebt eine Anschrift, lädt Paddle nach und wartet danach auf die
+   // Lizenz, während hinter dem Fenster unsichtbar eine Szene weiterlief.
+   const fensterOffen = eulaOpen || datenschutzOpen || impressumOpen || agbOpen
+      || widerrufOpen || anfrageOpen || proOpen;
 
    return (
       <ReactLenis
@@ -158,10 +174,6 @@ const App = () => {
                      <div className="section-darker" id="kontakt">
                         <Contact />
                      </div>
-                     <SectionTransition variant="glow-pulse" />
-                     <div className="section-dark" id="spenden">
-                        <Donate />
-                     </div>
                   </Suspense>
                </main>
                <Footer />
@@ -171,7 +183,10 @@ const App = () => {
             <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
             <DatenschutzModal open={datenschutzOpen} onClose={() => setDatenschutzOpen(false)} />
             <ImpressumModal open={impressumOpen} onClose={() => setImpressumOpen(false)} />
+            <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
+            <WiderrufModal open={widerrufOpen} onClose={() => setWiderrufOpen(false)} />
             <LizenzAnfrageModal open={anfrageOpen} onClose={() => setAnfrageOpen(false)} />
+            <ProKaufModal open={proOpen} onClose={() => setProOpen(false)} />
          </ErrorBoundary>
       </ReactLenis>
    );

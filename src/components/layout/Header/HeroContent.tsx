@@ -51,7 +51,7 @@ const HeroContent = () => {
             <span className="gradient-text-vivid">{name}</span>
          </motion.h1>
 
-         {/* Animated role cycling — tight below heading */}
+         {/* Animated role cycling - tight below heading */}
          <motion.div
             className="h-9 md:h-11 flex items-center justify-center"
             variants={staggerItem}

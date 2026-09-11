@@ -49,7 +49,7 @@ const Contact = () => {
          >
             {/* ── Trust card + GitHub + Facebook ── */}
             <motion.div variants={staggerContainerSlow} style={{ display: "flex", flexDirection: "column", gap: isShortDesktop ? 10 : 15 }}>
-               {/* Trust card — full width on mobile */}
+               {/* Trust card - full width on mobile */}
                <motion.div
                   variants={staggerItemSlow}
                   className="glass-card"
@@ -70,7 +70,7 @@ const Contact = () => {
                   </div>
                </motion.div>
 
-               {/* GitHub + Facebook + Instagram + X — 4-column grid (1 on mobile) */}
+               {/* GitHub + Facebook + Instagram + X - 4-column grid (1 on mobile) */}
                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 14 }}>
                   <motion.a
                      href={`https://github.com/${githubUsername}`}
@@ -152,7 +152,7 @@ const Contact = () => {
                variants={staggerContainerSlow}
                style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr", gap: 14 }}
             >
-               {/* Support card — ServiceCard style */}
+               {/* Support card - ServiceCard style */}
                <GlassCard
                   style={{ padding: 0, overflow: "hidden" }}
                   variants={staggerItemSlow}

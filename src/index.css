@@ -29,7 +29,7 @@
    --color-glow-purple: rgb(74 125 160 / 0.25);
 }
 
-/* RGB channel tokens — use with rgb(var(--ch-*) / <alpha>) */
+/* RGB channel tokens - use with rgb(var(--ch-*) / <alpha>) */
 :root {
    --ch-cyan: 106 172 204;
    --ch-purple: 74 125 160;
@@ -50,7 +50,7 @@
 /* Hide scrollbar on format rows */
 .format-scroll::-webkit-scrollbar { display: none; }
 
-/* ===== Format-Marquee — endloses Auto-Scrollen mit Pause-on-Hover ===== */
+/* ===== Format-Marquee - endloses Auto-Scrollen mit Pause-on-Hover ===== */
 .marquee-container {
    position: relative;
 }

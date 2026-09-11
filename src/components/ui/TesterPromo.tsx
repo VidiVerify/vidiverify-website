@@ -53,7 +53,7 @@ const writeSuppress = (patch: Partial<Suppress>): void => {
    try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...readSuppress(), ...patch }));
    } catch {
-      /* localStorage nicht verfügbar — ignorieren */
+      /* localStorage nicht verfügbar - ignorieren */
    }
 };
 

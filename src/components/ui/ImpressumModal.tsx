@@ -1,8 +1,15 @@
+/* Die Ebene liegt ÜBER der des Anfrageformulars (1100 statt 1000): Dieses
+ * Fenster wird aus dem Formular heraus geöffnet, und bei gleicher Ebene
+ * entschiede die Reihenfolge im DOM - das Formular steht dort weiter unten
+ * und läge damit obenauf. Der Text ging auf, war aber verdeckt
+ * (Anwenderbefund 10.09.2026). */
+
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { X, Scale, Mail, Globe, ShieldCheck, User } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
+import { useFensterStapel } from "@utils/useFensterStapel";
 import data from "../../../data/impressum.json";
 
 interface Props {
@@ -14,17 +21,13 @@ const ImpressumModal = ({ open, onClose }: Props) => {
    const { t } = useTranslation();
    const scrollRef = useRef<HTMLDivElement>(null);
 
+   // Escape und das Sperren des Seitenscrollens laufen über den gemeinsamen
+   // Fensterstapel: Sonst schliesst ein Fenster das darunter liegende mit.
+   useFensterStapel(open, onClose);
+
    useEffect(() => {
-      if (!open) return;
-      if (scrollRef.current) scrollRef.current.scrollTop = 0;
-      const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-      window.addEventListener("keydown", onKey);
-      document.body.style.overflow = "hidden";
-      return () => {
-         window.removeEventListener("keydown", onKey);
-         document.body.style.overflow = "";
-      };
-   }, [open, onClose]);
+      if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
+   }, [open]);
 
    return (
       <AnimatePresence>
@@ -38,7 +41,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                   transition={{ duration: 0.22 }}
                   onClick={onClose}
                   style={{
-                     position: "fixed", inset: 0, zIndex: 1000,
+                     position: "fixed", inset: 0, zIndex: 1100,
                      background: "rgba(6,7,18,0.82)",
                      backdropFilter: "blur(14px)",
                      WebkitBackdropFilter: "blur(14px)",
@@ -52,7 +55,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                   exit={{ opacity: 0, y: 20, scale: 0.97 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   style={{
-                     position: "fixed", inset: 0, zIndex: 1001,
+                     position: "fixed", inset: 0, zIndex: 1101,
                      display: "flex", alignItems: "center", justifyContent: "center",
                      padding: "24px 16px",
                      pointerEvents: "none",

@@ -33,7 +33,7 @@ async function fetchPageViews(cfg: PageViewConfig): Promise<number | null> {
             if (!isNaN(n)) return n + BASE_OFFSET;
          }
       } catch {
-         // timeout or network error — fall through
+         // timeout or network error - fall through
       }
    }
 

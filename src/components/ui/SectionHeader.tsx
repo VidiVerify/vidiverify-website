@@ -17,8 +17,10 @@ const SectionHeader = ({ title, subtitle }: Props) => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: isShortDesktop ? 10 : 16,
-            marginBottom: isShortDesktop ? 24 : 64,
+            gap: isShortDesktop ? 8 : 12,
+            // Der Abstand zwischen Trennstrich und Inhalt war mit 64 Pixeln
+            // der grösste Einzelposten der Seitenhöhe, achtmal auf der Seite.
+            marginBottom: isShortDesktop ? 18 : 36,
             textAlign: "center",
          }}
          variants={fadeInUp}
@@ -62,7 +64,7 @@ const SectionHeader = ({ title, subtitle }: Props) => {
                height: 2,
                width: 80,
                borderRadius: 9999,
-               marginTop: 4,
+               marginTop: 2,
                background: "linear-gradient(to right, #06b6d4, #a855f7)",
             }}
             variants={lineGrow}

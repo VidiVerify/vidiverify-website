@@ -1,5 +1,5 @@
 /**
- * Die Preise — vom Worker, nicht aus der Seite.
+ * Die Preise - vom Worker, nicht aus der Seite.
  *
  * Der Betrag stand zuletzt an drei Stellen: im Bestellfenster, in der
  * Preis-Sektion und im Worker, der die Anfrage entgegennimmt. Drei Stellen
@@ -7,7 +7,7 @@
  * landet. Deshalb ist der Worker die Quelle und die Seite fragt ihn.
  *
  * **Der Rückfall zeigt immer den Listenpreis.** Wenn der Abruf scheitert,
- * steht der eingebaute Wert da — der ungerabattete. Ein Ausfall darf nie zu
+ * steht der eingebaute Wert da - der ungerabattete. Ein Ausfall darf nie zu
  * einem zu niedrigen Preis führen; er darf höchstens einen Nachlass
  * verschweigen, den der Kunde dann erfragt.
  *
@@ -32,7 +32,7 @@ export interface Preisstand {
    listenpreise: { pro: number; lifetime: number };
    rabatt: RabattBefund | null;
    /** Warum ein eingegebener Code nicht greift: unbekannt, abgelaufen,
-    *  aufgebraucht — oder leer, wenn alles in Ordnung ist. */
+    *  aufgebraucht - oder leer, wenn alles in Ordnung ist. */
    codeGrund: string;
    laeuft: boolean;
 }
@@ -57,13 +57,18 @@ export function preisText(cent: number, sprache: "de" | "en"): string {
  * Liefert den Preisstand und eine Funktion, mit der sich ein Rabattcode
  * prüfen lässt. Ohne Code wird einmal beim Einhängen geladen.
  */
-export function usePreise(aktiv = true) {
+export function usePreise(aktiv = true, basis = "/api") {
    const [stand, setStand] = useState<Preisstand>(LEER);
 
    const holen = useCallback(async (code?: string) => {
       setStand((alt) => ({ ...alt, laeuft: true }));
       try {
-         const adresse = "/api/preise" + (code ? "?code=" + encodeURIComponent(code) : "");
+         /* Die Basis kommt vom Aufrufer, damit die Kaufseite im Sandkasten
+          * auch den Sandkasten fragt. Sonst prüfte sie einen Rabattcode gegen
+          * den Wirk-Worker, wo er gar nicht existiert - und der Code sähe
+          * ungültig aus, obwohl er richtig angelegt ist. */
+         const adresse = basis + "/preise"
+            + (code ? "?code=" + encodeURIComponent(code) : "");
          const antwort = await fetch(adresse);
          if (!antwort.ok) throw new Error(String(antwort.status));
          const daten = await antwort.json();
@@ -80,7 +85,7 @@ export function usePreise(aktiv = true) {
          // nichts anzeigt, wäre der schlechtere Tausch.
          setStand({ ...LEER, codeGrund: code ? "netz" : "" });
       }
-   }, []);
+   }, [basis]);
 
    useEffect(() => {
       if (aktiv) void holen();

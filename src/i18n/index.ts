@@ -6,8 +6,8 @@ import de from "./locales/de.json";
 import en from "./locales/en.json";
 
 // Default-Logik:
-// 1. localStorage ("vidiverify-lang") wenn gesetzt — gewinnt immer (User-Wahl)
-// 2. Querystring (?lng=en|de) — von Cloudflare Page Rule gesetzt, wenn jemand
+// 1. localStorage ("vidiverify-lang") wenn gesetzt - gewinnt immer (User-Wahl)
+// 2. Querystring (?lng=en|de) - von Cloudflare Page Rule gesetzt, wenn jemand
 //    via vidiverify.com einsteigt
 // 3. Hostname: vidiverify.com → en, vidiverify.de → de (für künftige
 //    Domain-Trennung direkt auf GitHub Pages)
@@ -25,7 +25,7 @@ const HOSTNAME_DETECTOR = {
    cacheUserLanguage: () => undefined,
 };
 
-// Custom-Detector via Klasseninstanz VOR init registrieren — sonst wird
+// Custom-Detector via Klasseninstanz VOR init registrieren - sonst wird
 // "hostname" beim initialen Detection-Run uebersprungen und der navigator-
 // Detector greift faelschlich (Browser=de-DE -> DE selbst auf vidiverify.com).
 const lngDetector = new LanguageDetector();
@@ -53,7 +53,7 @@ i18n
       returnObjects: true,
    });
 
-// <html lang="..."> dynamisch synchron halten — wichtig für Screenreader und SEO
+// <html lang="..."> dynamisch synchron halten - wichtig für Screenreader und SEO
 const syncHtmlLang = (lng: string) => {
    if (typeof document !== "undefined") {
       document.documentElement.lang = lng.toLowerCase().startsWith("de") ? "de" : "en";

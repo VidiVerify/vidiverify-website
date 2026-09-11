@@ -4,10 +4,10 @@
  * Eigenständig und nicht in `src/i18n/locales/*.json`: Die Sprachdateien des
  * One-Pagers sind Website-Texte, das hier ist ein Bestellvorgang. Er wandert
  * womöglich noch, und dann soll er als Ganzes wandern. Die SPRACHE folgt
- * trotzdem dem Umschalter in der Nav — das entscheidet der Aufrufer.
+ * trotzdem dem Umschalter in der Nav - das entscheidet der Aufrufer.
  *
  * Die Erklärzeile zum Verhältnis PRO/LIFETIME ist im Preisplan als zwingend
- * gesetzt — überall dort, wo Preise stehen. Sie ist hier kein Beiwerk: Ohne
+ * gesetzt - überall dort, wo Preise stehen. Sie ist hier kein Beiwerk: Ohne
  * sie kann ein Käufer den Wert von LIFETIME nicht abschätzen und wählt im
  * Zweifel PRO.
  */
@@ -18,7 +18,7 @@ export type Sprache = "de" | "en";
 
 const de = {
    titel: "Lizenz anfragen",
-   untertitel: "Der persönliche Bestellweg — mit Rechnung und Überweisung.",
+   untertitel: "Der persönliche Bestellweg - mit Rechnung und Überweisung.",
 
    vvidTitel: "Deine Installation",
    vvidFeld: "VV-ID",
@@ -28,7 +28,8 @@ const de = {
 
    wunschTitel: "Lizenztyp",
    preisHinweis:
-      "Endkundenpreise inklusive Umsatzsteuer. Einmalzahlung, kein Abonnement.",
+      "Gesamtpreise, keine weiteren Kosten. Kein Ausweis von Umsatzsteuer "
+      + "nach § 19 UStG. Einmalzahlung, kein Abonnement.",
 
    freeTitel: "FREE",
    freePreis: "kostenlos",
@@ -58,7 +59,7 @@ const de = {
    vorname: "Vorname",
    nachname: "Nachname",
    email: "Email",
-   emailHinweis: "Sie gehört zur Lizenz und steht im Schlüssel.",
+   emailHinweis: "Die eingegebene Emailadresse ist mit der Lizenz verknüpft.",
    emailFehler: "Bitte eine Emailadresse angeben.",
    telefon: "Telefon",
 
@@ -84,6 +85,28 @@ const de = {
       + "Anfrage und zur Rechnungsstellung. Näheres in der",
    datenschutzLink: "Datenschutzerklärung",
 
+   agbTeil1: "Ich habe die",
+   agbLink: "AGB einschliesslich der Haftungsbeschränkung in Ziffer 9",
+   agbTeil2: " und die",
+   agbTeil3: " gelesen und erkenne sie an.",
+
+   widerrufTeil1:
+      "Ich verlange ausdrücklich, dass mit der Bereitstellung nach "
+      + "Zahlungseingang begonnen wird, und bestätige, dass ich mein",
+   widerrufLink: "Widerrufsrecht",
+   widerrufTeil2: " damit mit Beginn der Bereitstellung verliere.",
+
+   zustimmungFehlt:
+      "Bitte beide Erklärungen bestätigen. Ohne sie können wir die Anfrage "
+      + "nicht bearbeiten.",
+
+   unverbindlichFett: "Anfrage unverbindlich.",
+   unverbindlichText:
+      "Ein Vertrag kommt erst mit unserer Rechnung und deiner Zahlung "
+      + "zustande. Die Rechnung kommt in der Regel innerhalb von ein bis drei "
+      + "Werktagen. VidiVerify ist ein technisches Hilfsmittel; Entscheidungen "
+      + "über deine Dateien triffst du in eigener Verantwortung.",
+
    pflichtnote: "* Notwendige Angaben",
    absenden: "Anfrage senden",
    sendet: "wird gesendet …",
@@ -91,14 +114,26 @@ const de = {
    turnstileFehltTitel: "Der Bot-Schutz ist noch nicht eingerichtet.",
    turnstileFehltText:
       "Diese Seite kann deshalb gerade keine Anfragen annehmen. Schreib uns "
-      + "bitte an support@vidiverify.de — wir kümmern uns sofort darum.",
+      + "bitte an support@vidiverify.de - wir kümmern uns sofort darum.",
 
+   emailTipp: "Meintest du",
+   landTipp: "Meintest du",
+   tippUebernehmen: "?",
+
+   dankeMitName: "Vielen Dank",
+   dankeOhneName: "Vielen Dank!",
    dankeTitel: "Deine Anfrage ist da.",
+   dankeMeldenAn: "Wir melden uns bei",
+   dankeAdressePruefen:
+      "Stimmt die Adresse nicht, schreib uns kurz an support@vidiverify.de - "
+      + "dann korrigieren wir sie, bevor die Rechnung rausgeht.",
    dankeText:
-      "Wir melden uns per Email mit der Rechnung. **Den Schlüssel gibt es "
-      + "nach dem Zahlungseingang** — danach Lizenzabruf direkt aus VidiVerify.",
+      "Wir melden uns per Email mit der Rechnung. **Den Lizenzschlüssel gibt "
+      + "es nach dem Zahlungseingang** - danach lässt er sich direkt aus "
+      + "VidiVerify abrufen.",
    dankeFrei:
-      "Wir melden uns per Email. Danach Lizenzabruf direkt aus VidiVerify.",
+      "Wir melden uns per Email. Den Lizenzschlüssel kannst du danach direkt "
+      + "aus VidiVerify abrufen.",
    zurueck: "Zurück zur Website",
 
    fehlerTitel: "Das hat nicht geklappt.",
@@ -117,7 +152,7 @@ const de = {
 
 const en: typeof de = {
    titel: "Request a licence",
-   untertitel: "The personal ordering route — with an invoice and a bank transfer.",
+   untertitel: "The personal ordering route - with an invoice and a bank transfer.",
 
    vvidTitel: "Your installation",
    vvidFeld: "VV-ID",
@@ -126,7 +161,9 @@ const en: typeof de = {
    vvidFehler: "The ID looks like VV- plus five characters, e.g. VV-A7K2M.",
 
    wunschTitel: "Licence type",
-   preisHinweis: "Retail prices including VAT. One payment, no subscription.",
+   preisHinweis:
+      "Total prices, no further costs. No VAT is shown (small business rule, "
+      + "§ 19 UStG). One payment, no subscription.",
 
    freeTitel: "FREE",
    freePreis: "free of charge",
@@ -155,7 +192,7 @@ const en: typeof de = {
    vorname: "First name",
    nachname: "Last name",
    email: "Email",
-   emailHinweis: "It belongs to the licence and is part of the key.",
+   emailHinweis: "The email address you enter is linked to the licence.",
    telefon: "Phone",
    emailFehler: "Please enter an email address.",
 
@@ -180,6 +217,26 @@ const en: typeof de = {
       + "invoice. More in our",
    datenschutzLink: "privacy policy",
 
+   agbTeil1: "I have read and accept the",
+   agbLink: "terms and conditions, including the limitation of liability in clause 9",
+   agbTeil2: " and the",
+   agbTeil3: ".",
+
+   widerrufTeil1:
+      "I expressly request that provision begins once payment has arrived, and "
+      + "I confirm that I thereby lose my",
+   widerrufLink: "right of withdrawal",
+   widerrufTeil2: " as soon as provision begins.",
+
+   zustimmungFehlt:
+      "Please confirm both statements. Without them we cannot process the request.",
+
+   unverbindlichFett: "This request is not binding.",
+   unverbindlichText:
+      "A contract is concluded only with our invoice and your payment. The "
+      + "invoice usually follows within one to three working days. VidiVerify is "
+      + "a technical tool; decisions about your files remain yours.",
+
    pflichtnote: "* Required",
    absenden: "Send request",
    sendet: "sending …",
@@ -187,16 +244,26 @@ const en: typeof de = {
    turnstileFehltTitel: "Bot protection is not set up yet.",
    turnstileFehltText:
       "This page cannot accept requests right now. Please write to "
-      + "support@vidiverify.de — we will take care of it immediately.",
+      + "support@vidiverify.de - we will take care of it immediately.",
 
+   emailTipp: "Did you mean",
+   landTipp: "Did you mean",
+   tippUebernehmen: "?",
+
+   dankeMitName: "Thank you",
+   dankeOhneName: "Thank you!",
    dankeTitel: "Your request has arrived.",
+   dankeMeldenAn: "We will get in touch at",
+   dankeAdressePruefen:
+      "If the address is wrong, drop us a line at support@vidiverify.de - we "
+      + "will correct it before the invoice goes out.",
    dankeText:
-      "We will get back to you by email with the invoice. **The key follows "
-      + "once the payment has arrived** — then retrieve it straight from "
-      + "VidiVerify.",
-   dankeFrei:
-      "We will get back to you by email. Then retrieve the licence straight "
+      "We will get back to you by email with the invoice. **The licence key "
+      + "follows once the payment has arrived** - then retrieve it straight "
       + "from VidiVerify.",
+   dankeFrei:
+      "We will get back to you by email. You can then retrieve the licence key "
+      + "straight from VidiVerify.",
    zurueck: "Back to the website",
 
    fehlerTitel: "That did not work.",

@@ -17,7 +17,6 @@ const NAV_KEYS: { id: string; key: string }[] = [
    { id: "download", key: "download" },
    { id: "preise", key: "pricing" },
    { id: "kontakt", key: "contact" },
-   { id: "spenden", key: "support" },
 ];
 
 const Nav = () => {
@@ -65,7 +64,7 @@ const Nav = () => {
 
       const heroEl = document.getElementById("hero");
       if (heroEl) observer.observe(heroEl);
-      // Stabile NAV_KEYS statt der sprachabhaengigen NAV_SECTIONS — die IDs aendern
+      // Stabile NAV_KEYS statt der sprachabhaengigen NAV_SECTIONS - die IDs aendern
       // sich nicht beim Sprachwechsel, daher kann das Effekt-Deps-Array leer bleiben.
       for (const { id } of NAV_KEYS) {
          const el = document.getElementById(id);

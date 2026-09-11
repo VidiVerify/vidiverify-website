@@ -9,14 +9,15 @@
    "roles": [
       "Der 1-Klick-Check für deine Videos",
       "Integritätsprüfung. Klar und schnell.",
-      "Technische Analyse für Videodateien",
-      "Moderne Desktop-Anwendung für Windows",
-      "Praxisnah entwickelt"
+      "Technische Analyse. Video und Audio.",
+      "Moderne Windowsanwendung. Branchenstandard.",
+      "Fehlerreparatur. Verzeichnisprüfung komplett.",
+      "Video|Audio Labor. Details & Forensik."
    ],
    "statistics": {
       "launch": "2026",
       "formate": "70+",
-      "codezeilen": "23k+",
+      "codezeilen": "60k+",
       "funktionen": "61+",
       "downloads": "350+",
       "seitenaufrufe": "3500+"

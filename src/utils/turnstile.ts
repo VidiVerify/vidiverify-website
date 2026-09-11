@@ -1,5 +1,5 @@
 /**
- * Welcher Turnstile-Schlüssel gilt — und warum es dafür eine eigene Datei gibt.
+ * Welcher Turnstile-Schlüssel gilt - und warum es dafür eine eigene Datei gibt.
  *
  * Die Wahl entscheidet, ob das Bestellformular geschützt ist oder nur so
  * aussieht. Cloudflares Testschlüssel bestehen immer; einer davon auf der
@@ -14,7 +14,7 @@
 
 /* Der öffentliche Schlüssel des Widgets.
  *
- * Kein Geheimnis — er steht ohnehin im ausgelieferten Seitenquelltext; das
+ * Kein Geheimnis - er steht ohnehin im ausgelieferten Seitenquelltext; das
  * Geheimnis ist das Gegenstück im Worker (`TURNSTILE_SECRET`). Ist er leer,
  * nimmt das Formular KEINE Anfragen an, statt sie ungeschützt zu senden.
  */
@@ -22,13 +22,13 @@ export const TURNSTILE_SITEKEY = "0x4AAAAAAEuYPC8XeM7ig91Z";
 
 /* Der Testschlüssel von Cloudflare: besteht immer, ist ausdrücklich dafür
  * gedacht. Ohne ihn stünde beim Entwickeln dauerhaft der Hinweis, dass gerade
- * nichts angenommen werden kann — man sähe also nie das Fenster, das der
+ * nichts angenommen werden kann - man sähe also nie das Fenster, das der
  * Kunde sieht. Das echte Widget kennt `localhost` nicht als Hostnamen und
  * würde dort ohnehin nicht laden. */
 export const TURNSTILE_TEST = "1x00000000000000000000AA";
 
 /* Derselbe Vorrat, aber dieser erzwingt eine Rückfrage. Mit
- * `interaction-only` ist das Widget im Regelfall unsichtbar — was gut ist und
+ * `interaction-only` ist das Widget im Regelfall unsichtbar - was gut ist und
  * zugleich heisst, dass man den einen Fall nie zu Gesicht bekommt, auf den es
  * ankommt. Über `?bot=1` lässt er sich lokal herstellen. */
 export const TURNSTILE_TEST_RUECKFRAGE = "3x00000000000000000000FF";

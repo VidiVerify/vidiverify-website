@@ -129,7 +129,7 @@ const MobileNoticeModal = ({ open, onClose, shareUrl }: MobileNoticeModalProps) 
 
                   {/* Body */}
                   <p style={{ fontSize: 13.5, color: TEXT_SECONDARY, lineHeight: 1.7, margin: "0 0 18px" }}>
-                     Du bist gerade mobil unterwegs — der Installer benötigt einen Windows-PC. So bekommst du den Download auf dein Gerät:
+                     Du bist gerade mobil unterwegs - der Installer benötigt einen Windows-PC. So bekommst du den Download auf dein Gerät:
                   </p>
 
                   {/* Copy action */}

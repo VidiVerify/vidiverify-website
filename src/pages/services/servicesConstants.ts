@@ -1,14 +1,19 @@
-import { ScanSearch, ShieldCheck, Film, FileVideo, FlaskConical, ClipboardList, Code } from "lucide-react";
+import {
+   ScanSearch, ShieldCheck, Film, FileVideo, AudioWaveform, FlaskConical,
+   MonitorCheck, ClipboardList, Code,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 // Icon-Lookup via stabile Service-ID (sprachunabhängig)
 export const iconMapById: Record<number, LucideIcon> = {
-   1: ScanSearch,
-   2: ShieldCheck,
-   3: Film,
-   4: FileVideo,
-   5: FlaskConical,
-   6: ClipboardList,
+   1: ScanSearch,      // Vorprüfung
+   2: ShieldCheck,     // Integrität
+   3: Film,            // Media Analyse
+   4: FileVideo,       // Video-Detailfenster
+   5: AudioWaveform,   // Audio-Detailfenster
+   6: FlaskConical,    // Media Lab
+   7: MonitorCheck,    // Kompatibilität
+   8: ClipboardList,   // Stapel, Reparatur, Nachweis
 };
 
 export const fallbackIcon: LucideIcon = Code;

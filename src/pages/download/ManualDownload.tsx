@@ -40,7 +40,7 @@ const ManualDownload = () => {
    const { t, i18n } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
 
-   // Primary-Sprache folgt der aktuellen App-Sprache — direkt aus i18n abgeleitet,
+   // Primary-Sprache folgt der aktuellen App-Sprache - direkt aus i18n abgeleitet,
    // kein useState/useEffect noetig (useTranslation re-rendert bei Sprachwechsel).
    const currentLang = (i18n.resolvedLanguage ?? i18n.language ?? "en").toLowerCase();
    const primaryLang: Lang = currentLang.startsWith("de") ? "de" : "en";

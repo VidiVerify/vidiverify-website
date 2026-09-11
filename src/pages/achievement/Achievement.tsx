@@ -117,13 +117,13 @@ const FormatGroup = ({ title, icon, iconColor, formats, accentColor, anim, direc
    const isShortDesktop = useMediaQuery(SHORT_DESKTOP_QUERY);
 
    // Marquee-Dauer berechnen: Breite EINER Kopie / Geschwindigkeit
-   // (Track ist 3× kopiert — Animation läuft genau über eine Kopien-Breite = 33.33%)
+   // (Track ist 3× kopiert - Animation läuft genau über eine Kopien-Breite = 33.33%)
    const copyWidth = formats.length * (TILE_WIDTH + TILE_GAP);
    const durationSec = Math.round(copyWidth / PX_PER_SECOND);
 
    // Track ist 3× gerendert; um die Mitte (Copy 2) als Ruheposition zu nutzen,
    // verschieben wir den Start um -copyWidth/2 und klemmen den Manual-Offset
-   // auf ±copyWidth/2 — damit zeigt der Viewport NIE leere Stellen,
+   // auf ±copyWidth/2 - damit zeigt der Viewport NIE leere Stellen,
    // egal wo in der Marquee-Animation man ist.
    const HOME_SHIFT = -copyWidth / 2;
    const MAX_OFFSET = copyWidth / 2;

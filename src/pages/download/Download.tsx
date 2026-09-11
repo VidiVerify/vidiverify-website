@@ -31,7 +31,7 @@ const formatBytes = (bytes: number): string => {
 };
 
 const formatDate = (iso: string, locale: string): string => {
-   if (!iso) return "—";
+   if (!iso) return "-";
    const dateLocale = locale.startsWith("de") ? "de-DE" : "en-US";
    return new Date(iso).toLocaleDateString(dateLocale, {
       day: "2-digit", month: "long", year: "numeric",
@@ -63,7 +63,7 @@ const Download = () => {
          id: "version",
          icon: <MdVerified size={18} color={CYAN} />,
          label: t("download.version"),
-         value: loading ? <Skeleton width={64} /> : error ? "—" : data?.version ?? "—",
+         value: loading ? <Skeleton width={64} /> : error ? "-" : data?.version ?? "-",
          mono: true,
       },
       {
@@ -77,7 +77,7 @@ const Download = () => {
          id: "groesse",
          icon: <BsFileZip size={18} color={CYAN} />,
          label: t("download.fileSize"),
-         value: loading ? <Skeleton width={56} /> : data?.fileSize ? formatBytes(data.fileSize) : "—",
+         value: loading ? <Skeleton width={56} /> : data?.fileSize ? formatBytes(data.fileSize) : "-",
          mono: false,
       },
    ];

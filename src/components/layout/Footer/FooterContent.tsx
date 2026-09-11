@@ -13,6 +13,8 @@ const FooterContent = () => {
 
    const LEGAL_LINKS = [
       { label: t("footer.privacy"), href: "#datenschutz" },
+      { label: t("footer.terms"), href: "#agb" },
+      { label: t("footer.withdrawal"), href: "#widerruf" },
       { label: t("footer.eula"), href: "#eula" },
       { label: t("footer.imprint"), href: "#impressum" },
    ];
