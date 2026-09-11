@@ -24,6 +24,7 @@ const de = {
    vvidWarum: "Der Lizenzschlüssel wird an diese Kennung gebunden.",
 
    wahlTitel: "Lizenz",
+   wahlTitelUpgrade: "Dein Upgrade",
    rabattPlatzhalter: "Rabatt- oder Aktionscode",
    rabattPruefen: "Einlösen",
    rabattGilt: "Code eingelöst - der Nachlass ist im Bezahlfenster enthalten.",
@@ -121,6 +122,7 @@ const en: typeof de = {
    vvidWarum: "The licence key is bound to this ID.",
 
    wahlTitel: "Licence",
+   wahlTitelUpgrade: "Your upgrade",
    rabattPlatzhalter: "Discount or promo code",
    rabattPruefen: "Apply",
    rabattGilt: "Code applied - the discount is included at checkout.",

@@ -1,13 +1,14 @@
 {
    "title": "Endbenutzerlizenzvereinbarung (EULA)",
    "subtitle": "für die Nutzung von VidiVerify",
-   "date": "Stand: 10.09.2026",
+   "date": "Stand: 11.09.2026",
    "sections": [
       {
          "id": 1,
          "title": "Vertragsgegenstand und Vertragspartner",
          "paragraphs": [
             "Diese Endbenutzerlizenzvereinbarung regelt die Nutzung der Software VidiVerify zwischen dem Nutzer und Thomas Smektalla, Liebestrasse 18a, 07546 Gera, Deutschland, auftretend unter der Bezeichnung „VidiVerify-Team“, im Folgenden „Anbieter“.",
+            "Die Lizenz kann über die Bestellanfrage beim Anbieter, über die Kaufseite mit dem Zahlungsanbieter Paddle als Wiederverkäufer oder über den Microsoft Store erworben werden. Für die Nutzung der Software ist unabhängig vom Erwerbsweg allein diese Vereinbarung massgeblich; den Erwerb regeln die Allgemeinen Geschäftsbedingungen des Anbieters beziehungsweise die Bedingungen des jeweiligen Verkäufers.",
             "Mit dem Download, der Installation oder der Nutzung von VidiVerify erkennt der Nutzer diese Bestimmungen an."
          ]
       },
@@ -43,7 +44,7 @@
          "id": 5,
          "title": "Aktivierung, Lizenzschlüssel und Gerätebindung",
          "paragraphs": [
-            "Eine Lizenz wird als signierter Lizenzschlüssel ausgestellt und ist an die Gerätekennung (VV-ID) des Rechners gebunden, für den sie angefordert wurde. Der Lizenzschlüssel kann über die Anwendung aus der Ausgabestelle des Anbieters abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht.",
+            "Eine Lizenz wird als signierter Lizenzschlüssel ausgestellt und ist an die Gerätekennung (VV-ID) des Rechners gebunden, für den sie angefordert wurde. Der Lizenzschlüssel kann über die Anwendung aus der Ausgabestelle des Anbieters abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Beim Kauf über die Kaufseite wird die Lizenz nach der Zahlungsbestätigung durch Paddle ausgestellt und von der Anwendung beim nächsten Start selbst abgeholt.",
             "Die Anwendung bestätigt eine vorhandene Lizenz höchstens einmal täglich beim Start im Hintergrund. Ohne Internetverbindung geschieht nichts; ein Verbindungsfehler nimmt niemandem seine Lizenz. Lässt sich über sieben Tage hinweg keine Verbindung herstellen, weist die Anwendung darauf hin und läuft bis dahin in der kostenfreien Fassung weiter; die Lizenz lebt wieder auf, sobald eine Verbindung besteht.",
             "Der Nutzer darf den Lizenzschlüssel nicht an Dritte weitergeben, öffentlich zugänglich machen oder umgehen."
          ]
@@ -52,7 +53,7 @@
          "id": 6,
          "title": "Rücknahme einer Lizenz",
          "paragraphs": [
-            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, oder wenn der Lizenzschlüssel entgegen dem vorstehenden Abschnitt verbreitet oder umgangen wurde.",
+            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, auch durch einen Wiederverkäufer, oder wenn der Lizenzschlüssel entgegen dem vorstehenden Abschnitt verbreitet oder umgangen wurde.",
             "Eine Rücknahme wirkt mit der nächsten Bestätigung. Sie wird aufgehoben, sobald der Grund entfallen ist. Für alle anderen Nutzer ändert sich dadurch nichts."
          ]
       },
@@ -86,7 +87,7 @@
          "title": "Datenverarbeitung",
          "paragraphs": [
             "Die geprüften Dateien verlassen den Rechner nicht. VidiVerify verarbeitet technische Daten lokal, soweit dies für die vorgesehenen Funktionen erforderlich ist. Eine automatische Übermittlung von Inhalten, Nutzungsstatistiken oder Prüfergebnissen an den Anbieter findet nicht statt.",
-            "Verbindungen stellt die Anwendung nur für die Prüfung auf Updates, den Bezug der Prüfwerkzeuge und für Lizenzvorgänge her. Eine Gerätekennung wird dabei nur übermittelt, wenn zuvor ein Bestellweg beschritten wurde. Einzelheiten regelt die Datenschutzerklärung.",
+            "Verbindungen stellt die Anwendung nur für die Prüfung auf Updates, den Bezug der Prüfwerkzeuge und für Lizenzvorgänge her. Eine Gerätekennung wird dabei nur übermittelt, wenn zuvor ein Bestellweg beschritten wurde. Beim Kauf über die Kaufseite werden die dort erhobenen Angaben an Paddle übergeben. Einzelheiten regelt die Datenschutzerklärung.",
             "Support-Pakete und Protokolldateien werden nur übermittelt, wenn der Nutzer sie selbst einsendet. Er prüft vorher, ob sie personenbezogene oder vertrauliche Inhalte enthalten."
          ]
       },

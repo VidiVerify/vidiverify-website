@@ -27,6 +27,7 @@ const de = {
    vvidFehler: "Die Kennung sieht aus wie VV- und fünf Zeichen, etwa VV-A7K2M.",
 
    wunschTitel: "Lizenztyp",
+   wunschTitelUpgrade: "Dein Upgrade",
    preisHinweis:
       "Gesamtpreise, keine weiteren Kosten. Kein Ausweis von Umsatzsteuer "
       + "nach § 19 UStG. Einmalzahlung, kein Abonnement.",
@@ -73,6 +74,7 @@ const de = {
    plz: "PLZ",
    stadt: "Ort",
    land: "Land",
+   firma: "Firmenname",
    steuernummer: "Steuernummer",
    ustid: "USt-IdNr.",
 
@@ -161,6 +163,7 @@ const en: typeof de = {
    vvidFehler: "The ID looks like VV- plus five characters, e.g. VV-A7K2M.",
 
    wunschTitel: "Licence type",
+   wunschTitelUpgrade: "Your upgrade",
    preisHinweis:
       "Total prices, no further costs. No VAT is shown (small business rule, "
       + "§ 19 UStG). One payment, no subscription.",
@@ -206,6 +209,7 @@ const en: typeof de = {
    plz: "Postcode",
    stadt: "City",
    land: "Country",
+   firma: "Company name",
    steuernummer: "Tax number",
    ustid: "VAT ID",
 

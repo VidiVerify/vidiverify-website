@@ -1,14 +1,15 @@
 {
    "title": "Allgemeine Geschäftsbedingungen",
    "subtitle": "für den Erwerb von VidiVerify-Lizenzen",
-   "date": "Stand: 10.09.2026",
-   "version": "AGB-2026-09-10",
+   "date": "Stand: 11.09.2026",
+   "version": "AGB-2026-09-11",
    "sections": [
       {
          "id": 1,
          "title": "Geltungsbereich und Anbieter",
          "paragraphs": [
             "Diese Bedingungen gelten für den Erwerb kostenpflichtiger Lizenzen für die Software VidiVerify.",
+            "Eine Lizenz kann auf zwei Wegen erworben werden: über die Bestellanfrage auf vidiverify.de, bei der der Anbieter selbst verkauft, oder über die Kaufseite mit dem Bezahlfenster unseres Zahlungsanbieters Paddle, bei der Paddle als Wiederverkäufer im eigenen Namen verkauft (Abschnitt 4). Ein Bezug über den Microsoft Store richtet sich nach dessen Bedingungen.",
             "Anbieter ist Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland. Email: admin@vidiverify.de (rechtlich und wirtschaftlich), support@vidiverify.de (technisch).",
             "Anbieter ist Thomas Smektalla als Privatperson; ein eingetragenes Unternehmen besteht nicht."
          ]
@@ -27,7 +28,7 @@
       },
       {
          "id": 3,
-         "title": "Bestellvorgang und Vertragsschluss",
+         "title": "Bestellvorgang und Vertragsschluss bei der Bestellanfrage",
          "paragraphs": [
             "Über das Formular „Lizenz anfragen“ auf vidiverify.de wird eine Anfrage abgegeben. Die Anfrage ist unverbindlich und stellt keine Bestellung dar; ein Vertrag kommt durch sie nicht zustande.",
             "Der Vertrag kommt in drei Schritten zustande: Der Interessent sendet die Anfrage ab und erkennt dabei diese Bedingungen an. Der Anbieter prüft die Anfrage und übersendet per Email eine Rechnung; diese Rechnung ist das Angebot des Anbieters. Der Vertrag kommt mit der vollständigen Zahlung des in der Rechnung genannten Betrages zustande.",
@@ -39,45 +40,56 @@
       },
       {
          "id": 4,
-         "title": "Preise, Steuern und Zahlung",
+         "title": "Kauf über die Kaufseite (Paddle)",
          "paragraphs": [
-            "Es gelten die zum Zeitpunkt der Anfrage angegebenen Preise. Die angegebenen Beträge sind Gesamtpreise; weitere Kosten fallen nicht an.",
-            "Umsatzsteuer wird nach § 19 UStG (Kleinunternehmerregelung) nicht ausgewiesen.",
-            "Die Zahlung erfolgt auf Grundlage der übersandten Rechnung nach den dort genannten Bedingungen."
+            "Auf der Kaufseite vidiverify.de/pro kann eine Lizenz unmittelbar bezahlt werden. Verkäufer ist dabei nicht der Anbieter, sondern unser Zahlungsanbieter Paddle als Wiederverkäufer (Merchant of Record): für Käufer mit Sitz ausserhalb der USA die Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, Vereinigtes Königreich; für Käufer mit Sitz in den USA die Paddle.com Inc., New York, USA.",
+            "Der Kaufvertrag kommt mit Paddle zustande, und zwar nach den Bedingungen, die Paddle im Bezahlfenster bereitstellt. Paddle stellt die Rechnung, berechnet die im Land des Käufers geltende Umsatzsteuer, führt sie ab und ist Ansprechpartner für Zahlung, Rückerstattung und Widerruf. Die Abschnitte 3, 5 und 9 dieser Bedingungen betreffen allein die Bestellanfrage.",
+            "Vor dem Öffnen des Bezahlfensters erhebt der Anbieter auf der Kaufseite Name, Rechnungsanschrift und Emailadresse, bei gewerblichen Käufern Firma und Umsatzsteuer-Identifikationsnummer, sowie die Gerätekennung (VV-ID) und übergibt sie an Paddle, damit die Rechnung den Käufer nennt, die Steuer nach dem richtigen Land berechnet wird und die Lizenz der Installation zugeordnet werden kann. Einzelheiten regelt die Datenschutzerklärung.",
+            "Was der Käufer erwirbt, beschreibt Abschnitt 2; die Bereitstellung durch den Anbieter regelt Abschnitt 6, die Rücknahme Abschnitt 7, die Nutzung die Endbenutzerlizenzvereinbarung. Ein Rabatt- oder Aktionscode wird im Bezahlfenster von Paddle verrechnet; massgeblich ist der dort angezeigte Betrag."
          ]
       },
       {
          "id": 5,
-         "title": "Bereitstellung",
+         "title": "Preise, Steuern und Zahlung",
          "paragraphs": [
-            "Der Lizenzschlüssel wird nach Zahlungseingang elektronisch bereitgestellt, in der Regel innerhalb von ein bis drei Werktagen. Er kann zusätzlich jederzeit über die Anwendung selbst abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Für einen dauerhaften Wechsel auf ein anderes Gerät genügt eine Mitteilung an den Anbieter.",
-            "Zur Aktivierung und zur wiederkehrenden Bestätigung der Lizenz werden die beim Erwerb angegebene Emailadresse und die Gerätekennung (VV-ID) verwendet."
+            "Es gelten die zum Zeitpunkt der Anfrage beziehungsweise des Kaufs angegebenen Preise. Die angegebenen Beträge sind Gesamtpreise; weitere Kosten fallen nicht an.",
+            "Bei der Bestellanfrage wird Umsatzsteuer nach § 19 UStG (Kleinunternehmerregelung) nicht ausgewiesen. Beim Kauf über die Kaufseite weist Paddle als Verkäufer die Umsatzsteuer des Käuferlandes aus; die auf der Kaufseite genannten Preise verstehen sich einschliesslich der deutschen Umsatzsteuer, verbindlich ist der im Bezahlfenster angezeigte Betrag.",
+            "Bei der Bestellanfrage erfolgt die Zahlung auf Grundlage der übersandten Rechnung nach den dort genannten Bedingungen, beim Kauf über die Kaufseite mit den von Paddle angebotenen Zahlungsmitteln."
          ]
       },
       {
          "id": 6,
-         "title": "Rücknahme einer Lizenz",
+         "title": "Bereitstellung",
          "paragraphs": [
-            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, oder wenn der Lizenzschlüssel entgegen den Bestimmungen der Endbenutzerlizenzvereinbarung verbreitet oder umgangen wird. Die Rücknahme wird aufgehoben, sobald ihr Grund entfallen ist. Weitergehende gesetzliche Rechte bleiben unberührt."
+            "Bei der Bestellanfrage wird der Lizenzschlüssel nach Zahlungseingang elektronisch bereitgestellt, in der Regel innerhalb von ein bis drei Werktagen. Beim Kauf über die Kaufseite wird die Lizenz unmittelbar nach der Zahlungsbestätigung durch Paddle ausgestellt, auf der Kaufseite angezeigt und von der Anwendung beim nächsten Start selbst abgeholt. In beiden Fällen kann der Lizenzschlüssel jederzeit über die Anwendung abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Für einen dauerhaften Wechsel auf ein anderes Gerät genügt eine Mitteilung an den Anbieter.",
+            "Zur Aktivierung und zur wiederkehrenden Bestätigung der Lizenz werden die beim Erwerb angegebene Emailadresse und die Gerätekennung (VV-ID) verwendet."
          ]
       },
       {
          "id": 7,
+         "title": "Rücknahme einer Lizenz",
+         "paragraphs": [
+            "Der Anbieter kann eine Lizenz zurücknehmen, wenn die Zahlung ausbleibt, zurückgerufen oder erstattet wird, auch durch Paddle, oder wenn der Lizenzschlüssel entgegen den Bestimmungen der Endbenutzerlizenzvereinbarung verbreitet oder umgangen wird. Die Rücknahme wird aufgehoben, sobald ihr Grund entfallen ist. Weitergehende gesetzliche Rechte bleiben unberührt."
+         ]
+      },
+      {
+         "id": 8,
          "title": "Mängelrechte",
          "paragraphs": [
             "Für Verbraucher gelten die gesetzlichen Rechte bei Mängeln digitaler Produkte. Der Anbieter ist insbesondere berechtigt, einen Mangel zunächst durch Aktualisierung, Fehlerbehebung oder Bereitstellung einer korrigierten Version zu beseitigen, soweit die gesetzlichen Voraussetzungen vorliegen."
          ]
       },
       {
-         "id": 8,
+         "id": 9,
          "title": "Widerrufsrecht für Verbraucher",
          "paragraphs": [
             "Verbrauchern steht bei Fernabsatzverträgen ein gesetzliches Widerrufsrecht zu. Die Einzelheiten ergeben sich aus der Widerrufsbelehrung, die Bestandteil dieser Bedingungen ist.",
-            "Bei digitalen Inhalten erlischt dieses Widerrufsrecht vorzeitig, wenn der Verbraucher ausdrücklich zustimmt, dass mit der Bereitstellung vor Ablauf der Widerrufsfrist begonnen wird, und gleichzeitig bestätigt, dass er dadurch mit Beginn der Bereitstellung sein Widerrufsrecht verliert. Beide Erklärungen werden im Anfrageformular gesondert abgefragt."
+            "Bei digitalen Inhalten erlischt dieses Widerrufsrecht vorzeitig, wenn der Verbraucher ausdrücklich zustimmt, dass mit der Bereitstellung vor Ablauf der Widerrufsfrist begonnen wird, und gleichzeitig bestätigt, dass er dadurch mit Beginn der Bereitstellung sein Widerrufsrecht verliert. Beide Erklärungen werden im Anfrageformular gesondert abgefragt, sobald eine kostenpflichtige Lizenz angefragt wird; bei der kostenfreien Registrierung entfällt die zweite, weil kein Vertrag zustande kommt.",
+            "Beim Kauf über die Kaufseite besteht das Widerrufsrecht gegenüber Paddle als Verkäufer. Belehrung, Erklärung zum vorzeitigen Erlöschen und Abwicklung eines Widerrufs richten sich nach den im Bezahlfenster bereitgestellten Bedingungen von Paddle; die Widerrufsbelehrung des Anbieters gilt für diesen Weg nicht."
          ]
       },
       {
-         "id": 9,
+         "id": 10,
          "title": "Haftung",
          "paragraphs": [
             "Der Anbieter haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit, für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, bei Übernahme einer Garantie sowie nach dem Produkthaftungsgesetz.",
@@ -90,7 +102,7 @@
          ]
       },
       {
-         "id": 10,
+         "id": 11,
          "title": "Verhältnis zur Endbenutzerlizenzvereinbarung",
          "paragraphs": [
             "Die Nutzung der Software richtet sich nach der Endbenutzerlizenzvereinbarung (EULA). Sie regelt insbesondere Umfang und Grenzen des Nutzungsrechts, den Bezug der Prüfwerkzeuge und der Drittsoftware, die Reparaturfunktionen sowie die Verarbeitung von Daten in der Anwendung.",
@@ -98,7 +110,7 @@
          ]
       },
       {
-         "id": 11,
+         "id": 12,
          "title": "Schlussbestimmungen",
          "paragraphs": [
             "Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Bei Verbrauchern gilt diese Rechtswahl nur, soweit hierdurch zwingende Verbraucherschutzvorschriften des Staates, in dem der Verbraucher seinen gewöhnlichen Aufenthalt hat, nicht eingeschränkt werden.",

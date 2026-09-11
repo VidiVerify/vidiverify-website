@@ -171,109 +171,181 @@
             "label": "Quick-Check",
             "title": "Quick-Check im Windows-Explorer",
             "description": "Rechtsklick auf eine Videodatei im Windows-Explorer - eine schlanke Worker-Komponente prüft in Sekunden Containerstruktur, Mediadaten und Integrität, ohne die Hauptanwendung zu starten. Eigenes Hinweisfenster mit Status, Befund und Mediadaten - und auf Wunsch nahtloser Übergang in die Vollanalyse.",
-            "tags": ["Kontextmenü", "Worker-EXE", "Sekunden"]
+            "tags": [
+               "Kontextmenü",
+               "Worker-EXE",
+               "Sekunden"
+            ]
          },
          "media-lab": {
             "label": "Media Lab",
             "title": "Reiter",
             "description": "Deine ersten Video-Laboratorien gehen an Bord - anfassen, ausprobieren, verstehen statt nur ablesen. Drei interaktive Werkzeuge machen Codecs, Bitraten und Dateigrössen begreifbar: CodecLab empfiehlt live den passenden Codec für Ziel und Gerät, das Bitrate ÄquivalenzLab rechnet Bitraten fair zwischen den Codecs um, und das Video SizeLab schätzt die Dateigrösse bei jeder Auflösung - inklusive Up- und Downscaling. Ein Reiter, drei Labore, echter Durchblick.",
-            "tags": ["CodecLab", "Bitrate ÄquivalenzLab", "Video SizeLab"]
+            "tags": [
+               "CodecLab",
+               "Bitrate ÄquivalenzLab",
+               "Video SizeLab"
+            ]
          },
          "media-test": {
             "label": "Media Test",
             "title": "Video- & Audio-Detailfenster",
             "description": "Sieh dir an, was wirklich in der Datei steckt - direkt in VidiVerify, aufrufbar aus dem Tab Media Analyse. Zwei üppige Detailfenster für Video und Audio mit noch mehr Detailtiefe: bildgenaue Vorschau mit voller Wiedergabe-Steuerung, Live-Statistik zu Frame, Zeit und Restzeit sowie eine echte Wellenform der Tonspur. Prüfen und sehen in einem Zug, ganz ohne Zweit-Player.",
-            "tags": ["Bildgenaue Vorschau", "Wiedergabe", "Wellenform"]
+            "tags": [
+               "Bildgenaue Vorschau",
+               "Wiedergabe",
+               "Wellenform"
+            ]
          },
          "deepcheck": {
             "label": "DeepCheck",
             "title": "DeepCheck",
             "description": "Inhaltsbasierte Tiefenprüfung der Typintegrität mit dem Magika-Plug-in. Erkennt Abweichungen zwischen Dateiendung, Kopfsignatur und Containerstruktur.",
-            "tags": ["Magika", "Typprüfung", "Integrität"]
+            "tags": [
+               "Magika",
+               "Typprüfung",
+               "Integrität"
+            ]
          },
          "nfo-export": {
             "label": "NFO-Export",
             "title": "NFO-Export für Medienverwaltung",
             "description": "Erzeugt standardkonforme .nfo-Dateien für Videoverwaltungssysteme wie Kodi, Jellyfin und Emby direkt aus den vorhandenen Analyseergebnissen.",
-            "tags": ["Kodi", "Jellyfin", "Emby"]
+            "tags": [
+               "Kodi",
+               "Jellyfin",
+               "Emby"
+            ]
          },
          "map-plus": {
             "label": "MAP+",
             "title": "MAP+ Archivierungs-PDF",
             "description": "Hochwertige PDF-Variante des MAP als professionelles Archivierungsdokument mit erweiterter Darstellung für Archive, Kunden und langfristige Dokumentation.",
-            "tags": ["PDF", "Archiv", "Bericht"]
+            "tags": [
+               "PDF",
+               "Archiv",
+               "Bericht"
+            ]
          },
          "media-stapel": {
             "label": "Media Stapel",
             "title": "Reiter",
             "description": "Stapelverarbeitung ganzer Verzeichnisse oder Dateilisten in einem Durchlauf mit laufender Ergebnisanalyse und automatisch gespeicherten MAP-Berichten pro Datei.",
-            "tags": ["Batch", "Verzeichnisse", "Automatisierung"]
+            "tags": [
+               "Batch",
+               "Verzeichnisse",
+               "Automatisierung"
+            ]
          },
          "diagnosemodus": {
             "label": "Diagnosemodus",
             "title": "Diagnosemodus",
             "description": "Vertiefte FFprobe-Analyse mit Paket- und Frame-Informationen sowie einem Streamcopy-Test. Ideal für Problemdateien mit auffälligen Zeitstempeln oder Paketfolgen. Ursprünglich als PRO geplant - direkt in der Basisversion freigegeben.",
-            "tags": ["FFprobe", "Tiefenanalyse", "Diagnose"]
+            "tags": [
+               "FFprobe",
+               "Tiefenanalyse",
+               "Diagnose"
+            ]
          },
          "vvprogressiv": {
             "label": "VVProgressiv™",
             "title": "VVProgressiv™ - verteilte, adaptive Prüfung",
             "description": "Prüft kurze Sequenzen über die gesamte Laufzeit verteilt statt nur den Dateianfang - und gräbt automatisch dort tiefer, wo es verdächtig wird. Schnelle Gewissheit über die ganze Datei, besonders bei langen AV1-, HEVC- und 4K-Aufnahmen, mit transparenter Abdeckungs-Anzeige.",
-            "tags": ["verteilt", "adaptiv", "AV1/HEVC"]
+            "tags": [
+               "verteilt",
+               "adaptiv",
+               "AV1/HEVC"
+            ]
          },
          "vollanalyse": {
             "label": "Vollanalyse",
             "title": "Lückenlose Voll-Decodierung",
             "description": "Lückenlose Voll-Decodierung jedes einzelnen Bildes - die Maximalstufe, wenn nicht Stichprobe, sondern Vollständigkeit gefragt ist. Für Archivierung und belastbare Nachweise.",
-            "tags": ["lückenlos", "forensisch", "Archiv"]
+            "tags": [
+               "lückenlos",
+               "forensisch",
+               "Archiv"
+            ]
          },
          "media-repair": {
             "label": "Media Repair",
             "title": "Reiter",
             "description": "Regelbasierte Reparaturvorschläge bei erkannten Fehlern mit Wahrscheinlichkeitsangabe und konkretem Verfahren. Arbeitet stets auf einer Kopie, nie an der Originaldatei.",
-            "tags": ["Reparatur", "FFmpeg", "regelbasiert"]
+            "tags": [
+               "Reparatur",
+               "FFmpeg",
+               "regelbasiert"
+            ]
          },
          "kompatibilitaet": {
             "label": "Kompatibilität",
             "title": "Kompatibilitätsbewertung",
             "description": "Wird deine Datei überall abgespielt? VidiVerify bewertet die Wiedergabe-Wahrscheinlichkeit gegen sechs Zielprofile - Universal, Streaming, Smart-TV, Mobil, Archiv und Broadcast - und macht das Urteil mit einer klaren Ampel sichtbar. Kritische Fallstricke wie problematische Codec-Profile oder Farbräume werden benannt, bevor sie beim Zuschauer zum schwarzen Bild werden.",
-            "tags": ["6 Zielprofile", "Ampel-Urteil", "Fallstrick-Radar"]
+            "tags": [
+               "6 Zielprofile",
+               "Ampel-Urteil",
+               "Fallstrick-Radar"
+            ]
          },
          "statistik": {
             "label": "Statistik",
             "title": "Statistik-Modul",
             "description": "Lernendes Statistiksystem, das reale Prüfungsdaten erfasst und individuelle Laufzeitprognosen pro System erstellt, differenziert nach CPU-Modus und Speicherquelle.",
-            "tags": ["Laufzeitprognose", "lernend", "Statistik"]
+            "tags": [
+               "Laufzeitprognose",
+               "lernend",
+               "Statistik"
+            ]
          },
          "vqa": {
             "label": "VQA",
             "title": "Perzeptuelle Qualitätsanalyse (VQA)",
             "description": "Bewertet die visuelle Qualität eines Videos aus menschlicher Sicht mit OpenCV, ergänzend zu technischen Kennzahlen und unabhängig von Plattformbewertungen.",
-            "tags": ["OpenCV", "Bildanalyse", "visuell"]
+            "tags": [
+               "OpenCV",
+               "Bildanalyse",
+               "visuell"
+            ]
          },
          "ytup": {
             "label": "YTUP™",
             "title": "YTUP™ - YouTube-Upload-Prognose",
             "description": "Proprietäres Analysemodul zur technischen und qualitativen Bewertung vor einem YouTube-Upload inklusive Qualitätsprognose nach der Neukodierung und Optimierungsempfehlungen.",
-            "tags": ["YouTube", "Upload", "Prognose"]
+            "tags": [
+               "YouTube",
+               "Upload",
+               "Prognose"
+            ]
          },
          "macos": {
             "label": "macOS",
             "title": "Portierung für macOS",
             "description": "Refactoring und Portierung der Anwendung für macOS mit einheitlicher Bedienoberfläche und vergleichbarem Funktionsumfang über alle unterstützten Betriebssysteme hinweg.",
-            "tags": ["macOS", "Portierung", "Refactoring"]
+            "tags": [
+               "macOS",
+               "Portierung",
+               "Refactoring"
+            ]
          },
          "sprachen": {
             "label": "Sprachen",
             "title": "Weitere Sprachen",
             "description": "Erweiterung der mehrsprachigen Benutzeroberfläche um Hindi, Portugiesisch, Japanisch und weitere Sprachen.",
-            "tags": ["Hindi", "Portugiesisch", "Japanisch"]
+            "tags": [
+               "Hindi",
+               "Portugiesisch",
+               "Japanisch"
+            ]
          },
          "lizenz": {
             "label": "Lizenzierung",
             "title": "Lizenzierungsmodul",
             "description": "Verwaltung der PRO-Aktivierung, Lizenzprüfung und Funktionsfreischaltung, vollständig lokal ohne dauerhafte Internetverbindung.",
-            "tags": ["Lizenz", "Aktivierung", "lokal"]
+            "tags": [
+               "Lizenz",
+               "Aktivierung",
+               "lokal"
+            ]
          }
       }
    },
@@ -304,7 +376,6 @@
       "licenseSmartHintPost": " eine kurze Reputationsabfrage zeigen - keine Gefährdungsmeldung.",
       "licenseSmartHintAria": "Hinweis zu Windows SmartScreen öffnen",
       "linkPrices": "Preise",
-      "linkDonate": "Spenden",
       "linkEula": "EULA",
       "msStoreAria": "VidiVerify im Microsoft Store öffnen",
       "heiseAria": "VidiVerify bei heise Download öffnen",
@@ -388,28 +459,6 @@
       "perspectiveTitle": "VidiVerify",
       "perspectiveDescriptionPart1": "Die offizielle Lizenzierung ermöglicht die Nutzung von VidiVerify - als VidiVerify ",
       "perspectiveDescriptionPart2": " - auch im gewerblichen und professionellen Umfeld. Erweiterte Pro-Features und zusätzliche Funktionen sind dabei automatisch eingeschlossen. Lizenzen sichern Innovation und Stabilität der Software."
-   },
-   "donate": {
-      "title": "Unterstützen",
-      "subtitle": "Vielen Dank für die Hilfe!",
-      "headline": "VidiVerify freiwillig unterstützen",
-      "description": "VidiVerify wird mit hohem zeitlichem und technischem Aufwand entwickelt, gepflegt und weiter ausgebaut. Hinter dem Projekt steht kein grosser Konzern, sondern ein unabhängiges Team mit dem Anspruch, eine sinnvolle und verlässliche Lösung für die technische Prüfung von Videodateien bereitzustellen. Wer die Zukunft des Projekts aktiv mittragen möchte, kann die Weiterentwicklung freiwillig per Spende unterstützen.",
-      "waysPaypal": "PayPal",
-      "ways4fund": "4fund",
-      "reasons": [
-         {
-            "title": "Aktive Weiterentwicklung",
-            "text": "Neue Features, Formate und Plug-ins entstehen durch kontinuierliche Arbeit - deine Unterstützung hält das Projekt in Bewegung."
-         },
-         {
-            "title": "Langzeitpflege",
-            "text": "Bugfixes, Kompatibilitätsupdates und stabile Releases erfordern dauerhaften Einsatz weit über die erste Veröffentlichung hinaus."
-         },
-         {
-            "title": "Unabhängigkeit",
-            "text": "Kein Konzern im Rücken, kein Vendor-Lock-in. VidiVerify bleibt frei, weil Menschen dahinterstehen - nicht Renditeerwartungen."
-         }
-      ]
    },
    "footer": {
       "rights": "Alle Rechte vorbehalten",

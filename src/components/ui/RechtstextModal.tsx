@@ -28,7 +28,18 @@ export interface Rechtstext {
    subtitle: string;
    date: string;
    version?: string;
-   sections: { id: number; title: string; paragraphs: string[] }[];
+   sections: {
+      id: number;
+      title: string;
+      paragraphs: string[];
+      /**
+       * Auszufüllende Felder, etwa im Muster-Widerrufsformular. Sie standen
+       * bis zum 11.09.2026 als Fliesstext mit Unterstrichen in einem Absatz
+       * und sahen nach nichts aus, das man ausfüllt (Anwenderbefund). Jetzt
+       * ein Block: je Feld eine Zeile mit Beschriftung und Schreiblinie.
+       */
+      formular?: string[];
+   }[];
 }
 
 interface Props {
@@ -200,6 +211,34 @@ const RechtstextModal = ({ open, onClose, daten, Icon, kennung }: Props) => {
                                              {para}
                                           </p>
                                        ))}
+                                       {section.formular && (
+                                          <div style={{
+                                             marginTop: 6, padding: "14px 16px 10px",
+                                             border: "1px solid rgba(106,172,204,0.18)",
+                                             borderRadius: 8,
+                                             background: "rgba(106,172,204,0.04)",
+                                             display: "flex", flexDirection: "column", gap: 14,
+                                          }}>
+                                             {section.formular.map((feld, i) => (
+                                                <div key={i} style={{
+                                                   display: "flex", alignItems: "baseline",
+                                                   gap: 10, flexWrap: "wrap",
+                                                }}>
+                                                   <span style={{
+                                                      fontSize: 12, color: TEXT_SECONDARY,
+                                                      whiteSpace: "nowrap",
+                                                   }}>
+                                                      {feld}:
+                                                   </span>
+                                                   <span aria-hidden="true" style={{
+                                                      flex: 1, minWidth: 160, height: 1,
+                                                      borderBottom: "1px solid rgba(238,238,245,0.45)",
+                                                      transform: "translateY(4px)",
+                                                   }} />
+                                                </div>
+                                             ))}
+                                          </div>
+                                       )}
                                     </div>
                                  </div>
                               </div>

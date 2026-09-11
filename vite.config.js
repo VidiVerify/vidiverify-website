@@ -2,9 +2,56 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
+import { readFileSync } from "node:fs";
+
+/* Die kurzen Adressen auch beim Entwickeln.
+ *
+ * Im Betrieb macht `public/404.html` aus `/pro?vvid=…` ein `/?vvid=…#pro` -
+ * GitHub Pages liefert bei einem unbekannten Pfad diese Seite aus, und sie
+ * leitet samt Abfrage weiter. Der Dev-Server kennt das nicht: Er lieferte
+ * unter `/pro` die Startseite ohne Hash, und das Fenster blieb zu
+ * (Anwenderbefund 11.09.2026, zweimal derselbe Stolperstein). Dieselbe
+ * Tabelle, dieselbe Weiterleitung - nur eben hier.
+ *
+ * Die Liste steht bewusst NICHT doppelt: Sie wird aus `public/404.html`
+ * gelesen, damit beide Wege dieselben Pfade kennen. Wer dort einen ergänzt,
+ * hat ihn hier.
+ */
+function kurzeAdressen() {
+   return {
+      name: "vidiverify-kurze-adressen",
+      apply: "serve",
+      configureServer(server) {
+         const quelle = fileURLToPath(new URL("./public/404.html", import.meta.url));
+         server.middlewares.use((req, res, next) => {
+            const [pfad, frage = ""] = (req.url || "/").split("?");
+            const sauber = pfad.replace(/\/$/, "");
+            if (!sauber || sauber.includes(".")) return next();
+            let tabelle = {};
+            try {
+               const text = readFileSync(quelle, "utf-8");
+               const block = /var routes = \{([\s\S]*?)\};/.exec(text);
+               for (const [, p, ziel] of (block ? block[1] : "")
+                       .matchAll(/"([^"]+)"\s*:\s*"([^"]+)"/g)) {
+                  tabelle[p] = ziel;
+               }
+            } catch {
+               tabelle = {};
+            }
+            const ziel = tabelle[sauber];
+            if (!ziel) return next();
+            const [vorn, hash = ""] = ziel.split("#");
+            const neu = vorn + (frage ? "?" + frage : "") + (hash ? "#" + hash : "");
+            res.statusCode = 302;
+            res.setHeader("Location", neu);
+            res.end();
+         });
+      },
+   };
+}
 
 export default defineConfig(() => ({
-   plugins: [tailwindcss(), react()],
+   plugins: [tailwindcss(), react(), kurzeAdressen()],
    base: "/",
    resolve: {
       alias: {

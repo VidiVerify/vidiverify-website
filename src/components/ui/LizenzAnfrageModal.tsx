@@ -30,7 +30,7 @@
  * Plan: 05_DOKUMENTATION/PLANUNGEN/PRO Lizenzierungsmodul/
  *       2026-09-09_Bestellanfrage-Umsetzung.md
  */
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { X, KeyRound } from "lucide-react";
@@ -243,8 +243,13 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
 
    const [vvid, setVvid] = useState(
       entwurf.vvid ?? (parameter.get("vvid") || "").trim().toUpperCase());
+   /* Beim Upgrade steht nur LIFETIME zur Wahl - die Anwendung hängt
+    * `nur=lifetime` an, wenn PRO bereits läuft. FREE und PRO wären dort
+    * Angebote, die dem Kunden nichts bringen. */
+   const nurLifetime = parameter.get("nur") === "lifetime";
    const [wunsch, setWunsch] = useState<Wunsch>(
-      entwurf.wunsch ?? (parameter.get("wunsch") === "lifetime" ? "lifetime" : "pro"));
+      nurLifetime ? "lifetime"
+         : entwurf.wunsch ?? (parameter.get("wunsch") === "lifetime" ? "lifetime" : "pro"));
    const [anrede, setAnrede] = useState(entwurf.anrede);
    const [kundentyp, setKundentyp] = useState(entwurf.kundentyp);
    /* Der Blick auf die Bestätigungsseite, ohne eine Anfrage abzusenden.
@@ -353,7 +358,69 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    // Fensterstapel, damit die Taste NUR das oberste Fenster trifft. Vorher
    // schloss ein Escape in der Datenschutzerklärung das Formular gleich mit,
    // und der Kunde stand wieder auf der Seite.
-   useFensterStapel(open, onClose);
+   /* Schliessen heisst: zurück auf die Website, nicht zurück ins Formular.
+    *
+    * Dieselben drei Schritte wie im Kauffenster (`ProKaufModal.schliessen`),
+    * und bis zum 11.09.2026 fehlten hier alle drei (Anwenderbefund): Das
+    * Fenster ging zu, aber `?vvid=…&ver=…#lizenz-anfrage` blieb in der
+    * Adresszeile stehen - ein Neuladen öffnete es erneut, und die
+    * Gerätekennung stand dauerhaft im Verlauf. Der Blick blieb auf der
+    * Preistafel hängen, statt auf die Seite zu gehen. Und nach einer
+    * abgeschickten Anfrage begrüsste das Fenster beim nächsten Öffnen mit der
+    * alten Bestätigung statt mit dem Formular.
+    *
+    * Der Entwurf bleibt davon unberührt: Wer das Fenster halb ausgefüllt
+    * schliesst, findet seine Eingaben wieder. Nach dem Absenden ist er
+    * ohnehin geleert. */
+   /* Welche Absendung gerade läuft. Jede Absendung zählt hoch, und
+    * Schliessen zählt ebenfalls hoch: Eine Antwort, die danach eintrifft,
+    * gehört zu einem Vorgang, den es nicht mehr gibt, und darf das Fenster
+    * nicht mehr auf „fertig" setzen (Codex-Review 11.09.2026). */
+   const laufRef = useRef(0);
+   const fertigRef = useRef(false);
+   useEffect(() => { fertigRef.current = fertig; }, [fertig]);
+
+   const schliessen = useCallback(() => {
+      onClose();
+      laufRef.current += 1;
+      try {
+         window.history.replaceState(null, "", window.location.pathname);
+      } catch {
+         // Ein Browser, der das verweigert, ist kein Grund, das Fenster
+         // offen zu lassen.
+      }
+      window.setTimeout(() => {
+         window.scrollTo({ top: 0, behavior: "smooth" });
+         setFehler("");
+         if (fertigRef.current) {
+            /* Nach einer abgeschickten Anfrage ist das Fenster beim
+             * nächsten Öffnen LEER - Felder, Wahl, Code und beide
+             * Zustimmungen. Bis zum 11.09.2026 wurde nur der Entwurf
+             * geleert; die Komponente bleibt aber gemountet, und ihr
+             * Zustand kam samt angekreuzter Erklärungen wieder hoch. An
+             * einem geteilten Rechner sähe der Nächste fremde Daten, und
+             * ein Klick schickte dieselbe Anfrage erneut (Codex-Review,
+             * hoch). Ein halb ausgefüllter, NICHT abgeschickter Entwurf
+             * bleibt weiterhin stehen. */
+            setFelder({});
+            setAnrede("");
+            setKundentyp("privat");
+            setWunsch("pro");
+            setVvid((parameter.get("vvid") || "").trim().toUpperCase());
+            setRabattcode("");
+            setAgbOk(false);
+            setWiderrufOk(false);
+            setZustimmungFehler(false);
+            setLeer([]);
+            setVvidFehler(false);
+            setEmailFehler(false);
+            setBotToken("");
+         }
+         setFertig(false);
+      }, 260);
+   }, [onClose]);   // eslint-disable-line react-hooks/exhaustive-deps
+
+   useFensterStapel(open, schliessen);
 
    useEffect(() => {
       if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
@@ -415,7 +482,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       const pflicht = ["vorname", "nachname"];
       if (brauchtAnschrift) {
          pflicht.push("strasse", "hausnummer", "plz", "stadt", "land");
-         if (kundentyp === "gewerblich") pflicht.push("steuernummer");
+         if (kundentyp === "gewerblich") pflicht.push("firma", "steuernummer");
       }
       const fehlend = pflicht.filter((n) => !(felder[n] || "").trim());
       // Die Anrede ist kein Textfeld, sondern zwei Knöpfe - sie steht deshalb
@@ -440,7 +507,12 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       // Beide Erklärungen sind Voraussetzung, und zwar bevor irgendetwas den
       // Rechner verlässt: Eine Anfrage ohne sie liesse sich später weder der
       // Rechnung zugrunde legen noch belegen.
-      if (!agbOk || !widerrufOk) {
+      // Die Widerrufserklärung gehört nur zu einer kostenpflichtigen Lizenz:
+      // Bei FREE kommt kein Vertrag zustande, also gibt es nichts zu
+      // widerrufen und nichts, das erlöschen könnte (Anwenderbefund
+      // 11.09.2026). AGB und Datenschutz bleiben auch dort Pflicht.
+      const widerrufNoetig = wunsch !== "free";
+      if (!agbOk || (widerrufNoetig && !widerrufOk)) {
          setZustimmungFehler(true);
          setFehler(t.zustimmungFehlt);
          window.setTimeout(() => {
@@ -459,6 +531,21 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       }
 
       setLaeuft(true);
+      const lauf = ++laufRef.current;
+      /* Nur, was zum gewählten Vorgang gehört. Die Felder werden beim Wechsel
+       * auf FREE oder auf „privat" ausgeblendet, nicht geleert - der Kunde
+       * soll sie beim Zurückwechseln wiederfinden. Mitgeschickt werden sie
+       * deshalb nicht: Eine FREE-Registrierung braucht keine Rechnungsanschrift
+       * in der Ablage, und ein Privatkunde keine Firma (Codex-Review
+       * 11.09.2026, Datenminimierung). */
+      const nurVorgang: Record<string, string> = { ...felder };
+      if (!brauchtAnschrift) {
+         for (const n of ["strasse", "hausnummer", "plz", "stadt", "land",
+                          "firma", "steuernummer", "ustid"]) delete nurVorgang[n];
+      }
+      if (kundentyp !== "gewerblich") {
+         for (const n of ["firma", "steuernummer", "ustid"]) delete nurVorgang[n];
+      }
       try {
          // Relative Adresse: Auf `.de` liegt der Worker auf derselben Zone, und
          // auf `.com` läuft die Website über den Reverse-Proxy - beide Male
@@ -473,7 +560,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
-               ...felder, anrede, kundentyp,
+               ...nurVorgang, anrede, kundentyp,
                vv_id: kennung, email, lizenzwunsch: wunsch,
                app_version: appVersion, turnstile: botToken,
                rabattcode,
@@ -481,11 +568,15 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                // ist die Zustimmung später wertlos, weil niemand mehr sagen
                // kann, welcher Wortlaut galt.
                agb_zugestimmt: agbOk,
-               widerruf_zugestimmt: widerrufOk,
+               // Bei FREE wird nichts erklärt, also auch nichts behauptet.
+               widerruf_zugestimmt: wunsch !== "free" && widerrufOk,
                agb_fassung: agbData.version,
                widerruf_fassung: widerrufData.version,
             }),
          });
+         // Das Fenster wurde inzwischen geschlossen oder erneut abgeschickt:
+         // Diese Antwort gehört einem Vorgang, den es nicht mehr gibt.
+         if (lauf !== laufRef.current) return;
          if (antwort.ok) {
             // Der Entwurf hat seinen Zweck erfüllt. Ihn stehen zu lassen
             // hiesse, dass das nächste Öffnen eine bereits gesendete Anfrage
@@ -508,7 +599,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
          window.turnstile?.reset(widgetRef.current || undefined);
          setBotToken("");
       } catch {
-         setFehler(t.fehlerNetz);
+         if (lauf === laufRef.current) setFehler(t.fehlerNetz);
       } finally {
          setLaeuft(false);
       }
@@ -529,7 +620,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.22 }}
-                  onClick={onClose}
+                  onClick={schliessen}
                   style={{
                      position: "fixed", inset: 0, zIndex: 1000,
                      background: "rgba(6,7,18,0.82)",
@@ -595,7 +686,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                            </p>
                         </div>
                         <button
-                           onClick={onClose}
+                           onClick={schliessen}
                            aria-label="schliessen"
                            style={{
                               flexShrink: 0, width: 32, height: 32, borderRadius: 8,
@@ -741,21 +832,25 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                               </Block>
 
                               {/* Lizenzwahl */}
-                              <Block titel={t.wunschTitel}>
+                              <Block titel={nurLifetime ? t.wunschTitelUpgrade : t.wunschTitel}>
                                  <div style={{
                                     display: "grid", gap: 10,
                                     gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
                                  }}>
-                                    <Wahl gewaehlt={wunsch === "free"} onClick={() => setWunsch("free")}
-                                          titel={t.freeTitel} preis={t.freePreis}
-                                          text={t.freeText} farbe={GREEN} />
-                                    <Wahl gewaehlt={wunsch === "pro"} onClick={() => setWunsch("pro")}
-                                          titel={t.proTitel}
-                                          preis={preisText(preise.pro, sprache)}
-                                          statt={preise.pro !== listenpreise.pro
-                                             ? t.statt + " " + preisText(listenpreise.pro, sprache)
-                                             : ""}
-                                          text={t.proText} farbe={CYAN} />
+                                    {!nurLifetime && (
+                                       <Wahl gewaehlt={wunsch === "free"} onClick={() => setWunsch("free")}
+                                             titel={t.freeTitel} preis={t.freePreis}
+                                             text={t.freeText} farbe={GREEN} />
+                                    )}
+                                    {!nurLifetime && (
+                                       <Wahl gewaehlt={wunsch === "pro"} onClick={() => setWunsch("pro")}
+                                             titel={t.proTitel}
+                                             preis={preisText(preise.pro, sprache)}
+                                             statt={preise.pro !== listenpreise.pro
+                                                ? t.statt + " " + preisText(listenpreise.pro, sprache)
+                                                : ""}
+                                             text={t.proText} farbe={CYAN} />
+                                    )}
                                     <Wahl gewaehlt={wunsch === "lifetime"}
                                           onClick={() => setWunsch("lifetime")}
                                           titel={t.lifetimeTitel}
@@ -829,12 +924,22 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                       Der Rahmen ist derselbe wie bei der Meldung am
                                       Ende des Formulars: grün, wenn der Code gilt, rot,
                                       wenn nicht. */}
-                                  <div style={{ display: "flex", alignItems: "flex-end" }}>
+                                  {/* Gleiche Höhe wie Feld und Knopf, ohne eine Zahl
+                                      zu raten: Die Spalte trägt dieselbe (unsichtbare)
+                                      Beschriftung wie die Nachbarspalte, und der Rahmen
+                                      füllt den Rest der Zeile. Ein fester Wert (38) war
+                                      bis zum 11.09.2026 um ein paar Pixel daneben
+                                      (Anwenderbefund). */}
+                                  <div style={{ display: "flex", flexDirection: "column" }}>
+                                     <span aria-hidden="true"
+                                           style={{ ...beschriftungStil, visibility: "hidden" }}>
+                                        {t.rabattTitel}
+                                     </span>
                                      {(rabatt || codeGrund) && (
                                         <span style={{
                                            display: "flex", alignItems: "center",
-                                           width: "100%", minHeight: 38,
-                                           padding: "6px 12px", borderRadius: 8,
+                                           width: "100%", flex: 1, boxSizing: "border-box",
+                                           padding: "0 12px", borderRadius: 8,
                                            fontSize: 12, lineHeight: 1.35,
                                            color: rabatt ? GREEN : "#fca5a5",
                                            background: rabatt
@@ -1037,6 +1142,17 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                           display: "grid", gap: 12,
                                           gridTemplateColumns: "1fr 1fr", marginTop: 12,
                                        }}>
+                                          {/* Der Firmenname fehlte bis zum 11.09.2026: Das
+                                              Kauffenster fragte ihn, dieses Formular nicht, und
+                                              eine gewerbliche Anfrage kam ohne den Namen an, der
+                                              auf die Rechnung gehört. Volle Breite, weil er die
+                                              Anschrift anführt. */}
+                                          <div style={{ gridColumn: "1 / -1" }}>
+                                             <Feld id="f-firma" titel={t.firma} pflicht kind={
+                                                <input id="f-firma" value={felder.firma || ""}
+                                                       onChange={setzen("firma")} maxLength={120}
+                                                       style={pflichtStil("firma")} />} />
+                                          </div>
                                           <Feld id="f-steuernummer" titel={t.steuernummer} pflicht kind={
                                              <input id="f-steuernummer" value={felder.steuernummer || ""}
                                                     onChange={setzen("steuernummer")} maxLength={32}
@@ -1098,15 +1214,17 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     <a href="#datenschutz" style={{ color: CYAN }}>{t.datenschutzLink}</a>
                                     {t.agbTeil3}
                                  </Kaestchen>
-                                 <Kaestchen
-                                    id="zustimmung-widerruf"
-                                    checked={widerrufOk}
-                                    onChange={(v) => { setWiderrufOk(v); if (v) setZustimmungFehler(false); }}
-                                 >
-                                    {t.widerrufTeil1}{" "}
-                                    <a href="#widerruf" style={{ color: CYAN }}>{t.widerrufLink}</a>
-                                    {t.widerrufTeil2}
-                                 </Kaestchen>
+                                 {wunsch !== "free" && (
+                                    <Kaestchen
+                                       id="zustimmung-widerruf"
+                                       checked={widerrufOk}
+                                       onChange={(v) => { setWiderrufOk(v); if (v) setZustimmungFehler(false); }}
+                                    >
+                                       {t.widerrufTeil1}{" "}
+                                       <a href="#widerruf" style={{ color: CYAN }}>{t.widerrufLink}</a>
+                                       {t.widerrufTeil2}
+                                    </Kaestchen>
+                                 )}
                               </div>
 
                               {/* Der Satz, der die ganze Konstruktion trägt:
@@ -1172,7 +1290,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
 
                         {fertig ? (
                            <motion.button
-                              onClick={onClose}
+                              onClick={schliessen}
                               whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                               style={{
                                  padding: "7px 18px", borderRadius: 10,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaHeart, FaFileContract, FaLock, FaIdCard, FaExclamationCircle } from "react-icons/fa";
+import { FaWindows, FaDownload, FaGithub, FaScroll, FaShieldAlt, FaTag, FaFileContract, FaLock, FaIdCard, FaExclamationCircle } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 import { BsCalendar3, BsFileZip } from "react-icons/bs";
 import { useLatestRelease } from "@/hooks/useLatestRelease";
@@ -320,11 +320,6 @@ const Download = () => {
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
                         style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
                         <FaTag size={12} /> {t("download.linkPrices")}
-                     </motion.a>
-                     <motion.a href="#spenden"
-                        whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}
-                        style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 12, color: CYAN, textDecoration: "none" }}>
-                        <FaHeart size={12} /> {t("download.linkDonate")}
                      </motion.a>
                      <motion.a href="#eula"
                         whileHover={{ opacity: 0.7, scale: 1.05 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.15 }}

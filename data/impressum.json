@@ -1,6 +1,6 @@
 {
    "title": "Impressum",
-   "date": "Stand: 10.09.2026",
+   "date": "Stand: 11.09.2026",
    "provider": {
       "legal_note": "Angaben gemäss § 5 DDG",
       "name": "Thomas Smektalla",
@@ -14,7 +14,10 @@
    },
    "contact": {
       "email": "support@vidiverify.de",
-      "websites": ["vidiverify.de", "vidiverify.com"]
+      "websites": [
+         "vidiverify.de",
+         "vidiverify.com"
+      ]
    },
    "privacy_url": "www.vidiverify.de/datenschutz",
    "responsible": "Thomas Smektalla",
@@ -38,6 +41,14 @@
          "title": "Projektbezogene Hinweise",
          "paragraphs": [
             "VidiVerify ist ein Softwareprojekt zur technischen Analyse und Prüfung von Videodateien. Weiterführende Regelungen zur Nutzung der Software, zum Lizenzmodell, zur Haftung sowie zu Pro-Funktionen ergeben sich aus der jeweils aktuellen Endbenutzerlizenzvereinbarung (EULA) und den ergänzenden rechtlichen Hinweisen auf dieser Website."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Verkauf über Paddle",
+         "paragraphs": [
+            "Für Käufe über die Kaufseite vidiverify.de/pro ist Verkäufer und Rechnungssteller unser Zahlungsanbieter Paddle als Wiederverkäufer (Merchant of Record): für Käufer mit Sitz ausserhalb der USA die Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, Vereinigtes Königreich; für Käufer mit Sitz in den USA die Paddle.com Inc., New York, USA. Fragen zu Zahlung, Rechnung und Rückerstattung beantwortet Paddle über das Kundenportal paddle.net.",
+            "Für Bestellungen über die Anfrage auf dieser Website ist Thomas Smektalla Verkäufer."
          ]
       }
    ]

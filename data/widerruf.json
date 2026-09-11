@@ -1,14 +1,15 @@
 {
    "title": "Widerrufsbelehrung",
-   "subtitle": "für Verbraucher bei Fernabsatzverträgen",
-   "date": "Stand: 10.09.2026",
-   "version": "WRB-2026-09-10",
+   "subtitle": "für Verbraucher bei Fernabsatzverträgen mit dem Anbieter",
+   "date": "Stand: 11.09.2026",
+   "version": "WRB-2026-09-11",
    "sections": [
       {
          "id": 1,
          "title": "Geltung",
          "paragraphs": [
-            "Diese Belehrung gilt für Verbraucher. Verbraucher ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschliesst, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können."
+            "Diese Belehrung gilt für Verbraucher. Verbraucher ist jede natürliche Person, die ein Rechtsgeschäft zu Zwecken abschliesst, die überwiegend weder ihrer gewerblichen noch ihrer selbständigen beruflichen Tätigkeit zugerechnet werden können.",
+            "Sie gilt für Verträge, die über die Bestellanfrage mit Thomas Smektalla (VidiVerify-Team) geschlossen werden. Beim Kauf über die Kaufseite vidiverify.de/pro ist Verkäufer unser Zahlungsanbieter Paddle; das Widerrufsrecht besteht dann gegenüber Paddle und richtet sich nach den Bedingungen, die Paddle im Bezahlfenster bereitstellt. Ein Widerruf oder eine Erstattung wird in diesem Fall über Paddle abgewickelt, erreichbar über das Kundenportal paddle.net."
          ]
       },
       {
@@ -35,7 +36,7 @@
          "paragraphs": [
             "VidiVerify ist ein digitaler Inhalt, der nicht auf einem körperlichen Datenträger bereitgestellt wird.",
             "Ihr Widerrufsrecht erlischt vor Ablauf der vierzehntägigen Widerrufsfrist, wenn wir mit der Bereitstellung begonnen haben, nachdem Sie ausdrücklich zugestimmt haben, dass wir mit der Vertragserfüllung vor Ablauf der Widerrufsfrist beginnen, und Sie bestätigt haben, dass Ihnen bekannt ist, dass Sie durch Ihre Zustimmung mit Beginn der Vertragserfüllung Ihr Widerrufsrecht verlieren.",
-            "Beide Erklärungen werden im Anfrageformular gesondert abgefragt. Solange die Bereitstellung nicht begonnen hat, bleibt Ihr Widerrufsrecht bestehen."
+            "Beide Erklärungen werden im Anfrageformular gesondert abgefragt, sobald eine kostenpflichtige Lizenz angefragt wird; beim Kauf über die Kaufseite werden sie im Bezahlfenster gegenüber Paddle abgegeben. Solange die Bereitstellung nicht begonnen hat, bleibt Ihr Widerrufsrecht bestehen."
          ]
       },
       {
@@ -44,8 +45,15 @@
          "paragraphs": [
             "Wenn Sie den Vertrag widerrufen wollen, füllen Sie bitte dieses Formular aus und senden Sie es zurück.",
             "An: Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland, Email: admin@vidiverify.de",
-            "Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Erwerb einer Lizenz für VidiVerify.",
-            "Bestellt am / erhalten am: ______   Name des Verbrauchers: ______   Anschrift des Verbrauchers: ______   Emailadresse: ______   Datum: ______   Unterschrift des Verbrauchers (nur bei Mitteilung auf Papier): ______"
+            "Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Erwerb einer Lizenz für VidiVerify."
+         ],
+         "formular": [
+            "Bestellt am / erhalten am",
+            "Name des Verbrauchers",
+            "Anschrift des Verbrauchers",
+            "Emailadresse",
+            "Datum",
+            "Unterschrift des Verbrauchers (nur bei Mitteilung auf Papier)"
          ]
       }
    ]

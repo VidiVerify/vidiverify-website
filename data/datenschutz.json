@@ -1,7 +1,7 @@
 {
    "title": "Datenschutzerklärung",
    "subtitle": "für die Nutzung der VidiVerify-Anwendung und der Website",
-   "date": "Stand: 10.09.2026",
+   "date": "Stand: 11.09.2026",
    "sections": [
       {
          "id": 1,
@@ -9,7 +9,7 @@
          "blocks": [
             {
                "type": "p",
-               "text": "Der Schutz personenbezogener Daten wird ernst genommen. Personenbezogene Daten werden nur in dem Umfang verarbeitet, der für die Bereitstellung der Website, den Betrieb der Anwendung, die Bearbeitung von Anfragen, die Abwicklung von Lizenzen und die technische Sicherheit erforderlich ist. Nach Art. 13 DSGVO sind betroffene Personen insbesondere über Verantwortliche, Zwecke, Rechtsgrundlagen, Empfänger, Speicherdauer und ihre Rechte zu informieren."
+               "text": "Der Schutz personenbezogener Daten wird ernst genommen. Personenbezogene Daten werden nur in dem Umfang verarbeitet, der für die Bereitstellung der Website, den Betrieb der Anwendung, die Bearbeitung von Anfragen, die Abwicklung von Lizenzen und Käufen und die technische Sicherheit erforderlich ist. Nach Art. 13 DSGVO sind betroffene Personen insbesondere über Verantwortliche, Zwecke, Rechtsgrundlagen, Empfänger, Speicherdauer und ihre Rechte zu informieren."
             },
             {
                "type": "p",
@@ -82,9 +82,9 @@
                "items": [
                   "Namensauflösung (DNS) für vidiverify.de und vidiverify.com.",
                   "Auslieferung von vidiverify.com: Diese Domain liefert dieselbe Website über einen vorgeschalteten Dienst aus; Aufrufe laufen dabei über die Infrastruktur von Cloudflare.",
-                  "Anwendungsdienste (Cloudflare Workers): Unter vidiverify.de/api/ und vidiverify.de/dl/ laufen eigene Programme, die Bestellanfragen entgegennehmen, Preise ausgeben, Lizenzen bereitstellen und Downloads zählen.",
-                  "Ablage (Cloudflare Workers KV) für Bestellanfragen, Lizenzeinträge, Rabattcodes und Zähler.",
-                  "Abwehr automatisierter Zusendungen (Cloudflare Turnstile) am Bestellformular."
+                  "Anwendungsdienste (Cloudflare Workers): Unter vidiverify.de/api/ und vidiverify.de/dl/ laufen eigene Programme, die Bestellanfragen entgegennehmen, Preise ausgeben, Kaufvorgänge für den Zahlungsanbieter Paddle vorbereiten und dessen Zahlungsmeldungen entgegennehmen, Lizenzen bereitstellen und Downloads zählen.",
+                  "Ablage (Cloudflare Workers KV) für Bestellanfragen, Kaufvorgänge, Lizenzeinträge, Rabattcodes und Zähler.",
+                  "Abwehr automatisierter Zusendungen (Cloudflare Turnstile) am Bestellformular und auf der Kaufseite."
                ]
             },
             {
@@ -187,7 +187,7 @@
             },
             {
                "type": "p",
-               "text": "Mit der Anfrage wird festgehalten, dass die Allgemeinen Geschäftsbedingungen anerkannt und die Erklärung zum vorzeitigen Erlöschen des Widerrufsrechts abgegeben wurden, jeweils mit der Kennung der Fassung, die zu diesem Zeitpunkt galt. Zweck ist der Nachweis gegenüber dem Kunden und im Streitfall. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO sowie Art. 6 Abs. 1 lit. c und f DSGVO; das berechtigte Interesse liegt in der Beweisbarkeit des Vertragsinhalts."
+               "text": "Mit der Anfrage wird festgehalten, dass die Allgemeinen Geschäftsbedingungen anerkannt und die Erklärung zum vorzeitigen Erlöschen des Widerrufsrechts abgegeben wurden (letztere nur bei einer kostenpflichtigen Lizenz), jeweils mit der Kennung der Fassung, die zu diesem Zeitpunkt galt. Zweck ist der Nachweis gegenüber dem Kunden und im Streitfall. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO sowie Art. 6 Abs. 1 lit. c und f DSGVO; das berechtigte Interesse liegt in der Beweisbarkeit des Vertragsinhalts."
             },
             {
                "type": "p",
@@ -197,11 +197,45 @@
       },
       {
          "id": 10,
+         "title": "Kauf über die Kaufseite mit Paddle",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Auf der Kaufseite vidiverify.de/pro kann eine Lizenz unmittelbar bezahlt werden. Verkäufer ist unser Zahlungsanbieter Paddle als Wiederverkäufer (Merchant of Record): für Käufer mit Sitz ausserhalb der USA die Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, Vereinigtes Königreich; für Käufer mit Sitz in den USA die Paddle.com Inc., New York, USA. Paddle ist für den Kaufvertrag, die Zahlung, die Rechnung und die Steuer eigenständig Verantwortlicher; seine Datenschutzhinweise gelten ergänzend (paddle.com/legal/privacy)."
+            },
+            {
+               "type": "p",
+               "text": "Vor dem Bezahlfenster erhebt die Kaufseite: Anrede, Vor- und Nachname, Emailadresse, Rechnungsanschrift (Strasse, Hausnummer, Postleitzahl, Ort, Land), Kundentyp, bei gewerblichen Käufern Firma und Umsatzsteuer-Identifikationsnummer, die Gerätekennung (VV-ID), die Programmversion, sofern die Seite aus der Anwendung geöffnet wurde, sowie freiwillig einen Rabatt- oder Aktionscode. Der Anbieter übergibt diese Angaben über seinen Anwendungsdienst an Paddle und legt dort Kunde, Anschrift und gegebenenfalls Firma an, bevor das Bezahlfenster geöffnet wird. Zweck ist, dass die Rechnung den Käufer nennt, die Steuer nach dem richtigen Land berechnet wird und die Lizenz der Installation zugeordnet werden kann. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung auf Wunsch des Käufers)."
+            },
+            {
+               "type": "p",
+               "text": "Das Bezahlfenster selbst stellt Paddle bereit. Es wird erst geladen, wenn die Kaufseite geöffnet wird; dabei stellt der Browser eine Verbindung zu Servern von Paddle her, und Paddle verarbeitet technische Verbindungsdaten sowie für das Bezahlfenster technisch notwendige Angaben im Browser. Zahlungsdaten wie Kartennummern werden ausschliesslich von Paddle und dessen Zahlungsdienstleistern verarbeitet; der Anbieter erhält sie zu keinem Zeitpunkt."
+            },
+            {
+               "type": "p",
+               "text": "Nach erfolgter Zahlung meldet Paddle dem Anwendungsdienst des Anbieters den Abschluss mit Transaktionskennung, Kundenkennung, erworbener Lizenzvariante und VV-ID. Der Anbieter ruft dazu die Emailadresse des Käufers bei Paddle ab, stellt die Lizenz aus und legt sie zum Abruf bereit. Gespeichert werden dabei Emailadresse, VV-ID, Lizenzvariante, Lizenzschlüssel, Transaktionskennung sowie die vor dem Kauf erhobenen Angaben zu Name, Anschrift und Firma, damit Rückfragen zu einem Kauf beantwortet werden können. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
+            },
+            {
+               "type": "p",
+               "text": "Ein Kauf, der sich keiner Installation zuordnen lässt, wird nicht verworfen, sondern zur manuellen Bearbeitung vorgemerkt; der Käufer wird dann über die bei Paddle hinterlegte Emailadresse kontaktiert."
+            },
+            {
+               "type": "p",
+               "text": "Die Vormerkung eines Kaufvorgangs wird spätestens nach 180 Tagen automatisch gelöscht, die Zuordnung einer verarbeiteten Transaktion, die eine doppelte Ausstellung verhindert, spätestens nach 400 Tagen. Der Lizenzeintrag bleibt dauerhaft gespeichert und wird auf Verlangen gelöscht. Zum Schutz vor automatisierten Zusendungen wird auch auf der Kaufseite Cloudflare Turnstile eingesetzt."
+            },
+            {
+               "type": "p",
+               "text": "Für Käufer ausserhalb der USA verarbeitet Paddle die Daten im Vereinigten Königreich; für dieses Land besteht ein Angemessenheitsbeschluss der Europäischen Kommission. Für die Paddle.com Inc. in den USA gelten die Standardvertragsklauseln der Europäischen Kommission und, soweit zertifiziert, das EU-US Data Privacy Framework."
+            }
+         ]
+      },
+      {
+         "id": 11,
          "title": "Lizenzausstellung, Lizenzabruf und regelmässige Bestätigung",
          "blocks": [
             {
                "type": "p",
-               "text": "Wird eine Lizenz ausgestellt, entsteht ein Eintrag mit Emailadresse, VV-ID, Lizenzvariante und Lizenzschlüssel. Er wird dauerhaft gespeichert, damit die Lizenz nach einer Neuinstallation oder einem Rechnerwechsel erneut abgerufen werden kann, und auf Verlangen gelöscht. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
+               "text": "Wird eine Lizenz ausgestellt, entsteht ein Eintrag mit Emailadresse, VV-ID, Lizenzvariante und Lizenzschlüssel, beim Kauf über Paddle zusätzlich mit Transaktionskennung und den Angaben aus dem Kaufvorgang. Er wird dauerhaft gespeichert, damit die Lizenz nach einer Neuinstallation oder einem Rechnerwechsel erneut abgerufen werden kann, und auf Verlangen gelöscht. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
             },
             {
                "type": "p",
@@ -214,7 +248,7 @@
          ]
       },
       {
-         "id": 11,
+         "id": 12,
          "title": "Was die Anwendung selbst verarbeitet",
          "blocks": [
             {
@@ -240,7 +274,7 @@
          ]
       },
       {
-         "id": 12,
+         "id": 13,
          "title": "Support-Pakete und technische Protokolle",
          "blocks": [
             {
@@ -254,7 +288,7 @@
          ]
       },
       {
-         "id": 13,
+         "id": 14,
          "title": "Bezug über den Microsoft Store",
          "blocks": [
             {
@@ -264,7 +298,25 @@
          ]
       },
       {
-         "id": 14,
+         "id": 15,
+         "title": "Spenden über PayPal und 4Fund",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Im Fenster „VidiVerify unterstützen“ der Anwendung stehen zwei freiwillige Spendenwege: PayPal (PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg) und 4Fund (Zrzutka.pl sp. z o.o., Wrocław, Polen). Beide werden als Adresse und als QR-Code angeboten."
+            },
+            {
+               "type": "p",
+               "text": "Eine Übermittlung an diese Anbieter erfolgt erst, wenn ein Spendenweg aktiv geöffnet oder der QR-Code benutzt wird. Wird ein Spendenvorgang ausgelöst, verarbeiten die Anbieter die dabei anfallenden Daten in eigener Verantwortung nach ihren eigenen Bestimmungen; der Anbieter von VidiVerify erhält dabei keine Zahlungsdaten und keine Angaben über einzelne Spender."
+            },
+            {
+               "type": "p",
+               "text": "Eine Spende hat mit der Lizenzierung nichts zu tun: Sie schaltet keine Funktionen frei und wird keiner Installation zugeordnet. Rechtsgrundlage für die Bereitstellung der beiden Wege ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in der Möglichkeit, ein unabhängiges Projekt freiwillig zu unterstützen."
+            }
+         ]
+      },
+      {
+         "id": 16,
          "title": "GitHub als Projekt- und Releaseplattform",
          "blocks": [
             {
@@ -278,7 +330,7 @@
          ]
       },
       {
-         "id": 15,
+         "id": 17,
          "title": "Externe Links",
          "blocks": [
             {
@@ -288,7 +340,7 @@
          ]
       },
       {
-         "id": 16,
+         "id": 18,
          "title": "Cookies und Speicherung im Browser",
          "blocks": [
             {
@@ -297,12 +349,12 @@
             },
             {
                "type": "p",
-               "text": "Technisch notwendige Speicherung im Browser kann stattfinden, etwa um die gewählte Sprache zu merken. Diese Angaben verbleiben im Browser des Nutzers. Cloudflare Turnstile kann am Bestellformular technisch notwendige Angaben verarbeiten."
+               "text": "Technisch notwendige Speicherung im Browser kann stattfinden, etwa um die gewählte Sprache zu merken. Diese Angaben verbleiben im Browser des Nutzers. Cloudflare Turnstile kann am Bestellformular und auf der Kaufseite technisch notwendige Angaben verarbeiten; das Bezahlfenster von Paddle kann für den Bezahlvorgang technisch notwendige Angaben im Browser speichern."
             }
          ]
       },
       {
-         "id": 17,
+         "id": 19,
          "title": "Speicherdauer",
          "blocks": [
             {
@@ -316,6 +368,7 @@
                   "Reichweitenmessung: zusammengefasste Angaben ohne Personenbezug, keine IP-Speicherung.",
                   "Downloadzähler: Zählstände ohne Personenbezug.",
                   "Bestellanfragen: bis zum Abschluss des Vorgangs, spätestens automatisch nach 180 Tagen.",
+                  "Kaufvorgänge über Paddle: Vormerkung spätestens nach 180 Tagen, Transaktionszuordnung spätestens nach 400 Tagen; Rechnungsdaten liegen bei Paddle nach dessen Fristen.",
                   "Lizenzeinträge: dauerhaft, damit die Lizenz erneut abgerufen werden kann; Löschung auf Verlangen.",
                   "Emails, Supportanfragen und Support-Pakete: solange dies für Bearbeitung und Dokumentation erforderlich ist.",
                   "Steuerlich aufbewahrungspflichtige Unterlagen: nach den gesetzlichen Fristen."
@@ -324,7 +377,7 @@
          ]
       },
       {
-         "id": 18,
+         "id": 20,
          "title": "Empfänger personenbezogener Daten",
          "blocks": [
             {
@@ -337,25 +390,27 @@
                   "GitHub als Hosting-Anbieter der Website und als Releaseplattform",
                   "Cloudflare für Namensauflösung, Auslieferung, Anwendungsdienste, Ablage und Abwehr automatisierter Zusendungen",
                   "Hetzner Online GmbH für die Emailinfrastruktur",
+                  "Paddle (Paddle.com Market Limited beziehungsweise Paddle.com Inc.) als Verkäufer beim Kauf über die Kaufseite",
                   "GoatCounter (Martin Tournoij) für die Reichweitenmessung",
                   "Microsoft, soweit die Anwendung über den Microsoft Store bezogen wird",
+                  "PayPal und 4Fund, soweit Nutzer diese Spendenwege freiwillig nutzen",
                   "Hersteller und Spiegelserver der Prüfwerkzeuge, soweit die Anwendung Plug-ins bezieht"
                ]
             }
          ]
       },
       {
-         "id": 19,
+         "id": 21,
          "title": "Übermittlung in Drittländer",
          "blocks": [
             {
                "type": "p",
-               "text": "Die Website kann Links auf Angebote Dritter enthalten, insbesondere zu GitHub und zum Microsoft Store. Für Inhalte und Datenverarbeitung dort sind ausschliesslich die jeweiligen Betreiber verantwortlich."
+               "text": "Bei GitHub, Cloudflare, Microsoft, Paddle und PayPal kann eine Verarbeitung ausserhalb der Europäischen Union stattfinden, insbesondere in den Vereinigten Staaten und im Vereinigten Königreich. Grundlage sind die Standardvertragsklauseln der Europäischen Kommission, soweit die Anbieter zertifiziert sind das EU-US Data Privacy Framework, sowie für das Vereinigte Königreich der Angemessenheitsbeschluss der Europäischen Kommission."
             }
          ]
       },
       {
-         "id": 20,
+         "id": 22,
          "title": "Rechte der betroffenen Personen",
          "blocks": [
             {
@@ -382,7 +437,7 @@
          ]
       },
       {
-         "id": 21,
+         "id": 23,
          "title": "Widerspruchsrecht",
          "blocks": [
             {
@@ -392,7 +447,7 @@
          ]
       },
       {
-         "id": 22,
+         "id": 24,
          "title": "Beschwerderecht bei einer Aufsichtsbehörde",
          "blocks": [
             {
@@ -402,12 +457,12 @@
          ]
       },
       {
-         "id": 23,
+         "id": 25,
          "title": "Änderung dieser Datenschutzerklärung",
          "blocks": [
             {
                "type": "p",
-               "text": "Diese Erklärung beschreibt den technischen Stand vom 10.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst. Das gilt insbesondere für die Aufnahme eines Zahlungsanbieters für den Direktkauf, für eingebettete Zahlungsfenster und für weitere Auswertungswerkzeuge."
+               "text": "Diese Erklärung beschreibt den technischen Stand vom 11.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst; das gilt insbesondere für weitere Zahlungswege und Auswertungswerkzeuge."
             }
          ]
       }
