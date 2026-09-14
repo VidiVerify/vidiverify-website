@@ -51,6 +51,8 @@ import {
    paddleAufbau, paddleHorchen, paddleLaden,
    type PaddleAufbau, type PaddleEreignis,
 } from "@utils/paddle";
+import { summeAus, type Summe } from "@utils/paddleSumme";
+import ProKaufZahlung from "./ProKaufZahlung";
 
 const VVID_RE = /^VV-[0-9A-Z]{5}$/;
 
@@ -63,7 +65,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
 const AMBER = "#f59e0b";
 
 type Wahl = "pro" | "lifetime";
-type Phase = "wahl" | "warten" | "fertig" | "dauert";
+/* „zahlen" ist seit dem 14.09.2026 ein eigener Schritt IM Fenster: Paddle
+ * läuft inline, nicht mehr als zweites Overlay darüber (`ProKaufZahlung`). */
+type Phase = "wahl" | "zahlen" | "warten" | "fertig" | "dauert";
 
 /* Wie lange die Erfolgsansicht auf die Lizenz wartet.
  *
@@ -94,7 +98,16 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    const [vvid, setVvid] = useState(kennungLesen().vvid);
    const appVersion = kennungLesen().version;
 
-   const [wahl, setWahl] = useState<Wahl>("pro");
+   /* Beim Upgrade steht nur LIFETIME zur Wahl - dieselbe Regel wie im
+    * Anfrageformular (`LizenzAnfrageModal`). Die Anwendung hängt
+    * `nur=lifetime` an, wenn PRO bereits läuft. Bis zum 14.09.2026 las nur das
+    * Formular den Parameter; die Kaufseite zeigte PRO vorgewählt, also genau
+    * das, was der Kunde schon hat (Befund VM-Probe). Einmal beim Laden
+    * gelesen: `nur` bleibt zwar in der Adresse stehen (`@utils/adresse`), aber
+    * die Wahl soll nicht an einem späteren Adresswechsel hängen. */
+   const [nurLifetime] = useState(
+      () => new URLSearchParams(window.location.search).get("nur") === "lifetime");
+   const [wahl, setWahl] = useState<Wahl>(nurLifetime ? "lifetime" : "pro");
    const [vvidFehler, setVvidFehler] = useState(false);
 
    /* Die Rechnungsanschrift.
@@ -133,6 +146,14 @@ const ProKaufModal = ({ open, onClose }: Props) => {
 
    const [aufbau, setAufbau] = useState<PaddleAufbau | null>(null);
    useEffect(() => { setAufbau(paddleAufbau()); }, []);
+
+   /* Die Transaktion des Zahlungsschritts und ihre Übersicht. Beide gelten
+    * nur für diesen Schritt: Wer zurück zu den Angaben geht, bekommt beim
+    * nächsten Weiter einen neuen Vorgang - Anschrift oder Lizenz können sich
+    * inzwischen geändert haben. */
+   const [transaktion, setTransaktion] = useState("");
+   const [summe, setSumme] = useState<Summe | null>(null);
+   const inhaltRef = useRef<HTMLDivElement>(null);
 
    const sitekey = turnstileSchluessel();
 
@@ -254,6 +275,8 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          window.scrollTo({ top: 0, behavior: "smooth" });
          setPhase("wahl");
          setToken("");
+         setTransaktion("");
+         setSumme(null);
       }, 260);
    }, [onClose]);
 
@@ -342,13 +365,39 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    useEffect(() => {
       if (!open || !aufbau) return;
       paddleHorchen((ereignis: PaddleEreignis) => {
+         // Die Übersicht neben dem Formular folgt Paddles Beträgen. Ereignisse
+         // ohne Summen lassen sie stehen (`summeAus` liefert dann null).
+         const neu = summeAus(ereignis, sprache);
+         if (neu) setSumme(neu);
          if (ereignis?.name !== "checkout.completed") return;
          abbruch.current = false;
          setPhase("warten");
          void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf);
       });
       return () => paddleHorchen(null);
-   }, [open, aufbau, vvid, holen]);
+   }, [open, aufbau, vvid, holen, sprache]);
+
+   /* Jeder Schritt beginnt oben. Wer die Anschrift unten ausgefüllt hat und
+    * weiterklickt, stünde sonst mitten im Zahlungsformular. */
+   useEffect(() => {
+      inhaltRef.current?.scrollTo({ top: 0 });
+   }, [phase]);
+
+   /* Zurück zu den Angaben: Die Transaktion wird verworfen, und die
+    * Sicherheitsabfrage muss neu bestätigt werden - ihr Token ist beim
+    * Anlegen des Vorgangs verbraucht worden. */
+   const zurueckZuAngaben = useCallback(() => {
+      setPhase("wahl");
+      setTransaktion("");
+      setSumme(null);
+      window.turnstile?.reset(widgetRef.current || undefined);
+      setBotToken("");
+   }, []);
+
+   const zahlungGescheitert = useCallback(() => {
+      zurueckZuAngaben();
+      setFehler(t.fehlerLaden);
+   }, [zurueckZuAngaben, t.fehlerLaden]);
 
    /* Kaufen heisst jetzt: erst den Vorgang, dann das Bezahlfenster.
     *
@@ -428,7 +477,14 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          if (!antwort.ok || !daten.transaction_id) {
             setFehler(String(daten.error || "").startsWith("turnstile")
                ? t.fehlerBot
-               : antwort.status === 429 ? t.fehlerBremse : t.fehlerVorgang);
+               : antwort.status === 429 ? t.fehlerBremse
+               // Die Installation hat das Gewünschte schon (Worker prüft
+               // seit 14.09.2026). Kein Fehler im eigentlichen Sinn - der
+               // Kunde soll wissen, dass er nicht zweimal zahlen muss.
+               : daten.error === "schon_lizenziert"
+                  ? (daten.grund === "lifetime_vorhanden"
+                     ? t.fehlerLifetimeVorhanden : t.fehlerProVorhanden)
+               : t.fehlerVorgang);
             // Ein verbrauchtes Turnstile-Token gilt nur einmal. Ohne das
             // Zurücksetzen scheitert auch der zweite Versuch, und der Kunde
             // sieht einen Fehler, den er nicht abstellen kann.
@@ -437,11 +493,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
             return;
          }
 
-         await paddleLaden(aufbau);
-         window.Paddle?.Checkout.open({
-            transactionId: daten.transaction_id,
-            settings: { displayMode: "overlay", theme: "dark", locale: sprache },
-         });
+         // Das Formular öffnet `ProKaufZahlung`, sobald sein Rahmen steht.
+         setSumme(null);
+         setTransaktion(String(daten.transaction_id));
+         setPhase("zahlen");
       } catch {
          setFehler(t.fehlerNetz);
       } finally {
@@ -525,6 +580,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               fontSize: 16, fontWeight: 800, color: TEXT_PRIMARY, margin: "4px 0 0",
                            }}>
                               {phase === "fertig" ? t.fertigTitel
+                                 : phase === "zahlen" ? t.zahlenTitel
                                  : phase === "warten" ? t.wartenTitel
                                  : phase === "dauert" ? t.dauertTitel
                                  : t.titel}
@@ -550,6 +606,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
 
                      {/* ── Inhalt ── */}
                      <div
+                        ref={inhaltRef}
                         data-lenis-prevent
                         onWheel={(e) => e.stopPropagation()}
                         style={{ padding: "22px 28px", overflowY: "auto", flex: 1 }}
@@ -685,6 +742,23 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                            </div>
                         ) : (
                            <>
+                           {/* Die Angaben bleiben beim Zahlungsschritt
+                               eingehängt und werden nur verborgen. Sonst
+                               verschwände mit ihnen das Turnstile-Widget,
+                               und nach „Angaben ändern" liesse sich die
+                               Sicherheitsabfrage nicht mehr bestätigen. */}
+                           {phase === "zahlen" && transaktion && (
+                              <ProKaufZahlung
+                                 aufbau={aufbau} transactionId={transaktion}
+                                 sprache={sprache} summe={summe} t={t}
+                                 priceId={aufbau.preise[wahl]}
+                                 land={laenderCode(land, sprache) || ""}
+                                 plz={plz.trim()}
+                                 rabattProzent={rabatt?.art === "prozent"
+                                    && rabatt.gilt_fuer.includes(wahl) ? rabatt.wert : null}
+                                 onFehler={zahlungGescheitert} />
+                           )}
+                           <div hidden={phase === "zahlen"}>
                               {/* ── Die Installation ── */}
                               <p style={rubrik}>{t.vvidTitel}</p>
                               <label htmlFor="pro-vvid" style={beschriftung}>
@@ -719,10 +793,12 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  display: "grid", gap: 10,
                                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                               }}>
-                                 <Kachel gewaehlt={wahl === "pro"} onClick={() => setWahl("pro")}
-                                         titel={t.proTitel} preis={anzeigePreis("pro")}
-                                         statt={stattPreis("pro")}
-                                         text={t.proText} farbe={CYAN} />
+                                 {!nurLifetime && (
+                                    <Kachel gewaehlt={wahl === "pro"} onClick={() => setWahl("pro")}
+                                            titel={t.proTitel} preis={anzeigePreis("pro")}
+                                            statt={stattPreis("pro")}
+                                            text={t.proText} farbe={CYAN} />
+                                 )}
                                  <Kachel gewaehlt={wahl === "lifetime"} onClick={() => setWahl("lifetime")}
                                          titel={t.lifetimeTitel} preis={anzeigePreis("lifetime")}
                                          statt={stattPreis("lifetime")}
@@ -982,6 +1058,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                     {fehler}
                                  </div>
                               )}
+                           </div>
                            </>
                         )}
                      </div>
@@ -1016,7 +1093,24 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                            <span style={{ fontSize: 11, color: TEXT_MUTED }}>Gera</span>
                         </span>
 
-                        {aufbau && phase === "wahl" ? (
+                        {aufbau && phase === "zahlen" ? (
+                           /* Bezahlt wird im Formular selbst - dessen Knopf
+                              ist der einzige Kaufknopf. Hier steht nur der
+                              Weg zurück. */
+                           <motion.button
+                              onClick={zurueckZuAngaben}
+                              whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                              style={{
+                                 padding: "7px 18px", borderRadius: 10,
+                                 background: "rgba(106,172,204,0.08)",
+                                 border: "1px solid rgba(106,172,204,0.2)",
+                                 fontSize: 12, fontWeight: 600, color: CYAN,
+                                 cursor: "pointer", fontFamily: "inherit",
+                              }}
+                           >
+                              {t.angabenAendern}
+                           </motion.button>
+                        ) : aufbau && phase === "wahl" ? (
                            <motion.button
                               onClick={() => void kaufen()}
                               disabled={laeuft}

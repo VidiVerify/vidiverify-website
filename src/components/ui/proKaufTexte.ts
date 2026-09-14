@@ -27,7 +27,7 @@ const de = {
    wahlTitelUpgrade: "Dein Upgrade",
    rabattPlatzhalter: "Rabatt- oder Aktionscode",
    rabattPruefen: "Einlösen",
-   rabattGilt: "Code eingelöst - der Nachlass ist im Bezahlfenster enthalten.",
+   rabattGilt: "Code eingelöst - der Nachlass ist in deiner Bestellung enthalten.",
    rabattUnbekannt: "Diesen Code kennen wir nicht.",
    rabattAbgelaufen: "Dieser Code ist abgelaufen.",
    rabattAufgebraucht: "Dieser Code ist bereits ausgeschöpft.",
@@ -43,7 +43,7 @@ const de = {
    preisHinweis:
       "Endpreis einschliesslich Umsatzsteuer. Einmalzahlung, kein Abonnement. "
       + "Der endgültige Betrag richtet sich nach deinem Land und steht im "
-      + "Bezahlfenster.",
+      + "nächsten Schritt.",
 
    anschriftTitel: "Rechnungsanschrift",
    firma: "Firmenname",
@@ -52,12 +52,18 @@ const de = {
    fehlerLand: "Dieses Land kennen wir nicht. Bitte aus der Liste wählen.",
    fehlerVorgang: "Der Kauf liess sich nicht vorbereiten. Bitte versuche es noch einmal.",
    fehlerBremse: "Zu viele Versuche in kurzer Zeit. Bitte warte eine Minute.",
+   fehlerLifetimeVorhanden:
+      "Für diese VV-ID ist LIFETIME bereits freigeschaltet. Ein weiterer Kauf "
+      + "ist nicht nötig - VidiVerify holt die Lizenz beim Start von selbst.",
+   fehlerProVorhanden:
+      "Für diese VV-ID ist PRO dieser Hauptversion bereits freigeschaltet. "
+      + "Möglich ist noch das Upgrade auf LIFETIME.",
    fehlerBot: "Die Sicherheitsabfrage ist fehlgeschlagen. Bitte versuche es noch einmal.",
    fehlerNetz: "Keine Verbindung. Bitte prüfe dein Netz und versuche es erneut.",
    botOffen: "Bitte die Sicherheitsabfrage darüber noch bestätigen.",
 
    ablaufTitel: "So läuft es",
-   ablauf1: "Du kaufst im Bezahlfenster. Verkäufer ist unser Zahlungsanbieter Paddle.",
+   ablauf1: "Du bezahlst im nächsten Schritt. Verkäufer ist unser Zahlungsanbieter Paddle.",
    ablauf2: "Rechnung und Zahlungsbestätigung kommen von Paddle per Email.",
    ablauf3:
       "Dein Lizenzschlüssel erscheint nach dem erfolgreichen Kauf hier im "
@@ -70,9 +76,22 @@ const de = {
    datenschutzLink: "Datenschutzerklärung",
    rechtZeile3: ". Den Kaufvertrag schliesst du mit Paddle.",
 
-   kaufen: "Kaufen",
-   kaufenLaeuft: "Bezahlfenster öffnet",
+   kaufen: "Weiter zur Zahlung",
+   kaufenLaeuft: "Zahlung wird vorbereitet",
    zurueck: "Schliessen",
+
+   zahlenTitel: "Bezahlen",
+   angabenAendern: "Angaben ändern",
+   bestellungTitel: "Deine Bestellung",
+   bestellungLaedt: "Betrag wird berechnet",
+   bestellungHinweis:
+      "Einmalzahlung, kein Abonnement. Verkäufer ist Paddle; Rechnung und "
+      + "Zahlungsbestätigung kommen per Email.",
+   nachlass: "Rabatt oder Nachlass",
+   nachlassEnthalten: "berücksichtigt",
+   steuer: "darin enthaltene Umsatzsteuer",
+   gesamt: "Zahlbetrag",
+   zahlungTitel: "Zahlung",
 
    zuTitel: "Der Kauf ist noch nicht geöffnet",
    zuText:
@@ -125,7 +144,7 @@ const en: typeof de = {
    wahlTitelUpgrade: "Your upgrade",
    rabattPlatzhalter: "Discount or promo code",
    rabattPruefen: "Apply",
-   rabattGilt: "Code applied - the discount is included at checkout.",
+   rabattGilt: "Code applied - the discount is included in your order.",
    rabattUnbekannt: "We do not know this code.",
    rabattAbgelaufen: "This code has expired.",
    rabattAufgebraucht: "This code is already used up.",
@@ -140,7 +159,7 @@ const en: typeof de = {
       + "major version of the line.",
    preisHinweis:
       "Final price including VAT. One-time payment, no subscription. The exact "
-      + "amount depends on your country and is shown at checkout.",
+      + "amount depends on your country and is shown in the next step.",
 
    anschriftTitel: "Billing address",
    firma: "Company name",
@@ -149,12 +168,18 @@ const en: typeof de = {
    fehlerLand: "We do not recognise this country. Please pick one from the list.",
    fehlerVorgang: "The purchase could not be prepared. Please try again.",
    fehlerBremse: "Too many attempts in a short time. Please wait a minute.",
+   fehlerLifetimeVorhanden:
+      "LIFETIME is already unlocked for this VV-ID. No further purchase is "
+      + "needed - VidiVerify picks up the licence on its own at start.",
+   fehlerProVorhanden:
+      "PRO for this major version is already unlocked for this VV-ID. The "
+      + "upgrade to LIFETIME is still available.",
    fehlerBot: "The security check failed. Please try again.",
    fehlerNetz: "No connection. Please check your network and try again.",
    botOffen: "Please confirm the security check above.",
 
    ablaufTitel: "How it works",
-   ablauf1: "You pay at checkout. The seller is our payment provider Paddle.",
+   ablauf1: "You pay in the next step. The seller is our payment provider Paddle.",
    ablauf2: "Invoice and payment confirmation come from Paddle by email.",
    ablauf3:
       "Your licence key appears here in this window after a successful "
@@ -167,9 +192,22 @@ const en: typeof de = {
    datenschutzLink: "privacy policy",
    rechtZeile3: " apply. The purchase contract is with Paddle.",
 
-   kaufen: "Buy",
-   kaufenLaeuft: "Opening checkout",
+   kaufen: "Continue to payment",
+   kaufenLaeuft: "Preparing payment",
    zurueck: "Close",
+
+   zahlenTitel: "Payment",
+   angabenAendern: "Change details",
+   bestellungTitel: "Your order",
+   bestellungLaedt: "Calculating amount",
+   bestellungHinweis:
+      "One-time payment, no subscription. The seller is Paddle; invoice and "
+      + "payment confirmation arrive by email.",
+   nachlass: "Discount",
+   nachlassEnthalten: "applied",
+   steuer: "including VAT",
+   gesamt: "Amount due",
+   zahlungTitel: "Payment",
 
    zuTitel: "Checkout is not open yet",
    zuText:

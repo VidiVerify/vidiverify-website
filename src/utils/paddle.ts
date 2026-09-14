@@ -115,7 +115,10 @@ declare global {
       Paddle?: {
          Environment: { set: (u: string) => void };
          Initialize: (o: Record<string, unknown>) => void;
-         Checkout: { open: (o: Record<string, unknown>) => void };
+         Checkout: {
+            open: (o: Record<string, unknown>) => void;
+            close?: () => void;
+         };
          PricePreview?: (o: Record<string, unknown>) => Promise<unknown>;
       };
    }
