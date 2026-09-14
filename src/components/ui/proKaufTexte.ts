@@ -27,6 +27,7 @@ const de = {
    wahlTitelUpgrade: "Dein Upgrade",
    rabattPlatzhalter: "Rabatt- oder Aktionscode",
    rabattPruefen: "Einlösen",
+   rabattEntfernen: "Entfernen",
    rabattGilt: "Code eingelöst - der Nachlass ist in deiner Bestellung enthalten.",
    rabattUnbekannt: "Diesen Code kennen wir nicht.",
    rabattAbgelaufen: "Dieser Code ist abgelaufen.",
@@ -58,9 +59,18 @@ const de = {
    fehlerProVorhanden:
       "Für diese VV-ID ist PRO dieser Hauptversion bereits freigeschaltet. "
       + "Möglich ist noch das Upgrade auf LIFETIME.",
+   fehlerZahlungUnterwegs:
+      "Für diese VV-ID ist gerade eine Zahlung eingegangen. Die Lizenz wird in "
+      + "diesem Moment ausgestellt - bitte einen Augenblick warten und in "
+      + "VidiVerify „Lizenz abrufen“ wählen.",
+   fehlerVorgangOffen:
+      "Für diese VV-ID ist noch ein Kaufvorgang offen, etwa eine gestellte "
+      + "Rechnung. Bitte diesen zuerst abschliessen oder support@vidiverify.de "
+      + "schreiben.",
    fehlerBot: "Die Sicherheitsabfrage ist fehlgeschlagen. Bitte versuche es noch einmal.",
    fehlerNetz: "Keine Verbindung. Bitte prüfe dein Netz und versuche es erneut.",
-   botOffen: "Bitte die Sicherheitsabfrage darüber noch bestätigen.",
+   botOffen: "Bitte bestätige kurz die Sicherheitsabfrage darüber und klicke dann erneut.",
+   botStumm: "Die Sicherheitsprüfung hat nicht rechtzeitig geantwortet. Bitte versuche es in einem Moment noch einmal.",
 
    ablaufTitel: "So läuft es",
    ablauf1: "Du bezahlst im nächsten Schritt. Verkäufer ist unser Zahlungsanbieter Paddle.",
@@ -144,6 +154,7 @@ const en: typeof de = {
    wahlTitelUpgrade: "Your upgrade",
    rabattPlatzhalter: "Discount or promo code",
    rabattPruefen: "Apply",
+   rabattEntfernen: "Remove",
    rabattGilt: "Code applied - the discount is included in your order.",
    rabattUnbekannt: "We do not know this code.",
    rabattAbgelaufen: "This code has expired.",
@@ -174,9 +185,16 @@ const en: typeof de = {
    fehlerProVorhanden:
       "PRO for this major version is already unlocked for this VV-ID. The "
       + "upgrade to LIFETIME is still available.",
+   fehlerZahlungUnterwegs:
+      "A payment for this VV-ID has just come in. The licence is being issued "
+      + "right now - please wait a moment and choose \"Fetch licence\" in VidiVerify.",
+   fehlerVorgangOffen:
+      "There is still an open purchase for this VV-ID, such as an issued invoice. "
+      + "Please complete it first or write to support@vidiverify.de.",
    fehlerBot: "The security check failed. Please try again.",
    fehlerNetz: "No connection. Please check your network and try again.",
-   botOffen: "Please confirm the security check above.",
+   botOffen: "Please confirm the security check above, then click again.",
+   botStumm: "The security check did not respond in time. Please try again in a moment.",
 
    ablaufTitel: "How it works",
    ablauf1: "You pay in the next step. The seller is our payment provider Paddle.",

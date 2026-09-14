@@ -35,12 +35,14 @@ import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { X, KeyRound } from "lucide-react";
 import ProBadge from "./ProBadge";
+import KnopfText from "./KnopfText";
 import {
    AMBER, CYAN, GREEN, TEXT_MUTED, TEXT_PRIMARY, TEXT_SECONDARY,
 } from "@/constants/theme";
 import { spracheAus, TEXTE } from "./lizenzAnfrageTexte";
 import { preisText, usePreise } from "@utils/usePreise";
 import { turnstileSchluessel } from "@utils/turnstile";
+import { useTurnstile } from "@utils/useTurnstile";
 import { apiBasis } from "@utils/apiBasis";
 import { useFensterStapel } from "@utils/useFensterStapel";
 import { kennungLesen } from "@utils/adresse";
@@ -62,15 +64,6 @@ const VVID_RE = /^VV-[0-9A-Z]{5}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
 
 type Wunsch = "free" | "pro" | "lifetime";
-
-declare global {
-   interface Window {
-      turnstile?: {
-         render: (el: HTMLElement, o: Record<string, unknown>) => string;
-         reset: (id?: string) => void;
-      };
-   }
-}
 
 /* Der Entwurf überlebt das Schliessen.
  *
@@ -234,7 +227,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
 
    // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
    // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
-   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen }
+   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen, verwerfen }
       = usePreise(open, apiBasis());
 
    const sitekey = turnstileSchluessel();
@@ -273,6 +266,16 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    });
    const [rabattcode, setRabattcode] = useState(entwurf.felder.rabattcode || "");
 
+   /* Der Nachlass gilt nur für den Code, der im Feld steht - wie auf der
+    * Kaufseite. Ändern oder Löschen nimmt ihn zurück, „Entfernen" ebenso
+    * (Anwenderbefund 14.09.2026). Der Entwurf wird mitgeführt, sonst käme
+    * der alte Code beim Wiederöffnen zurück. */
+   const codeSetzen = (wert: string) => {
+      setRabattcode(wert);
+      entwurf.felder = { ...entwurf.felder, rabattcode: wert };
+      if (rabatt && wert.trim() !== rabatt.code.toUpperCase()) verwerfen();
+   };
+
    const [laeuft, setLaeuft] = useState(false);
    const [fertig, setFertig] = useState(
       () => parameter.get("danke") === "1" && nurLokal);
@@ -282,9 +285,6 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
 
    const scrollRef = useRef<HTMLDivElement>(null);
    const fehlerRef = useRef<HTMLDivElement>(null);
-   const turnstileRef = useRef<HTMLDivElement>(null);
-   const widgetRef = useRef<string | null>(null);
-   const [botToken, setBotToken] = useState("");
 
    /* Die beiden Erklärungen.
     *
@@ -382,16 +382,25 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const laufRef = useRef(0);
    const fertigRef = useRef(false);
    useEffect(() => { fertigRef.current = fertig; }, [fertig]);
+   // Die laufende Übertragung wird beim Schliessen ABGEBROCHEN, nicht nur
+   // ihre Antwort verworfen - sonst liesse sich derselbe Entwurf nach dem
+   // Wiederöffnen ein zweites Mal absenden (Codex-Review Runde 2).
+   const abbruchSteuerung = useRef<AbortController | null>(null);
 
    const schliessen = useCallback(() => {
       onClose();
       laufRef.current += 1;
+      abbruchSteuerung.current?.abort();
       try {
          window.history.replaceState(null, "", window.location.pathname);
       } catch {
          // Ein Browser, der das verweigert, ist kein Grund, das Fenster
          // offen zu lassen.
       }
+      // Ein Lauf, der noch auf die Sicherheitsabfrage wartet, endet hier;
+      // ohne diese Zeile blieb der Absendeknopf nach dem Wiederöffnen
+      // gesperrt (Codex-Review 15.09.2026).
+      setLaeuft(false);
       window.setTimeout(() => {
          window.scrollTo({ top: 0, behavior: "smooth" });
          setFehler("");
@@ -417,7 +426,6 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
             setLeer([]);
             setVvidFehler(false);
             setEmailFehler(false);
-            setBotToken("");
          }
          setFertig(false);
       }, 260);
@@ -432,43 +440,9 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
    }, [open]);
 
-   /* Turnstile nachladen und einmal zeichnen.
-    *
-    * Ausdrücklich (`render`) statt über das automatische Aufsammeln: Der
-    * Entwicklungslauf von React baut jede Komponente zweimal, und das
-    * automatische Verfahren setzte dann zwei Widgets nebeneinander. Der
-    * Verweis wird beim Schliessen zurückgesetzt, weil das Widget mit dem
-    * Fenster verschwindet.
-    */
-   useEffect(() => {
-      if (!open || !sitekey) return;
-      const zeichnen = () => {
-         if (!window.turnstile || !turnstileRef.current || widgetRef.current) return;
-         widgetRef.current = window.turnstile.render(turnstileRef.current, {
-            sitekey,
-            theme: "dark",
-            size: "flexible",
-            // Zeigt sich nur, wenn tatsächlich eine Rückfrage nötig ist.
-            // Der Regelfall ist ein leerer Platz, und das ist der Zweck.
-            appearance: "interaction-only",
-            language: sprache,
-            callback: (token: string) => setBotToken(token),
-            "expired-callback": () => setBotToken(""),
-            "error-callback": () => setBotToken(""),
-         });
-      };
-      if (window.turnstile) {
-         zeichnen();
-      } else {
-         const skript = document.createElement("script");
-         skript.src =
-            "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-         skript.async = true;
-         skript.onload = zeichnen;
-         document.head.appendChild(skript);
-      }
-      return () => { widgetRef.current = null; };
-   }, [open, sprache, sitekey]);
+   /* Die Sicherheitsabfrage, gemeinsam mit der Kaufseite: `useTurnstile`. */
+   const { rahmenRef: turnstileRef, tokenHolen, verbraucht } =
+      useTurnstile(open, sitekey, sprache);
 
    const brauchtAnschrift = wunsch !== "free";
 
@@ -528,16 +502,29 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       }
       setZustimmungFehler(false);
 
-      if (sitekey && !botToken) {
-         setFehler(t.botOffen);
-         window.setTimeout(() => {
-            turnstileRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-         }, 50);
-         return;
-      }
-
       setLaeuft(true);
       const lauf = ++laufRef.current;
+
+      /* Das Token wird abgewartet statt vermisst (`useTurnstile`). Ohne
+       * Schlüssel gibt es keins - der Hinweis „Anfragen derzeit nicht möglich"
+       * steht dann ohnehin im Formular, und der Worker weist ab. */
+      let botToken = "";
+      if (sitekey) {
+         const bot = await tokenHolen();
+         if (lauf !== laufRef.current) return;
+         if (!bot.token) {
+            setLaeuft(false);
+            const rueckfrage = "grund" in bot && bot.grund === "rueckfrage";
+            setFehler(rueckfrage ? t.botOffen : t.botStumm);
+            if (rueckfrage) {
+               window.setTimeout(() => {
+                  turnstileRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+               }, 50);
+            }
+            return;
+         }
+         botToken = bot.token;
+      }
       /* Nur, was zum gewählten Vorgang gehört. Die Felder werden beim Wechsel
        * auf FREE oder auf „privat" ausgeblendet, nicht geleert - der Kunde
        * soll sie beim Zurückwechseln wiederfinden. Mitgeschickt werden sie
@@ -562,8 +549,11 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
           * Beim Entwickeln geht sie in den Sandkasten: Eine Testanfrage
           * gehoert nicht in die Wirkablage zwischen die echten Bestellungen,
           * und ein dort angelegter Rabattcode waere hier sonst unbekannt. */
+         const steuerung = new AbortController();
+         abbruchSteuerung.current = steuerung;
          const antwort = await fetch(apiBasis() + "/anfrage", {
             method: "POST",
+            signal: steuerung.signal,
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
                ...nurVorgang, anrede, kundentyp,
@@ -602,12 +592,11 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
          // Ein verbrauchtes Turnstile-Token gilt nur einmal. Ohne diesen
          // Rücksetzer scheiterte der zweite Versuch immer - und zwar mit einer
          // Meldung, die nach unserem Fehler aussieht.
-         window.turnstile?.reset(widgetRef.current || undefined);
-         setBotToken("");
+         verbraucht();
       } catch {
          if (lauf === laufRef.current) setFehler(t.fehlerNetz);
       } finally {
-         setLaeuft(false);
+         if (lauf === laufRef.current) setLaeuft(false);
       }
       // Nach dem Rendern der Meldung dorthin rollen - sonst bleibt der Klick
       // ohne sichtbare Antwort.
@@ -882,19 +871,13 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     </label>
                                     <div style={{ display: "flex", gap: 8 }}>
                                     <input id="f-rabatt" value={rabattcode}
-                                           onChange={(e) => {
-                                              const wert = e.target.value.toUpperCase();
-                                              setRabattcode(wert);
-                                              entwurf.felder = {
-                                                 ...entwurf.felder, rabattcode: wert,
-                                              };
-                                           }}
+                                           onChange={(e) => codeSetzen(e.target.value.toUpperCase())}
                                            onKeyDown={(e) => {
                                               // Return im Codefeld prueft den Code,
                                               // statt die halbe Anfrage abzuschicken.
                                               if (e.key === "Enter") {
                                                  e.preventDefault();
-                                                 void pruefen(rabattcode);
+                                                 if (rabattcode && !rabatt) void pruefen(rabattcode);
                                               }
                                            }}
                                            maxLength={32}
@@ -905,17 +888,19 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                               letterSpacing: "0.06em",
                                            }} />
                                     <button type="button"
-                                            onClick={() => void pruefen(rabattcode)}
-                                            disabled={!rabattcode || preisLaeuft}
+                                            onClick={() => rabatt ? codeSetzen("") : void pruefen(rabattcode)}
+                                            disabled={!rabatt && (!rabattcode || preisLaeuft)}
                                             style={{
                                                padding: "9px 16px", borderRadius: 8,
                                                border: "1px solid rgba(255,255,255,0.12)",
                                                background: "rgba(255,255,255,0.04)",
                                                color: rabattcode ? TEXT_PRIMARY : TEXT_MUTED,
                                                fontSize: 12.5, fontFamily: "inherit",
-                                               cursor: rabattcode ? "pointer" : "not-allowed",
+                                               cursor: rabatt || rabattcode ? "pointer" : "not-allowed",
+                                               display: "inline-grid",
                                             }}>
-                                       {t.rabattPruefen}
+                                       <KnopfText an={!rabatt} text={t.rabattPruefen} />
+                                       <KnopfText an={!!rabatt} text={t.rabattEntfernen} />
                                     </button>
                                     </div>
                                   </div>

@@ -45,6 +45,7 @@ import { TEXTE as ANFRAGE_TEXTE } from "./lizenzAnfrageTexte";
 import { preisText, usePreise } from "@utils/usePreise";
 import { useFensterStapel } from "@utils/useFensterStapel";
 import { turnstileSchluessel } from "@utils/turnstile";
+import { useTurnstile } from "@utils/useTurnstile";
 import { kennungLesen } from "@utils/adresse";
 import { laenderCode, laenderNamen } from "@utils/laender";
 import {
@@ -53,6 +54,7 @@ import {
 } from "@utils/paddle";
 import { summeAus, type Summe } from "@utils/paddleSumme";
 import ProKaufZahlung from "./ProKaufZahlung";
+import KnopfText from "./KnopfText";
 
 const VVID_RE = /^VV-[0-9A-Z]{5}$/;
 
@@ -135,9 +137,6 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * hintereinander abgewiesen werden. */
    const [leer, setLeer] = useState<string[]>([]);
 
-   const [botToken, setBotToken] = useState("");
-   const turnstileRef = useRef<HTMLDivElement>(null);
-   const widgetRef = useRef<string | null>(null);
    const [phase, setPhase] = useState<Phase>("wahl");
    const [token, setToken] = useState("");
    const [kopiert, setKopiert] = useState(false);
@@ -154,44 +153,31 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    const [transaktion, setTransaktion] = useState("");
    const [summe, setSumme] = useState<Summe | null>(null);
    const inhaltRef = useRef<HTMLDivElement>(null);
+   const fehlerRef = useRef<HTMLDivElement>(null);
+
+   /* Eine Meldung wird angesteuert, nicht nur eingeblendet.
+    *
+    * Der Kasten steht unter der Rechnungsanschrift und damit ausserhalb des
+    * sichtbaren Bereichs, sobald jemand oben auf „Weiter" klickt. Der Kunde sah
+    * nichts passieren und musste suchen, ob überhaupt etwas geschehen ist
+    * (Anwenderbefund 14.09.2026, Meldung zur vorhandenen Lizenz). Dasselbe
+    * Verfahren wie in der Bestellanfrage; der Fokus sorgt zusätzlich dafür,
+    * dass ein Screenreader die Meldung vorliest. */
+   useEffect(() => {
+      if (!fehler) return;
+      const kasten = fehlerRef.current;
+      kasten?.scrollIntoView({ behavior: "smooth", block: "center" });
+      kasten?.focus({ preventScroll: true });
+   }, [fehler]);
 
    const sitekey = turnstileSchluessel();
 
-   /* Turnstile nachladen und einmal zeichnen - dieselbe Machart wie in der
-    * Bestellanfrage. Ausdrücklich (`render`) statt über das automatische
-    * Aufsammeln: Der Entwicklungslauf von React baut jede Komponente zweimal,
-    * und das automatische Verfahren setzte dann zwei Widgets nebeneinander.
-    *
-    * Die Abwehr steht hier nicht aus Gewohnheit: Hinter dem Knopf entstehen
-    * Kunde, Anschrift und Transaktion bei einem fremden Dienst.
-    */
-   useEffect(() => {
-      if (!open || !sitekey) return;
-      const zeichnen = () => {
-         if (!window.turnstile || !turnstileRef.current || widgetRef.current) return;
-         widgetRef.current = window.turnstile.render(turnstileRef.current, {
-            sitekey,
-            theme: "dark",
-            size: "flexible",
-            appearance: "interaction-only",
-            language: sprache,
-            callback: (token: string) => setBotToken(token),
-            "expired-callback": () => setBotToken(""),
-            "error-callback": () => setBotToken(""),
-         });
-      };
-      if (window.turnstile) {
-         zeichnen();
-      } else {
-         const skript = document.createElement("script");
-         skript.src =
-            "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-         skript.async = true;
-         skript.onload = zeichnen;
-         document.head.appendChild(skript);
-      }
-      return () => { widgetRef.current = null; };
-   }, [open, sprache, sitekey]);
+   /* Die Sicherheitsabfrage. Die Abwehr steht hier nicht aus Gewohnheit:
+    * Hinter dem Knopf entstehen Kunde, Anschrift und Transaktion bei einem
+    * fremden Dienst. Wie sie mit einem fehlenden Token umgeht, steht in
+    * `useTurnstile`. */
+   const { rahmenRef: turnstileRef, tokenHolen, verbraucht } =
+      useTurnstile(open, sitekey, sprache);
 
    /* Wie weit die Warteanzeige fortgeschritten ist.
     *
@@ -220,9 +206,22 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * und nie zu niedrig. Eine Kaufseite ganz ohne Preis wäre der schlechtere
     * Tausch.
     */
-   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen }
+   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen, verwerfen }
       = usePreise(open, aufbau?.basis || "/api");
    const [rabattcode, setRabattcode] = useState("");
+
+   /* Der Nachlass gilt nur für den Code, der im Feld steht. Wer ihn ändert
+    * oder löscht, sieht sofort wieder den Listenpreis - sonst stünde ein
+    * Rabattpreis in der Kachel, während der neue Feldinhalt abgeschickt wird
+    * (Anwenderbefund 14.09.2026). */
+   const codeAendern = (wert: string) => {
+      setRabattcode(wert);
+      if (rabatt && wert.trim() !== rabatt.code.toUpperCase()) verwerfen();
+   };
+   const codeEntfernen = () => {
+      setRabattcode("");
+      verwerfen();
+   };
    const [paddlePreise, setPaddlePreise] = useState<Record<Wahl, string>>(
       { pro: "", lifetime: "" });
 
@@ -263,8 +262,20 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     *    nicht verloren: Er liegt bei der Abholstelle, und die Anwendung holt
     *    ihn beim nächsten Start.
     */
+   /* Ein Klick auf „Weiter" ist ein LAUF mit Nummer. Schliessen beendet ihn:
+    * Kein Wartender auf die Sicherheitsabfrage und keine laufende Anfrage darf
+    * danach noch Oberfläche oder Paddle verändern - vorher legte ein alter
+    * Klick nach dem Wiederöffnen eine Transaktion an, ohne dass jemand
+    * geklickt hatte (Codex-Review 15.09.2026). */
+   const laufRef = useRef(0);
+   const abbruchSteuerung = useRef<AbortController | null>(null);
+
    const schliessen = useCallback(() => {
       onClose();
+      laufRef.current += 1;
+      abbruchSteuerung.current?.abort();
+      setLaeuft(false);
+      setFehler("");
       try {
          window.history.replaceState(null, "", window.location.pathname);
       } catch {
@@ -294,8 +305,11 @@ const ProKaufModal = ({ open, onClose }: Props) => {
       const bis = Date.now() + WARTEN_MS;
       while (!abbruch.current && Date.now() < bis) {
          try {
+            // `ohne_vermerk`: Diese Seite ZEIGT den Schlüssel nur. Den
+            // Abholvermerk, den das Dash als „in Benutzung" liest, setzt
+            // allein die Anwendung (Worker seit 15.09.2026).
             const antwort = await fetch(
-               `${adresse}?vvid=${encodeURIComponent(kennung)}`);
+               `${adresse}?vvid=${encodeURIComponent(kennung)}&ohne_vermerk=1`);
             if (antwort.ok) {
                const daten = await antwort.json();
                if (daten && daten.token) {
@@ -390,9 +404,8 @@ const ProKaufModal = ({ open, onClose }: Props) => {
       setPhase("wahl");
       setTransaktion("");
       setSumme(null);
-      window.turnstile?.reset(widgetRef.current || undefined);
-      setBotToken("");
-   }, []);
+      verbraucht();
+   }, [verbraucht]);
 
    const zahlungGescheitert = useCallback(() => {
       zurueckZuAngaben();
@@ -444,13 +457,28 @@ const ProKaufModal = ({ open, onClose }: Props) => {
       if (!EMAIL_RE.test(email.trim())) { setFeldFehler("email"); setLeer(["email"]); return; }
       const landCode = laenderCode(land, sprache);
       if (!landCode) { setFeldFehler("land"); setLeer(["land"]); return; }
-      if (!botToken) { setFehler(t.botOffen); return; }
       if (!aufbau) return;
 
       setLaeuft(true);
+      const lauf = ++laufRef.current;
+      /* Das Token wird abgewartet, statt beim Fehlen gleich zu melden - siehe
+       * `useTurnstile`. Gemeldet wird nur, was der Kunde auch sehen kann: eine
+       * echte Rückfrage oder eine Prüfung, die gar nicht antwortet. */
+      const bot = await tokenHolen();
+      if (lauf !== laufRef.current) return;
+      if (!bot.token) {
+         setLaeuft(false);
+         if ("grund" in bot && bot.grund !== "abgebrochen") {
+            setFehler(bot.grund === "rueckfrage" ? t.botOffen : t.botStumm);
+         }
+         return;
+      }
+      const steuerung = new AbortController();
+      abbruchSteuerung.current = steuerung;
       try {
          const antwort = await fetch(aufbau.vorgangAnlegen, {
             method: "POST",
+            signal: steuerung.signal,
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
                vv_id: kennung,
@@ -470,10 +498,15 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                // Paddle-Kennung übersetzt. Was der Browser hier mitschickt,
                // ist ein Wunsch, keine Zusage.
                rabattcode: rabatt ? rabattcode.trim().toUpperCase() : "",
-               turnstile: botToken,
+               turnstile: bot.token,
             }),
          });
+         // Ein Token gilt nur einmal, ob der Vorgang entsteht oder nicht. Das
+         // nächste wird gleich geholt - für einen zweiten Versuch oder für
+         // „Angaben ändern".
+         verbraucht();
          const daten = await antwort.json().catch(() => ({}));
+         if (lauf !== laufRef.current) return;
          if (!antwort.ok || !daten.transaction_id) {
             setFehler(String(daten.error || "").startsWith("turnstile")
                ? t.fehlerBot
@@ -484,12 +517,11 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                : daten.error === "schon_lizenziert"
                   ? (daten.grund === "lifetime_vorhanden"
                      ? t.fehlerLifetimeVorhanden : t.fehlerProVorhanden)
+               // Ein zweites Fenster hat gerade bezahlt, der Webhook ist
+               // noch unterwegs (Worker seit 15.09.2026).
+               : daten.error === "zahlung_unterwegs" ? t.fehlerZahlungUnterwegs
+               : daten.error === "vorgang_offen" ? t.fehlerVorgangOffen
                : t.fehlerVorgang);
-            // Ein verbrauchtes Turnstile-Token gilt nur einmal. Ohne das
-            // Zurücksetzen scheitert auch der zweite Versuch, und der Kunde
-            // sieht einen Fehler, den er nicht abstellen kann.
-            window.turnstile?.reset(widgetRef.current || undefined);
-            setBotToken("");
             return;
          }
 
@@ -498,9 +530,9 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          setTransaktion(String(daten.transaction_id));
          setPhase("zahlen");
       } catch {
-         setFehler(t.fehlerNetz);
+         if (lauf === laufRef.current) setFehler(t.fehlerNetz);
       } finally {
-         setLaeuft(false);
+         if (lauf === laufRef.current) setLaeuft(false);
       }
    };
 
@@ -817,13 +849,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  <input
                                     id="pro-rabatt"
                                     value={rabattcode}
-                                    onChange={(e) => setRabattcode(e.target.value.toUpperCase())}
+                                    onChange={(e) => codeAendern(e.target.value.toUpperCase())}
                                     onKeyDown={(e) => {
                                        // Return prüft den Code, statt den
                                        // halben Kauf abzuschicken.
                                        if (e.key === "Enter") {
                                           e.preventDefault();
-                                          void pruefen(rabattcode);
+                                          if (rabattcode && !rabatt) void pruefen(rabattcode);
                                        }
                                     }}
                                     maxLength={32}
@@ -838,20 +870,25 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                        letterSpacing: "0.06em",
                                     }}
                                  />
+                                 {/* Ein eingelöster Code wird hier auch wieder
+                                     herausgenommen: Derselbe Knopf heisst dann
+                                     „Entfernen". */}
                                  <button
                                     type="button"
-                                    onClick={() => void pruefen(rabattcode)}
-                                    disabled={!rabattcode || preisLaeuft}
+                                    onClick={() => rabatt ? codeEntfernen() : void pruefen(rabattcode)}
+                                    disabled={!rabatt && (!rabattcode || preisLaeuft)}
                                     style={{
                                        padding: "9px 16px", borderRadius: 8,
                                        border: "1px solid rgba(255,255,255,0.12)",
                                        background: "rgba(255,255,255,0.04)",
                                        color: rabattcode ? TEXT_PRIMARY : TEXT_MUTED,
                                        fontSize: 12.5, fontFamily: "inherit",
-                                       cursor: rabattcode ? "pointer" : "not-allowed",
+                                       cursor: rabatt || rabattcode ? "pointer" : "not-allowed",
+                                       display: "inline-grid",
                                     }}
                                  >
-                                    {t.rabattPruefen}
+                                    <KnopfText an={!rabatt} text={t.rabattPruefen} />
+                                    <KnopfText an={!!rabatt} text={t.rabattEntfernen} />
                                  </button>
                               </div>
                               {/* Auch diese Zeile ist immer da und im Regelfall
@@ -1046,7 +1083,8 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               </p>
 
                               {fehler && (
-                                 <div style={{
+                                 <div ref={fehlerRef} role="alert" tabIndex={-1} style={{
+                                    outline: "none",
                                     marginTop: 14, padding: "11px 14px", borderRadius: 8,
                                     background: "rgba(239,68,68,0.08)",
                                     border: "1px solid rgba(239,68,68,0.25)",
