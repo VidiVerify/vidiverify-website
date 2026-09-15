@@ -35,6 +35,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { X, KeyRound } from "lucide-react";
 import ProBadge from "./ProBadge";
+import { FehlerKasten } from "./FehlerKasten";
 import KnopfText from "./KnopfText";
 import {
    AMBER, CYAN, GREEN, TEXT_MUTED, TEXT_PRIMARY, TEXT_SECONDARY,
@@ -227,7 +228,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
 
    // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
    // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
-   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen, verwerfen }
+   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
+           codeLaeuft, pruefen, verwerfen }
       = usePreise(open, apiBasis());
 
    const sitekey = turnstileSchluessel();
@@ -273,7 +275,12 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const codeSetzen = (wert: string) => {
       setRabattcode(wert);
       entwurf.felder = { ...entwurf.felder, rabattcode: wert };
-      if (rabatt && wert.trim() !== rabatt.code.toUpperCase()) verwerfen();
+      // Auch während einer laufenden Prüfung: Sonst traefe deren Antwort
+      // auf ein Feld, das längst etwas anderes zeigt - die Kacheln nennten
+      // dann einen Rabatt, den der Kauf nicht mitschickt (Codex-Review
+      // Runde 2, 16.09.2026, am Hook ausgeführt).
+      if ((rabatt || codeLaeuft)
+          && wert.trim().toUpperCase() !== (rabatt ? rabatt.code : "")) verwerfen();
    };
 
    const [laeuft, setLaeuft] = useState(false);
@@ -559,7 +566,21 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                ...nurVorgang, anrede, kundentyp,
                vv_id: kennung, email, lizenzwunsch: wunsch,
                app_version: appVersion, turnstile: botToken,
-               rabattcode,
+               /* NUR ein eingelöster Code geht mit - dieselbe Regel wie im
+                * Kauffenster. Die Vorbelegung des Browsers füllt das Feld
+                * sonst aus einer früheren Bestellung, ohne dass jemand
+                * „Einlösen" gedrückt hat: Das Fenster zeigt dann den vollen
+                * Preis, die Anfrage trüge den halben (Anwenderbefund
+                * 15.09.2026, nachgewiesen an `preis_cent: 4995` statt 9990).
+                * Der Worker prüft den Code selbst nach und wendet ihn an -
+                * er kann nicht wissen, dass ihn niemand einlösen wollte. */
+               /* Gesendet wird der GEPRÜFTE Code, und nur wenn er noch im
+                * Feld steht. Der blosse Wahrheitswert von `rabatt` genügt
+                * nicht: Wer während einer laufenden Prüfung den Code ändert,
+                * schickte sonst den neuen Feldinhalt mit dem Befund des alten
+                * (Codex-Review 16.09.2026, am Hook ausgeführt). */
+               rabattcode: rabatt && rabatt.code === rabattcode.trim().toUpperCase()
+                  ? rabatt.code : "",
                // Was der Kunde erklärt hat, und WOZU: Ohne die Fassungskennung
                // ist die Zustimmung später wertlos, weil niemand mehr sagen
                // kann, welcher Wortlaut galt.
@@ -1228,17 +1249,9 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                               <div ref={turnstileRef} style={{ minHeight: 4 }} />
 
                               {fehler && (
-                                 <div ref={fehlerRef} style={{
-                                    padding: "11px 14px", borderRadius: 8,
-                                    background: "rgba(239,68,68,0.08)",
-                                    border: "1px solid rgba(239,68,68,0.25)",
-                                    color: "#fca5a5", fontSize: 12.5,
-                                 }}>
-                                    <strong style={{ display: "block", marginBottom: 3 }}>
-                                       {t.fehlerTitel}
-                                    </strong>
+                                 <FehlerKasten ref={fehlerRef} titel={t.fehlerTitel}>
                                     {fehler}
-                                 </div>
+                                 </FehlerKasten>
                               )}
                            </form>
                         )}
@@ -1296,7 +1309,11 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                         ) : (
                            <motion.button
                               type="submit" form="anfrage-form"
-                              disabled={laeuft || !sitekey}
+                              /* Auch während einer laufenden Codeprüfung zu:
+                                 Sonst ginge die Anfrage raus, bevor der Befund da
+                                 ist - mit leerem Rabattcode, obwohl der Kunde
+                                 gerade eingelöst hat (Codex-Review 16.09.2026). */
+                              disabled={laeuft || codeLaeuft || !sitekey}
                               whileHover={laeuft || !sitekey ? undefined : { scale: 1.04 }}
                               whileTap={laeuft || !sitekey ? undefined : { scale: 0.97 }}
                               style={{

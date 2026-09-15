@@ -28,7 +28,23 @@ const de = {
    rabattPlatzhalter: "Rabatt- oder Aktionscode",
    rabattPruefen: "Einlösen",
    rabattEntfernen: "Entfernen",
-   rabattGilt: "Code eingelöst - der Nachlass ist in deiner Bestellung enthalten.",
+   /* `{wert}` wird im Fenster gefüllt: bei einem Prozentcode mit Satz UND
+    * Betrag („50 % (-50,00 €)"), bei einem Festbetrag nur mit dem Betrag.
+    * Der Kunde soll den Nachlass hier schon in Zahlen sehen und nicht erst
+    * im Bezahlschritt (Anwenderwunsch 15.09.2026). */
+   rabattGilt: "Code eingelöst - der Nachlass ist mit {wert} in deiner Bestellung enthalten.",
+   /* Zwei Arten, auf die ein bekannter Code den Preis nicht senkt - und
+    * beide sagen etwas anderes. „Eingelöst" steht in keiner von beiden: Was
+    * nichts bewirkt, ist nicht eingelöst (Anwenderbefund 15.09.2026).
+    *
+    * 1. Der Code ist an die andere Lizenz gebunden - PRO-Code, LIFETIME
+    *    gewählt. Hier hilft ein Wechsel der Wahl.
+    * 2. Der Code gilt für diese Lizenz, sein Festpreis liegt aber auf dem
+    *    Listenpreis (oder darüber). Dann ist nichts abzuziehen, und beim
+    *    Zahlungsanbieter entsteht erst gar kein Nachlass
+    *    (`festpreis_ohne_abzug`). */
+   rabattNichtFuerWahl: "Dieser Code gilt nicht für die gewählte Lizenz.",
+   rabattOhneAbzug: "Dieser Code senkt den Preis dieser Lizenz nicht.",
    rabattUnbekannt: "Diesen Code kennen wir nicht.",
    rabattAbgelaufen: "Dieser Code ist abgelaufen.",
    rabattAufgebraucht: "Dieser Code ist bereits ausgeschöpft.",
@@ -67,6 +83,13 @@ const de = {
       "Für diese VV-ID ist noch ein Kaufvorgang offen, etwa eine gestellte "
       + "Rechnung. Bitte diesen zuerst abschliessen oder support@vidiverify.de "
       + "schreiben.",
+   /* Der Worker hat gemerkt, dass zu dieser Installation etwas in der Ablage
+    * liegt, konnte es aber nicht lesen. Im Zweifel wird nicht verkauft - die
+    * Lage klärt sich meist binnen einer Minute von selbst. */
+   fehlerStandUnklar:
+      "Zu dieser Installation liegt bereits ein Eintrag vor, der sich gerade "
+      + "nicht sicher lesen lässt. Bitte in einer Minute noch einmal "
+      + "versuchen - oder support@vidiverify.de schreiben, wenn es bleibt.",
    fehlerBot: "Die Sicherheitsabfrage ist fehlgeschlagen. Bitte versuche es noch einmal.",
    fehlerNetz: "Keine Verbindung. Bitte prüfe dein Netz und versuche es erneut.",
    botOffen: "Bitte bestätige kurz die Sicherheitsabfrage darüber und klicke dann erneut.",
@@ -155,7 +178,9 @@ const en: typeof de = {
    rabattPlatzhalter: "Discount or promo code",
    rabattPruefen: "Apply",
    rabattEntfernen: "Remove",
-   rabattGilt: "Code applied - the discount is included in your order.",
+   rabattGilt: "Code applied - a discount of {wert} is included in your order.",
+   rabattNichtFuerWahl: "This code does not apply to the selected licence.",
+   rabattOhneAbzug: "This code does not lower the price of this licence.",
    rabattUnbekannt: "We do not know this code.",
    rabattAbgelaufen: "This code has expired.",
    rabattAufgebraucht: "This code is already used up.",
@@ -191,6 +216,10 @@ const en: typeof de = {
    fehlerVorgangOffen:
       "There is still an open purchase for this VV-ID, such as an issued invoice. "
       + "Please complete it first or write to support@vidiverify.de.",
+   fehlerStandUnklar:
+      "There is already an entry for this installation that cannot be read "
+      + "reliably right now. Please try again in a minute - or write to "
+      + "support@vidiverify.de if it persists.",
    fehlerBot: "The security check failed. Please try again.",
    fehlerNetz: "No connection. Please check your network and try again.",
    botOffen: "Please confirm the security check above, then click again.",

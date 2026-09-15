@@ -95,6 +95,31 @@ describe("useTurnstile", () => {
       await expect(warten).resolves.toEqual({ token: "", grund: "rueckfrage" });
    });
 
+   it("meldet eine bereits offene Rückfrage sofort, ohne zwölf Sekunden zu warten", async () => {
+      // Anwenderbefund 15.09.2026: Mit `?bot=1` steht die Rückfrage schon beim
+      // Öffnen im Fenster. Der Klick wartete danach die volle Frist ab und
+      // meldete dann dasselbe - fünfzehn Sekunden hängende Schaltfläche.
+      const { result } = mitRahmen();
+      act(() => optionen["before-interactive-callback"]());
+      const warten = result.current.tokenHolen();
+      // KEIN Vorspulen: Die Antwort muss ohne Zeitablauf da sein.
+      await expect(warten).resolves.toEqual({ token: "", grund: "rueckfrage" });
+      expect(zurueckgesetzt).toBe(0);
+   });
+
+   it("ein Fehler der Abfrage hebt den Rückfrage-Vermerk wieder auf", async () => {
+      // Codex-Review 16.09.2026: Cloudflare meldet `error-callback` ohne
+      // vorheriges `after-interactive-callback`. Ohne Bereinigung bliebe der
+      // Vermerk stehen, und seit `tokenHolen` bei offener Rückfrage sofort
+      // antwortet, käme der Kunde gar nicht mehr durch.
+      const { result } = mitRahmen();
+      act(() => optionen["before-interactive-callback"]());
+      act(() => optionen["error-callback"]());
+      const warten = result.current.tokenHolen();
+      act(() => optionen.callback("tok-nach-fehler"));
+      await expect(warten).resolves.toEqual({ token: "tok-nach-fehler" });
+   });
+
    it("ein verbrauchtes Token wird nicht zweimal ausgegeben", async () => {
       const { result } = mitRahmen();
       act(() => optionen.callback("tok-1"));

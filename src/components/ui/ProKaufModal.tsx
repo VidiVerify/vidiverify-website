@@ -34,6 +34,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { X, ShoppingCart, Check, Copy } from "lucide-react";
 import ProBadge from "./ProBadge";
+import { FehlerKasten } from "./FehlerKasten";
 import {
    CYAN, GREEN, TEXT_MUTED, TEXT_PRIMARY, TEXT_SECONDARY,
 } from "@/constants/theme";
@@ -206,9 +207,22 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * und nie zu niedrig. Eine Kaufseite ganz ohne Preis wäre der schlechtere
     * Tausch.
     */
-   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft, pruefen, verwerfen }
+   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
+           codeLaeuft, pruefen, verwerfen }
       = usePreise(open, aufbau?.basis || "/api");
    const [rabattcode, setRabattcode] = useState("");
+
+   /* Was der Code für DIESE Wahl wert ist - in Zahlen, nicht als Zusage.
+    *
+    * Der Nachlass wird aus den beiden Preisen gebildet und nicht aus dem
+    * Prozentsatz gerechnet: Gerundet wird beim Anbieter, und ein selbst
+    * gerechneter Betrag läge irgendwann einen Cent daneben. Ist er null,
+    * gilt der Code für die andere Lizenz - dann sagt die Zeile das, statt
+    * einen Nachlass zu behaupten, den der Preis nicht zeigt. */
+   const nachlassCent = Math.max(0, listenpreise[wahl] - preise[wahl]);
+   const rabattWert = rabatt && rabatt.art === "prozent"
+      ? `${rabatt.wert} % (-${preisText(nachlassCent, sprache)})`
+      : `-${preisText(nachlassCent, sprache)}`;
 
    /* Der Nachlass gilt nur für den Code, der im Feld steht. Wer ihn ändert
     * oder löscht, sieht sofort wieder den Listenpreis - sonst stünde ein
@@ -216,7 +230,12 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * (Anwenderbefund 14.09.2026). */
    const codeAendern = (wert: string) => {
       setRabattcode(wert);
-      if (rabatt && wert.trim() !== rabatt.code.toUpperCase()) verwerfen();
+      // Auch während einer laufenden Prüfung: Sonst traefe deren Antwort
+      // auf ein Feld, das längst etwas anderes zeigt - die Kacheln nennten
+      // dann einen Rabatt, den der Kauf nicht mitschickt (Codex-Review
+      // Runde 2, 16.09.2026, am Hook ausgeführt).
+      if ((rabatt || codeLaeuft)
+          && wert.trim().toUpperCase() !== (rabatt ? rabatt.code : "")) verwerfen();
    };
    const codeEntfernen = () => {
       setRabattcode("");
@@ -497,7 +516,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                // Der Code wird im Worker ERNEUT geprüft und dort in die
                // Paddle-Kennung übersetzt. Was der Browser hier mitschickt,
                // ist ein Wunsch, keine Zusage.
-               rabattcode: rabatt ? rabattcode.trim().toUpperCase() : "",
+               /* Gesendet wird der GEPRÜFTE Code, und nur wenn er noch im
+                * Feld steht. Der blosse Wahrheitswert von `rabatt` genügt
+                * nicht: Wer während einer laufenden Prüfung den Code ändert,
+                * schickte sonst den neuen Feldinhalt mit dem Befund des alten
+                * (Codex-Review 16.09.2026, am Hook ausgeführt). */
+               rabattcode: rabatt && rabatt.code === rabattcode.trim().toUpperCase()
+                  ? rabatt.code : "",
                turnstile: bot.token,
             }),
          });
@@ -521,6 +546,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                // noch unterwegs (Worker seit 15.09.2026).
                : daten.error === "zahlung_unterwegs" ? t.fehlerZahlungUnterwegs
                : daten.error === "vorgang_offen" ? t.fehlerVorgangOffen
+               // Zu dieser Installation liegt etwas in der Ablage, das sich
+               // gerade nicht lesen lässt. Der Worker verkauft dann nicht
+               // (Umbau 15.09.2026 gegen den Doppelkauf).
+               : daten.error === "stand_unklar" ? t.fehlerStandUnklar
                : t.fehlerVorgang);
             return;
          }
@@ -897,9 +926,18 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                   dem der Kunde auf die Preise schaut. */}
                               <p aria-live="polite" style={{
                                  ...hinweis, marginTop: 8, minHeight: 17,
-                                 color: rabatt ? GREEN : "#fca5a5",
+                                 /* Grün nur, wenn der Preis wirklich sinkt.
+                                    Ein Code, der für die andere Lizenz gilt,
+                                    ist keine gute Nachricht - er sieht sonst
+                                    aus wie eine. */
+                                 color: rabatt && nachlassCent > 0 ? GREEN
+                                    : rabatt ? AMBER : "#fca5a5",
                               }}>
-                                 {rabatt ? t.rabattGilt
+                                 {rabatt ? (nachlassCent > 0
+                                       ? t.rabattGilt.replace("{wert}", rabattWert)
+                                       : rabatt.gilt_fuer.includes(wahl)
+                                          ? t.rabattOhneAbzug
+                                          : t.rabattNichtFuerWahl)
                                     : !codeGrund ? "\u00a0"
                                     : codeGrund === "abgelaufen" ? t.rabattAbgelaufen
                                     : codeGrund === "aufgebraucht" ? t.rabattAufgebraucht
@@ -1083,18 +1121,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               </p>
 
                               {fehler && (
-                                 <div ref={fehlerRef} role="alert" tabIndex={-1} style={{
-                                    outline: "none",
-                                    marginTop: 14, padding: "11px 14px", borderRadius: 8,
-                                    background: "rgba(239,68,68,0.08)",
-                                    border: "1px solid rgba(239,68,68,0.25)",
-                                    color: "#fca5a5", fontSize: 12.5,
-                                 }}>
-                                    <strong style={{ display: "block", marginBottom: 3 }}>
-                                       {t.fehlerTitel}
-                                    </strong>
+                                 <FehlerKasten ref={fehlerRef} titel={t.fehlerTitel}
+                                               alsAlert abstandOben={14}>
                                     {fehler}
-                                 </div>
+                                 </FehlerKasten>
                               )}
                            </div>
                            </>
@@ -1151,7 +1181,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                         ) : aufbau && phase === "wahl" ? (
                            <motion.button
                               onClick={() => void kaufen()}
-                              disabled={laeuft}
+                              /* Siehe Bestellanfrage: Eine laufende Codeprüfung
+                                 hält den Kauf kurz auf, damit der geprüfte Code
+                                 auch mitgeht. */
+                              disabled={laeuft || codeLaeuft}
                               whileHover={{ scale: laeuft ? 1 : 1.04 }}
                               whileTap={{ scale: laeuft ? 1 : 0.97 }}
                               style={{

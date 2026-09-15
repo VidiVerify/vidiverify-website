@@ -61,4 +61,36 @@ describe("usePreise", () => {
       expect(result.current.rabatt).toBeNull();
       expect(result.current.preise).toEqual(LISTE);
    });
+
+   it("ein hängender Preisabruf sperrt die Codeprüfung nicht", async () => {
+      // Codex-Review Runde 2, 16.09.2026: `laeuft` umfasst auch den Abruf
+      // beim Öffnen. Hängt der, stand der Kaufknopf dauerhaft auf „zu",
+      // seit er auf diesen Zustand wartet. `codeLaeuft` trennt beides.
+      vi.spyOn(globalThis, "fetch").mockImplementation(() => new Promise(() => {}));
+      const { result } = renderHook(() => usePreise(true, "/api"));
+      await waitFor(() => expect(result.current.laeuft).toBe(true));
+      expect(result.current.codeLaeuft).toBe(false);
+   });
+
+   it("eine verspätete Antwort für einen alten Code wird nicht übernommen", async () => {
+      // Derselbe Review: Feld während der Prüfung geändert, dann trifft die
+      // Antwort für den ALTEN Code ein. Vorher zeigten die Kacheln danach
+      // einen Nachlass, den der Kauf nicht mitschickte.
+      let loesen: ((w: unknown) => void) | null = null;
+      vi.spyOn(globalThis, "fetch").mockImplementation((adresse) =>
+         String(adresse).includes("code=ALT")
+            ? new Promise((f) => { loesen = () => f({
+                 ok: true, json: () => Promise.resolve(RABATT),
+              } as Response); })
+            : antwort({ preise: LISTE, listenpreise: LISTE }));
+      const { result } = renderHook(() => usePreise(true, "/api"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      act(() => { void result.current.pruefen("ALT"); });
+      await waitFor(() => expect(result.current.codeLaeuft).toBe(true));
+      // Der Kunde tippt weiter - das Formular verwirft die laufende Prüfung.
+      act(() => result.current.verwerfen());
+      await act(async () => { loesen?.(null); });
+      expect(result.current.rabatt).toBeNull();
+      expect(result.current.preise).toEqual(LISTE);
+   });
 });

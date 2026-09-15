@@ -35,6 +35,14 @@ export interface Preisstand {
     *  aufgebraucht - oder leer, wenn alles in Ordnung ist. */
    codeGrund: string;
    laeuft: boolean;
+   /** Läuft gerade eine vom Kunden GESTARTETE Codeprüfung?
+    *
+    *  Getrennt von `laeuft`, weil daran eine Sperre hängt: Der Kaufknopf
+    *  wartet auf eine Codeprüfung, damit der geprüfte Code noch mitgeht -
+    *  aber niemals auf den Preisabruf beim Öffnen. Hängt der, wäre der Kauf
+    *  sonst dauerhaft zu (Codex-Review Runde 2, 16.09.2026, am Hook
+    *  ausgeführt). */
+   codeLaeuft: boolean;
 }
 
 const LEER: Preisstand = {
@@ -43,7 +51,11 @@ const LEER: Preisstand = {
    rabatt: null,
    codeGrund: "",
    laeuft: false,
+   codeLaeuft: false,
 };
+
+/** Nach dieser Zeit gilt eine Preisauskunft als ausgeblieben. */
+const ANTWORTFRIST_MS = 8000;
 
 /** Cent als Preis, in der Schreibweise der jeweiligen Sprache. */
 export function preisText(cent: number, sprache: "de" | "en"): string {
@@ -67,7 +79,10 @@ export function usePreise(aktiv = true, basis = "/api") {
 
    const holen = useCallback(async (code?: string) => {
       const nummer = ++abfrage.current;
-      setStand((alt) => ({ ...alt, laeuft: true }));
+      setStand((alt) => ({ ...alt, laeuft: true, codeLaeuft: !!code }));
+      // Ohne Frist bliebe ein hängender Abruf für immer „unterwegs".
+      const steuerung = new AbortController();
+      const frist = window.setTimeout(() => steuerung.abort(), ANTWORTFRIST_MS);
       try {
          /* Die Basis kommt vom Aufrufer, damit die Kaufseite im Sandkasten
           * auch den Sandkasten fragt. Sonst prüfte sie einen Rabattcode gegen
@@ -75,7 +90,7 @@ export function usePreise(aktiv = true, basis = "/api") {
           * ungültig aus, obwohl er richtig angelegt ist. */
          const adresse = basis + "/preise"
             + (code ? "?code=" + encodeURIComponent(code) : "");
-         const antwort = await fetch(adresse);
+         const antwort = await fetch(adresse, { signal: steuerung.signal });
          if (!antwort.ok) throw new Error(String(antwort.status));
          const daten = await antwort.json();
          if (nummer !== abfrage.current) return;
@@ -85,6 +100,7 @@ export function usePreise(aktiv = true, basis = "/api") {
             rabatt: daten.rabatt || null,
             codeGrund: daten.code_grund || "",
             laeuft: false,
+            codeLaeuft: false,
          });
       } catch {
          // Kein Netz, keine Route, kein Worker: Der Listenpreis steht, und der
@@ -92,6 +108,8 @@ export function usePreise(aktiv = true, basis = "/api") {
          // nichts anzeigt, wäre der schlechtere Tausch.
          if (nummer !== abfrage.current) return;
          setStand({ ...LEER, codeGrund: code ? "netz" : "" });
+      } finally {
+         window.clearTimeout(frist);
       }
    }, [basis]);
 
@@ -105,7 +123,8 @@ export function usePreise(aktiv = true, basis = "/api") {
    const verwerfen = useCallback(() => {
       ++abfrage.current;
       setStand((alt) => ({
-         ...alt, preise: alt.listenpreise, rabatt: null, codeGrund: "", laeuft: false,
+         ...alt, preise: alt.listenpreise, rabatt: null, codeGrund: "",
+         laeuft: false, codeLaeuft: false,
       }));
    }, []);
 

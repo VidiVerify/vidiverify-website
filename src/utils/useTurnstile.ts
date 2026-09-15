@@ -98,8 +98,18 @@ export function useTurnstile(aktiv: boolean, sitekey: string, sprache: string) {
             appearance: "interaction-only",
             language: sprache,
             callback: (token: string) => { rueckfrageSetzen(false); tokenSetzen(token); },
-            "expired-callback": () => tokenSetzen(""),
-            "error-callback": () => tokenSetzen(""),
+            /* Beide räumen auch den Rückfrage-Vermerk ab.
+             *
+             * Cloudflare meldet `error-callback` für Netz- und
+             * Challengefehler - und zwar OHNE vorher
+             * `after-interactive-callback` zu schicken. Ohne die Bereinigung
+             * bliebe `rueckfrageRef` dauerhaft auf „offen", und seit
+             * `tokenHolen` bei offener Rückfrage sofort antwortet, meldete
+             * jeder weitere Klick eine Rückfrage, die es gar nicht gibt: Das
+             * Fenster wäre zu, bis es jemand neu öffnet (Codex-Review
+             * 16.09.2026, Ablauf ausgeführt). */
+            "expired-callback": () => { rueckfrageSetzen(false); tokenSetzen(""); },
+            "error-callback": () => { rueckfrageSetzen(false); tokenSetzen(""); },
             "before-interactive-callback": () => rueckfrageSetzen(true),
             "after-interactive-callback": () => rueckfrageSetzen(false),
          });
@@ -142,6 +152,17 @@ export function useTurnstile(aktiv: boolean, sitekey: string, sprache: string) {
    const tokenHolen = useCallback((): Promise<TokenErgebnis> => {
       if (!sitekey) return Promise.resolve({ token: "", grund: "stumm" });
       if (tokenRef.current) return Promise.resolve({ token: tokenRef.current });
+      /* Steht die Rückfrage schon offen, wird NICHT gewartet.
+       *
+       * Warten hilft nur gegen eine Prüfung, die von selbst fertig wird. Eine
+       * sichtbare Rückfrage wird das nie: Ohne den Klick des Kunden kommt kein
+       * Token, und nach zwölf Sekunden stünde dieselbe Meldung da wie sofort.
+       * Für den Kunden sind das keine zwölf Sekunden Geduld, sondern eine
+       * Schaltfläche, die hängt (Anwenderbefund 15.09.2026, VM-Probe: „das
+       * dauert etwa 15 s"). */
+      if (rueckfrageRef.current) {
+         return Promise.resolve({ token: "", grund: "rueckfrage" });
+      }
       return new Promise((fertig) => {
          let erledigt = false;
          const ende = (ergebnis: TokenErgebnis) => {
