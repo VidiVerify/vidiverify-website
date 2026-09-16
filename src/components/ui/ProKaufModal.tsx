@@ -54,6 +54,7 @@ import {
    type PaddleAufbau, type PaddleEreignis,
 } from "@utils/paddle";
 import { summeAus, type Summe } from "@utils/paddleSumme";
+import { nachsperreGilt, nachsperreSetzen } from "@utils/kaufNachsperre";
 import ProKaufZahlung from "./ProKaufZahlung";
 import KnopfText from "./KnopfText";
 
@@ -403,12 +404,15 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          const neu = summeAus(ereignis, sprache);
          if (neu) setSumme(neu);
          if (ereignis?.name !== "checkout.completed") return;
+         // Zuerst die Nachsperre: Ab jetzt öffnet kein Tab dieses Browsers
+         // für zehn Minuten ein zweites Bezahlformular derselben Lizenz.
+         nachsperreSetzen(vvid, wahl);
          abbruch.current = false;
          setPhase("warten");
          void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf);
       });
       return () => paddleHorchen(null);
-   }, [open, aufbau, vvid, holen, sprache]);
+   }, [open, aufbau, vvid, wahl, holen, sprache]);
 
    /* Jeder Schritt beginnt oben. Wer die Anschrift unten ausgefüllt hat und
     * weiterklickt, stünde sonst mitten im Zahlungsformular. */
@@ -454,6 +458,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
       if (!VVID_RE.test(kennung)) {
          setVvidFehler(true);
          setFehler(t.fehlerVvid);
+         return;
+      }
+      /* Eben bezahlt, in diesem oder einem anderen Tab: Kein zweiter Vorgang,
+       * und die Meldung ist dieselbe, die der Worker in dem Fall schickt. Der
+       * Worker sperrt ohnehin - hier geht nur keine Anfrage erst hinaus. */
+      if (nachsperreGilt(kennung, wahl)) {
+         setFehler(t.fehlerZahlungUnterwegs);
          return;
       }
       /* Alle Felder sind Pflicht - sie stehen auf der Rechnung.
