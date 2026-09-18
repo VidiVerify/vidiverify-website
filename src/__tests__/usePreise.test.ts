@@ -23,6 +23,27 @@ function antwort(daten: unknown) {
 afterEach(() => vi.restoreAllMocks());
 
 describe("usePreise", () => {
+   it("die Kaufseite fragt mit weg=kauf, die Bestellanfrage ohne", async () => {
+      /* Die Kaufseite darf nur Codes zeigen, die Paddle gewährt - der Worker
+       * entscheidet das an `weg=kauf` (Durchsicht 18.09.2026). */
+      const adressen: string[] = [];
+      vi.spyOn(globalThis, "fetch").mockImplementation((adresse) => {
+         adressen.push(String(adresse));
+         return antwort({ preise: LISTE, listenpreise: LISTE });
+      });
+      const kauf = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(kauf.result.current.laeuft).toBe(false));
+      await act(() => kauf.result.current.pruefen("SOMMER-26"));
+      expect(adressen).toContain("/api/preise?weg=kauf");
+      expect(adressen).toContain("/api/preise?code=SOMMER-26&weg=kauf");
+
+      adressen.length = 0;
+      const anfrage = renderHook(() => usePreise(true, "/api"));
+      await waitFor(() => expect(anfrage.result.current.laeuft).toBe(false));
+      await act(() => anfrage.result.current.pruefen("SOMMER-26"));
+      expect(adressen.every((a) => !a.includes("weg="))).toBe(true);
+   });
+
    it("verwerfen nimmt den Nachlass zurück und zeigt die Listenpreise", async () => {
       vi.spyOn(globalThis, "fetch").mockImplementation((adresse) =>
          antwort(String(adresse).includes("code=")

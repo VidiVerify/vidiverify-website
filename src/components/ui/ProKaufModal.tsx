@@ -55,6 +55,7 @@ import {
 } from "@utils/paddle";
 import { summeAus, type Summe } from "@utils/paddleSumme";
 import { nachsperreGilt, nachsperreSetzen } from "@utils/kaufNachsperre";
+import { tokenPasst } from "@utils/lizenzToken";
 import ProKaufZahlung from "./ProKaufZahlung";
 import KnopfText from "./KnopfText";
 
@@ -210,7 +211,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     */
    const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
            codeLaeuft, pruefen, verwerfen }
-      = usePreise(open, aufbau?.basis || "/api");
+      = usePreise(open, aufbau?.basis || "/api", "kauf");
    const [rabattcode, setRabattcode] = useState("");
 
    /* Was der Code für DIESE Wahl wert ist - in Zahlen, nicht als Zusage.
@@ -320,8 +321,11 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * Erfolgsansicht, die beim Wirk-Worker nachsähe, wartete auf eine Lizenz,
     * die woanders längst liegt.
     */
+   /* Beim Upgrade liegt bei der Abholstelle schon das alte PRO-Token, und die
+    * erste Antwort kam damit sofort (Befund K1, 18.09.2026). Fertig ist erst
+    * ein Token mit dem gekauften Typ - bis dahin wird weiter gewartet. */
    const abbruch = useRef(false);
-   const holen = useCallback(async (kennung: string, adresse: string) => {
+   const holen = useCallback(async (kennung: string, adresse: string, gekauft: Wahl) => {
       const bis = Date.now() + WARTEN_MS;
       while (!abbruch.current && Date.now() < bis) {
          try {
@@ -332,7 +336,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                `${adresse}?vvid=${encodeURIComponent(kennung)}&ohne_vermerk=1`);
             if (antwort.ok) {
                const daten = await antwort.json();
-               if (daten && daten.token) {
+               if (daten && daten.token && tokenPasst(String(daten.token), gekauft)) {
                   setToken(String(daten.token));
                   setPhase("fertig");
                   return;
@@ -409,7 +413,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          nachsperreSetzen(vvid, wahl);
          abbruch.current = false;
          setPhase("warten");
-         void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf);
+         void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf, wahl);
       });
       return () => paddleHorchen(null);
    }, [open, aufbau, vvid, wahl, holen, sprache]);
@@ -561,6 +565,8 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                // gerade nicht lesen lässt. Der Worker verkauft dann nicht
                // (Umbau 15.09.2026 gegen den Doppelkauf).
                : daten.error === "stand_unklar" ? t.fehlerStandUnklar
+               // Tageskontingent des Workers leer (K8, 18.09.2026).
+               : daten.error === "ueberlastet" ? t.fehlerUeberlastet
                : t.fehlerVorgang);
             return;
          }
@@ -801,7 +807,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               <button type="button" onClick={() => {
                                  abbruch.current = false;
                                  setPhase("warten");
-                                 void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf);
+                                 void holen(vvid.trim().toUpperCase(), aufbau.lizenzAbruf, wahl);
                               }} style={{
                                  marginTop: 12, padding: "7px 14px", borderRadius: 8,
                                  background: "rgba(255,255,255,0.04)",
@@ -953,6 +959,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                     : codeGrund === "abgelaufen" ? t.rabattAbgelaufen
                                     : codeGrund === "aufgebraucht" ? t.rabattAufgebraucht
                                     : codeGrund === "netz" ? t.rabattNetz
+                                    : codeGrund === "nur_anfrage" ? t.rabattNurAnfrage
                                     : t.rabattUnbekannt}
                               </p>
 

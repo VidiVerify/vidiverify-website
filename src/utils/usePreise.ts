@@ -70,7 +70,11 @@ export function preisText(cent: number, sprache: "de" | "en"): string {
  * lässt, und eine, die ihn wieder verwirft. Ohne Code wird einmal beim
  * Einhängen geladen.
  */
-export function usePreise(aktiv = true, basis = "/api") {
+/* `weg = "kauf"` für die Kaufseite: Dann gilt nur ein Code, den auch Paddle
+ * kennt - sonst zeigte die Seite einen Nachlass, den das Bezahlfenster nicht
+ * gewährt (Worker `preiseAusgeben`, 18.09.2026). Die Bestellanfrage fragt
+ * ohne und sieht jeden gültigen Code. */
+export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
    const [stand, setStand] = useState<Preisstand>(LEER);
    /* Nur die jüngste Abfrage darf den Stand setzen. Sonst käme eine Prüfung,
     * die noch unterwegs war, nach dem Entfernen des Codes zurück und setzte
@@ -88,8 +92,11 @@ export function usePreise(aktiv = true, basis = "/api") {
           * auch den Sandkasten fragt. Sonst prüfte sie einen Rabattcode gegen
           * den Wirk-Worker, wo er gar nicht existiert - und der Code sähe
           * ungültig aus, obwohl er richtig angelegt ist. */
-         const adresse = basis + "/preise"
-            + (code ? "?code=" + encodeURIComponent(code) : "");
+         const frage = new URLSearchParams();
+         if (code) frage.set("code", code);
+         if (weg) frage.set("weg", weg);
+         const suche = frage.toString();
+         const adresse = basis + "/preise" + (suche ? "?" + suche : "");
          const antwort = await fetch(adresse, { signal: steuerung.signal });
          if (!antwort.ok) throw new Error(String(antwort.status));
          const daten = await antwort.json();
@@ -111,7 +118,7 @@ export function usePreise(aktiv = true, basis = "/api") {
       } finally {
          window.clearTimeout(frist);
       }
-   }, [basis]);
+   }, [basis, weg]);
 
    /* Einen eingelösten Code zurücknehmen (Anwenderbefund 14.09.2026).
     *

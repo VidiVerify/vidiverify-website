@@ -49,6 +49,7 @@ const de = {
    rabattAbgelaufen: "Dieser Code ist abgelaufen.",
    rabattAufgebraucht: "Dieser Code ist bereits ausgeschöpft.",
    rabattNetz: "Der Code liess sich gerade nicht prüfen.",
+   rabattNurAnfrage: "Dieser Code gilt nur für die Bestellanfrage, nicht beim Onlinekauf.",
    statt: "statt",
    proTitel: "PRO",
    proText: "Alle PRO-Funktionen einer Hauptversion.",
@@ -90,6 +91,13 @@ const de = {
       "Zu dieser Installation liegt bereits ein Eintrag vor, der sich gerade "
       + "nicht sicher lesen lässt. Bitte in einer Minute noch einmal "
       + "versuchen - oder support@vidiverify.de schreiben, wenn es bleibt.",
+   /* Der Worker kann gerade nicht schreiben - im Free-Tarif ist das
+    * Tageskontingent aufgebraucht (Befund K8, 18.09.2026). Er bricht ab, bevor
+    * bei Paddle etwas entsteht; berechnet ist nichts. Kein Fehlerton: Das
+    * Kontingent füllt sich um Mitternacht UTC von selbst wieder auf. */
+   fehlerUeberlastet:
+      "Gerade ist hier sehr viel los. Bitte in ein paar Stunden noch einmal "
+      + "vorbeischauen - berechnet wurde nichts.",
    fehlerBot: "Die Sicherheitsabfrage ist fehlgeschlagen. Bitte versuche es noch einmal.",
    fehlerNetz: "Keine Verbindung. Bitte prüfe dein Netz und versuche es erneut.",
    botOffen: "Bitte bestätige kurz die Sicherheitsabfrage darüber und klicke dann erneut.",
@@ -185,6 +193,7 @@ const en: typeof de = {
    rabattAbgelaufen: "This code has expired.",
    rabattAufgebraucht: "This code is already used up.",
    rabattNetz: "The code could not be checked right now.",
+   rabattNurAnfrage: "This code only applies to an order request, not to online purchase.",
    statt: "was",
    proTitel: "PRO",
    proText: "All PRO features of one major version.",
@@ -220,6 +229,9 @@ const en: typeof de = {
       "There is already an entry for this installation that cannot be read "
       + "reliably right now. Please try again in a minute - or write to "
       + "support@vidiverify.de if it persists.",
+   fehlerUeberlastet:
+      "It's very busy here right now. Please come back in a few hours - "
+      + "nothing has been charged.",
    fehlerBot: "The security check failed. Please try again.",
    fehlerNetz: "No connection. Please check your network and try again.",
    botOffen: "Please confirm the security check above, then click again.",
