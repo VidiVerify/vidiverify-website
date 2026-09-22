@@ -7,7 +7,7 @@
  */
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { usePreise } from "@utils/usePreise";
+import { GESPERRTE_LAENDER_RUECKFALL, usePreise } from "@utils/usePreise";
 
 const LISTE = { pro: 2990, lifetime: 9990 };
 const RABATT = {
@@ -113,5 +113,68 @@ describe("usePreise", () => {
       await act(async () => { loesen?.(null); });
       expect(result.current.rabatt).toBeNull();
       expect(result.current.preise).toEqual(LISTE);
+   });
+
+   it("die gesperrten Länder kommen vom Worker, mit Rückfall", async () => {
+      /* Die Liste wird im Worker gepflegt und reist mit der Preisauskunft.
+       * Gepruefte Zusage: Was der Worker schickt, gilt - und wenn er nichts
+       * schickt, steht der eingebaute Rückfall da statt einer leeren Liste,
+       * die jeden Kauf durchliesse (21.09.2026). */
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         antwort({ preise: LISTE, listenpreise: LISTE,
+                   gesperrte_laender: ["RU", "XX"] }));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(["RU", "XX"]);
+   });
+
+   it("ohne Auskunft bleibt der Rückfall stehen", async () => {
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         Promise.reject(new Error("kein Netz")));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(GESPERRTE_LAENDER_RUECKFALL);
+      expect(result.current.gesperrteLaender).toContain("RU");
+   });
+
+   it("eine leere Liste gilt als Ausfall, nicht als Freigabe", async () => {
+      /* Codex-Review 22.09.2026: `Array.isArray` nahm auch `[]` an - die
+       * Sperre war damit vollstaendig aufgehoben, und der Kaeufer lief bis
+       * zur Abweisung beim Zahlungsanbieter. Die Richtung des Zweifels ist
+       * dieselbe wie beim Preis: lieber zu streng. */
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         antwort({ preise: LISTE, listenpreise: LISTE, gesperrte_laender: [] }));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(GESPERRTE_LAENDER_RUECKFALL);
+   });
+
+   it("eine gefuellte, aber unbrauchbare Liste ist auch ein Ausfall", async () => {
+      /* Codex-Review 22.09.2026, zweite Runde: Die Leerpruefung stand VOR dem
+       * Filtern. Eine Liste wie diese bestand sie - und war danach leer. */
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         antwort({ preise: LISTE, listenpreise: LISTE,
+                   gesperrte_laender: ["DEUTSCHLAND", 7, null, ""] }));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(GESPERRTE_LAENDER_RUECKFALL);
+   });
+
+   it("Doppelungen und Leerzeichen stoeren nicht", async () => {
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         antwort({ preise: LISTE, listenpreise: LISTE,
+                   gesperrte_laender: [" ru ", "RU", "by"] }));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(["RU", "BY"]);
+   });
+
+   it("unbrauchbare Eintraege fliegen raus, der Rest gilt", async () => {
+      vi.spyOn(globalThis, "fetch").mockImplementation(() =>
+         antwort({ preise: LISTE, listenpreise: LISTE,
+                   gesperrte_laender: ["ru", 7, "DEUTSCHLAND", "by", null] }));
+      const { result } = renderHook(() => usePreise(true, "/api", "kauf"));
+      await waitFor(() => expect(result.current.laeuft).toBe(false));
+      expect(result.current.gesperrteLaender).toEqual(["RU", "BY"]);
    });
 });

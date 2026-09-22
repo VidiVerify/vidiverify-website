@@ -4,6 +4,7 @@ import { useLenis } from "lenis/react";
 import { useTranslation } from "react-i18next";
 import { FaTimes, FaFlask, FaDownload } from "react-icons/fa";
 import { TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
+import { aktionBeendet } from "@utils/testerAktion";
 
 // Dezenter Tester-Aktions-Teaser. Zustand kommt aus demselben Manifest, das
 // auch die App liest (vidiverify.de/tester/manifest.json) -> ein Schalter,
@@ -123,10 +124,9 @@ const TesterPromo = () => {
             .then((m) => {
                if (cancelled) return;
                if (m) {
-                  const endRaw = m.action_end_at ?? m.end_at ?? null;
-                  const ended =
-                     m.ended === true || (endRaw !== null && Date.parse(endRaw) < Date.now());
-                  if (ended) return; // Kampagne vorbei -> nicht einblenden
+                  // Die Regel, wann die Aktion vorbei ist, steht in
+                  // `utils/testerAktion` - der Kaufweg braucht dieselbe.
+                  if (aktionBeendet(m)) return; // Kampagne vorbei -> nicht einblenden
                   run(m.active === true ? "live" : "soon");
                } else {
                   run("soon");

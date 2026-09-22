@@ -48,7 +48,8 @@ import { useFensterStapel } from "@utils/useFensterStapel";
 import { turnstileSchluessel } from "@utils/turnstile";
 import { useTurnstile } from "@utils/useTurnstile";
 import { kennungLesen } from "@utils/adresse";
-import { laenderCode, laenderNamen } from "@utils/laender";
+import { laenderCode, laenderListe } from "@utils/laender";
+import { useTesterAktion } from "@utils/testerAktion";
 import {
    paddleAufbau, paddleHorchen, paddleLaden,
    type PaddleAufbau, type PaddleEreignis,
@@ -210,8 +211,31 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * Tausch.
     */
    const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
-           codeLaeuft, pruefen, verwerfen }
+           codeLaeuft, gesperrteLaender, pruefen, verwerfen }
       = usePreise(open, aufbau?.basis || "/api", "kauf");
+
+   /* Steht im Feld ein Land, aus dem der Zahlungsanbieter nicht annimmt?
+    *
+    * Erkannt wird das beim Tippen und nicht erst beim Absenden. Wer aus
+    * Russland kauft, hatte bis zum 21.09.2026 Anschrift, Sicherheitsabfrage
+    * und Kaufknopf hinter sich und bekam danach „bitte noch einmal
+    * versuchen" - eine Aufforderung, die nie zum Ziel führen konnte.
+    *
+    * Das Land bleibt in der Vorschlagsliste stehen. Es verschwinden zu
+    * lassen, hiesse dem Kunden zu verschweigen, woran es liegt; er trüge
+    * dann ein anderes ein und käme erst recht nicht durch.
+    */
+   const landGesperrt = (() => {
+      const code = laenderCode(land, sprache);
+      return !!code && gesperrteLaender.includes(code);
+   })();
+
+   /* Ob die Tester-Aktion noch läuft - nur für den Hinweis unten. Gefragt
+    * wird erst, wenn ein gesperrtes Land im Feld steht: Für alle anderen
+    * Käufer ist die Auskunft ohne Belang, und ein Abruf beim Öffnen wäre ein
+    * Aufruf, den niemand braucht. */
+   const testerLaeuft = useTesterAktion(open && landGesperrt);
+
    const [rabattcode, setRabattcode] = useState("");
 
    /* Was der Code für DIESE Wahl wert ist - in Zahlen, nicht als Zusage.
@@ -491,6 +515,12 @@ const ProKaufModal = ({ open, onClose }: Props) => {
       if (!EMAIL_RE.test(email.trim())) { setFeldFehler("email"); setLeer(["email"]); return; }
       const landCode = laenderCode(land, sprache);
       if (!landCode) { setFeldFehler("land"); setLeer(["land"]); return; }
+      /* Der Kaufknopf ist bei einem gesperrten Land ohnehin zu; diese Prüfung
+       * fängt den Weg über die Tastatur. Der Worker weist denselben Fall mit
+       * `land_gesperrt` ab - hier geht nur keine Anfrage erst hinaus. */
+      if (gesperrteLaender.includes(landCode)) {
+         setFeldFehler("land_gesperrt"); setLeer(["land"]); return;
+      }
       if (!aufbau) return;
 
       setLaeuft(true);
@@ -567,6 +597,12 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                : daten.error === "stand_unklar" ? t.fehlerStandUnklar
                // Tageskontingent des Workers leer (K8, 18.09.2026).
                : daten.error === "ueberlastet" ? t.fehlerUeberlastet
+               /* Das Netz unter der eigenen Liste: Sperrt der
+                * Zahlungsanbieter ein Land, das die Seite noch nicht kennt,
+                * steht hier die richtige Auskunft statt „noch einmal
+                * versuchen". Den Kasten mit den Wegen zeigt das Feld erst,
+                * wenn die Liste nachgezogen ist - der Satz allein trägt. */
+               : daten.error === "land_gesperrt" ? t.landGesperrtTitel
                : t.fehlerVorgang);
             return;
          }
@@ -1073,17 +1109,67 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                           wert={land} setzen={setLand} max={64}
                                           liste="pro-laender"
                                           fehler={leer.includes("land")}
-                                          fehlerImmer={feldFehler === "land"} />
+                                          fehlerImmer={feldFehler === "land"
+                                             || landGesperrt} />
                               </Zeile>
                               {/* Angeboten, nicht vorgeschrieben - wie in der
                                   Bestellanfrage. Aus dem Namen wird beim
                                   Absenden der Ländercode; erkennt ihn niemand,
                                   sagt das Feld es, statt zu raten. */}
+                              {/* Gesperrte Länder bleiben in der Liste und
+                                  tragen den Vermerk im `label`. Eingefügt
+                                  wird beim Anklicken immer der `value`, also
+                                  der blosse Landesname - der Vermerk steht
+                                  also im Vorschlag, nie im Feld. */}
                               <datalist id="pro-laender">
-                                 {laenderNamen(sprache).map((name) => (
-                                    <option key={name} value={name} />
+                                 {laenderListe(sprache).map(({ code, name }) => (
+                                    <option key={code} value={name}
+                                            label={gesperrteLaender.includes(code)
+                                               ? `${name} - ${t.landGesperrtKurz}`
+                                               : undefined} />
                                  ))}
                               </datalist>
+
+                              {/* Der Hinweis zum gesperrten Land - mit dem
+                                  Weg, der aus diesen Ländern trägt.
+                                  Die Bestellanfrage steht zuerst: Sie läuft
+                                  nicht über den Zahlungsanbieter und bleibt
+                                  offen, auch wenn die Tester-Aktion einmal
+                                  endet. */}
+                              {landGesperrt && (
+                                 <div style={{
+                                    marginTop: 10, padding: "10px 12px",
+                                    borderRadius: 10,
+                                    background: "rgba(252,165,165,0.06)",
+                                    border: "1px solid rgba(252,165,165,0.22)",
+                                    fontSize: 12, color: TEXT_SECONDARY,
+                                    lineHeight: 1.6,
+                                 }}>
+                                    <strong style={{ color: "#fca5a5", fontWeight: 600 }}>
+                                       {t.landGesperrtTitel}
+                                    </strong>
+                                    <p style={{ margin: "6px 0 0" }}>
+                                       {t.landGesperrtWeg}{" "}
+                                       {/* Das Kauffenster muss dabei ZUGEHEN.
+                                           Ohne das Schliessen öffnete sich
+                                           die Bestellanfrage dahinter und
+                                           blieb verdeckt - der angebotene
+                                           Ausweg war unerreichbar, während
+                                           der Kaufknopf gesperrt blieb
+                                           (Codex-Review 22.09.2026, am DOM
+                                           nachgestellt). */}
+                                       <a href="#lizenz-anfrage"
+                                          onClick={() => onClose()}
+                                          style={{ color: CYAN, fontWeight: 600 }}>
+                                          {t.zuKnopf}
+                                       </a>
+                                    </p>
+                                    <p style={{ margin: "6px 0 0" }}>{t.landGesperrtKarte}</p>
+                                    {testerLaeuft && (
+                                       <p style={{ margin: "6px 0 0" }}>{t.landGesperrtTester}</p>
+                                    )}
+                                 </div>
+                              )}
 
                               {/* Diese Zeile steht IMMER - sonst schoebe sie
                                   beim ersten Fehler das halbe Fenster nach
@@ -1093,11 +1179,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                   Stelle. */}
                               <p style={{
                                  ...hinweis, marginTop: 8, minHeight: 17,
-                                 color: (feldFehler === "email" || feldFehler === "land")
+                                 color: (feldFehler === "email" || feldFehler === "land"
+                                    || feldFehler === "land_gesperrt")
                                     ? "#fca5a5" : TEXT_MUTED,
                               }}>
                                  {feldFehler === "email" ? t.fehlerEmail
                                     : feldFehler === "land" ? t.fehlerLand
+                                    : feldFehler === "land_gesperrt" ? t.landGesperrtKurz
                                     : <><Stern /> {t.erforderlich}</>}
                               </p>
 
@@ -1202,16 +1290,23 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               /* Siehe Bestellanfrage: Eine laufende Codeprüfung
                                  hält den Kauf kurz auf, damit der geprüfte Code
                                  auch mitgeht. */
-                              disabled={laeuft || codeLaeuft}
-                              whileHover={{ scale: laeuft ? 1 : 1.04 }}
-                              whileTap={{ scale: laeuft ? 1 : 0.97 }}
+                              /* Ein gesperrtes Land schliesst den Knopf, statt
+                                 ihn ins Leere laufen zu lassen. Der Kasten
+                                 über dem Knopf sagt, warum - und nennt den
+                                 Weg, der trägt. */
+                              disabled={laeuft || codeLaeuft || landGesperrt}
+                              whileHover={{ scale: laeuft || landGesperrt ? 1 : 1.04 }}
+                              whileTap={{ scale: laeuft || landGesperrt ? 1 : 0.97 }}
                               style={{
                                  padding: "8px 20px", borderRadius: 10,
-                                 background: laeuft ? "rgba(106,172,204,0.08)" : CYAN,
+                                 background: laeuft || landGesperrt
+                                    ? "rgba(106,172,204,0.08)" : CYAN,
                                  border: "1px solid rgba(106,172,204,0.3)",
                                  fontSize: 12.5, fontWeight: 700,
-                                 color: laeuft ? CYAN : "#08111a",
-                                 cursor: laeuft ? "wait" : "pointer",
+                                 color: laeuft || landGesperrt ? CYAN : "#08111a",
+                                 opacity: landGesperrt ? 0.55 : 1,
+                                 cursor: landGesperrt ? "not-allowed"
+                                    : laeuft ? "wait" : "pointer",
                                  fontFamily: "inherit",
                               }}
                            >

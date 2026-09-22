@@ -31,6 +31,7 @@ const CODES = (
 ).split(" ");
 
 const zwischenspeicher = new Map<string, string[]>();
+const paarSpeicher = new Map<string, Array<{ code: string; name: string }>>();
 
 /** Alle Ländernamen, alphabetisch in der gewünschten Sprache. */
 export function laenderNamen(sprache: string): string[] {
@@ -91,6 +92,39 @@ export function laenderCode(eingabe: string, sprache: string): string | null {
       // dann, dass es das Land nicht erkennt - besser als eine Vermutung.
    }
    return null;
+}
+
+/**
+ * Die Länder als Paare aus Code und Namen, in der Reihenfolge der Namen.
+ *
+ * Gebraucht, wo zu einem angezeigten Namen der Code bekannt sein muss, ohne
+ * ihn zu suchen - etwa um in der Vorschlagsliste zu vermerken, aus welchem
+ * Land der Zahlungsanbieter nicht annimmt. `laenderCode` je Eintrag
+ * aufzurufen liefe über die ganze Liste, und das bei jedem Neuzeichnen.
+ */
+export function laenderListe(sprache: string): Array<{ code: string; name: string }> {
+   const schluessel = sprache || "de";
+   const fertig = paarSpeicher.get(schluessel);
+   if (fertig) return fertig;
+
+   let paare: Array<{ code: string; name: string }>;
+   try {
+      const anzeige = new Intl.DisplayNames([schluessel], { type: "region" });
+      paare = CODES
+         .map((code) => {
+            try {
+               return { code, name: anzeige.of(code) || "" };
+            } catch {
+               return { code, name: "" };
+            }
+         })
+         .filter((p) => p.name && !/^[A-Z]{2}$/.test(p.name));
+   } catch {
+      paare = [];
+   }
+   paare.sort((a, b) => a.name.localeCompare(b.name, schluessel));
+   paarSpeicher.set(schluessel, paare);
+   return paare;
 }
 
 /**

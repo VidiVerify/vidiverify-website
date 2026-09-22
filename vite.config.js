@@ -1,8 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
+// Ausdrücklich eingeführt: Die Konfiguration wird von ESLint als Browsercode
+// geprüft, und dort gibt es kein globales `process`.
+import process from "node:process";
 
 /* Die kurzen Adressen auch beim Entwickeln.
  *
@@ -51,7 +55,19 @@ function kurzeAdressen() {
 }
 
 export default defineConfig(() => ({
-   plugins: [tailwindcss(), react(), kurzeAdressen()],
+   /* TLS beim Entwickeln - nur auf Ansage (`VV_HTTPS=1 pnpm dev`).
+    *
+    * Gebraucht für die Zahlungslinks: Der Zahlungsanbieter schreibt sie
+    * grundsätzlich auf `https` um, auch wenn im Konto `http://localhost:3000`
+    * hinterlegt ist (am 22.09.2026 an einem frisch angelegten Vorgang
+    * nachgemessen). Ohne TLS endet der Link in `ERR_SSL_PROTOCOL_ERROR`.
+    *
+    * Standardmässig AUS: Das Zertifikat ist selbst ausgestellt, und der
+    * Browser fragt bei jedem neuen Profil nach. Wer nur an der Seite
+    * arbeitet, soll das nicht wegklicken müssen.
+    */
+   plugins: [tailwindcss(), react(), kurzeAdressen(),
+             ...(process.env.VV_HTTPS === "1" ? [basicSsl()] : [])],
    base: "/",
    resolve: {
       alias: {

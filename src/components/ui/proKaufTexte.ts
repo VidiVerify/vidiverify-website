@@ -68,6 +68,17 @@ const de = {
    erforderlich: "Erforderlich",
    fehlerEmail: "Diese Emailadresse sieht nicht vollständig aus.",
    fehlerLand: "Dieses Land kennen wir nicht. Bitte aus der Liste wählen.",
+   landGesperrtKurz: "Kauf derzeit nicht möglich",
+   landGesperrtTitel: "Aus diesem Land nimmt unser Zahlungsanbieter derzeit keine Bestellung an.",
+   landGesperrtWeg:
+      "Schick uns stattdessen eine Bestellanfrage - wir melden uns per Email "
+      + "und finden einen Weg.",
+   landGesperrtKarte:
+      "Wer eine Karte ausserhalb dieser Länder nutzt, kauft hier ganz normal: "
+      + "Massgeblich ist die Rechnungsanschrift der Karte.",
+   landGesperrtTester:
+      "Und solange die Tester-Aktion läuft, gibt es PRO für die gesamte "
+      + "Hauptversion 1.x ganz ohne Zahlung - die Anmeldung steht in VidiVerify.",
    fehlerVorgang: "Der Kauf liess sich nicht vorbereiten. Bitte versuche es noch einmal.",
    fehlerBremse: "Zu viele Versuche in kurzer Zeit. Bitte warte eine Minute.",
    fehlerLifetimeVorhanden:
@@ -211,6 +222,18 @@ const en: typeof de = {
    erforderlich: "Required",
    fehlerEmail: "This email address does not look complete.",
    fehlerLand: "We do not recognise this country. Please pick one from the list.",
+   landGesperrtKurz: "purchase not available",
+   landGesperrtTitel: "Our payment provider currently cannot accept an order placed from this country.",
+   landGesperrtWeg:
+      "Send us an order request instead - we will reply by email and find a "
+      + "way.",
+   landGesperrtKarte:
+      "If you use a card issued outside these countries, you can buy here as "
+      + "usual: what counts is the billing address of that card.",
+   landGesperrtTester:
+      "And while the tester programme runs, PRO for the whole 1.x major "
+      + "version is available with no payment at all - sign up inside "
+      + "VidiVerify.",
    fehlerVorgang: "The purchase could not be prepared. Please try again.",
    fehlerBremse: "Too many attempts in a short time. Please wait a minute.",
    fehlerLifetimeVorhanden:

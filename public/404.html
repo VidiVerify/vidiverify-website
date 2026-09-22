@@ -22,7 +22,12 @@
                // Rechtstexte ohne eigenen Pfad und nur über die Website
                // selbst erreichbar.
                "/agb": "/#agb",
-               "/widerruf": "/#widerruf"
+               "/widerruf": "/#widerruf",
+               // Die Zielseite der verschickten Zahlungslinks. Paddle setzt
+               // seinen Default Payment Link darauf und hängt `?_ptxn=<id>`
+               // an; Paddle.js öffnet das Bezahlfenster dann von selbst.
+               // Die Abfrage muss deshalb mitreisen - siehe unten.
+               "/zahlen": "/#zahlen"
             };
             var target = routes[path];
             if (target) {

@@ -20,6 +20,7 @@ import AgbModal from "@components/ui/AgbModal";
 import WiderrufModal from "@components/ui/WiderrufModal";
 import LizenzAnfrageModal from "@components/ui/LizenzAnfrageModal";
 import ProKaufModal from "@components/ui/ProKaufModal";
+import ZahlenSeite from "@components/ui/ZahlenSeite";
 import { kennungAufraeumen } from "@utils/adresse";
 
 // Lazy Load "Below the fold" sections for massive performance gains
@@ -68,6 +69,10 @@ const App = () => {
    // `/pro?vvid=…&ver=…`. Die VV-ID MUSS dabei ankommen - ohne sie kann ein
    // Kauf keiner Installation zugeordnet werden.
    const [proOpen, setProOpen] = useState(() => window.location.hash === "#pro");
+   /* Die Zielseite der verschickten Zahlungslinks. Sie kommt nicht aus der
+    * Anwendung, sondern aus einer Email: Der Zahlungsanbieter hängt an diese
+    * Adresse `?_ptxn=<Vorgang>`, und Paddle.js öffnet das Bezahlfenster. */
+   const [zahlenOffen] = useState(() => window.location.hash === "#zahlen");
 
    /* Gerätekennung und Version aus der Adresse nehmen, sobald sie gelesen sind.
     *
@@ -138,6 +143,39 @@ const App = () => {
    // Lizenz, während hinter dem Fenster unsichtbar eine Szene weiterlief.
    const fensterOffen = eulaOpen || datenschutzOpen || impressumOpen || agbOpen
       || widerrufOpen || anfrageOpen || proOpen;
+
+   /* Die Zielseite der Zahlungslinks steht FÜR SICH, ohne die Landeseite
+    * dahinter.
+    *
+    * Wer hier ankommt, hat sich längst entschieden - er hat einen Link aus
+    * unserer Email geöffnet und will bezahlen. Eine Preistafel und eine
+    * Formatliste hinter dem Bezahlfenster wären an dieser Stelle nur Lärm,
+    * und die Szenen im Hintergrund nähmen dem Fenster Rechenzeit (siehe
+    * `fensterOffen`). */
+   if (zahlenOffen) {
+      /* Die Rechtsmodale gehören MIT.
+       *
+       * Der Fusszeile hier ohne sie zu rendern, hiess: AGB, Widerruf,
+       * Datenschutz, EULA und Impressum waren von der Zahlungsseite aus nicht
+       * erreichbar - die Links setzten nur einen Zustand, den niemand
+       * anzeigte (Codex-Review 22.09.2026, am Routing nachgestellt).
+       * Ausgerechnet auf der Seite, auf der bezahlt wird. */
+      return (
+         <ErrorBoundary>
+            <Nav />
+            <ZahlenSeite />
+            <Footer />
+            <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
+            <DatenschutzModal open={datenschutzOpen}
+                              onClose={() => setDatenschutzOpen(false)} />
+            <ImpressumModal open={impressumOpen}
+                            onClose={() => setImpressumOpen(false)} />
+            <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
+            <WiderrufModal open={widerrufOpen}
+                           onClose={() => setWiderrufOpen(false)} />
+         </ErrorBoundary>
+      );
+   }
 
    return (
       <ReactLenis

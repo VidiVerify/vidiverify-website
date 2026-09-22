@@ -19,6 +19,41 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export const PREISE_RUECKFALL = { pro: 2990, lifetime: 9990 };
 
+/* Länder, aus denen der Zahlungsanbieter keine Bestellung annimmt.
+ *
+ * Gepflegt wird die Liste im Worker (`PADDLE_GESPERRTE_LAENDER`), der sie mit
+ * der Preisauskunft mitschickt. Was hier steht, ist der Rückfall für die
+ * Sekunden bis zur Antwort - und für den Fall, dass sie ausbleibt. Er darf
+ * veralten: Der Worker weist einen Kauf aus einem gesperrten Land ohnehin ab,
+ * diese Liste sorgt nur dafür, dass der Kunde es vorher erfährt.
+ */
+export const GESPERRTE_LAENDER_RUECKFALL = [
+   "RU", "BY", "IR", "KP", "SY", "CU", "AF", "MM",
+];
+
+/**
+ * Die Länderliste aus der Antwort des Workers - oder der Rückfall.
+ *
+ * **Erst filtern, dann auf Leere prüfen.** Die erste Fassung fragte
+ * andersherum, und damit blieb eine Lücke eine Ebene tiefer: Eine gefüllte,
+ * aber durchweg unbrauchbare Liste (`["DEUTSCHLAND", 7]`) bestand die
+ * Längenprüfung, wurde vom Filter geleert - und die Sperre war wieder ganz
+ * aufgehoben (Codex-Review 22.09.2026, zweite Runde).
+ *
+ * Bleibt nach dem Filtern nichts übrig, gilt das als Ausfall, nicht als
+ * Freigabe: Der Worker schickt immer eine gefüllte Liste. Die Richtung des
+ * Zweifels ist dieselbe wie beim Preis - lieber zu streng.
+ */
+export function laenderAusAntwort(roh: unknown): string[] {
+   if (!Array.isArray(roh)) return GESPERRTE_LAENDER_RUECKFALL;
+   const sauber = [...new Set(
+      roh.filter((l): l is string => typeof l === "string")
+         .map((l) => l.trim().toUpperCase())
+         .filter((l) => /^[A-Z]{2}$/.test(l)),
+   )];
+   return sauber.length ? sauber : GESPERRTE_LAENDER_RUECKFALL;
+}
+
 export interface RabattBefund {
    code: string;
    art: "prozent" | "festpreis";
@@ -43,6 +78,9 @@ export interface Preisstand {
     *  sonst dauerhaft zu (Codex-Review Runde 2, 16.09.2026, am Hook
     *  ausgeführt). */
    codeLaeuft: boolean;
+   /** Länder, aus denen der Zahlungsanbieter nicht annimmt - siehe
+    *  `GESPERRTE_LAENDER_RUECKFALL`. */
+   gesperrteLaender: string[];
 }
 
 const LEER: Preisstand = {
@@ -52,6 +90,7 @@ const LEER: Preisstand = {
    codeGrund: "",
    laeuft: false,
    codeLaeuft: false,
+   gesperrteLaender: GESPERRTE_LAENDER_RUECKFALL,
 };
 
 /** Nach dieser Zeit gilt eine Preisauskunft als ausgeblieben. */
@@ -108,6 +147,16 @@ export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
             codeGrund: daten.code_grund || "",
             laeuft: false,
             codeLaeuft: false,
+            /* Eine LEERE Liste gilt nicht als Auskunft, sondern als Ausfall.
+             *
+             * `Array.isArray` nimmt auch `[]` an, und damit war die Sperre
+             * vollständig aufgehoben: Der Kaufknopf öffnete wieder, und der
+             * Käufer lief bis zur Abweisung beim Zahlungsanbieter
+             * (Codex-Review 22.09.2026, am Hook nachgestellt). Der Worker
+             * schickt immer eine gefüllte Liste; kommt keine, trägt der
+             * Rückfall. Die Richtung des Zweifels ist damit dieselbe wie beim
+             * Preis: lieber zu streng als zu freizügig. */
+            gesperrteLaender: laenderAusAntwort(daten.gesperrte_laender),
          });
       } catch {
          // Kein Netz, keine Route, kein Worker: Der Listenpreis steht, und der
