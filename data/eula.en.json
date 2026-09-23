@@ -1,0 +1,138 @@
+{
+  "title": "End User License Agreement (EULA)",
+  "subtitle": "for the use of VidiVerify",
+  "date": "Version: 24.09.2026",
+  "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+  "sections": [
+    {
+      "id": 1,
+      "title": "Subject Matter and Contracting Parties",
+      "paragraphs": [
+        "This End User License Agreement governs the use of the VidiVerify software between the user and Thomas Smektalla, Liebestrasse 18a, 07546 Gera, Germany, trading as “VidiVerify Team”, hereinafter the “Provider”.",
+        "A license can be obtained through an order request to the Provider, through the purchase page with the payment provider Paddle acting as reseller, or through the Microsoft Store. Regardless of how it was obtained, the use of the software is governed solely by this agreement; the purchase is governed by the Provider’s General Terms and Conditions or by the terms of the respective seller.",
+        "By downloading, installing or using VidiVerify, the user accepts these terms."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Purpose of the Software",
+      "paragraphs": [
+        "VidiVerify is a tool for the technical analysis and checking of video and audio files. The software examines technical properties, integrity, structure and other evaluable characteristics and presents the results in a structured form.",
+        "All output, notes, ratings and analysis results serve as technical guidance. They are not a guarantee, not an assurance and not a binding statement about a particular condition, a particular usability or a legal assessment.",
+        "This expressly also applies to check reports used as evidence: they reflect what the software measured with the stated rule set and the stated tool version."
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Usage Model",
+      "paragraphs": [
+        "VidiVerify is provided in a tiered model.",
+        "Use for exclusively private purposes is permitted free of charge.",
+        "As soon as VidiVerify is not used exclusively for private purposes, in particular in a commercial, professional, business, institutional or other professional environment, a license is required."
+      ]
+    },
+    {
+      "id": 4,
+      "title": "License Types",
+      "paragraphs": [
+        "Licensing takes the form of a one-time usage fee, not a subscription.",
+        "PRO applies to one major version, for example all 1.x releases, and includes all updates as well as the additional features released within that major version. A license covers its program generation and all older ones; it does not unlock a newer generation.",
+        "LIFETIME applies across all major versions of the product line.",
+        "There is a claim to specific future features, modules or unlocks only if they were expressly promised for the respective license or major version."
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Activation, License Key and Device Binding",
+      "paragraphs": [
+        "A license is issued as a signed license key and is bound to the device identifier (VV-ID) of the computer for which it was requested. The license key can be retrieved through the application from the Provider’s issuing service, so that it is not lost after a reinstallation or a change of computer. When purchasing through the purchase page, the license is issued after Paddle confirms the payment, and the application retrieves it by itself at the next start.",
+        "The application confirms an existing license in the background at every start. Without an internet connection nothing happens; a connection error does not take anyone’s license away. If no connection can be established for seven days, the application points this out and continues as the free edition until then; the license is restored as soon as a connection is available.",
+        "The user may not pass the license key on to third parties, make it publicly accessible or circumvent it."
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Revocation of a License",
+      "paragraphs": [
+        "The Provider may revoke a license if payment is not made, is reversed or refunded, including by a reseller, or if the license key was distributed or circumvented contrary to the preceding section.",
+        "A revocation takes effect with the next confirmation. It is lifted as soon as the reason no longer applies. Nothing changes for all other users."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Rights of Use",
+      "paragraphs": [
+        "The user receives a simple, non-exclusive, non-transferable and non-sublicensable right to use the software within the scope of this agreement.",
+        "Free use is limited to exclusively private purposes. Use outside the exclusively private sphere is only permitted with a valid license.",
+        "Passing on, renting, lending, modifying, decompiling or otherwise altering the software is not permitted, unless mandatory statutory provisions allow otherwise."
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Check Tools and Third-Party Software",
+      "paragraphs": [
+        "VidiVerify is delivered without the actual check tools. They are obtained at the first start and kept up to date by the startup check. The software only checks with the tool version against which the respective edition was developed and tested; if the installed version is older, the application requires the complete download.",
+        "No warranty is given for the availability, function or permanent provision of external components. Third-party software and plug-ins are governed exclusively by their own license terms."
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Modification of Files by Media Repair",
+      "paragraphs": [
+        "The repair function writes new files. It does not alter the source file, but stores the result as a separate file and may remove output files again if the check rates them as worthless or worse than the original.",
+        "The user is responsible for backing up their data. A repair attempt does not replace a backup copy. The user must check the results of a repair before using them further or discarding the original."
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Data Processing",
+      "paragraphs": [
+        "The checked files do not leave the computer. VidiVerify processes technical data locally, to the extent required for the intended functions. Content, usage statistics or check results are not transmitted to the Provider automatically.",
+        "The application only establishes connections to check for updates, to obtain the check tools and for license operations. A device identifier is only transmitted if an ordering route was taken beforehand. When purchasing through the purchase page, the data collected there is passed on to Paddle. Details are set out in the privacy policy.",
+        "Support packages and log files are only transmitted if the user sends them in personally. Beforehand, the user checks whether they contain personal or confidential content."
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Liability and Warranty",
+      "paragraphs": [
+        "The software is used at the user’s own risk. To the extent permitted by law, the software is provided without warranty. No assurance is given regarding availability, freedom from errors, uninterrupted usability or particular results.",
+        "The Provider is liable without limitation for intent and gross negligence, for injury to life, body or health, and in cases of mandatory statutory liability.",
+        "In the event of a slightly negligent breach of essential contractual obligations, liability is limited to the typical, foreseeable damage. Essential contractual obligations are those whose fulfilment makes the proper performance of this agreement possible in the first place and on whose compliance the user may regularly rely.",
+        "Otherwise, liability for damage caused by slight negligence is excluded.",
+        "To the extent permitted by law, no liability is accepted in particular for loss of data, lost economic benefits, indirect damage, consequential damage, or for decisions based on analysis results, check reports or ratings of the software."
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Donations",
+      "paragraphs": [
+        "Voluntary donations are possible.",
+        "Donations are made without consideration and do not give rise to any claim to licensing, unlocking of PRO features, updates, preferred support or any other service."
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Changes",
+      "paragraphs": [
+        "The Provider may further develop or adapt the software, its range of functions, plug-in connections, distribution channels, license models and this agreement with effect for the future.",
+        "For licenses already granted, the terms of the respective major version stated at the time of licensing apply, unless mandatory statutory provisions stand in the way."
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Applicable Law and Place of Jurisdiction",
+      "paragraphs": [
+        "German law applies. For consumers, the mandatory provisions of the state in which the consumer has their habitual residence remain unaffected.",
+        "The place of jurisdiction is Gera, to the extent that this can be validly agreed."
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Severability Clause",
+      "paragraphs": [
+        "Should individual provisions of this agreement be or become wholly or partially invalid, the validity of the remaining provisions remains unaffected."
+      ]
+    }
+  ]
+}

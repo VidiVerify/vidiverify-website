@@ -1,7 +1,7 @@
 {
    "title": "Endbenutzerlizenzvereinbarung (EULA)",
    "subtitle": "für die Nutzung von VidiVerify",
-   "date": "Stand: 11.09.2026",
+   "date": "Stand: 24.09.2026",
    "sections": [
       {
          "id": 1,
@@ -45,7 +45,7 @@
          "title": "Aktivierung, Lizenzschlüssel und Gerätebindung",
          "paragraphs": [
             "Eine Lizenz wird als signierter Lizenzschlüssel ausgestellt und ist an die Gerätekennung (VV-ID) des Rechners gebunden, für den sie angefordert wurde. Der Lizenzschlüssel kann über die Anwendung aus der Ausgabestelle des Anbieters abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Beim Kauf über die Kaufseite wird die Lizenz nach der Zahlungsbestätigung durch Paddle ausgestellt und von der Anwendung beim nächsten Start selbst abgeholt.",
-            "Die Anwendung bestätigt eine vorhandene Lizenz höchstens einmal täglich beim Start im Hintergrund. Ohne Internetverbindung geschieht nichts; ein Verbindungsfehler nimmt niemandem seine Lizenz. Lässt sich über sieben Tage hinweg keine Verbindung herstellen, weist die Anwendung darauf hin und läuft bis dahin in der kostenfreien Fassung weiter; die Lizenz lebt wieder auf, sobald eine Verbindung besteht.",
+            "Die Anwendung bestätigt eine vorhandene Lizenz bei jedem Start im Hintergrund. Ohne Internetverbindung geschieht nichts; ein Verbindungsfehler nimmt niemandem seine Lizenz. Lässt sich über sieben Tage hinweg keine Verbindung herstellen, weist die Anwendung darauf hin und läuft bis dahin in der kostenfreien Fassung weiter; die Lizenz lebt wieder auf, sobald eine Verbindung besteht.",
             "Der Nutzer darf den Lizenzschlüssel nicht an Dritte weitergeben, öffentlich zugänglich machen oder umgehen."
          ]
       },
