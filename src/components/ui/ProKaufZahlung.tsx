@@ -22,7 +22,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { GREEN, TEXT_MUTED, TEXT_PRIMARY, TEXT_SECONDARY } from "@/constants/theme";
-import { paddleLaden, type PaddleAufbau } from "@utils/paddle";
+import { einbettung, paddleLaden, type PaddleAufbau } from "@utils/paddle";
 import { bruttoAusVorschau, preisZeilen, type Summe } from "@utils/paddleSumme";
 import type { TEXTE } from "./proKaufTexte";
 
@@ -89,30 +89,7 @@ const ProKaufZahlung = ({
          if (!aktiv) return;
          window.Paddle?.Checkout.open({
             transactionId,
-            settings: {
-               displayMode: "inline",
-               frameTarget: RAHMEN,
-               frameInitialHeight: "450",
-               frameStyle:
-                  "width: 100%; min-width: 312px; background-color: transparent; border: none;",
-               theme: "dark",
-               locale: sprache,
-               // Eine Seite statt mehrerer: Email und Anschrift stehen schon
-               // in der Transaktion, übrig bleibt die Zahlung.
-               variant: "one-page",
-               // Die Emailadresse gehört zum angelegten Kunden und steht auf
-               // der Rechnung. Im Formular austauschbar, liefe der Kauf auf
-               // eine Adresse, die in unserem Vorgang nie vorkam.
-               allowLogout: false,
-               // Rabattcodes laufen über unser Feld und werden im Worker
-               // geprüft; ein zweiter Eingang im Formular ginge an dieser
-               // Prüfung vorbei.
-               showAddDiscounts: false,
-               allowDiscountRemoval: false,
-               // Die USt-IdNr erheben wir selbst, der Worker legt sie beim
-               // Unternehmen an.
-               showAddTaxId: false,
-            },
+            settings: einbettung(RAHMEN, sprache),
          });
       }).catch(() => { if (aktiv) onFehler(); });
       return () => {

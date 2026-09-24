@@ -137,6 +137,42 @@ export function paddleHorchen(neu: ((ereignis: PaddleEreignis) => void) | null) 
    horcher = neu;
 }
 
+/**
+ * Die Einstellungen des eingebetteten Bezahlfensters - für die Kaufseite und
+ * die Zahlseite der Zahlungslinks gleich (24.09.2026).
+ *
+ * Bis hierher setzte nur die Kaufseite sie. Ein Zahlungslink öffnete Paddles
+ * Overlay im hellen Standardschema, mit eigenen Dashboard-Werten und einem
+ * Logout, der die Emailadresse des angelegten Kunden austauschbar machte.
+ * Beide Wege tragen jetzt dasselbe Fenster mit den Werten aus dem Dashboard
+ * (Checkout settings > Inline, Paddle-Plan 8a).
+ */
+export function einbettung(rahmen: string, sprache: string): Record<string, unknown> {
+   return {
+      displayMode: "inline",
+      frameTarget: rahmen,
+      frameInitialHeight: "450",
+      frameStyle:
+         "width: 100%; min-width: 312px; background-color: transparent; border: none;",
+      theme: "dark",
+      locale: sprache,
+      // Eine Seite statt mehrerer: Email und Anschrift stehen schon in der
+      // Transaktion, übrig bleibt die Zahlung.
+      variant: "one-page",
+      // Die Emailadresse gehört zum angelegten Kunden und steht auf der
+      // Rechnung. Im Formular austauschbar, liefe der Kauf auf eine Adresse,
+      // die in unserem Vorgang nie vorkam.
+      allowLogout: false,
+      // Rabattcodes laufen über unser Feld und werden im Worker geprüft; ein
+      // zweiter Eingang im Formular ginge an dieser Prüfung vorbei.
+      showAddDiscounts: false,
+      allowDiscountRemoval: false,
+      // Die USt-IdNr erheben wir selbst, der Worker legt sie beim Unternehmen
+      // an.
+      showAddTaxId: false,
+   };
+}
+
 let geladen: Promise<void> | null = null;
 
 /**
@@ -146,7 +182,12 @@ let geladen: Promise<void> | null = null;
  * harmlos, ein zweites Skript-Element im Kopf ist es nicht - es überschreibt
  * `window.Paddle` mitten in einem offenen Bezahlvorgang.
  */
-export function paddleLaden(aufbau: PaddleAufbau): Promise<void> {
+export function paddleLaden(
+   aufbau: PaddleAufbau,
+   /** Voreinstellung für Bezahlfenster, die Paddle.js selbst öffnet - der
+    * Zahlungslink (`?_ptxn=`). Gilt nur beim ersten Laden. */
+   voreinstellung?: Record<string, unknown>,
+): Promise<void> {
    if (geladen) return geladen;
    geladen = new Promise<void>((fertig, scheitern) => {
       const einrichten = () => {
@@ -158,6 +199,7 @@ export function paddleLaden(aufbau: PaddleAufbau): Promise<void> {
          window.Paddle.Initialize({
             token: aufbau.token,
             eventCallback: (ereignis: PaddleEreignis) => horcher?.(ereignis),
+            ...(voreinstellung ? { checkout: { settings: voreinstellung } } : {}),
          });
          fertig();
       };

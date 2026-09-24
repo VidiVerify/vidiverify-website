@@ -20,10 +20,13 @@
  */
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { paddleAufbau, paddleHorchen, paddleLaden } from "@utils/paddle";
+import { einbettung, paddleAufbau, paddleHorchen, paddleLaden } from "@utils/paddle";
 import type { PaddleEreignis } from "@utils/paddle";
 import { spracheAus } from "./proKaufTexte";
 import { CYAN, GREEN, TEXT_PRIMARY, TEXT_SECONDARY } from "@/constants/theme";
+
+/** Der Rahmen, in den Paddle das Bezahlfenster bettet. */
+const RAHMEN = "vv-zahlen-rahmen";
 
 /** Das Häkchen im Ring - gezeichnet, nicht als Zeichen gesetzt.
  *
@@ -118,7 +121,8 @@ const TEXTE = {
 
 export default function ZahlenSeite() {
    const { i18n } = useTranslation();
-   const t = TEXTE[spracheAus(i18n.language)];
+   const sprache = spracheAus(i18n.language);
+   const t = TEXTE[sprache];
    /* Beides steht schon vor dem ersten Zeichnen fest - es hängt allein an der
     * Adresse und am Host. Im Effekt gesetzt, wären es zwei Durchläufe und der
     * Besucher sähe kurz „wird geöffnet", bevor die Absage kommt.
@@ -131,6 +135,12 @@ export default function ZahlenSeite() {
       }
       return paddleAufbau() ? "laeuft" : "hier_nicht";
    });
+
+   /* Steht das eingebettete Fenster, sind „wird geöffnet" und „sonst neu
+    * laden" falsch (VM 24.09.2026). Ein Merker und KEIN weiterer Zustand:
+    * Ein Zustandswechsel meldete den Horcher unten ab, und der Abschluss der
+    * Zahlung käme nicht mehr an. */
+   const [fensterDa, setFensterDa] = useState(false);
 
    useEffect(() => {
       if (zustand !== "laeuft") return;
@@ -150,18 +160,25 @@ export default function ZahlenSeite() {
        * Nächstes zu tun ist, statt eine Lizenz zu behaupten, die sie nicht
        * gesehen hat. */
       paddleHorchen((ereignis: PaddleEreignis) => {
-         if (ereignis?.name !== "checkout.completed") return;
-         if (!abgemeldet) setZustand("bezahlt");
+         if (abgemeldet) return;
+         if (ereignis?.name === "checkout.loaded") setFensterDa(true);
+         if (ereignis?.name === "checkout.completed") setZustand("bezahlt");
       });
       /* Geladen und eingerichtet - mehr ist nicht zu tun. Paddle.js liest den
-       * Parameter beim Start selbst und legt das Bezahlfenster über die
-       * Seite. Ein eigener `Checkout.open`-Aufruf ginge dem sogar vor und
-       * wäre die fehleranfälligere Fassung. */
-      paddleLaden(aufbau).catch(() => {
+       * Parameter beim Start selbst und öffnet das Bezahlfenster. Ein eigener
+       * `Checkout.open`-Aufruf ginge dem sogar vor und wäre die
+       * fehleranfälligere Fassung.
+       *
+       * Die Voreinstellung macht daraus dasselbe eingebettete Fenster wie auf
+       * der Kaufseite (24.09.2026). Ohne sie öffnete Paddle.js ein Overlay im
+       * hellen Standardschema, mit anderen Farben und austauschbarer
+       * Emailadresse. Paddle: „Paddle.js uses default settings when opening a
+       * checkout payment link" - so kommt die Voreinstellung dort an. */
+      paddleLaden(aufbau, einbettung(RAHMEN, sprache)).catch(() => {
          if (!abgemeldet) setZustand("gescheitert");
       });
       return () => { abgemeldet = true; paddleHorchen(null); };
-   }, [zustand]);
+   }, [zustand, sprache]);
 
    const bezahlt = zustand === "bezahlt";
    const text = zustand === "laeuft" ? t.laeuft
@@ -192,16 +209,24 @@ export default function ZahlenSeite() {
             }}>
                {bezahlt ? t.bezahltTitel : t.titel}
             </h1>
-            <p style={{
-               marginTop: 12, fontSize: 14, color: TEXT_SECONDARY,
-               lineHeight: 1.65,
-            }}>
-               {text}
-            </p>
-            {zustand === "laeuft" && (
-               <p style={{ marginTop: 8, fontSize: 12.5, color: TEXT_SECONDARY }}>
-                  {t.laeuftHinweis}
+            {!(zustand === "laeuft" && fensterDa) && (
+               <p style={{
+                  marginTop: 12, fontSize: 14, color: TEXT_SECONDARY,
+                  lineHeight: 1.65,
+               }}>
+                  {text}
                </p>
+            )}
+            {zustand === "laeuft" && (
+               <>
+                  {!fensterDa && (
+                     <p style={{ marginTop: 8, fontSize: 12.5, color: TEXT_SECONDARY }}>
+                        {t.laeuftHinweis}
+                     </p>
+                  )}
+                  {/* Hier bettet Paddle das Bezahlfenster ein. */}
+                  <div className={RAHMEN} style={{ marginTop: 20, minHeight: 450, textAlign: "left" }} />
+               </>
             )}
             {bezahlt && (
                <>
