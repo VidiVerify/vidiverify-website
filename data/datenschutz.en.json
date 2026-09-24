@@ -1,0 +1,508 @@
+{
+   "title": "Privacy Policy",
+   "subtitle": "for the use of the VidiVerify application and website",
+   "date": "Version: 24.09.2026",
+   "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+   "sections": [
+      {
+         "id": 1,
+         "title": "General",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The protection of personal data is taken seriously. Personal data is only processed to the extent required to provide the website, operate the application, handle enquiries, process licenses and purchases, and ensure technical security. Under Art. 13 GDPR, data subjects must be informed in particular about the controller, purposes, legal bases, recipients, storage periods and their rights."
+            },
+            {
+               "type": "p",
+               "text": "This policy covers two areas that differ considerably in terms of data protection: the website at vidiverify.de and vidiverify.com, and the VidiVerify application, which runs on the user's computer."
+            },
+            {
+               "type": "p",
+               "text": "The most important statement about the application first: the checked video and audio files do not leave the computer. There is no upload, neither for checking nor for analysis, neither in whole nor in part. All reports and logs are created locally."
+            }
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Controller",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The controller responsible for the processing of personal data is:"
+            },
+            {
+               "type": "address",
+               "lines": [
+                  "Thomas Smektalla",
+                  "VidiVerify Team",
+                  "Liebestrasse 18a",
+                  "07546 Gera",
+                  "Germany"
+               ]
+            },
+            {
+               "type": "email",
+               "label": "Technical",
+               "address": "support@vidiverify.de"
+            },
+            {
+               "type": "email",
+               "label": "Legal and business",
+               "address": "admin@vidiverify.de"
+            },
+            {
+               "type": "p",
+               "text": "The provider is Thomas Smektalla as a private individual."
+            }
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Website hosting via GitHub Pages",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The website is provided via GitHub Pages, a static hosting service of GitHub, Inc. or GitHub B.V. According to GitHub, when a GitHub Pages website is visited, the visitor's IP address is logged for security purposes, regardless of whether the visitor is signed in to GitHub."
+            },
+            {
+               "type": "p",
+               "text": "In particular, the following may be processed: IP address, date and time of access, requested content, referrer information, browser type, browser version, operating system and other technical connection data. The purpose is technical provision and ensuring stability and security. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest lies in the secure and functional operation of the website."
+            }
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Cloudflare: name resolution, delivery and application services",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Both domains are operated via Cloudflare (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA). Cloudflare is involved at several points:"
+            },
+            {
+               "type": "ul",
+               "items": [
+                  "Name resolution (DNS) for vidiverify.de and vidiverify.com.",
+                  "Delivery of vidiverify.com: this domain delivers the same website via an upstream service; requests pass through Cloudflare's infrastructure.",
+                  "Application services (Cloudflare Workers): under vidiverify.de/api/ and vidiverify.de/dl/, dedicated programs run that receive order requests, output prices, prepare purchases for the payment provider Paddle and receive its payment and refund notifications, provide and confirm licenses, and count downloads.",
+                  "Storage (Cloudflare Workers KV) for order requests, purchases, purchase history, license entries, discount codes and counters.",
+                  "File storage (Cloudflare R2) under dl.vidiverify.com for the check tools and runtime packages obtained by the application.",
+                  "Protection against automated submissions (Cloudflare Turnstile) on the order form and the purchase page."
+               ]
+            },
+            {
+               "type": "p",
+               "text": "With every request, Cloudflare processes technical connection data, in particular IP address, time, requested address and browser information. The purpose is delivery, prevention of abuse and operation of the services mentioned. The legal basis is Art. 6(1)(f) GDPR, and additionally Art. 6(1)(b) GDPR for order and license operations."
+            },
+            {
+               "type": "p",
+               "text": "To protect against abuse, the application services limit the number of requests per connection. For this purpose, not the IP address itself is stored but an irreversible hash of it, for no longer than 60 seconds. The application services also keep operating logs (time, requested address, result and error messages, where applicable transaction or device identifiers), which Cloudflare retains for only a few days. They serve solely for troubleshooting."
+            },
+            {
+               "type": "p",
+               "text": "Cloudflare acts as a processor in this respect. Transfers to the USA are based on the Standard Contractual Clauses of the European Commission and the EU-US Data Privacy Framework."
+            }
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Encrypted transmission",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The website is provided exclusively in encrypted form via HTTPS. This protects communication from unauthorised reading and alteration."
+            }
+         ]
+      },
+      {
+         "id": 6,
+         "title": "Audience measurement with GoatCounter",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "GoatCounter, operated by Martin Tournoij, Ireland, is used to measure reach. According to the operator, the data is stored on servers of Hetzner Online GmbH in Germany and Finland."
+            },
+            {
+               "type": "p",
+               "text": "According to the operator, GoatCounter works without cookies and without storing data in the browser. IP addresses are not stored, nor is the full user agent or a tracking identifier. To distinguish sessions, a combination of page, IP address and browser identifier is kept in memory for no more than eight hours and replaced by a random string."
+            },
+            {
+               "type": "p",
+               "text": "Data aggregated by day or hour is stored: page viewed, approximate location at country level, browser, operating system, language and screen width."
+            },
+            {
+               "type": "p",
+               "text": "The website displays the number of page views. To do so, the browser retrieves a public counter from GoatCounter; as with any request, the IP address is transmitted to GoatCounter."
+            },
+            {
+               "type": "p",
+               "text": "The purpose is to evaluate how the website is used. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest lies in data-minimising audience measurement without profiling. As no information on the end device is accessed, no consent is obtained."
+            }
+         ]
+      },
+      {
+         "id": 7,
+         "title": "Download counting",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The application is downloaded via a redirecting address (vidiverify.de/dl/…) that counts the request. The day, program version and type of request are recorded, that is, download via the website or self-update of the application. No IP addresses, device identifiers or other characteristics that would allow conclusions about a person are stored."
+            },
+            {
+               "type": "p",
+               "text": "The purpose is to determine download figures. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest lies in knowing how widely the software is used."
+            }
+         ]
+      },
+      {
+         "id": 8,
+         "title": "Contact by email",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "When contacting support@vidiverify.de or admin@vidiverify.de, the data provided is processed, in particular the email address, the content of the message and any other voluntary information."
+            },
+            {
+               "type": "p",
+               "text": "The purpose is to handle enquiries, support cases and project-related matters. The legal basis is Art. 6(1)(b) GDPR where the enquiry aims at initiating or performing a contract, otherwise Art. 6(1)(f) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "The email infrastructure is provided by Hetzner Online GmbH, Industriestrasse 25, 91710 Gunzenhausen, Germany; the servers are located in Germany. Hetzner acts as a processor in this respect."
+            }
+         ]
+      },
+      {
+         "id": 9,
+         "title": "Order request via the “Request a license” form",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "A license can be requested via the form at vidiverify.de/lizenz-anfrage. Only three fields are mandatory: device identifier (VV-ID), email address and desired license type. In addition, the program version is transmitted if the form was opened from within the application."
+            },
+            {
+               "type": "p",
+               "text": "The following can be provided voluntarily: salutation, first and last name, telephone number, billing address, tax number, VAT identification number, a discount or promotion code and a free-text note. Anyone who only wants to register as a user of the free edition does not fill in anything further."
+            },
+            {
+               "type": "p",
+               "text": "The VV-ID is a pseudonymous device identifier calculated on the user's computer from a Windows system identifier. It contains no plain data and on its own does not allow any conclusions about a person; together with the email address it is personal data."
+            },
+            {
+               "type": "p",
+               "text": "The purpose is to process the request, issue the license and invoice. The legal basis is Art. 6(1)(b) GDPR. The record is stored in the storage of the provider Cloudflare."
+            },
+            {
+               "type": "p",
+               "text": "Cloudflare Turnstile is used to protect against automated submissions. Technical connection data, in particular the IP address, and browser information are processed. According to the provider, Turnstile does not set cookies for advertising purposes and does not perform cross-device tracking. The legal basis in this respect is Art. 6(1)(f) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "Together with the request, it is recorded that the General Terms and Conditions were accepted and that the declaration on the early expiry of the right of withdrawal was made (the latter only for a paid license), each with the identifier of the version in force at that time. The purpose is proof towards the customer and in the event of a dispute. The legal basis is Art. 6(1)(b) GDPR and Art. 6(1)(c) and (f) GDPR; the legitimate interest lies in being able to prove the content of the contract."
+            },
+            {
+               "type": "p",
+               "text": "The request record is deleted as soon as the matter is completed, automatically after 180 days at the latest. The information is not used for advertising purposes; no newsletter is offered."
+            }
+         ]
+      },
+      {
+         "id": 10,
+         "title": "Purchase via the purchase page with Paddle",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "A license can be paid for directly on the purchase page vidiverify.de/pro. The seller is our payment provider Paddle acting as reseller (Merchant of Record): for buyers based outside the USA, Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, United Kingdom; for buyers based in the USA, Paddle.com Inc., New York, USA. Paddle is an independent controller for the purchase contract, payment, invoice and tax; its privacy notice applies in addition (paddle.com/legal/privacy)."
+            },
+            {
+               "type": "p",
+               "text": "Before the checkout window, the purchase page collects: salutation, first and last name, email address, billing address (street, house number, postcode, city, country), customer type, for business buyers the company and VAT identification number, the device identifier (VV-ID), the program version if the page was opened from the application, and optionally a discount or promotion code. The provider passes this information to Paddle via its application service and creates the customer, address and, where applicable, the company there before the checkout window opens. The purpose is that the invoice names the buyer, the tax is calculated for the correct country and the license can be assigned to the installation. The legal basis is Art. 6(1)(b) GDPR (pre-contractual steps at the buyer's request)."
+            },
+            {
+               "type": "p",
+               "text": "The checkout window itself is provided by Paddle. It is only loaded when the purchase page is opened; the browser then connects to Paddle's servers, and Paddle processes technical connection data as well as information technically necessary for the checkout window in the browser. Payment data such as card numbers are processed exclusively by Paddle and its payment service providers; the provider never receives them."
+            },
+            {
+               "type": "p",
+               "text": "After payment, Paddle notifies the provider's application service of the completion with transaction identifier, customer identifier, purchased license type and VV-ID. The provider takes the email address from the information collected before the purchase, or alternatively retrieves it from Paddle, issues the license and makes it available for retrieval. The following is stored: email address, VV-ID, license type, license key, transaction identifier and the name, address and company details collected before the purchase, so that questions about a purchase can be answered. The legal basis is Art. 6(1)(b) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "In addition, a purchase history is kept for each installation: transaction identifier, license type and program generation of every paid purchase, without name or email address. It is needed so that, after an upgrade has been refunded, the previously paid license can be restored instead of the license being withdrawn entirely. The legal basis is Art. 6(1)(b) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "If Paddle reports a refund or chargeback, the provider checks whether the license is revoked or downgraded to another paid purchase. To this end, the provider regularly compares the transactions and refunds kept at Paddle, including the buyer's email address, with its own entries, so that no paid purchase remains without a license and no refunded license continues unnoticed. The legal basis is Art. 6(1)(b) and (f) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "At a customer's request, the provider can generate a payment link. In that case, the provider creates the customer's details at Paddle itself; otherwise the above applies."
+            },
+            {
+               "type": "p",
+               "text": "A purchase that cannot be assigned to an installation is not discarded but marked for manual processing, for no longer than 400 days; the buyer is then contacted via the email address stored at Paddle."
+            },
+            {
+               "type": "p",
+               "text": "The record of a purchase is deleted automatically after 180 days at the latest, the payment step of an installation after 24 hours, for a payment link after 30 days, and the assignment of a processed transaction, which prevents duplicate issuance, after 400 days at the latest. The license entry and purchase history are stored permanently and deleted on request. Cloudflare Turnstile is also used on the purchase page to protect against automated submissions."
+            },
+            {
+               "type": "p",
+               "text": "For buyers outside the USA, Paddle processes the data in the United Kingdom; an adequacy decision of the European Commission exists for this country. For Paddle.com Inc. in the USA, the Standard Contractual Clauses of the European Commission apply and, where certified, the EU-US Data Privacy Framework."
+            }
+         ]
+      },
+      {
+         "id": 11,
+         "title": "License issuance, retrieval and regular confirmation",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "When a license is issued, an entry is created with email address, VV-ID, license type and license key, and for purchases via Paddle additionally with the transaction identifier and the details from the purchase. It is stored permanently so that the license can be retrieved again after a reinstallation or a change of computer, and deleted on request. The legal basis is Art. 6(1)(b) GDPR."
+            },
+            {
+               "type": "p",
+               "text": "On retrieval, the application sends the VV-ID to vidiverify.de/api/lizenz. Only this identifier is transmitted. The application only asks on its own if an ordering route was taken beforehand: an installation that never wanted to buy does not send its device identifier."
+            },
+            {
+               "type": "p",
+               "text": "An existing license is confirmed in the background at every program start; here too, only the VV-ID is transmitted. The same applies as long as no license is available yet after an ordering route was taken. Without an internet connection nothing happens and the license is retained. The purpose is to take over a newly issued license and to detect revoked licenses, for example after a refund. The legal basis is Art. 6(1)(b) GDPR in conjunction with Art. 6(1)(f) GDPR."
+            }
+         ]
+      },
+      {
+         "id": 12,
+         "title": "Notification of the provider via Pushover",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "So that purchases, order requests and payment problems can be handled without delay, the provider receives a short message on their mobile phone via the Pushover service. The messages contain only license type, amount and country, without any personal data."
+            }
+         ]
+      },
+      {
+         "id": 13,
+         "title": "What the application itself processes",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The checked files do not leave the computer. There is no transmission of image, sound or file content, no cloud analysis and no usage statistics sent to the provider. Check logs, reports and settings are stored exclusively locally."
+            },
+            {
+               "type": "p",
+               "text": "On its own, the application only establishes these connections:"
+            },
+            {
+               "type": "ul",
+               "items": [
+                  "Checking for updates and retrieving the change log against files in the public repositories on GitHub, and obtaining the setup file via vidiverify.de.",
+                  "Obtaining the check tools (plug-ins) and the runtime package at the first start and on updates, among others from GitHub, MediaArea, VideoLAN, Codeberg and a dedicated mirror under dl.vidiverify.com at Cloudflare.",
+                  "License operations as described in the section “License issuance, retrieval and regular confirmation”."
+               ]
+            },
+            {
+               "type": "p",
+               "text": "The usual technical connection data processed by the respective provider arises in the process. The legal basis is Art. 6(1)(f) GDPR; the legitimate interest lies in keeping the software up to date and functional."
+            },
+            {
+               "type": "p",
+               "text": "The application only opens the purchase page, manuals, donation options and other web pages in the user's browser upon an explicit click."
+            }
+         ]
+      },
+      {
+         "id": 14,
+         "title": "Support packages and technical logs",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "VidiVerify can create a support package containing technical logs, log files and other information suitable for error analysis. It is not transmitted automatically, but only if the user sends the package by email themselves."
+            },
+            {
+               "type": "p",
+               "text": "The processing serves exclusively to handle the support case. The legal basis is Art. 6(1)(b) GDPR, otherwise Art. 6(1)(f) GDPR. As such a package may in individual cases contain personal or personally identifiable information, such as file paths, users should check its contents before sending it."
+            }
+         ]
+      },
+      {
+         "id": 15,
+         "title": "Obtaining the software via the Microsoft Store",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "VidiVerify is also offered via the Microsoft Store. When obtained there, the privacy terms of Microsoft Corporation apply; the data arising in the process is processed by Microsoft under its own responsibility. No information about individual buyers or users is obtained from there."
+            }
+         ]
+      },
+      {
+         "id": 16,
+         "title": "Donations via PayPal and 4Fund",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The application's “Support VidiVerify” window offers two voluntary donation options: PayPal (PayPal (Europe) S.à r.l. et Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg) and 4Fund (Zrzutka.pl sp. z o.o., Wrocław, Poland). Both are offered as a link and as a QR code."
+            },
+            {
+               "type": "p",
+               "text": "Data is only transmitted to these providers when a donation option is actively opened or the QR code is used. If a donation is made, the providers process the data arising under their own responsibility and terms; the provider of VidiVerify receives no payment data and no information about individual donors."
+            },
+            {
+               "type": "p",
+               "text": "A donation has nothing to do with licensing: it does not unlock any features and is not assigned to any installation. The legal basis for offering both options is Art. 6(1)(f) GDPR; the legitimate interest lies in allowing voluntary support of an independent project."
+            }
+         ]
+      },
+      {
+         "id": 17,
+         "title": "GitHub as project and release platform",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The website may contain links to GitHub, in particular to the project, releases or release notes. Merely visiting the website does not establish a connection to GitHub through such a link; this only happens when it is clicked. GitHub's privacy terms then apply in addition."
+            },
+            {
+               "type": "p",
+               "text": "In addition, the website retrieves the publicly available number of downloads and details of the latest version via GitHub's programming interface. The browser connects to GitHub, transmitting the IP address. The legal basis is Art. 6(1)(f) GDPR."
+            }
+         ]
+      },
+      {
+         "id": 18,
+         "title": "External links",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The website may contain links to third-party offerings, in particular to GitHub and the Microsoft Store. The respective operators alone are responsible for content and data processing there."
+            }
+         ]
+      },
+      {
+         "id": 19,
+         "title": "Cookies and storage in the browser",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "The website does not set cookies for advertising or analysis purposes. Audience measurement works without cookies; a consent banner is therefore not displayed."
+            },
+            {
+               "type": "p",
+               "text": "Technically necessary storage in the browser may take place, for example to remember the selected language. This information remains in the user's browser. Cloudflare Turnstile may process technically necessary information on the order form and purchase page; Paddle's checkout window may store technically necessary information in the browser for the payment process."
+            }
+         ]
+      },
+      {
+         "id": 20,
+         "title": "Storage period",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Personal data is only stored for as long as required for the respective purposes or as long as statutory retention obligations exist."
+            },
+            {
+               "type": "ul",
+               "items": [
+                  "Access and security data for hosting and delivery: according to the systems of GitHub and Cloudflare.",
+                  "Operating logs of the application services: a few days at Cloudflare; hash of the IP address for abuse prevention: no longer than 60 seconds.",
+                  "Audience measurement: aggregated data without personal reference, no IP storage.",
+                  "Download counter: counts without personal reference, no longer than 400 days.",
+                  "Order requests: until the matter is completed, automatically after 180 days at the latest.",
+                  "Purchases via Paddle: purchase record after 180 days at the latest, payment step after 24 hours (payment link 30 days), transaction assignment and unresolved purchases marked for processing after 400 days at the latest; invoice data is held by Paddle according to its periods.",
+                  "Records preventing duplicate notifications (transaction identifiers only): 30 or 100 days.",
+                  "License entries and purchase history: permanently, so that the license can be retrieved again and assigned correctly after a refund; deletion on request.",
+                  "Emails, support requests and support packages: as long as required for processing and documentation.",
+                  "Documents subject to tax retention: according to the statutory periods."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 21,
+         "title": "Recipients of personal data",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Recipients of personal data may in particular be:"
+            },
+            {
+               "type": "ul",
+               "items": [
+                  "GitHub as hosting provider of the website and as release platform",
+                  "Cloudflare for name resolution, delivery, application services, storage, file storage and protection against automated submissions",
+                  "Hetzner Online GmbH for the email infrastructure",
+                  "Paddle (Paddle.com Market Limited or Paddle.com Inc.) as seller for purchases via the purchase page",
+                  "GoatCounter (Martin Tournoij) for audience measurement",
+                  "Microsoft, where the application is obtained via the Microsoft Store",
+                  "PayPal and 4Fund, where users voluntarily use these donation options",
+                  "Manufacturers and mirror servers of the check tools, where the application obtains plug-ins"
+               ]
+            }
+         ]
+      },
+      {
+         "id": 22,
+         "title": "Transfers to third countries",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "With GitHub, Cloudflare, Microsoft, Paddle and PayPal, processing may take place outside the European Union, in particular in the United States and the United Kingdom. This is based on the Standard Contractual Clauses of the European Commission, the EU-US Data Privacy Framework where the providers are certified, and for the United Kingdom the adequacy decision of the European Commission."
+            }
+         ]
+      },
+      {
+         "id": 23,
+         "title": "Rights of data subjects",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Under the GDPR, data subjects have in particular the following rights:"
+            },
+            {
+               "type": "ul",
+               "items": [
+                  "Right of access",
+                  "Right to rectification",
+                  "Right to erasure",
+                  "Right to restriction of processing",
+                  "Right to data portability",
+                  "Right to object to processing based on legitimate interests",
+                  "Right to withdraw consent with effect for the future",
+                  "Right to lodge a complaint with a data protection supervisory authority"
+               ]
+            },
+            {
+               "type": "p",
+               "text": "A message to admin@vidiverify.de is sufficient to exercise these rights."
+            }
+         ]
+      },
+      {
+         "id": 24,
+         "title": "Right to object",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Where personal data is processed on the basis of Art. 6(1)(f) GDPR, there is the right to object at any time on grounds relating to the particular situation of the data subject."
+            }
+         ]
+      },
+      {
+         "id": 25,
+         "title": "Right to lodge a complaint with a supervisory authority",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Data subjects have the right to lodge a complaint with a data protection supervisory authority. The authority responsible for the controller is the Thuringian State Commissioner for Data Protection and Freedom of Information (Thüringer Landesbeauftragter für den Datenschutz und die Informationsfreiheit)."
+            }
+         ]
+      },
+      {
+         "id": 26,
+         "title": "Changes to this privacy policy",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "This policy describes the technical status as of 24.09.2026. If services, methods of integration or purposes change, it will be updated; this applies in particular to additional payment methods and analysis tools. This English version is provided for information; the German version is binding."
+            }
+         ]
+      }
+   ]
+}

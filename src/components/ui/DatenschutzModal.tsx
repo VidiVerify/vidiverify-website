@@ -10,7 +10,8 @@ import { useTranslation } from "react-i18next";
 import { X, ShieldCheck } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import { useFensterStapel } from "@utils/useFensterStapel";
-import data from "../../../data/datenschutz.json";
+import datenDe from "../../../data/datenschutz.json";
+import datenEn from "../../../data/datenschutz.en.json";
 
 type Block =
    | { type: "p"; text: string }
@@ -18,13 +19,26 @@ type Block =
    | { type: "address"; lines: string[] }
    | { type: "email"; label: string; address: string };
 
+interface Datenschutz {
+   title: string;
+   subtitle: string;
+   date: string;
+   /** Nur in der Übersetzung: dass allein die deutsche Fassung verbindlich ist. */
+   notice?: string;
+   sections: { id: number; title: string; blocks: Block[] }[];
+}
+
 interface Props {
    open: boolean;
    onClose: () => void;
 }
 
 const DatenschutzModal = ({ open, onClose }: Props) => {
-   const { t } = useTranslation();
+   const { t, i18n } = useTranslation();
+   // Auf Englisch die Übersetzung (24.09.2026) - vidiverify.com liefert
+   // englisch aus. Verbindlich bleibt die deutsche Fassung.
+   const data = ((i18n.language || "de").toLowerCase().startsWith("de")
+      ? datenDe : datenEn) as Datenschutz;
    const scrollRef = useRef<HTMLDivElement>(null);
 
    // Escape und das Sperren des Seitenscrollens laufen über den gemeinsamen
@@ -155,6 +169,11 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
                               {data.title}
                            </h2>
                            <p style={{ fontSize: 11, color: TEXT_MUTED, margin: "4px 0 0" }}>{data.date}</p>
+                           {data.notice && (
+                              <p style={{ fontSize: 11, color: CYAN, margin: "6px 0 0", lineHeight: 1.5 }}>
+                                 {data.notice}
+                              </p>
+                           )}
                         </div>
                         <button
                            onClick={onClose}

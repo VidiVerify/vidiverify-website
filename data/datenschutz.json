@@ -1,7 +1,7 @@
 {
    "title": "Datenschutzerklärung",
    "subtitle": "für die Nutzung der VidiVerify-Anwendung und der Website",
-   "date": "Stand: 11.09.2026",
+   "date": "Stand: 24.09.2026",
    "sections": [
       {
          "id": 1,
@@ -82,14 +82,19 @@
                "items": [
                   "Namensauflösung (DNS) für vidiverify.de und vidiverify.com.",
                   "Auslieferung von vidiverify.com: Diese Domain liefert dieselbe Website über einen vorgeschalteten Dienst aus; Aufrufe laufen dabei über die Infrastruktur von Cloudflare.",
-                  "Anwendungsdienste (Cloudflare Workers): Unter vidiverify.de/api/ und vidiverify.de/dl/ laufen eigene Programme, die Bestellanfragen entgegennehmen, Preise ausgeben, Kaufvorgänge für den Zahlungsanbieter Paddle vorbereiten und dessen Zahlungsmeldungen entgegennehmen, Lizenzen bereitstellen und Downloads zählen.",
-                  "Ablage (Cloudflare Workers KV) für Bestellanfragen, Kaufvorgänge, Lizenzeinträge, Rabattcodes und Zähler.",
+                  "Anwendungsdienste (Cloudflare Workers): Unter vidiverify.de/api/ und vidiverify.de/dl/ laufen eigene Programme, die Bestellanfragen entgegennehmen, Preise ausgeben, Kaufvorgänge für den Zahlungsanbieter Paddle vorbereiten und dessen Zahlungs- und Erstattungsmeldungen entgegennehmen, Lizenzen bereitstellen und bestätigen und Downloads zählen.",
+                  "Ablage (Cloudflare Workers KV) für Bestellanfragen, Kaufvorgänge, Kaufhistorie, Lizenzeinträge, Rabattcodes und Zähler.",
+                  "Dateiablage (Cloudflare R2) unter dl.vidiverify.com für die Prüfwerkzeuge und Laufzeitpakete, die die Anwendung bezieht.",
                   "Abwehr automatisierter Zusendungen (Cloudflare Turnstile) am Bestellformular und auf der Kaufseite."
                ]
             },
             {
                "type": "p",
                "text": "Bei jedem Aufruf verarbeitet Cloudflare technische Verbindungsdaten, insbesondere IP-Adresse, Zeitpunkt, angeforderte Adresse und Angaben zum Browser. Zweck ist die Auslieferung, die Abwehr von Missbrauch und der Betrieb der genannten Dienste. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, für die Bestell- und Lizenzvorgänge zusätzlich Art. 6 Abs. 1 lit. b DSGVO."
+            },
+            {
+               "type": "p",
+               "text": "Zum Schutz vor Missbrauch begrenzen die Anwendungsdienste die Zahl der Aufrufe je Anschluss. Dafür wird nicht die IP-Adresse gespeichert, sondern ein nicht umkehrbarer Hashwert davon, und zwar höchstens 60 Sekunden lang. Die Anwendungsdienste führen ausserdem Betriebsprotokolle (Zeitpunkt, aufgerufene Adresse, Ergebnis und Fehlermeldungen, gegebenenfalls Vorgangs- oder Gerätekennungen), die Cloudflare nur wenige Tage vorhält. Sie dienen allein der Fehlersuche."
             },
             {
                "type": "p",
@@ -122,6 +127,10 @@
             {
                "type": "p",
                "text": "Gespeichert werden tages- oder stundenweise zusammengefasste Angaben: aufgerufene Seite, ungefährer Standort auf Länderebene, Browser, Betriebssystem, Sprache und Bildschirmbreite."
+            },
+            {
+               "type": "p",
+               "text": "Die Website zeigt die Zahl der Seitenaufrufe an. Dazu ruft der Browser einen öffentlichen Zähler bei GoatCounter ab; dabei wird wie bei jedem Aufruf die IP-Adresse an GoatCounter übermittelt."
             },
             {
                "type": "p",
@@ -213,15 +222,27 @@
             },
             {
                "type": "p",
-               "text": "Nach erfolgter Zahlung meldet Paddle dem Anwendungsdienst des Anbieters den Abschluss mit Transaktionskennung, Kundenkennung, erworbener Lizenzvariante und VV-ID. Der Anbieter ruft dazu die Emailadresse des Käufers bei Paddle ab, stellt die Lizenz aus und legt sie zum Abruf bereit. Gespeichert werden dabei Emailadresse, VV-ID, Lizenzvariante, Lizenzschlüssel, Transaktionskennung sowie die vor dem Kauf erhobenen Angaben zu Name, Anschrift und Firma, damit Rückfragen zu einem Kauf beantwortet werden können. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
+               "text": "Nach erfolgter Zahlung meldet Paddle dem Anwendungsdienst des Anbieters den Abschluss mit Transaktionskennung, Kundenkennung, erworbener Lizenzvariante und VV-ID. Der Anbieter übernimmt die Emailadresse aus den vor dem Kauf erhobenen Angaben, hilfsweise ruft er sie bei Paddle ab, stellt die Lizenz aus und legt sie zum Abruf bereit. Gespeichert werden dabei Emailadresse, VV-ID, Lizenzvariante, Lizenzschlüssel, Transaktionskennung sowie die vor dem Kauf erhobenen Angaben zu Name, Anschrift und Firma, damit Rückfragen zu einem Kauf beantwortet werden können. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
             },
             {
                "type": "p",
-               "text": "Ein Kauf, der sich keiner Installation zuordnen lässt, wird nicht verworfen, sondern zur manuellen Bearbeitung vorgemerkt; der Käufer wird dann über die bei Paddle hinterlegte Emailadresse kontaktiert."
+               "text": "Zu jeder Installation wird ausserdem eine Kaufhistorie geführt: Transaktionskennung, Lizenzvariante und Programmgeneration jedes bezahlten Kaufs, ohne Namen und Emailadresse. Sie wird gebraucht, damit nach der Erstattung eines Upgrades die zuvor bezahlte Lizenz wiederhergestellt werden kann, statt die Lizenz ganz zu entziehen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO."
             },
             {
                "type": "p",
-               "text": "Die Vormerkung eines Kaufvorgangs wird spätestens nach 180 Tagen automatisch gelöscht, die Zuordnung einer verarbeiteten Transaktion, die eine doppelte Ausstellung verhindert, spätestens nach 400 Tagen. Der Lizenzeintrag bleibt dauerhaft gespeichert und wird auf Verlangen gelöscht. Zum Schutz vor automatisierten Zusendungen wird auch auf der Kaufseite Cloudflare Turnstile eingesetzt."
+               "text": "Meldet Paddle eine Erstattung oder Rückbuchung, prüft der Anbieter, ob die Lizenz zurückgenommen oder auf einen anderen bezahlten Kauf zurückgestuft wird. Dazu gleicht er die bei Paddle geführten Transaktionen und Erstattungen einschliesslich der Emailadresse des Käufers regelmässig mit den eigenen Einträgen ab, damit kein bezahlter Kauf ohne Lizenz bleibt und keine erstattete Lizenz unbemerkt weiterläuft. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO."
+            },
+            {
+               "type": "p",
+               "text": "Auf Wunsch eines Kunden kann der Anbieter einen Zahlungslink erzeugen. Er legt die Angaben des Kunden dann selbst bei Paddle an; im Übrigen gilt das Vorstehende."
+            },
+            {
+               "type": "p",
+               "text": "Ein Kauf, der sich keiner Installation zuordnen lässt, wird nicht verworfen, sondern zur manuellen Bearbeitung vorgemerkt, spätestens 400 Tage lang; der Käufer wird dann über die bei Paddle hinterlegte Emailadresse kontaktiert."
+            },
+            {
+               "type": "p",
+               "text": "Die Vormerkung eines Kaufvorgangs wird spätestens nach 180 Tagen automatisch gelöscht, der Bezahlschritt einer Installation nach 24 Stunden, bei einem Zahlungslink nach 30 Tagen, die Zuordnung einer verarbeiteten Transaktion, die eine doppelte Ausstellung verhindert, spätestens nach 400 Tagen. Lizenzeintrag und Kaufhistorie bleiben dauerhaft gespeichert und werden auf Verlangen gelöscht. Zum Schutz vor automatisierten Zusendungen wird auch auf der Kaufseite Cloudflare Turnstile eingesetzt."
             },
             {
                "type": "p",
@@ -243,12 +264,22 @@
             },
             {
                "type": "p",
-               "text": "Eine vorhandene Lizenz wird höchstens einmal täglich beim Programmstart im Hintergrund bestätigt; auch dabei wird nur die VV-ID übermittelt. Ohne Internetverbindung geschieht nichts, die Lizenz bleibt erhalten. Zweck ist die Erkennung zurückgenommener Lizenzen, etwa nach einer Rückerstattung. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO in Verbindung mit Art. 6 Abs. 1 lit. f DSGVO."
+               "text": "Eine vorhandene Lizenz wird bei jedem Programmstart im Hintergrund bestätigt; auch dabei wird nur die VV-ID übermittelt. Dasselbe gilt, solange nach einem beschrittenen Bestellweg noch keine Lizenz vorliegt. Ohne Internetverbindung geschieht nichts, die Lizenz bleibt erhalten. Zweck ist, eine neu ausgestellte Lizenz zu übernehmen und zurückgenommene Lizenzen zu erkennen, etwa nach einer Rückerstattung. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO in Verbindung mit Art. 6 Abs. 1 lit. f DSGVO."
             }
          ]
       },
       {
          "id": 12,
+         "title": "Benachrichtigung des Anbieters über Pushover",
+         "blocks": [
+            {
+               "type": "p",
+               "text": "Damit Käufe, Bestellanfragen und Probleme mit Zahlungen ohne Verzögerung bearbeitet werden, erhält der Anbieter über den Dienst Pushover eine kurze Nachricht auf sein Mobiltelefon. Die Nachrichten enthalten nur Lizenzvariante, Betrag und Land, ohne jegliche personenbezogenen Daten."
+            }
+         ]
+      },
+      {
+         "id": 13,
          "title": "Was die Anwendung selbst verarbeitet",
          "blocks": [
             {
@@ -262,19 +293,23 @@
             {
                "type": "ul",
                "items": [
-                  "Prüfung auf Updates gegen eine Datei im öffentlichen Release-Repository bei GitHub sowie Bezug der Setup-Datei über vidiverify.de.",
-                  "Bezug der Prüfwerkzeuge (Plug-ins) beim ersten Start und bei Aktualisierungen, unter anderem von GitHub, MediaArea, VideoLAN, Codeberg sowie einem eigenen Spiegel.",
-                  "Lizenzvorgänge nach dem vorstehenden Abschnitt."
+                  "Prüfung auf Updates und Abruf der Änderungsliste gegen Dateien in den öffentlichen Repositories bei GitHub sowie Bezug der Setup-Datei über vidiverify.de.",
+                  "Bezug der Prüfwerkzeuge (Plug-ins) und des Laufzeitpakets beim ersten Start und bei Aktualisierungen, unter anderem von GitHub, MediaArea, VideoLAN, Codeberg sowie einem eigenen Spiegel unter dl.vidiverify.com bei Cloudflare.",
+                  "Lizenzvorgänge nach dem Abschnitt „Lizenzausstellung, Lizenzabruf und regelmässige Bestätigung“."
                ]
             },
             {
                "type": "p",
                "text": "Dabei fallen die üblichen technischen Verbindungsdaten an, die der jeweilige Anbieter verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in der Aktualität und Funktionsfähigkeit der Software."
+            },
+            {
+               "type": "p",
+               "text": "Kaufseite, Handbücher, Spendenwege und andere Webseiten öffnet die Anwendung nur auf ausdrücklichen Klick im Browser des Nutzers."
             }
          ]
       },
       {
-         "id": 13,
+         "id": 14,
          "title": "Support-Pakete und technische Protokolle",
          "blocks": [
             {
@@ -288,7 +323,7 @@
          ]
       },
       {
-         "id": 14,
+         "id": 15,
          "title": "Bezug über den Microsoft Store",
          "blocks": [
             {
@@ -298,7 +333,7 @@
          ]
       },
       {
-         "id": 15,
+         "id": 16,
          "title": "Spenden über PayPal und 4Fund",
          "blocks": [
             {
@@ -316,7 +351,7 @@
          ]
       },
       {
-         "id": 16,
+         "id": 17,
          "title": "GitHub als Projekt- und Releaseplattform",
          "blocks": [
             {
@@ -330,7 +365,7 @@
          ]
       },
       {
-         "id": 17,
+         "id": 18,
          "title": "Externe Links",
          "blocks": [
             {
@@ -340,7 +375,7 @@
          ]
       },
       {
-         "id": 18,
+         "id": 19,
          "title": "Cookies und Speicherung im Browser",
          "blocks": [
             {
@@ -354,7 +389,7 @@
          ]
       },
       {
-         "id": 19,
+         "id": 20,
          "title": "Speicherdauer",
          "blocks": [
             {
@@ -365,11 +400,13 @@
                "type": "ul",
                "items": [
                   "Zugriffs- und Sicherheitsdaten beim Hosting und bei der Auslieferung: nach Massgabe der Systeme von GitHub und Cloudflare.",
+                  "Betriebsprotokolle der Anwendungsdienste: wenige Tage bei Cloudflare; Hashwert der IP-Adresse zur Missbrauchsabwehr: höchstens 60 Sekunden.",
                   "Reichweitenmessung: zusammengefasste Angaben ohne Personenbezug, keine IP-Speicherung.",
-                  "Downloadzähler: Zählstände ohne Personenbezug.",
+                  "Downloadzähler: Zählstände ohne Personenbezug, höchstens 400 Tage.",
                   "Bestellanfragen: bis zum Abschluss des Vorgangs, spätestens automatisch nach 180 Tagen.",
-                  "Kaufvorgänge über Paddle: Vormerkung spätestens nach 180 Tagen, Transaktionszuordnung spätestens nach 400 Tagen; Rechnungsdaten liegen bei Paddle nach dessen Fristen.",
-                  "Lizenzeinträge: dauerhaft, damit die Lizenz erneut abgerufen werden kann; Löschung auf Verlangen.",
+                  "Kaufvorgänge über Paddle: Vormerkung spätestens nach 180 Tagen, Bezahlschritt nach 24 Stunden (Zahlungslink 30 Tage), Transaktionszuordnung und vorgemerkte ungeklärte Käufe spätestens nach 400 Tagen; Rechnungsdaten liegen bei Paddle nach dessen Fristen.",
+                  "Vermerke gegen doppelte Benachrichtigungen (nur Vorgangskennungen): 30 beziehungsweise 100 Tage.",
+                  "Lizenzeinträge und Kaufhistorie: dauerhaft, damit die Lizenz erneut abgerufen und nach einer Erstattung richtig zugeordnet werden kann; Löschung auf Verlangen.",
                   "Emails, Supportanfragen und Support-Pakete: solange dies für Bearbeitung und Dokumentation erforderlich ist.",
                   "Steuerlich aufbewahrungspflichtige Unterlagen: nach den gesetzlichen Fristen."
                ]
@@ -377,7 +414,7 @@
          ]
       },
       {
-         "id": 20,
+         "id": 21,
          "title": "Empfänger personenbezogener Daten",
          "blocks": [
             {
@@ -388,7 +425,7 @@
                "type": "ul",
                "items": [
                   "GitHub als Hosting-Anbieter der Website und als Releaseplattform",
-                  "Cloudflare für Namensauflösung, Auslieferung, Anwendungsdienste, Ablage und Abwehr automatisierter Zusendungen",
+                  "Cloudflare für Namensauflösung, Auslieferung, Anwendungsdienste, Ablage, Dateiablage und Abwehr automatisierter Zusendungen",
                   "Hetzner Online GmbH für die Emailinfrastruktur",
                   "Paddle (Paddle.com Market Limited beziehungsweise Paddle.com Inc.) als Verkäufer beim Kauf über die Kaufseite",
                   "GoatCounter (Martin Tournoij) für die Reichweitenmessung",
@@ -400,7 +437,7 @@
          ]
       },
       {
-         "id": 21,
+         "id": 22,
          "title": "Übermittlung in Drittländer",
          "blocks": [
             {
@@ -410,7 +447,7 @@
          ]
       },
       {
-         "id": 22,
+         "id": 23,
          "title": "Rechte der betroffenen Personen",
          "blocks": [
             {
@@ -437,7 +474,7 @@
          ]
       },
       {
-         "id": 23,
+         "id": 24,
          "title": "Widerspruchsrecht",
          "blocks": [
             {
@@ -447,7 +484,7 @@
          ]
       },
       {
-         "id": 24,
+         "id": 25,
          "title": "Beschwerderecht bei einer Aufsichtsbehörde",
          "blocks": [
             {
@@ -457,12 +494,12 @@
          ]
       },
       {
-         "id": 25,
+         "id": 26,
          "title": "Änderung dieser Datenschutzerklärung",
          "blocks": [
             {
                "type": "p",
-               "text": "Diese Erklärung beschreibt den technischen Stand vom 11.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst; das gilt insbesondere für weitere Zahlungswege und Auswertungswerkzeuge."
+               "text": "Diese Erklärung beschreibt den technischen Stand vom 24.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst; das gilt insbesondere für weitere Zahlungswege und Auswertungswerkzeuge. Eine englische Fassung steht zur Information bereit; verbindlich ist die deutsche."
             }
          ]
       }

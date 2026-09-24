@@ -28,6 +28,8 @@ export interface Rechtstext {
    subtitle: string;
    date: string;
    version?: string;
+   /** Nur in Übersetzungen: dass allein die deutsche Fassung verbindlich ist. */
+   notice?: string;
    sections: {
       id: number;
       title: string;
@@ -141,6 +143,11 @@ const RechtstextModal = ({ open, onClose, daten, Icon, kennung }: Props) => {
                               {daten.date}
                               {daten.version ? ` · ${daten.version}` : ""}
                            </p>
+                           {daten.notice && (
+                              <p style={{ fontSize: 11, color: CYAN, margin: "6px 0 0", lineHeight: 1.5 }}>
+                                 {daten.notice}
+                              </p>
+                           )}
                         </div>
                         <button
                            onClick={onClose}

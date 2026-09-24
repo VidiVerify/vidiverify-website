@@ -1,15 +1,15 @@
 {
    "title": "Allgemeine Geschäftsbedingungen",
    "subtitle": "für den Erwerb von VidiVerify-Lizenzen",
-   "date": "Stand: 11.09.2026",
-   "version": "AGB-2026-09-11",
+   "date": "Stand: 24.09.2026",
+   "version": "AGB-2026-09-24",
    "sections": [
       {
          "id": 1,
          "title": "Geltungsbereich und Anbieter",
          "paragraphs": [
             "Diese Bedingungen gelten für den Erwerb kostenpflichtiger Lizenzen für die Software VidiVerify.",
-            "Eine Lizenz kann auf zwei Wegen erworben werden: über die Bestellanfrage auf vidiverify.de, bei der der Anbieter selbst verkauft, oder über die Kaufseite mit dem Bezahlfenster unseres Zahlungsanbieters Paddle, bei der Paddle als Wiederverkäufer im eigenen Namen verkauft (Abschnitt 4). Ein Bezug über den Microsoft Store richtet sich nach dessen Bedingungen.",
+            "Eine Lizenz kann auf zwei Wegen erworben werden: über die Bestellanfrage auf vidiverify.de, bei der der Anbieter selbst verkauft, oder über die Kaufseite mit dem Bezahlfenster unseres Zahlungsanbieters Paddle, bei der Paddle als Wiederverkäufer im eigenen Namen verkauft (Abschnitt 4). Über den Microsoft Store wird nur die Software bereitgestellt, keine Lizenz.",
             "Anbieter ist Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Deutschland. Email: admin@vidiverify.de (rechtlich und wirtschaftlich), support@vidiverify.de (technisch).",
             "Anbieter ist Thomas Smektalla als Privatperson; ein eingetragenes Unternehmen besteht nicht."
          ]
@@ -62,7 +62,7 @@
          "title": "Bereitstellung",
          "paragraphs": [
             "Bei der Bestellanfrage wird der Lizenzschlüssel nach Zahlungseingang elektronisch bereitgestellt, in der Regel innerhalb von ein bis drei Werktagen. Beim Kauf über die Kaufseite wird die Lizenz unmittelbar nach der Zahlungsbestätigung durch Paddle ausgestellt, auf der Kaufseite angezeigt und von der Anwendung beim nächsten Start selbst abgeholt. In beiden Fällen kann der Lizenzschlüssel jederzeit über die Anwendung abgerufen werden, damit er nach einer Neuinstallation oder einem Rechnerwechsel nicht verloren geht. Für einen dauerhaften Wechsel auf ein anderes Gerät genügt eine Mitteilung an den Anbieter.",
-            "Zur Aktivierung und zur wiederkehrenden Bestätigung der Lizenz werden die beim Erwerb angegebene Emailadresse und die Gerätekennung (VV-ID) verwendet."
+            "Zur Aktivierung und zur wiederkehrenden Bestätigung der Lizenz übermittelt die Anwendung allein die Gerätekennung (VV-ID). Die beim Erwerb angegebene Emailadresse ist Bestandteil des Lizenzschlüssels und wird dabei nicht übertragen."
          ]
       },
       {
