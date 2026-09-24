@@ -275,7 +275,11 @@
          "blocks": [
             {
                "type": "p",
-               "text": "So that purchases, order requests and payment problems can be handled without delay, the provider receives a short message on their mobile phone via the Pushover service. The messages contain only license type, amount and country, without any personal data."
+               "text": "So that purchases, order requests and payment problems can be handled without delay, the provider receives a short message on their mobile phone via the Pushover service (USA). The messages contain the license type, amount, country and the pseudonymous device identifier (VV-ID); names, email addresses and postal addresses are not transmitted."
+            },
+            {
+               "type": "p",
+               "text": "The legal basis is Art. 6(1)(f) GDPR; the legitimate interest lies in handling purchases and requests promptly."
             }
          ]
       },
@@ -429,6 +433,7 @@
                   "Cloudflare for name resolution, delivery, application services, storage, file storage and protection against automated submissions",
                   "Hetzner Online GmbH for the email infrastructure",
                   "Paddle (Paddle.com Market Limited or Paddle.com Inc.) as seller for purchases via the purchase page",
+                  "Pushover for notifying the provider, with the pseudonymous device identifier only",
                   "GoatCounter (Martin Tournoij) for audience measurement",
                   "Microsoft, where the application is obtained via the Microsoft Store",
                   "PayPal and 4Fund, where users voluntarily use these donation options",
@@ -443,7 +448,7 @@
          "blocks": [
             {
                "type": "p",
-               "text": "With GitHub, Cloudflare, Microsoft, Paddle and PayPal, processing may take place outside the European Union, in particular in the United States and the United Kingdom. This is based on the Standard Contractual Clauses of the European Commission, the EU-US Data Privacy Framework where the providers are certified, and for the United Kingdom the adequacy decision of the European Commission."
+               "text": "With GitHub, Cloudflare, Microsoft, Paddle, Pushover and PayPal, processing may take place outside the European Union, in particular in the United States and the United Kingdom. This is based on the Standard Contractual Clauses of the European Commission, the EU-US Data Privacy Framework where the providers are certified, and for the United Kingdom the adequacy decision of the European Commission."
             }
          ]
       },
