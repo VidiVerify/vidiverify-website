@@ -388,7 +388,7 @@
             },
             {
                "type": "p",
-               "text": "Technisch notwendige Speicherung im Browser kann stattfinden, etwa um die gewählte Sprache zu merken. Diese Angaben verbleiben im Browser des Nutzers. Cloudflare Turnstile kann am Bestellformular und auf der Kaufseite technisch notwendige Angaben verarbeiten; das Bezahlfenster von Paddle kann für den Bezahlvorgang technisch notwendige Angaben im Browser speichern."
+               "text": "Technisch notwendig und ohne Einwilligung gespeichert werden im Browser (localStorage) nur: die gewählte Sprache; nach einer Zahlung auf der Kaufseite für zehn Minuten die Gerätekennung (VV-ID), die Lizenzvariante und das Ende dieser Frist, damit dieselbe Lizenz nicht versehentlich ein zweites Mal bezahlt wird; und die Wahl, einen Hinweis nicht mehr anzuzeigen. Diese Angaben verbleiben im Browser des Nutzers und werden nicht übertragen. Cloudflare Turnstile kann am Bestellformular und auf der Kaufseite technisch notwendige Angaben verarbeiten; das Bezahlfenster von Paddle kann für den Bezahlvorgang technisch notwendige Angaben im Browser speichern."
             }
          ]
       },

@@ -389,7 +389,7 @@
             },
             {
                "type": "p",
-               "text": "Technically necessary storage in the browser may take place, for example to remember the selected language. This information remains in the user's browser. Cloudflare Turnstile may process technically necessary information on the order form and purchase page; Paddle's checkout window may store technically necessary information in the browser for the payment process."
+               "text": "Only the following is stored in the browser (localStorage), as technically necessary and without consent: the selected language; after a payment on the purchase page, for ten minutes, the device identifier (VV-ID), the license type and the end of this period, so that the same license is not paid for a second time by mistake; and the choice not to show a notice again. This information remains in the user's browser and is not transmitted. Cloudflare Turnstile may process technically necessary information on the order form and purchase page; Paddle's checkout window may store technically necessary information in the browser for the payment process."
             }
          ]
       },
