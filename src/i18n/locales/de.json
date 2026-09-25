@@ -227,6 +227,16 @@
                "Bericht"
             ]
          },
+         "media-compare": {
+            "label": "Media Compare",
+            "title": "Reiter",
+            "description": "Film.mkv oder Film (1).mkv? FLAC oder MP3? Media Compare prüft zwei Fassungen derselben Datei und stellt sie Kategorie für Kategorie nebeneinander: Video, Audio, Effizienz, Kompatibilität und Ausstattung. Am Ende steht eine Empfehlung in Worten, welche Fassung bleiben soll. Eine als FLAC getarnte MP3 fällt dabei über den Spektrum-Cutoff auf, und wenn es keinen klaren Sieger gibt, sagt VidiVerify auch das.",
+            "tags": [
+               "Dubletten",
+               "Empfehlung",
+               "Spektrum-Cutoff"
+            ]
+         },
          "media-stapel": {
             "label": "Media Stapel",
             "title": "Reiter",

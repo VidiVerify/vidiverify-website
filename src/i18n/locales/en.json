@@ -227,6 +227,16 @@
                "Report"
             ]
          },
+         "media-compare": {
+            "label": "Media Compare",
+            "title": "Tab",
+            "description": "Film.mkv or Film (1).mkv? FLAC or MP3? Media Compare checks two versions of the same file and sets them side by side, category by category: video, audio, efficiency, compatibility and features. It ends with a recommendation in plain words on which version to keep. An MP3 disguised as FLAC gives itself away through the spectrum cutoff, and when there is no clear winner, VidiVerify says so too.",
+            "tags": [
+               "Duplicates",
+               "Recommendation",
+               "Spectrum cutoff"
+            ]
+         },
          "media-stapel": {
             "label": "Media Batch",
             "title": "Tab",

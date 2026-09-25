@@ -5,7 +5,7 @@ import {
    FaDesktop, FaSearch, FaFileAlt, FaFilePdf, FaCopy,
    FaBug, FaWrench, FaCheckCircle, FaChartBar, FaEye,
    FaYoutube, FaApple, FaGlobe, FaKey, FaBolt, FaExpand, FaCheck,
-   FaShieldAlt, FaStream, FaFlask,
+   FaShieldAlt, FaStream, FaFlask, FaBalanceScale,
 } from "react-icons/fa";
 import PageSection from "@components/layout/PageSection";
 import useMediaQuery from "@utils/useMediaQuery";
@@ -66,7 +66,8 @@ interface Item {
 // Items tragen nur Metadaten (id, Icon, Flags); alle Texte (label, title,
 // description, tags) kommen aus den i18n-Übersetzungen, gelookt-uppt via id.
 const ITEMS: Item[] = [
-   { id: "ki-forensik",    pro: true,  isTab: true,                             icon: <FaShieldAlt size={14} /> },
+   { id: "media-compare",  pro: true,  isTab: true, next: true,                 icon: <FaBalanceScale size={14} /> },
+   { id: "ki-forensik",   pro: true,  isTab: true,                             icon: <FaShieldAlt size={14} /> },
    { id: "media-repair",   pro: true,  isTab: true, delivered: { version: "v1.5.0" }, icon: <FaWrench size={14} /> },
    { id: "quick-check",    pro: false, delivered: { version: "v1.4.8" },        icon: <FaBolt size={14} /> },
    { id: "map-plus",       pro: true,                                           icon: <FaFilePdf size={15} /> },
