@@ -1,7 +1,7 @@
 {
    "title": "Datenschutzerklärung",
    "subtitle": "für die Nutzung der VidiVerify-Anwendung und der Website",
-   "date": "Stand: 24.09.2026",
+   "date": "Stand: 25.09.2026",
    "sections": [
       {
          "id": 1,
@@ -176,11 +176,11 @@
          "blocks": [
             {
                "type": "p",
-               "text": "Über das Formular unter vidiverify.de/lizenz-anfrage kann eine Lizenz angefragt werden. Pflichtangaben sind allein drei Felder: Gerätekennung (VV-ID), Emailadresse und gewünschte Lizenzvariante. Zusätzlich wird die Programmversion übermittelt, sofern das Formular aus der Anwendung heraus geöffnet wurde."
+               "text": "Über das Formular unter vidiverify.de/lizenz-anfrage kann eine Lizenz angefragt werden. Pflichtangaben sind Gerätekennung (VV-ID), gewünschte Lizenzvariante, Anrede, Vor- und Nachname sowie Emailadresse. Bei einer kostenpflichtigen Lizenz kommt die Rechnungsanschrift hinzu (Strasse, Hausnummer, Postleitzahl, Ort, Land), bei gewerblichen Kunden zusätzlich Firma und Steuernummer. Diese Angaben werden für die Rechnung benötigt. Zusätzlich wird die Programmversion übermittelt, sofern das Formular aus der Anwendung heraus geöffnet wurde."
             },
             {
                "type": "p",
-               "text": "Freiwillig können angegeben werden: Anrede, Vor- und Nachname, Telefonnummer, Rechnungsanschrift, Steuernummer, Umsatzsteuer-Identifikationsnummer, ein Rabatt- oder Aktionscode sowie eine Anmerkung im Freitext. Wer sich nur als Nutzer der kostenfreien Fassung registrieren möchte, füllt nichts weiter aus."
+               "text": "Freiwillig können angegeben werden: Telefonnummer, Umsatzsteuer-Identifikationsnummer, ein Rabatt- oder Aktionscode sowie eine Anmerkung im Freitext. Wer sich nur als Nutzer der kostenfreien Fassung registriert, gibt keine Anschrift an; Felder, die zum gewählten Vorgang nicht gehören, werden nicht übermittelt."
             },
             {
                "type": "p",
@@ -504,7 +504,7 @@
          "blocks": [
             {
                "type": "p",
-               "text": "Diese Erklärung beschreibt den technischen Stand vom 24.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst; das gilt insbesondere für weitere Zahlungswege und Auswertungswerkzeuge. Eine englische Fassung steht zur Information bereit; verbindlich ist die deutsche."
+               "text": "Diese Erklärung beschreibt den technischen Stand vom 25.09.2026. Ändern sich Dienste, Einbindungsarten oder Zwecke, wird sie angepasst; das gilt insbesondere für weitere Zahlungswege und Auswertungswerkzeuge. Eine englische Fassung steht zur Information bereit; verbindlich ist die deutsche."
             }
          ]
       }

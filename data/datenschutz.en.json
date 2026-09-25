@@ -1,7 +1,7 @@
 {
    "title": "Privacy Policy",
    "subtitle": "for the use of the VidiVerify application and website",
-   "date": "Version: 24.09.2026",
+   "date": "Version: 25.09.2026",
    "notice": "This English version is a convenience translation. Only the German version is legally binding.",
    "sections": [
       {
@@ -177,11 +177,11 @@
          "blocks": [
             {
                "type": "p",
-               "text": "A license can be requested via the form at vidiverify.de/lizenz-anfrage. Only three fields are mandatory: device identifier (VV-ID), email address and desired license type. In addition, the program version is transmitted if the form was opened from within the application."
+               "text": "A license can be requested via the form at vidiverify.de/lizenz-anfrage. Mandatory are the device identifier (VV-ID), the desired license type, salutation, first and last name and the email address. For a paid license, the billing address is added (street, house number, postcode, city, country), and for business customers also the company and tax number. This information is needed for the invoice. In addition, the program version is transmitted if the form was opened from within the application."
             },
             {
                "type": "p",
-               "text": "The following can be provided voluntarily: salutation, first and last name, telephone number, billing address, tax number, VAT identification number, a discount or promotion code and a free-text note. Anyone who only wants to register as a user of the free edition does not fill in anything further."
+               "text": "The following can be provided voluntarily: telephone number, VAT identification number, a discount or promotion code and a free-text note. Anyone who only registers as a user of the free edition does not provide an address; fields that do not belong to the chosen request are not transmitted."
             },
             {
                "type": "p",
@@ -505,7 +505,7 @@
          "blocks": [
             {
                "type": "p",
-               "text": "This policy describes the technical status as of 24.09.2026. If services, methods of integration or purposes change, it will be updated; this applies in particular to additional payment methods and analysis tools. This English version is provided for information; the German version is binding."
+               "text": "This policy describes the technical status as of 25.09.2026. If services, methods of integration or purposes change, it will be updated; this applies in particular to additional payment methods and analysis tools. This English version is provided for information; the German version is binding."
             }
          ]
       }
