@@ -282,9 +282,11 @@ const Roadmap = () => {
                                        <DeliveredBadge label={t("roadmap.badgeDelivered")} version={item.delivered.version} />
                                     ) : item.next ? (
                                        <NextBadge label={t("roadmap.badgeNext")} />
-                                    ) : item.pro ? (
-                                       <ProBadge label={t("roadmap.badgePro")} />
                                     ) : null}
+                                    {/* PRO zusätzlich zum Status, nicht statt seiner: Seit 1.5.0
+                                        ist PRO käuflich, und ohne das Abzeichen hielte man eine
+                                        ausgelieferte PRO-Funktion für kostenlos. */}
+                                    {item.pro && <ProBadge label={t("roadmap.badgePro")} />}
                                  </h3>
                               </div>
 
