@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { CYAN, TEXT_SECONDARY } from "@/constants/theme";
 import logo from "@/assets/logo.svg";
 import DesktopNav from "./DesktopNav";
+import DownloadCta from "./DownloadCta";
 import LanguageToggle from "@components/ui/LanguageToggle";
 
 interface NavSection {
@@ -98,6 +99,7 @@ const NavBar = ({
                      sectionProgress={sectionProgress}
                      onNavigate={onNavigate}
                   />
+                  <DownloadCta onNavigate={onNavigate} />
                   <LanguageToggle />
                </div>
             )}

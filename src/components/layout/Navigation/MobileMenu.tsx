@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CYAN, TEXT_SECONDARY } from "@/constants/theme";
+import DownloadCta from "./DownloadCta";
 
 interface NavSection {
    id: string;
@@ -159,6 +160,10 @@ const MobileMenu = ({
                            </motion.button>
                         );
                      })}
+
+                     <div style={{ padding: "16px 4px 0" }}>
+                        <DownloadCta onNavigate={onNavigate} block />
+                     </div>
                   </div>
                </motion.div>
             </motion.div>

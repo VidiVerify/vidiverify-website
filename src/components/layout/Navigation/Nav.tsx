@@ -9,12 +9,13 @@ interface NavSection {
    label: string;
 }
 
+// Highlights steht nicht im Menü: Der Hero verlinkt ihn direkt, und er
+// folgt ihm unmittelbar. Download ist kein Punkt der Liste, sondern ein
+// eigener Knopf (DownloadCta).
 const NAV_KEYS: { id: string; key: string }[] = [
-   { id: "highlights", key: "highlights" },
    { id: "funktionen", key: "features" },
    { id: "formate", key: "formats" },
    { id: "roadmap", key: "roadmap" },
-   { id: "download", key: "download" },
    { id: "preise", key: "pricing" },
    { id: "kontakt", key: "contact" },
 ];
