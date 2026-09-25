@@ -3,6 +3,62 @@
    "subtitle": "for the use of the VidiVerify application and website",
    "date": "Version: 25.09.2026",
    "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+   "summary": {
+      "title": "At a glance",
+      "items": [
+         {
+            "icon": "lokal",
+            "head": "Checked files stay on your computer",
+            "text": "No upload, no cloud analysis, neither whole files nor excerpts. Reports, logs and settings are created locally and stay there.",
+            "ref": 13
+         },
+         {
+            "icon": "statistik",
+            "head": "No usage statistics from the app",
+            "text": "The application does not report what, when or how often something is checked. It only connects for updates, check tools and the license.",
+            "ref": 13
+         },
+         {
+            "icon": "lizenz",
+            "head": "License check with a single identifier",
+            "text": "Only the pseudonymous VV‑ID is transmitted, no name and no email address. An installation that never wanted to buy does not even send that.",
+            "ref": 11
+         },
+         {
+            "icon": "cookies",
+            "head": "No tracking cookies, no banner",
+            "text": "Audience measurement works without cookies and does not store IP addresses. No profiling, no advertising networks.",
+            "ref": 6
+         },
+         {
+            "icon": "zahlung",
+            "head": "The provider never sees payment data",
+            "text": "Card numbers and other payment data are processed solely by the payment provider Paddle. Name and address are collected only for the invoice.",
+            "ref": 10
+         },
+         {
+            "icon": "werbung",
+            "head": "For license and invoice only, never for advertising",
+            "text": "No newsletter, no advertising with the details from a request or purchase. Open requests are deleted after 180 days at the latest.",
+            "ref": 9
+         },
+         {
+            "icon": "support",
+            "head": "Support only when you ask for it",
+            "text": "A support package never leaves the computer automatically, only when it is sent in by email.",
+            "ref": 14
+         },
+         {
+            "icon": "https",
+            "head": "Encrypted transmission",
+            "text": "The website is available exclusively via HTTPS, protected against eavesdropping and tampering.",
+            "ref": 5
+         }
+      ],
+      "rights": "Access, rectification, erasure and objection at any time by email to admin@vidiverify.de.",
+      "note": "This overview is a summary; the full policy below is authoritative."
+   },
+   "tocTitle": "Contents",
    "sections": [
       {
          "id": 1,

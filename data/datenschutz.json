@@ -2,6 +2,62 @@
    "title": "Datenschutzerklärung",
    "subtitle": "für die Nutzung der VidiVerify-Anwendung und der Website",
    "date": "Stand: 25.09.2026",
+   "summary": {
+      "title": "Auf einen Blick",
+      "items": [
+         {
+            "icon": "lokal",
+            "head": "Geprüfte Dateien bleiben auf dem Rechner",
+            "text": "Kein Upload, keine Cloud-Analyse, weder ganz noch in Ausschnitten. Berichte, Protokolle und Einstellungen entstehen lokal und bleiben dort.",
+            "ref": 13
+         },
+         {
+            "icon": "statistik",
+            "head": "Keine Nutzungsstatistik aus der App",
+            "text": "Die Anwendung meldet nicht, was, wann oder wie oft geprüft wird. Sie verbindet sich nur für Updates, Prüfwerkzeuge und die Lizenz.",
+            "ref": 13
+         },
+         {
+            "icon": "lizenz",
+            "head": "Lizenzprüfung mit einer einzigen Kennung",
+            "text": "Übermittelt wird nur die pseudonyme VV‑ID, kein Name und keine Emailadresse. Wer nie kaufen wollte, sendet nicht einmal die.",
+            "ref": 11
+         },
+         {
+            "icon": "cookies",
+            "head": "Keine Tracking-Cookies, kein Banner",
+            "text": "Die Reichweitenmessung arbeitet ohne Cookies und speichert keine IP-Adressen. Keine Profilbildung, keine Werbenetzwerke.",
+            "ref": 6
+         },
+         {
+            "icon": "zahlung",
+            "head": "Zahlungsdaten sieht der Anbieter nie",
+            "text": "Kartennummern und andere Zahlungsdaten verarbeitet allein der Zahlungsanbieter Paddle. Name und Anschrift werden nur für die Rechnung erhoben.",
+            "ref": 10
+         },
+         {
+            "icon": "werbung",
+            "head": "Nur für Lizenz und Rechnung, nie für Werbung",
+            "text": "Kein Newsletter, keine Werbung mit den Angaben aus Anfrage oder Kauf. Offene Anfragen werden spätestens nach 180 Tagen gelöscht.",
+            "ref": 9
+         },
+         {
+            "icon": "support",
+            "head": "Support nur auf eigenen Wunsch",
+            "text": "Ein Support-Paket verlässt den Rechner nie automatisch, sondern nur, wenn es selbst per Email eingesendet wird.",
+            "ref": 14
+         },
+         {
+            "icon": "https",
+            "head": "Verschlüsselt übertragen",
+            "text": "Die Website ist ausschliesslich über HTTPS erreichbar, geschützt vor Mitlesen und Verändern.",
+            "ref": 5
+         }
+      ],
+      "rights": "Auskunft, Berichtigung, Löschung und Widerspruch jederzeit per Email an admin@vidiverify.de.",
+      "note": "Die Übersicht fasst zusammen; massgeblich ist die vollständige Erklärung darunter."
+   },
+   "tocTitle": "Inhalt",
    "sections": [
       {
          "id": 1,

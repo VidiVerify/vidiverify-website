@@ -7,8 +7,11 @@
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { X, ShieldCheck } from "lucide-react";
-import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
+import {
+   X, ShieldCheck, HardDrive, EyeOff, KeyRound, CookieIcon, CreditCard, Ban,
+   LifeBuoy, Lock, type LucideIcon,
+} from "lucide-react";
+import { CYAN, GREEN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import { useFensterStapel } from "@utils/useFensterStapel";
 import datenDe from "../../../data/datenschutz.json";
 import datenEn from "../../../data/datenschutz.en.json";
@@ -25,8 +28,32 @@ interface Datenschutz {
    date: string;
    /** Nur in der Übersetzung: dass allein die deutsche Fassung verbindlich ist. */
    notice?: string;
+   /* „Auf einen Blick": die Stärken vorweg, jede mit dem Abschnitt, der sie
+    * belegt (`ref`). Eine Aussage ohne Deckung in den Abschnitten gehört
+    * nicht hierher - die Übersicht ist Werbung, darf aber nichts versprechen,
+    * was die Erklärung nicht sagt. */
+   summary: {
+      title: string;
+      items: { icon: string; head: string; text: string; ref: number }[];
+      rights: string;
+      note: string;
+   };
+   tocTitle: string;
    sections: { id: number; title: string; blocks: Block[] }[];
 }
+
+const SUMMARY_ICONS: Record<string, LucideIcon> = {
+   lokal: HardDrive,
+   statistik: EyeOff,
+   lizenz: KeyRound,
+   cookies: CookieIcon,
+   zahlung: CreditCard,
+   werbung: Ban,
+   support: LifeBuoy,
+   https: Lock,
+};
+
+const RIGHTS_EMAIL = "admin@vidiverify.de";
 
 interface Props {
    open: boolean;
@@ -48,6 +75,29 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
    useEffect(() => {
       if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
    }, [open]);
+
+   // Springt innerhalb des Fensters, nicht auf der Seite: Der Inhalt hat
+   // seinen eigenen Scrollbereich, `scrollIntoView` bewegte auch die Seite
+   // dahinter.
+   const springe = (id: number) => {
+      const box = scrollRef.current;
+      const ziel = box?.querySelector<HTMLElement>(`#ds-abschnitt-${id}`);
+      if (box && ziel) box.scrollTo({ top: ziel.offsetTop - 16, behavior: "smooth" });
+   };
+
+   const renderRights = (text: string) => {
+      const pos = text.indexOf(RIGHTS_EMAIL);
+      if (pos < 0) return text;
+      return (
+         <>
+            {text.slice(0, pos)}
+            <a href={`mailto:${RIGHTS_EMAIL}`} style={{ color: GREEN, textDecoration: "none", fontWeight: 600 }}>
+               {RIGHTS_EMAIL}
+            </a>
+            {text.slice(pos + RIGHTS_EMAIL.length)}
+         </>
+      );
+   };
 
    const renderBlock = (block: Block, i: number) => {
       if (block.type === "p") {
@@ -196,15 +246,133 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
                         data-lenis-prevent
                         onWheel={e => e.stopPropagation()}
                         style={{
+                           position: "relative",
                            overflowY: "auto", flex: 1,
                            padding: "24px 28px 32px",
                            scrollbarWidth: "thin",
                            scrollbarColor: "rgba(106,172,204,0.2) transparent",
                         }}
                      >
+                        {/* Auf einen Blick */}
+                        <section style={{
+                           position: "relative",
+                           padding: "20px 20px 18px",
+                           borderRadius: 16,
+                           background: "linear-gradient(160deg, rgba(34,197,94,0.10), rgba(34,197,94,0.03) 45%, rgba(106,172,204,0.04))",
+                           border: "1px solid rgba(34,197,94,0.28)",
+                           boxShadow: "0 0 0 1px rgba(34,197,94,0.05), 0 14px 40px rgba(34,197,94,0.07), inset 0 1px 0 rgba(255,255,255,0.05)",
+                           marginBottom: 22,
+                        }}>
+                           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                              <span style={{
+                                 width: 30, height: 30, borderRadius: "50%", flexShrink: 0,
+                                 background: `radial-gradient(circle at 35% 30%, #4ade80, ${GREEN} 55%, #15803d)`,
+                                 boxShadow: "0 0 16px rgba(34,197,94,0.45), inset 0 1px 1px rgba(255,255,255,0.35)",
+                                 display: "flex", alignItems: "center", justifyContent: "center",
+                              }}>
+                                 <ShieldCheck size={16} color="#fff" strokeWidth={2.4} />
+                              </span>
+                              <h3 style={{ fontSize: 15, fontWeight: 800, color: TEXT_PRIMARY, margin: 0, letterSpacing: "0.01em" }}>
+                                 {data.summary.title}
+                              </h3>
+                           </div>
+
+                           <div style={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(auto-fit, minmax(min(250px, 100%), 1fr))",
+                              gap: 10,
+                           }}>
+                              {data.summary.items.map((item) => {
+                                 const Icon = SUMMARY_ICONS[item.icon] ?? ShieldCheck;
+                                 return (
+                                    <button
+                                       key={item.icon}
+                                       type="button"
+                                       onClick={() => springe(item.ref)}
+                                       title={`§ ${item.ref}`}
+                                       style={{
+                                          display: "flex", gap: 12, alignItems: "flex-start",
+                                          textAlign: "left", cursor: "pointer",
+                                          padding: "12px 14px", borderRadius: 12,
+                                          background: "rgba(10,12,28,0.55)",
+                                          border: "1px solid rgba(34,197,94,0.14)",
+                                          transition: "border-color 0.15s, background 0.15s",
+                                          font: "inherit",
+                                       }}
+                                       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)"; e.currentTarget.style.background = "rgba(34,197,94,0.06)"; }}
+                                       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.14)"; e.currentTarget.style.background = "rgba(10,12,28,0.55)"; }}
+                                    >
+                                       <span style={{
+                                          width: 30, height: 30, borderRadius: 9, flexShrink: 0,
+                                          background: "rgba(34,197,94,0.12)",
+                                          border: "1px solid rgba(34,197,94,0.3)",
+                                          boxShadow: "0 0 12px rgba(34,197,94,0.15)",
+                                          display: "flex", alignItems: "center", justifyContent: "center",
+                                       }}>
+                                          <Icon size={15} color={GREEN} strokeWidth={2.2} />
+                                       </span>
+                                       <span style={{ minWidth: 0 }}>
+                                          <span style={{ display: "block", fontSize: 12.5, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.4 }}>
+                                             {item.head}
+                                          </span>
+                                          <span style={{ display: "block", fontSize: 11.5, color: TEXT_SECONDARY, lineHeight: 1.6, marginTop: 3 }}>
+                                             {item.text}
+                                          </span>
+                                       </span>
+                                    </button>
+                                 );
+                              })}
+                           </div>
+
+                           <p style={{ fontSize: 12, color: TEXT_SECONDARY, lineHeight: 1.6, margin: "14px 0 0" }}>
+                              {renderRights(data.summary.rights)}
+                           </p>
+                           <p style={{ fontSize: 10.5, color: TEXT_MUTED, lineHeight: 1.5, margin: "4px 0 0" }}>
+                              {data.summary.note}
+                           </p>
+                        </section>
+
+                        {/* Inhalt */}
+                        <nav style={{
+                           padding: "14px 16px", borderRadius: 12, marginBottom: 30,
+                           background: "rgba(106,172,204,0.03)",
+                           border: "1px solid rgba(106,172,204,0.1)",
+                        }}>
+                           <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, margin: "0 0 8px" }}>
+                              {data.tocTitle}
+                           </p>
+                           <div style={{
+                              display: "grid",
+                              gridTemplateColumns: "repeat(auto-fill, minmax(min(200px, 100%), 1fr))",
+                              columnGap: 16, rowGap: 2,
+                           }}>
+                              {data.sections.map((section) => (
+                                 <button
+                                    key={section.id}
+                                    type="button"
+                                    onClick={() => springe(section.id)}
+                                    style={{
+                                       display: "flex", gap: 8, alignItems: "baseline",
+                                       textAlign: "left", cursor: "pointer",
+                                       padding: "3px 0", background: "none", border: "none",
+                                       font: "inherit", fontSize: 11.5, lineHeight: 1.45,
+                                       color: TEXT_SECONDARY, transition: "color 0.15s",
+                                    }}
+                                    onMouseEnter={e => { e.currentTarget.style.color = CYAN; }}
+                                    onMouseLeave={e => { e.currentTarget.style.color = TEXT_SECONDARY; }}
+                                 >
+                                    <span style={{ fontSize: 10, fontWeight: 800, color: CYAN, minWidth: 16, textAlign: "right" }}>
+                                       {section.id}
+                                    </span>
+                                    <span>{section.title}</span>
+                                 </button>
+                              ))}
+                           </div>
+                        </nav>
+
                         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                            {data.sections.map((section) => (
-                              <div key={section.id} style={{ display: "flex", gap: 18 }}>
+                              <div key={section.id} id={`ds-abschnitt-${section.id}`} style={{ display: "flex", gap: 18 }}>
                                  <div style={{
                                     flexShrink: 0, width: 28, height: 28, borderRadius: 8,
                                     background: "rgba(106,172,204,0.07)", border: "1px solid rgba(106,172,204,0.15)",
