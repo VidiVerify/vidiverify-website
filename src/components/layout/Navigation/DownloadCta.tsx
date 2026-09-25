@@ -24,23 +24,24 @@ const DownloadCta = ({ onNavigate, block }: Props) => {
          whileHover={{ scale: 1.04, y: -1 }}
          whileTap={{ scale: 0.97 }}
          style={{
-            display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 6,
+            display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
             width: block ? "100%" : undefined,
-            // Höhe und Form der Sprachwahl daneben: Pille, 32 px, 11er-Schrift
-            height: block ? 44 : 32,
-            padding: block ? "0 16px" : "0 14px",
+            // So gross wie die inneren Knöpfe der Sprachwahl (DE/EN), nicht
+            // wie deren äussere Pille: dieselben Werte wie in
+            // LanguageToggle.tsx, keine feste Höhe.
+            padding: block ? "12px 16px" : "4px 10px",
             borderRadius: 999,
-            border: "1px solid rgba(255,221,128,0.55)",
+            border: "none",
             // PRO-Gold wie der Knopf der Tester-Promo (TesterPromo.tsx)
             background: `linear-gradient(135deg, ${GOLD}, ${GOLD_DARK})`,
-            boxShadow: "0 2px 12px rgba(245,197,66,0.28), inset 0 1px 0 rgba(255,255,255,0.4)",
+            boxShadow: "0 2px 10px rgba(245,197,66,0.25), inset 0 1px 0 rgba(255,255,255,0.4)",
             color: "#1a1a1a",
-            fontSize: block ? 14 : 11.5, fontWeight: 700, letterSpacing: "0.02em",
+            fontSize: block ? 14 : 11, fontWeight: 700, letterSpacing: "0.04em",
             cursor: "pointer", fontFamily: "inherit",
             whiteSpace: "nowrap",
          }}
       >
-         <Download size={block ? 16 : 13} strokeWidth={2.6} />
+         <Download size={block ? 16 : 12} strokeWidth={2.6} />
          {t("nav.download")}
       </motion.button>
    );
