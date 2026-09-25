@@ -230,7 +230,7 @@
          "media-stapel": {
             "label": "Media Stapel",
             "title": "Reiter",
-            "description": "Stapelverarbeitung ganzer Verzeichnisse oder Dateilisten in einem Durchlauf mit laufender Ergebnisanalyse und automatisch gespeicherten MAP-Berichten pro Datei.",
+            "description": "Prüft ganze Ordner oder Dateilisten in einem Lauf, mit laufender Ergebnisübersicht, Pause und Fortsetzen und einem gemeinsamen StapelMAP-Bericht über alle Dateien.",
             "tags": [
                "Batch",
                "Verzeichnisse",
@@ -270,7 +270,7 @@
          "media-repair": {
             "label": "Media Repair",
             "title": "Reiter",
-            "description": "Regelbasierte Reparaturvorschläge bei erkannten Fehlern mit Wahrscheinlichkeitsangabe und konkretem Verfahren. Arbeitet stets auf einer Kopie, nie an der Originaldatei.",
+            "description": "Behebt typische Container- und Kompatibilitätsprobleme verlustfrei, ohne Neukodierung: Zeitstempel, Seitenverhältnis, Rotation, Metadaten und bestimmte Bitstream-Fehler. Das Ergebnis entsteht als neue Datei, das Original bleibt unverändert.",
             "tags": [
                "Reparatur",
                "FFmpeg",
@@ -340,11 +340,11 @@
          "lizenz": {
             "label": "Lizenzierung",
             "title": "Lizenzierungsmodul",
-            "description": "Verwaltung der PRO-Aktivierung, Lizenzprüfung und Funktionsfreischaltung, vollständig lokal ohne dauerhafte Internetverbindung.",
+            "description": "Aktivierung der PRO-Funktionen per Lizenzschlüssel. Die App bestätigt die Lizenz beim Start; ohne Internet läuft PRO bis zu sieben Tage weiter.",
             "tags": [
                "Lizenz",
                "Aktivierung",
-               "lokal"
+               "7 Tage offline"
             ]
          }
       }

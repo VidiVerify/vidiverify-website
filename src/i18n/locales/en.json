@@ -44,7 +44,7 @@
          "🚀 Check in stages. Judge with confidence. | From DeepCheck to full inspection: several depths of analysis that surface anomalies and lead to a clear verdict.",
          "🔬 Technology visible down to the detail. | Media analysis, diagnostics, Quick-Check and detail windows: structured instead of unreadable raw data.",
          "🧪 Media Lab instead of guesswork. | Codecs, bitrates, file sizes, compatibility: calculated and comparable in three labs.",
-         "📦 For single files. For entire archives. | Media Stack checks whole folders, Media Repair rescues damaged containers. Powerful, local, no cloud."
+         "📦 For single files. For entire archives. | Media Batch checks whole folders, Media Repair rescues damaged containers. Powerful, local, no cloud."
       ]
    },
    "testerPromo": {
@@ -135,7 +135,7 @@
             "id": 8,
             "title": "Batch, repair, record",
             "list": [
-               "Media Stack: whole folders in one run (PRO)",
+               "Media Batch: whole folders in one run (PRO)",
                "Media Repair: rescue containers, audio verified after (PRO)",
                "MAP, StapelMAP and RepairMAP as a PDF record",
                "Rule version and tool version in every report"
@@ -228,9 +228,9 @@
             ]
          },
          "media-stapel": {
-            "label": "Media Stack",
+            "label": "Media Batch",
             "title": "Tab",
-            "description": "Batch processing of entire directories or file lists in a single run with live result analysis and automatically saved MAP reports per file.",
+            "description": "Checks entire folders or file lists in a single run, with a live results overview, pause and resume, and one combined batch MAP report covering all files.",
             "tags": [
                "Batch",
                "Directories",
@@ -270,7 +270,7 @@
          "media-repair": {
             "label": "Media Repair",
             "title": "Tab",
-            "description": "Rule-based repair suggestions for detected errors with probability estimates and concrete procedures. Always operates on a copy, never on the original file.",
+            "description": "Fixes typical container and compatibility problems losslessly, without re-encoding: timestamps, aspect ratio, rotation, metadata and certain bitstream errors. The result is written as a new file; the original stays untouched.",
             "tags": [
                "Repair",
                "FFmpeg",
@@ -340,11 +340,11 @@
          "lizenz": {
             "label": "Licensing",
             "title": "Licensing module",
-            "description": "Management of PRO activation, license verification and feature unlocking, fully local without a permanent internet connection.",
+            "description": "Activation of the PRO features with a license key. The app confirms the license at startup; without internet, PRO keeps running for up to seven days.",
             "tags": [
                "License",
                "Activation",
-               "local"
+               "7 days offline"
             ]
          }
       }
