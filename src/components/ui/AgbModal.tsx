@@ -19,6 +19,7 @@ const AgbModal = ({ open, onClose }: Props) => (
       daten={agbData as Rechtstext}
       Icon={FileText}
       kennung="agb"
+      inhalt
    />
 );
 

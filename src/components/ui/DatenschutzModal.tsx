@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { CYAN, GREEN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import { useFensterStapel } from "@utils/useFensterStapel";
+import { Inhaltsverzeichnis, ZumInhalt } from "./RechtstextNavigation";
+import { abschnittId, springe } from "@utils/rechtstextSprung";
 import datenDe from "../../../data/datenschutz.json";
 import datenEn from "../../../data/datenschutz.en.json";
 
@@ -76,14 +78,6 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
       if (open && scrollRef.current) scrollRef.current.scrollTop = 0;
    }, [open]);
 
-   // Springt innerhalb des Fensters, nicht auf der Seite: Der Inhalt hat
-   // seinen eigenen Scrollbereich, `scrollIntoView` bewegte auch die Seite
-   // dahinter.
-   const springe = (id: number) => {
-      const box = scrollRef.current;
-      const ziel = box?.querySelector<HTMLElement>(`#ds-abschnitt-${id}`);
-      if (box && ziel) box.scrollTo({ top: ziel.offsetTop - 16, behavior: "smooth" });
-   };
 
    const renderRights = (text: string) => {
       const pos = text.indexOf(RIGHTS_EMAIL);
@@ -288,7 +282,7 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
                                     <button
                                        key={item.icon}
                                        type="button"
-                                       onClick={() => springe(item.ref)}
+                                       onClick={() => springe(scrollRef, abschnittId(item.ref))}
                                        title={`§ ${item.ref}`}
                                        style={{
                                           display: "flex", gap: 12, alignItems: "flex-start",
@@ -332,47 +326,11 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
                            </p>
                         </section>
 
-                        {/* Inhalt */}
-                        <nav style={{
-                           padding: "14px 16px", borderRadius: 12, marginBottom: 30,
-                           background: "rgba(106,172,204,0.03)",
-                           border: "1px solid rgba(106,172,204,0.1)",
-                        }}>
-                           <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, margin: "0 0 8px" }}>
-                              {data.tocTitle}
-                           </p>
-                           <div style={{
-                              display: "grid",
-                              gridTemplateColumns: "repeat(auto-fill, minmax(min(200px, 100%), 1fr))",
-                              columnGap: 16, rowGap: 2,
-                           }}>
-                              {data.sections.map((section) => (
-                                 <button
-                                    key={section.id}
-                                    type="button"
-                                    onClick={() => springe(section.id)}
-                                    style={{
-                                       display: "flex", gap: 8, alignItems: "baseline",
-                                       textAlign: "left", cursor: "pointer",
-                                       padding: "3px 0", background: "none", border: "none",
-                                       font: "inherit", fontSize: 11.5, lineHeight: 1.45,
-                                       color: TEXT_SECONDARY, transition: "color 0.15s",
-                                    }}
-                                    onMouseEnter={e => { e.currentTarget.style.color = CYAN; }}
-                                    onMouseLeave={e => { e.currentTarget.style.color = TEXT_SECONDARY; }}
-                                 >
-                                    <span style={{ fontSize: 10, fontWeight: 800, color: CYAN, minWidth: 16, textAlign: "right" }}>
-                                       {section.id}
-                                    </span>
-                                    <span>{section.title}</span>
-                                 </button>
-                              ))}
-                           </div>
-                        </nav>
+                        <Inhaltsverzeichnis box={scrollRef} sections={data.sections} titel={data.tocTitle} />
 
                         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                            {data.sections.map((section) => (
-                              <div key={section.id} id={`ds-abschnitt-${section.id}`} style={{ display: "flex", gap: 18 }}>
+                              <div key={section.id} id={abschnittId(section.id)} style={{ display: "flex", gap: 18 }}>
                                  <div style={{
                                     flexShrink: 0, width: 28, height: 28, borderRadius: 8,
                                     background: "rgba(106,172,204,0.07)", border: "1px solid rgba(106,172,204,0.15)",
@@ -389,6 +347,7 @@ const DatenschutzModal = ({ open, onClose }: Props) => {
                                     </h3>
                                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                                        {(section.blocks as Block[]).map((block, i) => renderBlock(block, i))}
+                                       <ZumInhalt box={scrollRef} />
                                     </div>
                                  </div>
                               </div>

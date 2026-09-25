@@ -22,6 +22,8 @@ import { X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import { useFensterStapel } from "@utils/useFensterStapel";
+import { Inhaltsverzeichnis, ZumInhalt } from "./RechtstextNavigation";
+import { abschnittId } from "@utils/rechtstextSprung";
 
 export interface Rechtstext {
    title: string;
@@ -51,9 +53,13 @@ interface Props {
    Icon: LucideIcon;
    /** Eindeutig je Text, damit die Ein- und Ausblendung nicht springt. */
    kennung: string;
+   /** Inhaltsverzeichnis oben und „Zum Inhalt" je Abschnitt - für die langen
+    * Texte (AGB, EULA). Die Widerrufsbelehrung mit fünf Abschnitten braucht
+    * es nicht. */
+   inhalt?: boolean;
 }
 
-const RechtstextModal = ({ open, onClose, daten, Icon, kennung }: Props) => {
+const RechtstextModal = ({ open, onClose, daten, Icon, kennung, inhalt }: Props) => {
    const { t } = useTranslation();
    const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -179,15 +185,17 @@ const RechtstextModal = ({ open, onClose, daten, Icon, kennung }: Props) => {
                         data-lenis-prevent
                         onWheel={(e) => e.stopPropagation()}
                         style={{
+                           position: "relative",
                            overflowY: "auto", flex: 1,
                            padding: "24px 28px 32px",
                            scrollbarWidth: "thin",
                            scrollbarColor: "rgba(106,172,204,0.2) transparent",
                         }}
                      >
+                        {inhalt && <Inhaltsverzeichnis box={scrollRef} sections={daten.sections} />}
                         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
                            {daten.sections.map((section) => (
-                              <div key={section.id} style={{ display: "flex", gap: 18 }}>
+                              <div key={section.id} id={abschnittId(section.id)} style={{ display: "flex", gap: 18 }}>
                                  <div style={{
                                     flexShrink: 0, width: 28, height: 28, borderRadius: 8,
                                     background: "rgba(106,172,204,0.07)",
@@ -246,6 +254,7 @@ const RechtstextModal = ({ open, onClose, daten, Icon, kennung }: Props) => {
                                              ))}
                                           </div>
                                        )}
+                                       {inhalt && <ZumInhalt box={scrollRef} />}
                                     </div>
                                  </div>
                               </div>

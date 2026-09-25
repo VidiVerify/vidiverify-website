@@ -29,6 +29,7 @@ const EulaModal = ({ open, onClose }: Props) => {
          daten={(deutsch ? eulaDe : eulaEn) as Rechtstext}
          Icon={ScrollText}
          kennung="eula"
+         inhalt
       />
    );
 };

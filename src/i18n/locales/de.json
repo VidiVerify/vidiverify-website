@@ -470,6 +470,8 @@
    },
    "modal": {
       "close": "Schliessen",
-      "closeAria": "Schliessen"
+      "closeAria": "Schliessen",
+      "toc": "Inhalt",
+      "backToToc": "Zum Inhalt"
    }
 }

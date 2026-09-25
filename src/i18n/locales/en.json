@@ -470,6 +470,8 @@
    },
    "modal": {
       "close": "Close",
-      "closeAria": "Close"
+      "closeAria": "Close",
+      "toc": "Contents",
+      "backToToc": "Back to contents"
    }
 }
