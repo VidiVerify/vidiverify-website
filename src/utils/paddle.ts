@@ -26,13 +26,12 @@
  */
 export const PADDLE_TOKEN_SANDKASTEN = "test_59faf825345b6f40d6c60af9e4d";
 
-/* Der Client-Token des Wirkkontos. LEER, solange der Wirkkatalog nicht
- * angelegt und die Paddle-Freigabe nicht erteilt ist.
+/* Der Client-Token des Wirkkontos, angelegt am 26.09.2026.
  *
- * Was bei leerem Token passiert, ist die eigentliche Aussage dieser Datei:
- * Der Kauf wird NICHT angeboten. Er fällt nicht in den Sandkasten zurück.
+ * Mit ihm bietet die Wirkdomain den Kauf an. Bei leerem Token wird der Kauf
+ * NICHT angeboten - er fällt nie in den Sandkasten zurück.
  */
-export const PADDLE_TOKEN_LIVE = "";
+export const PADDLE_TOKEN_LIVE = "live_a4c7b19200db8d7fdb9e414e3a9";
 
 /** Die Preiskennungen des Sandkasten-Katalogs, angelegt am 10.09.2026. */
 export const PREISE_SANDKASTEN = {

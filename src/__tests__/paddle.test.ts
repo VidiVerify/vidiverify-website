@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
-   PADDLE_TOKEN_SANDKASTEN, PREISE_SANDKASTEN,
+   PADDLE_TOKEN_LIVE, PADDLE_TOKEN_SANDKASTEN, PREISE_LIVE, PREISE_SANDKASTEN,
    paddleAufbau, paddleUmgebung,
 } from "@utils/paddle";
 
@@ -17,14 +17,15 @@ import {
  * falsche.** Solange der Wirkkatalog fehlt, liefert der Aufbau `null`.
  */
 describe("Paddle-Aufbau", () => {
-   it("bietet auf der Wirkdomain nichts an, solange der Wirktoken fehlt", () => {
-      // Sobald PADDLE_TOKEN_LIVE gesetzt ist, muss dieser Fall auf den echten
-      // Token prüfen - dann ist die Aussage nicht mehr „nichts", sondern
-      // „nicht der Sandkasten".
+   it("bietet auf der Wirkdomain das Wirkkonto an, nie den Sandkasten", () => {
+      // Seit dem 26.09.2026 ist der Wirktoken gesetzt: Die Aussage ist nicht
+      // mehr „nichts", sondern „genau das Wirkkonto mit dem Wirkkatalog".
       for (const host of ["vidiverify.de", "www.vidiverify.de", "vidiverify.com"]) {
          const aufbau = paddleAufbau(host);
-         expect(aufbau === null || aufbau.umgebung === "production").toBe(true);
-         expect(aufbau?.token).not.toBe(PADDLE_TOKEN_SANDKASTEN);
+         expect(aufbau?.umgebung).toBe("production");
+         expect(aufbau?.token).toBe(PADDLE_TOKEN_LIVE);
+         expect(aufbau?.preise).toEqual(PREISE_LIVE);
+         expect(aufbau?.basis).toBe("/api");
       }
    });
 
