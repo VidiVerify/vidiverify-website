@@ -40,8 +40,12 @@ export const PREISE_SANDKASTEN = {
    lifetime: "pri_01m261r6ft6rdf4tqemt1e5rh0",
 };
 
-/** Die Preiskennungen des Wirkkatalogs. Leer, siehe oben. */
-export const PREISE_LIVE = { pro: "", lifetime: "" };
+/** Die Preiskennungen des Wirkkatalogs, angelegt am 26.09.2026. Ohne
+ *  Wirktoken bleiben sie wirkungslos, siehe oben. */
+export const PREISE_LIVE = {
+   pro: "pri_01m3etex3jb8a2t02w272epztg",
+   lifetime: "pri_01m3etdj3xc91q4z61d0ez7kw3",
+};
 
 export interface PaddleAufbau {
    token: string;
