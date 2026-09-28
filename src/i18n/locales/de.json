@@ -42,7 +42,7 @@
       "subtitle": "Das Wichtigste in Kürze",
       "cards": [
          "🚀 Mehrstufig prüfen. Sicher beurteilen. | Vom DeepCheck bis zur Vollprüfung: mehrere Prüftiefen, die Auffälligkeiten finden und zu einem klaren Urteil führen.",
-         "🔬 Technik sichtbar bis ins Detail. | Media Analyse, Diagnose, Quick-Check sowie Video- und Audiofenster: strukturiert statt unlesbarer Rohdaten.",
+         "🔬 Technik sichtbar bis ins Detail. | Media Analyse, Diagnose, QuickCheck sowie Video- und Audiofenster: strukturiert statt unlesbarer Rohdaten.",
          "🧪 MediaLab statt schätzen. | Codecs, Bitraten, Dateigrössen, Kompatibilität: berechnet und vergleichbar in drei Laboren.",
          "📦 Für Dateien. Für ganze Bestände. | Media Stapel prüft komplette Ordner, Media Repair rettet beschädigte Container. Leistungsfähig, lokal, ohne Cloud."
       ]
@@ -68,7 +68,7 @@
                "Datei hineinziehen, Urteil in Sekunden",
                "Magic Bytes gegen die Dateiendung geprüft",
                "Magika-Tiefenprüfung, ML-gestützt (optional)",
-               "Quick-Check per Rechtsklick im Explorer"
+               "QuickCheck per Rechtsklick im Explorer"
             ]
          },
          {
@@ -168,8 +168,8 @@
             ]
          },
          "quick-check": {
-            "label": "Quick-Check",
-            "title": "Quick-Check im Windows-Explorer",
+            "label": "QuickCheck",
+            "title": "QuickCheck im Windows-Explorer",
             "description": "Rechtsklick auf eine Videodatei im Windows-Explorer - eine schlanke Worker-Komponente prüft in Sekunden Containerstruktur, Mediadaten und Integrität, ohne die Hauptanwendung zu starten. Eigenes Hinweisfenster mit Status, Befund und Mediadaten - und auf Wunsch nahtloser Übergang in die Vollanalyse.",
             "tags": [
                "Kontextmenü",

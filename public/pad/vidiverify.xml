@@ -110,7 +110,7 @@ Key features:
 - Full integrity scan — detects decoding errors, corrupted frames, and structural file damage
 - Diagnostics deep analysis — three-stage in-depth check (stream copy, ffprobe deep scan, decode layer) for stubborn cases such as tape grabs and damaged containers
 - Automatic escalation — flags suspicious findings and offers the in-depth diagnostic with one click
-- Quick-Check — instant pre-inspection via right-click in Windows Explorer, without opening the app
+- QuickCheck — instant pre-inspection via right-click in Windows Explorer, without opening the app
 - Pre-check (Precheck) — fast technical metadata inspection before the full scan
 - Quality rating — intelligent, codec- and format-aware evaluation (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD, and more)
 - Type integrity — magic-bytes check plus optional Google Magika ML classification (Apache-2.0)
@@ -149,7 +149,7 @@ Kernfunktionen:
 - Tiefgehende Integritätsprüfung — erkennt Dekodierfehler, beschädigte Frames und strukturelle Dateischäden
 - Diagnose-Tiefenanalyse — dreistufige Prüfung (Streamcopy, ffprobe-Tiefenanalyse, Decode-Layer) für hartnäckige Fälle wie VHS-Grabs und beschädigte Container
 - Automatische Eskalation — markiert auffällige Befunde und bietet die Tiefenanalyse mit einem Klick an
-- Quick-Check — Sekundenschnelle Vorab-Prüfung per Rechtsklick im Windows-Explorer, ohne die App zu öffnen
+- QuickCheck — Sekundenschnelle Vorab-Prüfung per Rechtsklick im Windows-Explorer, ohne die App zu öffnen
 - Vorprüfung (Precheck) — schnelle technische Metadaten-Inspektion vor dem eigentlichen Scan
 - Qualitätsbewertung — intelligente, codec- und formatspezifische Bewertung (AVC, HEVC, MPEG-2, AV1, ProRes, DNxHD u. v. m.)
 - Typintegrität — Magic-Bytes-Prüfung plus optionale Google-Magika-ML-Klassifikation (Apache-2.0)

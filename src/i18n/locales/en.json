@@ -42,7 +42,7 @@
       "subtitle": "The essentials at a glance",
       "cards": [
          "🚀 Check in stages. Judge with confidence. | From DeepCheck to full inspection: several depths of analysis that surface anomalies and lead to a clear verdict.",
-         "🔬 Technology visible down to the detail. | Media analysis, diagnostics, Quick-Check and detail windows: structured instead of unreadable raw data.",
+         "🔬 Technology visible down to the detail. | Media analysis, diagnostics, QuickCheck and detail windows: structured instead of unreadable raw data.",
          "🧪 Media Lab instead of guesswork. | Codecs, bitrates, file sizes, compatibility: calculated and comparable in three labs.",
          "📦 For single files. For entire archives. | Media Batch checks whole folders, Media Repair rescues damaged containers. Powerful, local, no cloud."
       ]
@@ -68,7 +68,7 @@
                "Drop a file in, verdict in seconds",
                "Magic bytes checked against the extension",
                "Magika deep check, ML-based (optional)",
-               "Quick-Check by right-click in Explorer"
+               "QuickCheck by right-click in Explorer"
             ]
          },
          {
@@ -168,8 +168,8 @@
             ]
          },
          "quick-check": {
-            "label": "Quick-Check",
-            "title": "Quick-Check in Windows Explorer",
+            "label": "QuickCheck",
+            "title": "QuickCheck in Windows Explorer",
             "description": "Right-click on a video file in Windows Explorer - a lightweight worker component checks container structure, media data and integrity in seconds, without launching the main application. Dedicated notification window with status, finding and media data - and optional seamless handoff to the full analysis.",
             "tags": [
                "Context menu",
