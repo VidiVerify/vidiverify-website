@@ -1,0 +1,123 @@
+{
+   "title": "Terms and Conditions",
+   "subtitle": "for the purchase of VidiVerify licenses",
+   "date": "Version: 24.09.2026",
+   "version": "AGB-2026-09-24",
+   "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Scope and provider",
+         "paragraphs": [
+            "These terms apply to the purchase of paid licenses for the VidiVerify software.",
+            "A license can be obtained in two ways: through the order request on vidiverify.de, where the provider sells directly, or through the purchase page with the checkout of our payment provider Paddle, where Paddle sells as a reseller in its own name (section 4). The Microsoft Store only distributes the software, not a license.",
+            "The provider is Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Germany. Email: admin@vidiverify.de (legal and business matters), support@vidiverify.de (technical matters).",
+            "The provider is Thomas Smektalla as a private individual (sole proprietor); there is no registered company."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Subject of the contract",
+         "paragraphs": [
+            "VidiVerify is software for the technical analysis, checking and processing of video and audio files. It is a technical aid; there is no assurance that all errors, compatibility problems or quality impairments of a media file will be detected or fixed.",
+            "What is purchased is a license that unlocks paid features of the software. The purchase is a one-time payment; there is no subscription and no automatic renewal.",
+            "Use without a license is permitted free of charge for strictly private purposes. Any use beyond that, in particular in a commercial, professional, business or institutional environment, requires a license.",
+            "PRO unlocks the paid features of the purchased major version, for example version 1.x, including all updates within that major version. The license is valid for its program generation and all older ones; a later new major version, for example 2.x, is not automatically included.",
+            "LIFETIME additionally covers future major versions for as long as VidiVerify is developed or provided by the provider. The name LIFETIME does not imply any obligation to continue development, maintenance or provision for a minimum period or permanently.",
+            "The license is issued for one device and is bound to its device ID (VV-ID)."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Ordering process and conclusion of contract for order requests",
+         "paragraphs": [
+            "The “Request a license” form on vidiverify.de submits a request. The request is non-binding and is not an order; it does not create a contract.",
+            "The contract is concluded in three steps: the prospective customer submits the request and accepts these terms. The provider reviews the request and sends an invoice by email; this invoice is the provider's offer. The contract is concluded upon full payment of the amount stated in the invoice.",
+            "The invoice is usually sent within one to three business days of receiving the request.",
+            "The provider is not obliged to accept a request. In particular, it may decline a request if tax or legal processing is not possible in the individual case.",
+            "The contract language is German. Correspondence and support are also available in English; the German version is authoritative for the content of the contract.",
+            "The provider stores the contract text. These terms and the information on the right of withdrawal are sent to the customer in text form together with the invoice."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Purchase via the purchase page (Paddle)",
+         "paragraphs": [
+            "On the purchase page vidiverify.de/pro, a license can be paid for immediately. The seller in this case is not the provider but our payment provider Paddle as reseller (Merchant of Record): for buyers outside the USA, Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, United Kingdom; for buyers in the USA, Paddle.com Inc., New York, USA.",
+            "The purchase contract is concluded with Paddle under the terms Paddle provides in the checkout. Paddle issues the invoice, calculates and remits the VAT or sales tax applicable in the buyer's country, and is the point of contact for payment, refunds and withdrawal. Sections 3, 5 and 9 of these terms concern only the order request.",
+            "Before the checkout opens, the provider collects on the purchase page the name, billing address and email address, for business buyers also the company name and VAT ID, as well as the device ID (VV-ID), and passes them to Paddle so that the invoice names the buyer, tax is calculated for the correct country and the license can be assigned to the installation. Details are set out in the privacy policy.",
+            "What the buyer acquires is described in section 2; delivery by the provider is governed by section 6, revocation by section 7, and use by the End User License Agreement. A discount or promotional code is applied in Paddle's checkout; the amount shown there is authoritative."
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Prices, taxes and payment",
+         "paragraphs": [
+            "The prices stated at the time of the request or purchase apply. The amounts stated are total prices; there are no further costs.",
+            "For order requests, no VAT is shown under § 19 of the German VAT Act (small business rule). For purchases via the purchase page, Paddle as seller charges the VAT of the buyer's country; the prices shown on the purchase page include German VAT, and the amount shown in the checkout is binding.",
+            "For order requests, payment is made on the basis of the invoice sent and under the conditions stated there; for purchases via the purchase page, with the payment methods offered by Paddle."
+         ]
+      },
+      {
+         "id": 6,
+         "title": "Delivery",
+         "paragraphs": [
+            "For order requests, the license key is provided electronically after receipt of payment, usually within one to three business days. For purchases via the purchase page, the license is issued immediately after Paddle confirms the payment, shown on the purchase page and fetched by the application itself at its next start. In both cases, the license key can be retrieved through the application at any time, so it is not lost after a reinstallation or a change of computer. For a permanent move to another device, a message to the provider is sufficient.",
+            "For activation and recurring confirmation of the license, the application transmits only the device ID (VV-ID). The email address given at purchase is part of the license key and is not transmitted in the process."
+         ]
+      },
+      {
+         "id": 7,
+         "title": "Revocation of a license",
+         "paragraphs": [
+            "The provider may revoke a license if payment is not made, is reversed or is refunded, including by Paddle, or if the license key is distributed or circumvented contrary to the End User License Agreement. The revocation is lifted as soon as its reason no longer applies. Further statutory rights remain unaffected."
+         ]
+      },
+      {
+         "id": 8,
+         "title": "Rights in case of defects",
+         "paragraphs": [
+            "Consumers have the statutory rights for defects in digital products. In particular, the provider is entitled to remedy a defect first by an update, a bug fix or the provision of a corrected version, where the statutory requirements are met."
+         ]
+      },
+      {
+         "id": 9,
+         "title": "Right of withdrawal for consumers",
+         "paragraphs": [
+            "Consumers have a statutory right of withdrawal for distance contracts. The details are set out in the information on the right of withdrawal, which forms part of these terms.",
+            "For digital content, this right of withdrawal expires early if the consumer expressly agrees that delivery begins before the end of the withdrawal period and at the same time confirms that they thereby lose their right of withdrawal once delivery begins. Both declarations are asked for separately in the request form as soon as a paid license is requested; for free registration the second one is omitted, because no contract is concluded.",
+            "For purchases via the purchase page, the right of withdrawal applies towards Paddle as seller. Information, the declaration on early expiry and the handling of a withdrawal follow the terms Paddle provides in the checkout; the provider's information on the right of withdrawal does not apply to this route."
+         ]
+      },
+      {
+         "id": 10,
+         "title": "Liability",
+         "paragraphs": [
+            "The provider is liable without limitation for intent and gross negligence, for damage resulting from injury to life, body or health, where a guarantee has been given, and under the German Product Liability Act.",
+            "In the event of a slightly negligent breach of an essential contractual obligation, liability is limited to the typical damage foreseeable at the time the contract was concluded. Essential contractual obligations are those whose fulfilment makes the proper performance of the contract possible in the first place and on whose observance the customer may regularly rely.",
+            "Otherwise, liability is excluded. This applies in particular to indirect damage, lost profit, lost savings, business interruption, third-party claims and damage resulting from decisions based on analysis results, check reports, ratings or repair attempts of the software.",
+            "Liability for loss of data is limited to the effort that would have been required for recovery had the customer made proper and regular backups. The customer is responsible for backing up their data, in particular before using features that write or modify files.",
+            "The above limitations also apply in favour of the provider's legal representatives, employees and vicarious agents and to claims in tort.",
+            "Towards businesses, claims against the provider become time-barred one year after the statutory start of the limitation period; this does not apply to the cases named in the first paragraph. Towards consumers, the statutory limitation periods apply.",
+            "The above provisions do not shift the burden of proof to the customer's disadvantage. Mandatory statutory liability provisions and the statutory rights for defects in digital products remain unaffected."
+         ]
+      },
+      {
+         "id": 11,
+         "title": "Relationship to the End User License Agreement",
+         "paragraphs": [
+            "Use of the software is governed by the End User License Agreement (EULA). It governs in particular the scope and limits of the right of use, the retrieval of the checking tools and third-party software, the repair features and the processing of data in the application.",
+            "These terms govern the purchase. In case of conflict, these terms take precedence for the purchase and the EULA for the use."
+         ]
+      },
+      {
+         "id": 12,
+         "title": "Final provisions",
+         "paragraphs": [
+            "The law of the Federal Republic of Germany applies, excluding the UN Convention on Contracts for the International Sale of Goods. For consumers, this choice of law applies only insofar as it does not restrict mandatory consumer protection provisions of the country in which the consumer has their habitual residence.",
+            "The provider is neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board (§ 36 VSBG).",
+            "Should individual provisions of these terms be or become invalid, the remaining provisions remain unaffected."
+         ]
+      }
+   ]
+}

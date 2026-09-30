@@ -1,0 +1,61 @@
+{
+   "title": "Refund Policy and Right of Withdrawal",
+   "subtitle": "for consumers in distance contracts with the provider",
+   "date": "Version: 30.09.2026",
+   "version": "WRB-2026-09-30",
+   "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Scope and refunds",
+         "paragraphs": [
+            "This information applies to consumers. A consumer is any natural person who enters into a legal transaction for purposes that are predominantly outside their trade, business or profession.",
+            "It applies to contracts concluded through the order request with Thomas Smektalla (VidiVerify-Team). For purchases via the purchase page vidiverify.de/pro, the seller is our payment provider Paddle; the right of withdrawal then applies towards Paddle and follows the terms Paddle provides in the checkout. In this case, a withdrawal or refund is handled by Paddle, via the customer portal paddle.net. Refunds follow Paddle's refund policy (paddle.com/legal/refund-policy); under it, a refund can be requested within fourteen days of the purchase."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Right of withdrawal",
+         "paragraphs": [
+            "You have the right to withdraw from this contract within fourteen days without giving any reason.",
+            "The withdrawal period is fourteen days from the day the contract is concluded. The contract is concluded upon full payment of the amount stated in the invoice.",
+            "To exercise your right of withdrawal, you must inform us (Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Germany, email: admin@vidiverify.de) of your decision to withdraw from this contract by means of a clear statement, for example a letter sent by post or an email. You may use the model withdrawal form below, but this is not mandatory.",
+            "To meet the withdrawal deadline, it is sufficient to send your notice of exercising the right of withdrawal before the withdrawal period expires."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Consequences of withdrawal",
+         "paragraphs": [
+            "If you withdraw from this contract, we shall reimburse all payments received from you without undue delay and at the latest within fourteen days from the day on which we receive notice of your withdrawal from this contract.",
+            "We will make this reimbursement using the same means of payment you used for the original transaction, unless expressly agreed otherwise with you; in no case will you be charged any fees as a result of this reimbursement."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Early expiry of the right of withdrawal",
+         "paragraphs": [
+            "VidiVerify is digital content that is not supplied on a physical data carrier.",
+            "Your right of withdrawal expires before the end of the fourteen-day withdrawal period if we have begun delivery after you have expressly agreed that we begin performance of the contract before the withdrawal period expires, and you have confirmed that you are aware that by giving your consent you lose your right of withdrawal once performance of the contract begins.",
+            "Both declarations are asked for separately in the request form as soon as a paid license is requested; for purchases via the purchase page, they are given to Paddle in the checkout. As long as delivery has not begun, your right of withdrawal remains."
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Model withdrawal form",
+         "paragraphs": [
+            "If you wish to withdraw from the contract, please complete this form and return it.",
+            "To: Thomas Smektalla, VidiVerify-Team, Liebestrasse 18a, 07546 Gera, Germany, email: admin@vidiverify.de",
+            "I hereby withdraw from the contract concluded by me for the purchase of a license for VidiVerify."
+         ],
+         "formular": [
+            "Ordered on / received on",
+            "Name of consumer",
+            "Address of consumer",
+            "Email address",
+            "Date",
+            "Signature of consumer (only for notice on paper)"
+         ]
+      }
+   ]
+}
