@@ -1,0 +1,64 @@
+{
+   "title": "Legal Notice",
+   "date": "Version: 11.09.2026",
+   "notice": "This English version is a convenience translation. Only the German version is legally binding.",
+   "labels": {
+      "kicker": "Legal information",
+      "represented_by": "Represented by",
+      "email": "Email",
+      "website": "Website",
+      "privacy": "Privacy",
+      "responsible": "Responsible for content"
+   },
+   "provider": {
+      "legal_note": "Information pursuant to § 5 DDG (German Digital Services Act)",
+      "name": "Thomas Smektalla",
+      "address": [
+         "VidiVerify-Team",
+         "Liebestrasse 18a",
+         "07546 Gera",
+         "Germany"
+      ],
+      "represented_by": "Thomas Smektalla (sole proprietor, no registered company)"
+   },
+   "contact": {
+      "email": "support@vidiverify.de",
+      "websites": [
+         "vidiverify.de",
+         "vidiverify.com"
+      ]
+   },
+   "privacy_url": "www.vidiverify.com/datenschutz/",
+   "responsible": "Thomas Smektalla",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Consumer dispute resolution",
+         "paragraphs": [
+            "Notice pursuant to § 36 VSBG: We are neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Copyright",
+         "paragraphs": [
+            "The content, texts, designs, logos, graphics, images and other elements published on this website are subject to applicable copyright and related rights, unless marked otherwise. Any use beyond the limits permitted by law requires the prior consent of the respective rights holder."
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Project information",
+         "paragraphs": [
+            "VidiVerify is a software project for the technical analysis and checking of video files. Further provisions on the use of the software, the licensing model, liability and Pro features are set out in the current End User License Agreement (EULA) and the supplementary legal information on this website."
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Sales via Paddle",
+         "paragraphs": [
+            "For purchases via the purchase page vidiverify.de/pro, the seller and invoicing party is our payment provider Paddle as reseller (Merchant of Record): for buyers outside the USA, Paddle.com Market Limited, Judd House, 18-29 Mora Street, London EC1V 8BT, United Kingdom; for buyers in the USA, Paddle.com Inc., New York, USA. Questions about payment, invoices and refunds are answered by Paddle via the customer portal paddle.net.",
+            "For orders placed through the request on this website, Thomas Smektalla is the seller."
+         ]
+      }
+   ]
+}

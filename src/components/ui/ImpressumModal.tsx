@@ -10,7 +10,8 @@ import { useTranslation } from "react-i18next";
 import { X, Scale, Mail, Globe, ShieldCheck, User } from "lucide-react";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED } from "@/constants/theme";
 import { useFensterStapel } from "@utils/useFensterStapel";
-import data from "../../../data/impressum.json";
+import datenDe from "../../../data/impressum.json";
+import datenEn from "../../../data/impressum.en.json";
 
 interface Props {
    open: boolean;
@@ -18,7 +19,12 @@ interface Props {
 }
 
 const ImpressumModal = ({ open, onClose }: Props) => {
-   const { t } = useTranslation();
+   const { t, i18n } = useTranslation();
+   // Auf Englisch die Übersetzung (30.09.2026) - vidiverify.com liefert
+   // englisch aus, und Paddle prüft die Domain dort. Verbindlich bleibt die
+   // deutsche Fassung; die Übersetzung sagt das oben selbst (`notice`).
+   const data = ((i18n.language || "de").toLowerCase().startsWith("de")
+      ? datenDe : datenEn) as typeof datenDe & { notice?: string };
    const scrollRef = useRef<HTMLDivElement>(null);
 
    // Escape und das Sperren des Seitenscrollens laufen über den gemeinsamen
@@ -90,12 +96,17 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                            <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
-                              Rechtliche Angaben
+                              {data.labels.kicker}
                            </p>
                            <h2 style={{ fontSize: 16, fontWeight: 800, color: TEXT_PRIMARY, margin: "4px 0 0" }}>
                               {data.title}
                            </h2>
                            <p style={{ fontSize: 11, color: TEXT_MUTED, margin: "4px 0 0" }}>{data.date}</p>
+                           {data.notice && (
+                              <p style={{ fontSize: 11, color: CYAN, margin: "6px 0 0", lineHeight: 1.5 }}>
+                                 {data.notice}
+                              </p>
+                           )}
                         </div>
                         <button
                            onClick={onClose}
@@ -158,7 +169,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                                  }} />
                                  <div style={{ flex: 1 }}>
                                     <p style={{ fontSize: 10, fontWeight: 600, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 6px" }}>
-                                       Vertreten durch
+                                       {data.labels.represented_by}
                                     </p>
                                     <p style={{ fontSize: 12.5, color: TEXT_SECONDARY, margin: 0 }}>
                                        {data.provider.represented_by}
@@ -185,7 +196,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                                        <Mail size={12} color={CYAN} />
                                     </div>
                                     <span style={{ fontSize: 10, fontWeight: 700, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.07em" }}>
-                                       Email
+                                       {data.labels.email}
                                     </span>
                                  </div>
                                  <a
@@ -212,7 +223,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                                        <Globe size={12} color={CYAN} />
                                     </div>
                                     <span style={{ fontSize: 10, fontWeight: 700, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.07em" }}>
-                                       Website
+                                       {data.labels.website}
                                     </span>
                                  </div>
                                  <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -234,7 +245,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                                     <ShieldCheck size={11} color={CYAN} style={{ opacity: 0.7 }} />
                                     <span style={{ fontSize: 10, fontWeight: 600, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                                       Datenschutz
+                                       {data.labels.privacy}
                                     </span>
                                  </div>
                                  <span style={{ fontSize: 11.5, color: TEXT_SECONDARY }}>{data.privacy_url}</span>
@@ -248,7 +259,7 @@ const ImpressumModal = ({ open, onClose }: Props) => {
                                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                                     <User size={11} color={CYAN} style={{ opacity: 0.7 }} />
                                     <span style={{ fontSize: 10, fontWeight: 600, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                                       Inhaltlich verantwortlich
+                                       {data.labels.responsible}
                                     </span>
                                  </div>
                                  <span style={{ fontSize: 11.5, color: TEXT_SECONDARY }}>{data.responsible}</span>

@@ -1,6 +1,14 @@
 {
    "title": "Impressum",
    "date": "Stand: 11.09.2026",
+   "labels": {
+      "kicker": "Rechtliche Angaben",
+      "represented_by": "Vertreten durch",
+      "email": "Email",
+      "website": "Website",
+      "privacy": "Datenschutz",
+      "responsible": "Inhaltlich verantwortlich"
+   },
    "provider": {
       "legal_note": "Angaben gemäss § 5 DDG",
       "name": "Thomas Smektalla",
