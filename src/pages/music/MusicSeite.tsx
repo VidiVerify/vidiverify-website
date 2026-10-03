@@ -12,9 +12,10 @@
  * wieder auf `/music` gesetzt, damit ein weitergeteilter Link die
  * Album-Vorschau trägt und nicht die der Startseite.
  *
- * **Die Dateien.** Zum Hören liegen 192-kbit-Fassungen ohne eingebettetes
- * Cover unter `public/music/vol-001/` - auf derselben Domain, damit die
- * Spektralanzeige (Web Audio) ohne CORS-Freigabe arbeitet. Das Album in
+ * **Die Dateien.** Zum Hören liegen unter `public/music/vol-001/` die
+ * Originale mit unveränderter Tonspur und allen Tags; nur das eingebettete
+ * Cover ist ein 600er-JPEG statt des 2,3-MB-PNG. Auf derselben Domain, damit
+ * die Spektralanzeige (Web Audio) ohne CORS-Freigabe arbeitet. Das Album in
  * voller Qualität liegt als ZIP im Release des Repos `vidiverify-music`.
  * Die Wellenformen sind beim Aufbereiten vorberechnet (`vol001.json`), die
  * Seite muss keine MP3 laden, um sie zu zeichnen.
