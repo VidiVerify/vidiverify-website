@@ -125,6 +125,17 @@ body {
    overflow-x: hidden;
 }
 
+/* Das `overflow-x: hidden` am `body` genügt Safari auf dem iPhone nicht: Die
+ * Einblend-Animationen starten bis zu 120 px rechts neben dem Bildschirm, und
+ * Safari verbreitert dafür die ganze Seite (375 px wurden 473 px). Alles, was
+ * `position: fixed` hat, wuchs mit - Navigation und Formularfenster ragten
+ * rechts aus dem Bild (Anwenderbefund 03.10.2026). `clip` statt `hidden`,
+ * weil es keinen eigenen Rollbereich anlegt; `position: sticky` bleibt
+ * intakt. */
+main {
+   overflow-x: clip;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
    width: 6px;
@@ -792,6 +803,28 @@ img {
          0 2px 4px rgba(0, 0, 0, 0.2),
          0 0 120px rgb(var(--ch-cyan) / 0.08),
          inset 0 1px 0 rgb(var(--ch-white) / 0.06);
+   }
+}
+
+/* ===== Formularfenster (Bestellanfrage, Kaufseite) =====
+ * Die Höhe zuerst in `vh`, dann in `dvh`: Ein Browser, der `dvh` nicht kennt,
+ * behält die erste Angabe. `dvh` folgt der Tastatur - mit `vh` rechnet Safari
+ * auf dem iPhone mit der vollen Höhe, und das Fenster rutscht unter die
+ * Tastatur (Anwenderbefund 03.10.2026). */
+.formular-fenster {
+   max-height: 88vh;
+   max-height: 88dvh;
+}
+
+/* Safari zoomt beim Antippen in jedes Feld mit weniger als 16 px Schrift und
+ * schiebt dabei die Ansicht zur Seite. Gilt für Touchgeräte, auf dem Desktop
+ * bleibt die feinere Schrift. `!important`, weil die Felder ihre Grösse als
+ * Inline-Stil tragen. */
+@media (pointer: coarse) {
+   .formular-fenster input,
+   .formular-fenster textarea,
+   .formular-fenster select {
+      font-size: 16px !important;
    }
 }
 

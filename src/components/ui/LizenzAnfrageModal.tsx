@@ -46,6 +46,7 @@ import { turnstileSchluessel } from "@utils/turnstile";
 import { useTurnstile } from "@utils/useTurnstile";
 import { apiBasis } from "@utils/apiBasis";
 import { useFensterStapel } from "@utils/useFensterStapel";
+import useMediaQuery from "@utils/useMediaQuery";
 import { kennungLesen } from "@utils/adresse";
 import { emailVorschlag } from "@utils/emailVorschlag";
 import { laenderNamen, landVorschlag } from "@utils/laender";
@@ -205,7 +206,7 @@ function Kaestchen({ id, checked, onChange, children }: {
 function Block({ titel, children }: { titel: string; children: React.ReactNode }) {
    return (
       <section style={{
-         padding: "18px 20px",
+         padding: "18px clamp(14px, 4vw, 20px)",
          borderRadius: 14,
          border: "1px solid rgba(255,255,255,0.06)",
          background: "rgba(255,255,255,0.02)",
@@ -225,6 +226,13 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const { i18n } = useTranslation();
    const sprache = spracheAus(i18n.language);
    const t = TEXTE[sprache];
+
+   /* Auf dem Telefon stehen die Felder untereinander. Die Raster für den
+    * Desktop liessen auf 375 px Breite pro Feld 60 bis 90 px übrig - zu
+    * schmal, um eine Stadt oder ein Land zu lesen (Anwenderbefund 03.10.2026,
+    * iPhone). Zusammen bleibt nur, was zusammengehört: Strasse und Nummer,
+    * PLZ und Stadt. */
+   const schmal = useMediaQuery("(max-width: 640px)");
 
    // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
    // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
@@ -654,12 +662,15 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                   style={{
                      position: "fixed", inset: 0, zIndex: 1001,
                      display: "flex", alignItems: "center", justifyContent: "center",
-                     padding: "24px 16px",
+                     padding: schmal ? "10px 8px" : "24px 16px",
                      pointerEvents: "none",
                   }}
                >
-                  <div style={{
-                     width: "100%", maxWidth: 780, maxHeight: "88vh",
+                  {/* Die Höhe steht in `index.css` (`.formular-fenster`):
+                      Sie braucht `dvh` mit Rückfall, und das geht inline
+                      nicht. */}
+                  <div className="formular-fenster" style={{
+                     width: "100%", maxWidth: 780,
                      display: "flex", flexDirection: "column",
                      background: "rgba(14,16,36,0.97)",
                      border: "1px solid rgba(106,172,204,0.18)",
@@ -670,7 +681,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                   }}>
                      {/* ── Kopf ── */}
                      <div style={{
-                        padding: "22px 28px 20px",
+                        padding: schmal ? "16px 16px 14px" : "22px 28px 20px",
                         borderBottom: "1px solid rgba(106,172,204,0.12)",
                         display: "flex", alignItems: "flex-start", gap: 14,
                         flexShrink: 0,
@@ -722,7 +733,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                         data-lenis-prevent
                         onWheel={(e) => e.stopPropagation()}
                         style={{
-                           overflowY: "auto", flex: 1, padding: "22px 28px 28px",
+                           overflowY: "auto", flex: 1,
+                           padding: schmal ? "16px 12px 22px" : "22px 28px 28px",
                            scrollbarWidth: "thin",
                            scrollbarColor: "rgba(106,172,204,0.2) transparent",
                         }}
@@ -884,9 +896,10 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                      Grundlage fuer eine Rechnung. */}
                                  <div style={{
                                     display: "grid", gap: 10, marginTop: 12,
-                                    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                                    gridTemplateColumns: schmal
+                                       ? "minmax(0, 1fr)" : "repeat(3, minmax(0, 1fr))",
                                  }}>
-                                  <div style={{ gridColumn: "span 2" }}>
+                                  <div style={{ gridColumn: schmal ? undefined : "span 2" }}>
                                     <label htmlFor="f-rabatt" style={beschriftungStil}>
                                        {t.rabattTitel}
                                     </label>
@@ -942,16 +955,23 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                       füllt den Rest der Zeile. Ein fester Wert (38) war
                                       bis zum 11.09.2026 um ein paar Pixel daneben
                                       (Anwenderbefund). */}
+                                  {/* Auf dem Telefon gibt es keine dritte Spalte:
+                                      Die Rückmeldung steht dann als eigene Zeile
+                                      unter dem Feld, ohne Platzhalter-Beschriftung,
+                                      und nur, wenn es etwas zu melden gibt. */}
+                                  {(!schmal || rabatt || codeGrund) && (
                                   <div style={{ display: "flex", flexDirection: "column" }}>
-                                     <span aria-hidden="true"
-                                           style={{ ...beschriftungStil, visibility: "hidden" }}>
-                                        {t.rabattTitel}
-                                     </span>
+                                     {!schmal && (
+                                        <span aria-hidden="true"
+                                              style={{ ...beschriftungStil, visibility: "hidden" }}>
+                                           {t.rabattTitel}
+                                        </span>
+                                     )}
                                      {(rabatt || codeGrund) && (
                                         <span style={{
                                            display: "flex", alignItems: "center",
                                            width: "100%", flex: 1, boxSizing: "border-box",
-                                           padding: "0 12px", borderRadius: 8,
+                                           padding: schmal ? "8px 12px" : "0 12px", borderRadius: 8,
                                            fontSize: 12, lineHeight: 1.35,
                                            color: rabatt ? GREEN : "#fca5a5",
                                            background: rabatt
@@ -967,6 +987,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                         </span>
                                      )}
                                   </div>
+                                  )}
                                  </div>
                                  {/* Die Erklärzeile zum Verhältnis PRO/LIFETIME steht auf der
                                      Preis-Sektion, von der der Kunde herkommt - hier wäre sie
@@ -978,7 +999,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                               <Block titel={t.kontaktTitel}>
                                  <div style={{
                                     display: "grid", gap: 12,
-                                    gridTemplateColumns: "150px 1fr 1fr",
+                                    gridTemplateColumns: schmal
+                                       ? "minmax(0, 1fr)" : "150px 1fr 1fr",
                                  }}>
                                     <Feld id="f-anrede" titel={t.anrede} pflicht kind={
                                        <div id="f-anrede" style={{ display: "flex", gap: 6 }}>
@@ -1019,7 +1041,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                  </div>
                                  <div style={{
                                     display: "grid", gap: 12,
-                                    gridTemplateColumns: "1fr 1fr", marginTop: 12,
+                                    gridTemplateColumns: schmal ? "minmax(0, 1fr)" : "1fr 1fr",
+                                    marginTop: 12,
                                  }}>
                                     <Feld id="f-email" titel={t.email} pflicht kind={
                                        <input id="f-email" type="email" maxLength={254}
@@ -1067,7 +1090,10 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                               {/* Anschrift - nur, wenn es etwas zu berechnen gibt */}
                               {brauchtAnschrift && (
                                  <Block titel={t.anschriftTitel}>
-                                    <div style={{ display: "flex", gap: 18, marginBottom: 14 }}>
+                                    <div style={{
+                                       display: "flex", flexWrap: "wrap",
+                                       columnGap: 18, rowGap: 8, marginBottom: 14,
+                                    }}>
                                        <span style={{ ...beschriftungStil, marginBottom: 0, alignSelf: "center" }}>
                                           {t.kundentyp}
                                        </span>
@@ -1085,7 +1111,10 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                           </span>
                                        ))}
                                     </div>
-                                    <div style={{ display: "grid", gap: 12, gridTemplateColumns: "3fr 1fr" }}>
+                                    <div style={{
+                                       display: "grid", gap: schmal ? 10 : 12,
+                                       gridTemplateColumns: schmal ? "minmax(0, 1fr) 88px" : "3fr 1fr",
+                                    }}>
                                        <Feld id="f-strasse" titel={t.strasse} pflicht kind={
                                           <input id="f-strasse" value={felder.strasse || ""}
                                                  onChange={setzen("strasse")} maxLength={120}
@@ -1096,8 +1125,10 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                                  style={pflichtStil("hausnummer")} />} />
                                     </div>
                                     <div style={{
-                                       display: "grid", gap: 12,
-                                       gridTemplateColumns: "1fr 2fr 2fr", marginTop: 12,
+                                       display: "grid", gap: schmal ? 10 : 12,
+                                       gridTemplateColumns: schmal
+                                          ? "96px minmax(0, 1fr)" : "1fr 2fr 2fr",
+                                       marginTop: 12,
                                     }}>
                                        <Feld id="f-plz" titel={t.plz} pflicht kind={
                                           <input id="f-plz" value={felder.plz || ""}
@@ -1113,6 +1144,9 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                            die Liste nicht kennt, kann das trotzdem.
                                            Die Namen kommen vom Browser, in der
                                            Sprache des Kunden. */}
+                                       {/* Auf dem Telefon in eigener Zeile über die
+                                           volle Breite: Ländernamen sind lang. */}
+                                       <div style={{ gridColumn: schmal ? "1 / -1" : undefined }}>
                                        <Feld id="f-land" titel={t.land} pflicht kind={
                                           <>
                                              <input id="f-land" value={felder.land || ""}
@@ -1124,6 +1158,7 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                                 {laender.map((l) => <option key={l} value={l} />)}
                                              </datalist>
                                           </>} />
+                                       </div>
                                     </div>
 
                                     {/* Und der Fall, den die Liste nicht fängt: Sie
@@ -1152,7 +1187,8 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                                     {kundentyp === "gewerblich" && (
                                        <div style={{
                                           display: "grid", gap: 12,
-                                          gridTemplateColumns: "1fr 1fr", marginTop: 12,
+                                          gridTemplateColumns: schmal ? "minmax(0, 1fr)" : "1fr 1fr",
+                                          marginTop: 12,
                                        }}>
                                           {/* Der Firmenname fehlte bis zum 11.09.2026: Das
                                               Kauffenster fragte ihn, dieses Formular nicht, und
@@ -1264,9 +1300,9 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
                          Leiste nicht mitrollt, bleibt er auch bei
                          ausgeklappter Anschrift sichtbar. */}
                      <div style={{
-                        padding: "14px 28px",
+                        padding: schmal ? "12px 16px" : "14px 28px",
                         borderTop: "1px solid rgba(106,172,204,0.1)",
-                        display: "flex", alignItems: "center",
+                        display: "flex", alignItems: "center", gap: 10,
                         justifyContent: "space-between",
                         flexShrink: 0,
                         background: "rgba(106,172,204,0.02)",

@@ -45,6 +45,7 @@ import { spracheAus, TEXTE } from "./proKaufTexte";
 import { TEXTE as ANFRAGE_TEXTE } from "./lizenzAnfrageTexte";
 import { preisText, usePreise } from "@utils/usePreise";
 import { useFensterStapel } from "@utils/useFensterStapel";
+import useMediaQuery from "@utils/useMediaQuery";
 import { turnstileSchluessel } from "@utils/turnstile";
 import { useTurnstile } from "@utils/useTurnstile";
 import { kennungLesen } from "@utils/adresse";
@@ -95,6 +96,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    const sprache = spracheAus(i18n.language || "de");
    const t = TEXTE[sprache];
    const ta = ANFRAGE_TEXTE[sprache];
+
+   /* Auf dem Telefon stehen die Felder untereinander - dieselbe Regel wie in
+    * der Bestellanfrage (Anwenderbefund 03.10.2026, iPhone). */
+   const schmal = useMediaQuery("(max-width: 640px)");
 
    // Kennung und Version über `@utils/adresse`: Beide werden gleich nach dem
    // Laden aus der Adresse entfernt, und `appVersion` wird bei JEDEM Rendern
@@ -652,12 +657,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                   style={{
                      position: "fixed", inset: 0, zIndex: 1001,
                      display: "flex", alignItems: "center", justifyContent: "center",
-                     padding: "24px 16px",
+                     padding: schmal ? "10px 8px" : "24px 16px",
                      pointerEvents: "none",
                   }}
                >
-                  <div style={{
-                     width: "100%", maxWidth: 620, maxHeight: "88vh",
+                  {/* Die Höhe steht in `index.css` (`.formular-fenster`). */}
+                  <div className="formular-fenster" style={{
+                     width: "100%", maxWidth: 620,
                      display: "flex", flexDirection: "column",
                      background: "rgba(14,16,36,0.97)",
                      border: "1px solid rgba(106,172,204,0.18)",
@@ -668,7 +674,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                   }}>
                      {/* ── Kopf ── */}
                      <div style={{
-                        padding: "22px 28px 20px",
+                        padding: schmal ? "16px 16px 14px" : "22px 28px 20px",
                         borderBottom: "1px solid rgba(106,172,204,0.12)",
                         display: "flex", alignItems: "flex-start", gap: 14,
                         flexShrink: 0,
@@ -723,7 +729,10 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                         ref={inhaltRef}
                         data-lenis-prevent
                         onWheel={(e) => e.stopPropagation()}
-                        style={{ padding: "22px 28px", overflowY: "auto", flex: 1 }}
+                        style={{
+                           padding: schmal ? "16px 16px" : "22px 28px",
+                           overflowY: "auto", flex: 1,
+                        }}
                      >
                         {/* Kein Aufbau heisst: hier kann nicht gekauft werden.
                             Das ist der ehrliche Zustand, solange der
@@ -1040,7 +1049,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  </Zeile>
                               )}
 
-                              <Zeile spalten="150px 1fr 1fr">
+                              <Zeile spalten={schmal ? "minmax(0, 1fr)" : "150px 1fr 1fr"}>
                                  {/* Zwei Knoepfe statt eines Textfeldes - wie in
                                      der Bestellanfrage. Eine Anrede tippt
                                      niemand, er waehlt sie. */}
@@ -1089,7 +1098,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                           fehlerImmer={feldFehler === "email"} />
                               </Zeile>
 
-                              <Zeile spalten="1fr 90px">
+                              <Zeile spalten={schmal ? "minmax(0, 1fr) 88px" : "1fr 90px"}>
                                  <Eingabe id="pro-strasse" titel={ta.strasse} pflicht
                                           wert={strasse} setzen={setStrasse} max={120}
                                           fehler={leer.includes("strasse")} />
@@ -1098,7 +1107,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                           fehler={leer.includes("hausnummer")} />
                               </Zeile>
 
-                              <Zeile spalten="110px 1fr 1fr">
+                              <Zeile spalten={schmal ? "96px minmax(0, 1fr)" : "110px 1fr 1fr"}>
                                  <Eingabe id="pro-plz" titel={ta.plz} pflicht
                                           wert={plz} setzen={setPlz} max={16}
                                           fehler={leer.includes("plz")} />
@@ -1107,7 +1116,7 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                           fehler={leer.includes("stadt")} />
                                  <Eingabe id="pro-land" titel={ta.land} pflicht
                                           wert={land} setzen={setLand} max={64}
-                                          liste="pro-laender"
+                                          liste="pro-laender" breit={schmal}
                                           fehler={leer.includes("land")}
                                           fehlerImmer={feldFehler === "land"
                                              || landGesperrt} />
@@ -1239,9 +1248,9 @@ const ProKaufModal = ({ open, onClose }: Props) => {
 
                      {/* ── Fussleiste ── */}
                      <div style={{
-                        padding: "14px 28px",
+                        padding: schmal ? "12px 16px" : "14px 28px",
                         borderTop: "1px solid rgba(106,172,204,0.1)",
-                        display: "flex", alignItems: "center",
+                        display: "flex", alignItems: "center", gap: 10,
                         justifyContent: "space-between",
                         flexShrink: 0,
                         background: "rgba(106,172,204,0.02)",
@@ -1368,10 +1377,12 @@ function Stern() {
 }
 
 function Eingabe({ id, titel, wert, setzen, max, pflicht, fehler, fehlerImmer,
-                  liste }: {
+                  liste, breit }: {
    id: string; titel: string; wert: string; setzen: (v: string) => void;
    max: number; pflicht?: boolean; fehler?: boolean; fehlerImmer?: boolean;
    liste?: string;
+   /** Über die volle Zeile, auch wenn das Raster mehrere Spalten hat. */
+   breit?: boolean;
 }) {
    /* Der rote Rahmen verschwindet, sobald etwas drinsteht.
     *
@@ -1391,7 +1402,7 @@ function Eingabe({ id, titel, wert, setzen, max, pflicht, fehler, fehlerImmer,
     */
    const zeigtFehler = fehlerImmer || (Boolean(fehler) && !wert.trim());
    return (
-      <div style={{ minWidth: 0 }}>
+      <div style={{ minWidth: 0, gridColumn: breit ? "1 / -1" : undefined }}>
          <label htmlFor={id} style={beschriftung}>
             {titel}{pflicht ? <> <Stern /></> : null}
          </label>
