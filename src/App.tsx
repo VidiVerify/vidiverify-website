@@ -31,6 +31,7 @@ const Contact = lazy(() => import("@pages/contact/Contact"));
 const Roadmap = lazy(() => import("@pages/roadmap/Roadmap"));
 const Download = lazy(() => import("@pages/download/Download"));
 const Preise = lazy(() => import("@pages/preise/Preise"));
+const MusicSeite = lazy(() => import("@pages/music/MusicSeite"));
 
 const SectionLoader = () => (
    <div
@@ -73,6 +74,10 @@ const App = () => {
     * Anwendung, sondern aus einer Email: Der Zahlungsanbieter hängt an diese
     * Adresse `?_ptxn=<Vorgang>`, und Paddle.js öffnet das Bezahlfenster. */
    const [zahlenOffen] = useState(() => window.location.hash === "#zahlen");
+   /* Die Musikseite (vidiverify.de/music). Sie kommt über die Weiterleitung
+    * in `public/music/index.html`, die zuvor die Album-Vorschau für Facebook
+    * ausgeliefert hat. */
+   const [musicOffen] = useState(() => window.location.hash === "#music");
 
    /* Gerätekennung und Version aus der Adresse nehmen, sobald sie gelesen sind.
     *
@@ -164,6 +169,29 @@ const App = () => {
          <ErrorBoundary>
             <Nav />
             <ZahlenSeite />
+            <Footer />
+            <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
+            <DatenschutzModal open={datenschutzOpen}
+                              onClose={() => setDatenschutzOpen(false)} />
+            <ImpressumModal open={impressumOpen}
+                            onClose={() => setImpressumOpen(false)} />
+            <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
+            <WiderrufModal open={widerrufOpen}
+                           onClose={() => setWiderrufOpen(false)} />
+         </ErrorBoundary>
+      );
+   }
+
+   /* Die Musikseite steht ebenfalls für sich: eigener Kopf mit Cover, eigene
+    * Player-Leiste. Die Szenen der Landeseite wären hier nur Konkurrenz zum
+    * Cover. Die Rechtsmodale gehören aus demselben Grund wie oben mit. */
+   if (musicOffen) {
+      return (
+         <ErrorBoundary>
+            <Nav />
+            <Suspense fallback={<SectionLoader />}>
+               <MusicSeite />
+            </Suspense>
             <Footer />
             <EulaModal open={eulaOpen} onClose={() => setEulaOpen(false)} />
             <DatenschutzModal open={datenschutzOpen}

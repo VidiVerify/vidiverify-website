@@ -27,7 +27,11 @@
                // seinen Default Payment Link darauf und hängt `?_ptxn=<id>`
                // an; Paddle.js öffnet das Bezahlfenster dann von selbst.
                // Die Abfrage muss deshalb mitreisen - siehe unten.
-               "/zahlen": "/#zahlen"
+               "/zahlen": "/#zahlen",
+               // Das Album. Die eigentliche Seite liegt in
+               // `public/music/index.html` (Vorschau für Facebook); der
+               // Eintrag hier hält `/music` auch im Dev-Server erreichbar.
+               "/music": "/#music"
             };
             var target = routes[path];
             if (target) {

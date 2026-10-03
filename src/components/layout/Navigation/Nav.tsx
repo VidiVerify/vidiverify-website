@@ -79,6 +79,10 @@ const Nav = () => {
       const el = document.querySelector(`#${id}`);
       if (el) {
          el.scrollIntoView({ behavior: "smooth" });
+      } else {
+         // Auf den eigenständigen Seiten (/music, /zahlen) gibt es die
+         // Abschnitte nicht - dann zur Startseite und dort hinspringen.
+         window.location.href = id === "hero" ? "/" : `/#${id}`;
       }
       setMobileMenuOpen(false);
    }, []);
