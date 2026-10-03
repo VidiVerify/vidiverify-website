@@ -151,6 +151,17 @@ function zaehlen(pfad: string) {
    try { gc?.count?.({ path: pfad, event: true }); } catch { /* egal */ }
 }
 
+/** Ob die Spektralanzeige den Ton über Web Audio leiten darf (siehe
+ *  `tonAnschliessen`). Safari erkennt man an „Safari" ohne „Chrome"/„Android";
+ *  iPads melden sich als Mac-Safari und fallen damit ebenfalls heraus. */
+function spektrumMoeglich(): boolean {
+   const ua = navigator.userAgent;
+   const safari = /safari/i.test(ua) && !/chrome|chromium|crios|fxios|android/i.test(ua);
+   const ios = /iphone|ipad|ipod/i.test(ua);
+   return !safari && !ios
+      && window.matchMedia("(min-width: 1024px) and (hover: hover)").matches;
+}
+
 /* ===== Wellenform ===== */
 
 interface WelleProps {
@@ -289,10 +300,18 @@ export default function MusicSeite() {
 
    /* Web Audio erst beim ersten Abspielen: Browser lassen einen
     * AudioContext ohne Nutzeraktion nicht anlaufen. Schlägt es fehl, spielt
-    * die Musik trotzdem - nur ohne Spektrum. */
+    * die Musik trotzdem - nur ohne Spektrum.
+    *
+    * NUR dort, wo das Spektrum zu sehen ist (breit, mit Maus) und NICHT in
+    * Safari. Über `createMediaElementSource` läuft der Ton durch die
+    * Umrechnung des AudioContext; Safari rechnet dort 44,1 kHz auf die 48 kHz
+    * des Geräts um, und das schwankt: Am iPhone liefen die Songs mal
+    * schneller, mal langsamer (Anwenderbefund 03.10.2026). Ausserdem bricht
+    * ein umgeleiteter Ton am Sperrbildschirm ab. Am Handy ist das Spektrum
+    * ohnehin ausgeblendet - der Umweg brachte dort nur das Risiko. */
    const tonAnschliessen = useCallback(() => {
       const el = audio.current;
-      if (!el) return;
+      if (!el || !spektrumMoeglich()) return;
       try {
          if (!tonKette.current) {
             const Ctor = window.AudioContext
@@ -453,7 +472,7 @@ export default function MusicSeite() {
          {/* Musik ohne Sprechtext: Untertitel gibt es nicht. Die Titel
              stehen in der Liste und in der Player-Leiste. */}
          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-         <audio ref={audio} preload="none" />
+         <audio ref={audio} preload="auto" />
 
          {/* ===== Kopf ===== */}
          <section className="vvm-kopf">
@@ -609,7 +628,7 @@ export default function MusicSeite() {
                   </div>
                </div>
                <div className="vvm-player-rechts">
-                  <Spektrum analyser={analyser} laeuft={laeuft} />
+                  {analyser && <Spektrum analyser={analyser} laeuft={laeuft} />}
                   <button type="button" onClick={() => setStumm((s) => !s)} aria-label={t.ton}>
                      {stumm || lautstaerke === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
                   </button>
