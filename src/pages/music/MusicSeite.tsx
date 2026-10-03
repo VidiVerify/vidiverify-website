@@ -20,7 +20,7 @@
  * Die Wellenformen sind beim Aufbereiten vorberechnet (`vol001.json`), die
  * Seite muss keine MP3 laden, um sie zu zeichnen.
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
    Check, Disc3, Download, Pause, Play, Share2, SkipBack, SkipForward,
@@ -176,7 +176,7 @@ interface WelleProps {
 }
 
 /** Vorberechnete Wellenform; der gespielte Teil leuchtet im Coververlauf. */
-function Welle({ werte, anteil, aktiv, hoehe, label, onSprung, id }: WelleProps) {
+function WelleZeichnung({ werte, anteil, aktiv, hoehe, label, onSprung, id }: WelleProps) {
    const n = werte.length;
    const breite = n * 3;
    const klick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -226,6 +226,22 @@ function Welle({ werte, anteil, aktiv, hoehe, label, onSprung, id }: WelleProps)
       </svg>
    );
 }
+
+/* Nur neu zeichnen, wenn sich am Bild etwas ändert.
+ *
+ * Die Seite rendert bei jedem `timeupdate` (rund viermal pro Sekunde) neu.
+ * Ohne diese Sperre zeichnete sie dabei alle elf Wellenformen mit zusammen
+ * über 3000 Balken - auch die zehn, die stillstehen. Am iPhone geriet die
+ * Wiedergabe ins Leiern, während dieselbe Datei direkt geöffnet sauber lief
+ * (Anwenderbefund 03.10.2026).
+ *
+ * `onSprung` zählt bewusst NICHT mit: Es ist bei jedem Rendern eine neue
+ * Funktion und hebelte die Sperre sonst aus. Die Aufrufer reichen deshalb
+ * eine Funktion herein, die über `springeRef` stets die aktuelle Fassung
+ * von `springe` erreicht. */
+const Welle = memo(WelleZeichnung, (a, b) =>
+   a.werte === b.werte && a.anteil === b.anteil && a.aktiv === b.aktiv
+   && a.hoehe === b.hoehe && a.label === b.label && a.id === b.id);
 
 /* ===== Spektralanzeige ===== */
 
@@ -381,6 +397,10 @@ export default function MusicSeite() {
       el.currentTime = anteil * (el.duration || LISTE[i].dauer);
       setPos(el.currentTime);
    }, [aktuell, spiele]);
+
+   // Für die Wellenformen, die nicht bei jedem Rendern neu zeichnen (`Welle`).
+   const springeRef = useRef(springe);
+   useEffect(() => { springeRef.current = springe; }, [springe]);
 
    // Audio-Ereignisse
    useEffect(() => {
@@ -560,7 +580,7 @@ export default function MusicSeite() {
                         <div className="vvm-nur-breit">
                            <Welle id={`z${tr.nr}`} werte={tr.wellen} hoehe={34} aktiv={istAktiv}
                                   anteil={istAktiv ? anteil : 0} label={`${t.wellen}: ${tr.titel}`}
-                                  onSprung={(a) => springe(i, a)} />
+                                  onSprung={(a) => springeRef.current(i, a)} />
                         </div>
                         <span className="vvm-nur-mittel vvm-genre">{tr.genre}</span>
                         <span className="vvm-dauer">{zeit(tr.dauer)}</span>
@@ -622,7 +642,7 @@ export default function MusicSeite() {
                      <div className="vvm-player-welle">
                         {track && (
                            <Welle id="player" werte={track.wellen} hoehe={28} aktiv anteil={anteil}
-                                  label={t.wellen} onSprung={(a) => aktuell !== null && springe(aktuell, a)} />
+                                  label={t.wellen} onSprung={(a) => aktuell !== null && springeRef.current(aktuell, a)} />
                         )}
                      </div>
                      <span>{zeit(laenge || track?.dauer || 0)}</span>
