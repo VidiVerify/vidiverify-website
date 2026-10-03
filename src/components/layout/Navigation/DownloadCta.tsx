@@ -11,7 +11,8 @@ const GOLD_DARK = "#d97706";
 
 interface Props {
    onNavigate: (id: string) => void;
-   /** Im Handy-Menü über die volle Breite. */
+   /** Im Handy-Menü: grösser, aber nur so breit wie sein Inhalt. Über die
+    *  volle Breite wirkte er wie ein Balken (Anwenderwunsch 03.10.2026). */
    block?: boolean;
 }
 
@@ -25,11 +26,10 @@ const DownloadCta = ({ onNavigate, block }: Props) => {
          whileTap={{ scale: 0.97 }}
          style={{
             display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 5,
-            width: block ? "100%" : undefined,
             // So gross wie die inneren Knöpfe der Sprachwahl (DE/EN), nicht
             // wie deren äussere Pille: dieselben Werte wie in
             // LanguageToggle.tsx, keine feste Höhe.
-            padding: block ? "12px 16px" : "4px 10px",
+            padding: block ? "10px 22px" : "4px 10px",
             borderRadius: 999,
             border: "none",
             // PRO-Gold wie der Knopf der Tester-Promo (TesterPromo.tsx)

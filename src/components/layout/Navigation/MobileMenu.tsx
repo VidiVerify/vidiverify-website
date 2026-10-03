@@ -161,7 +161,8 @@ const MobileMenu = ({
                         );
                      })}
 
-                     <div style={{ padding: "16px 4px 0" }}>
+                     {/* Links bündig mit den Punkten der Menüliste. */}
+                     <div style={{ padding: "16px 0 0 10px" }}>
                         <DownloadCta onNavigate={onNavigate} block />
                      </div>
                   </div>
