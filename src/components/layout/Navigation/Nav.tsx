@@ -11,10 +11,11 @@ interface NavSection {
 
 // Highlights steht nicht im Menü: Der Hero verlinkt ihn direkt, und er
 // folgt ihm unmittelbar. Download ist kein Punkt der Liste, sondern ein
-// eigener Knopf (DownloadCta).
+// eigener Knopf (DownloadCta). Die Formate stehen seit „First Look" nicht
+// mehr im Menü: Sie bleiben auf der Seite, angesteuert werden sie kaum.
 const NAV_KEYS: { id: string; key: string }[] = [
+   { id: "first-look", key: "firstLook" },
    { id: "funktionen", key: "features" },
-   { id: "formate", key: "formats" },
    { id: "roadmap", key: "roadmap" },
    { id: "preise", key: "pricing" },
    { id: "kontakt", key: "contact" },

@@ -17,7 +17,8 @@
       "type-check": "tsc --noEmit",
       "predeploy": "pnpm run build",
       "deploy": "gh-pages -d build",
-      "clean": "rimraf build node_modules/.vite"
+      "clean": "rimraf build node_modules/.vite",
+      "bilder:firstlook": "node scripts/firstlook-bilder.mjs"
    },
    "dependencies": {
       "@emailjs/browser": "^4.4.1",
@@ -60,6 +61,7 @@
       "prettier": "^3.8.1",
       "puppeteer": "^24.0.0",
       "rimraf": "^6.1.2",
+      "sharp": "^0.35.5",
       "typescript": "^5.9.3",
       "typescript-eslint": "^8.57.2",
       "vite": "^7.3.2",

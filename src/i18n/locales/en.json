@@ -8,8 +8,8 @@
    },
    "nav": {
       "highlights": "Highlights",
+      "firstLook": "First Look",
       "features": "Features",
-      "formats": "Formats",
       "roadmap": "Roadmap",
       "download": "Download",
       "pricing": "Pricing",
@@ -355,6 +355,138 @@
                "License",
                "Activation",
                "7 days offline"
+            ]
+         }
+      }
+   },
+   "firstLook": {
+      "title": "First Look",
+      "subtitle": "VidiVerify 1.5 up close",
+      "vergroessern": "Enlarge",
+      "schliessen": "Close",
+      "zurueck": "Previous image",
+      "weiter": "Next image",
+      "kapitelLabel": "Chapter",
+      "kapitel": {
+         "pruefung": {
+            "titel": "Checks",
+            "text": "Three stages at a glance: integrity check, full check and diagnosis, each with a clear traffic light.",
+            "tags": [
+               "3 check stages",
+               "Traffic-light verdict",
+               "Magika ML"
+            ]
+         },
+         "analyse": {
+            "titel": "Media Analysis",
+            "text": "Container, codec, bitrate and aspect ratio at a glance, with a separate verdict for video and audio.",
+            "tags": [
+               "Video and audio verdict",
+               "Atmos and DTS:X",
+               "Rating details"
+            ]
+         },
+         "audio": {
+            "titel": "Audio Detail",
+            "text": "Spectrum, levels and waveform. Tells you whether a bitrate is genuine or just upscaled.",
+            "tags": [
+               "Upcoding detection",
+               "Dropouts",
+               "Spectrogram"
+            ]
+         },
+         "stapel": {
+            "titel": "Media Batch",
+            "text": "Check entire folders in one run, with live status per file and time remaining.",
+            "tags": [
+               "Whole folders",
+               "Live time remaining",
+               "Batch report"
+            ]
+         },
+         "repair": {
+            "titel": "Media Repair",
+            "text": "Names the damage and suggests a repair method with an honest chance of success.",
+            "tags": [
+               "Method choice",
+               "Chance of success",
+               "Verification"
+            ]
+         },
+         "lab": {
+            "titel": "Media Lab",
+            "text": "Will the file play everywhere? A traffic-light verdict against six target profiles, from Universal to Broadcast.",
+            "tags": [
+               "6 target profiles",
+               "Traffic-light verdict",
+               "Rule set"
+            ]
+         },
+         "map": {
+            "titel": "MAP Report",
+            "text": "The findings as an archivable PDF: all key values and check results on one page.",
+            "tags": [
+               "PDF",
+               "Audit-proof",
+               "DE · EN · ES · 中文"
+            ]
+         },
+         "quick": {
+            "titel": "Quick Check",
+            "text": "Just right-click in Windows Explorer: findings and media data in seconds, without starting the app.",
+            "tags": [
+               "Explorer right-click",
+               "Seconds",
+               "No app start"
+            ]
+         },
+         "windows": {
+            "titel": "Windows Theme",
+            "text": "Bright and clear like Windows itself - familiar from the first click and easy to read even in daylight.",
+            "tags": [
+               "Light",
+               "Windows style"
+            ]
+         },
+         "plex": {
+            "titel": "Plex Theme",
+            "text": "Charcoal with orange accents - feels right at home next to Plex, Jellyfin or Emby.",
+            "tags": [
+               "Dark",
+               "Orange accents"
+            ]
+         },
+         "video": {
+            "titel": "Video Detail",
+            "text": "Frame-accurate preview, frame types and GOP, perceptual analysis and bitrate graph - all inside the app, no second player needed.",
+            "tags": [
+               "Frame-accurate",
+               "GOP analysis",
+               "Bitrate graph"
+            ]
+         },
+         "codeclab": {
+            "titel": "CodecLab",
+            "text": "Three questions about goal, devices and use - and a reasoned codec recommendation with an alternative.",
+            "tags": [
+               "Recommendation",
+               "H.264 · H.265 · VP9 · AV1"
+            ]
+         },
+         "bitratelab": {
+            "titel": "Bitrate EquivalenceLab",
+            "text": "Enter a bitrate and see what it equals in the other codecs - including CRF starting values.",
+            "tags": [
+               "Codec comparison",
+               "CRF starting values"
+            ]
+         },
+         "sizelab": {
+            "titel": "Video SizeLab",
+            "text": "Estimates the file size for every target resolution and codec, including up- and downscaling.",
+            "tags": [
+               "File size",
+               "Up- and downscaling"
             ]
          }
       }

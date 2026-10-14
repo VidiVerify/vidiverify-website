@@ -26,6 +26,7 @@ import { kennungAufraeumen } from "@utils/adresse";
 // Lazy Load "Below the fold" sections for massive performance gains
 const About = lazy(() => import("@pages/about/About"));
 const Services = lazy(() => import("@pages/services/Services"));
+const FirstLook = lazy(() => import("@pages/firstlook/FirstLook"));
 const Achievement = lazy(() => import("@pages/achievement/Achievement"));
 const Contact = lazy(() => import("@pages/contact/Contact"));
 const Roadmap = lazy(() => import("@pages/roadmap/Roadmap"));
@@ -231,6 +232,10 @@ const App = () => {
                      <SectionTransition variant="gradient-sweep" />
                      <div className="section-darker" id="highlights">
                         <About />
+                     </div>
+                     <SectionTransition variant="beam" />
+                     <div className="section-dark" id="first-look">
+                        <FirstLook />
                      </div>
                      <SectionTransition variant="glow-pulse" />
                      <div className="section-dark" id="funktionen">

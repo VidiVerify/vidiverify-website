@@ -87,6 +87,233 @@
 }
 .marquee-arrow-left  { left: 4px; }
 .marquee-arrow-right { right: 4px; }
+
+/* ===== First Look =====
+ * Bühne mit Ambilight, Kapitel im Magazin-Stil, Filmstreifen als Vorschau.
+ * Die Kapitelfarbe kommt als --fl-farbe aus der Komponente. */
+
+/* Ambilight: das Bild selbst, stark weichgezeichnet, strahlt hinter sich */
+.firstlook-ambilight {
+   position: absolute; inset: 0; width: 100%; height: 100%;
+   object-fit: cover; pointer-events: none; z-index: 0;
+   filter: blur(64px) saturate(2.4) brightness(1.9);
+   opacity: 0.85;
+   transform: scale(1.22);
+}
+/* Lichtkegel in der Kapitelfarbe. Die Farbe ist als <color> registriert,
+ * damit sie beim Kapitelwechsel überblendet statt umzuspringen. */
+@property --fl-spot {
+   syntax: "<color>"; inherits: true; initial-value: transparent;
+}
+.firstlook-buehne-raum {
+   --fl-rand: 560px;
+   transition: --fl-spot 0.9s ease;
+}
+/* Niedrige Bildschirme: PageSection rückt enger zusammen, also weniger Rand */
+@media (max-height: 820px) and (min-width: 1024px) {
+   .firstlook-buehne-raum { --fl-rand: 505px; }
+}
+@media (max-height: 700px) and (min-width: 1024px) {
+   .firstlook-buehne-raum { --fl-rand: 490px; }
+   .firstlook-chips { display: none !important; }
+}
+.firstlook-buehne-raum::before {
+   content: ""; position: absolute; inset: -12% -8% -22%; pointer-events: none;
+   background:
+      radial-gradient(ellipse 55% 50% at 50% 50%, color-mix(in srgb, var(--fl-spot) 26%, transparent), transparent 70%),
+      radial-gradient(ellipse 45% 10% at 50% 96%, color-mix(in srgb, var(--fl-spot) 40%, transparent), transparent 75%);
+}
+.firstlook-buehne {
+   position: relative; z-index: 1; display: block;
+   width: 100%; height: 100%; padding: 0;
+   border: 1px solid rgba(255, 255, 255, 0.1);
+   border-radius: 12px; overflow: hidden;
+   background: #08142a; cursor: zoom-in;
+   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.firstlook-buehne:hover { transform: translateY(-3px); }
+.firstlook-reflex {
+   position: absolute; inset: 0; pointer-events: none;
+   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.14) 48%,
+      rgba(255, 255, 255, 0.03) 55%, transparent 65%);
+}
+.firstlook-lupe {
+   position: absolute; right: 12px; bottom: 12px;
+   display: inline-flex; align-items: center; gap: 6px;
+   padding: 6px 10px; border-radius: 8px; font-size: 12px;
+   background: rgba(6, 7, 18, 0.75);
+   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+   opacity: 0; transition: opacity 0.2s;
+}
+.firstlook-buehne:hover .firstlook-lupe,
+.firstlook-buehne:focus-visible .firstlook-lupe { opacity: 1; }
+@media (hover: none) { .firstlook-lupe { opacity: 0.9; } }
+
+/* Kapitel: Nummer als leuchtende Kontur, Titel im Verlauf der Kapitelfarbe */
+.firstlook-kapitel {
+   display: grid; grid-template-columns: auto 1fr;
+   gap: 24px; align-items: start;
+}
+.firstlook-nummer {
+   font-size: 56px; font-weight: 800; line-height: 0.85;
+   letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+   color: var(--fl-farbe);
+   filter: drop-shadow(0 0 18px color-mix(in srgb, var(--fl-farbe) 35%, transparent));
+   padding: 4px 22px 4px 0;
+   border-right: 1px solid color-mix(in srgb, var(--fl-farbe) 30%, transparent);
+}
+.firstlook-zeile {
+   font-family: var(--font-mono); font-size: 11px;
+   letter-spacing: 0.2em; text-transform: uppercase;
+   color: var(--fl-farbe);
+}
+.firstlook-titel {
+   font-size: clamp(21px, 2.4vw, 26px); font-weight: 800;
+   letter-spacing: -0.02em; line-height: 1.15; margin: 4px 0 0;
+   background: linear-gradient(90deg, #eeeef5 0%, #eeeef5 35%, var(--fl-farbe) 100%);
+   -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.firstlook-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.firstlook-chip {
+   font-family: var(--font-mono); font-size: 11px;
+   padding: 4px 10px; border-radius: 999px;
+   color: color-mix(in srgb, var(--fl-farbe) 80%, white);
+   background: color-mix(in srgb, var(--fl-farbe) 10%, transparent);
+   border: 1px solid color-mix(in srgb, var(--fl-farbe) 35%, transparent);
+}
+@media (max-width: 640px) {
+   .firstlook-kapitel { grid-template-columns: 1fr; gap: 6px; }
+   .firstlook-nummer { font-size: 44px; border-right: 0; padding: 0; }
+}
+
+/* Vollansicht: Bildunterschrift */
+.firstlook-voll-text { text-align: center; max-width: 720px; width: 100%; }
+.firstlook-voll-kopf {
+   display: inline-flex; align-items: baseline; gap: 12px;
+}
+.firstlook-voll-nr {
+   font-size: 22px; font-weight: 800; line-height: 1;
+   letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+   color: var(--fl-farbe);
+   padding-right: 12px;
+   border-right: 1px solid color-mix(in srgb, var(--fl-farbe) 40%, transparent);
+   filter: drop-shadow(0 0 10px color-mix(in srgb, var(--fl-farbe) 35%, transparent));
+}
+.firstlook-voll-titel {
+   font-size: 18px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2;
+   background: linear-gradient(90deg, #eeeef5 0%, #eeeef5 40%, var(--fl-farbe) 100%);
+   -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.firstlook-voll-erklaerung {
+   font-size: 13px; line-height: 1.5; color: #a5a5c0; margin: 5px 0 0;
+}
+/* Segmentleiste: haarfein sichtbar, aber mit genug Fläche zum Treffen */
+.firstlook-voll-segmente {
+   display: flex; justify-content: center; gap: 4px; margin-top: 6px;
+}
+.firstlook-voll-segmente button {
+   width: 22px; height: 12px; padding: 0; border: 0; cursor: pointer;
+   background: linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16))
+      center / 100% 2px no-repeat;
+   transition: width 0.3s;
+}
+.firstlook-voll-segmente button:hover {
+   background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+}
+.firstlook-voll-segmente button.ist-aktiv {
+   width: 34px;
+   background-image: linear-gradient(var(--fl-farbe), var(--fl-farbe));
+   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--fl-farbe) 60%, transparent));
+}
+@media (max-width: 640px) {
+   .firstlook-voll-segmente button { width: 14px; }
+   .firstlook-voll-segmente button.ist-aktiv { width: 24px; }
+}
+
+/* Filmstreifen: Perforation oben und unten, rollt mit (background-attachment: local) */
+.firstlook-film {
+   position: relative; border-radius: 14px;
+   background: linear-gradient(180deg, #04050b, #0a0c18 50%, #04050b);
+   border: 1px solid rgba(255, 255, 255, 0.06);
+   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 60px rgba(0, 0, 0, 0.45);
+   overflow: hidden;
+}
+.firstlook-streifen {
+   --fl-perf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='10'%3E%3Crect x='7' y='2' width='10' height='6' rx='1.6' fill='%23ffffff' fill-opacity='0.13'/%3E%3C/svg%3E");
+   display: flex; gap: 14px; overflow-x: auto;
+   padding: 24px 24px 24px;
+   scroll-snap-type: x proximity; scrollbar-width: none;
+   background:
+      var(--fl-perf) repeat-x 0 6px local,
+      var(--fl-perf) repeat-x 0 calc(100% - 6px) local;
+   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.firstlook-streifen::-webkit-scrollbar { display: none; }
+.firstlook-streifen::after { content: ""; flex: 0 0 12px; }
+
+.firstlook-bild {
+   flex: 0 0 148px; padding: 0; border: 0; background: none; cursor: pointer;
+   /* Sonst macht ein langer Name ("Bitrate ÄquivalenzLab") den Rahmen breiter
+    * und damit das 16:9-Bild höher als die anderen; so kürzt er mit "…". */
+   min-width: 0;
+   display: flex; flex-direction: column; gap: 7px;
+   scroll-snap-align: center; text-align: left;
+   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.firstlook-bild-rahmen {
+   position: relative; display: block; isolation: isolate;
+   padding: 1.5px; border-radius: 8px; overflow: hidden;
+   background: rgba(255, 255, 255, 0.08);
+   transition: box-shadow 0.4s;
+}
+.firstlook-bild img {
+   position: relative; z-index: 1; display: block;
+   width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 6.5px;
+   filter: grayscale(0.6) brightness(0.55) contrast(1.05);
+   transition: filter 0.4s;
+}
+.firstlook-bild:hover { transform: translateY(-4px); }
+.firstlook-bild:hover img { filter: grayscale(0) brightness(0.95); }
+.firstlook-bild.ist-aktiv { transform: translateY(-4px) scale(1.05); }
+.firstlook-bild.ist-aktiv img { filter: none; }
+.firstlook-bild.ist-aktiv .firstlook-bild-rahmen {
+   box-shadow: 0 0 12px -6px color-mix(in srgb, var(--fl-farbe) 70%, transparent),
+      0 10px 24px rgba(0, 0, 0, 0.5);
+}
+/* Umlaufender Lichtrand am aktiven Bild */
+.firstlook-bild.ist-aktiv .firstlook-bild-rahmen::before {
+   content: ""; position: absolute; inset: -60%; z-index: 0;
+   background: conic-gradient(transparent 0 55%, var(--fl-farbe) 78%, #ffffff 84%,
+      var(--fl-farbe) 90%, transparent 100%);
+   animation: fl-dreh 3.2s linear infinite;
+}
+@keyframes fl-dreh { to { transform: rotate(1turn); } }
+.firstlook-takt {
+   position: absolute; left: 1.5px; right: 1.5px; bottom: 1.5px; height: 2px; z-index: 2;
+   background: var(--fl-farbe); transform-origin: 0 50%;
+   box-shadow: 0 0 4px color-mix(in srgb, var(--fl-farbe) 60%, transparent);
+}
+/* Randbeschriftung wie auf echtem Film */
+.firstlook-kante {
+   font-family: var(--font-mono); font-size: 10px;
+   letter-spacing: 0.14em; text-transform: uppercase;
+   color: #f59e0b; opacity: 0.5; padding-left: 2px;
+   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+   transition: color 0.3s, opacity 0.3s;
+}
+.firstlook-bild:hover .firstlook-kante { opacity: 0.85; }
+.firstlook-bild.ist-aktiv .firstlook-kante {
+   color: var(--fl-farbe); opacity: 1;
+   text-shadow: 0 0 8px color-mix(in srgb, var(--fl-farbe) 35%, transparent);
+}
+@media (max-width: 640px) {
+   .firstlook-bild { flex-basis: 128px; }
+   .firstlook-streifen { padding: 22px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+   .firstlook-bild.ist-aktiv .firstlook-bild-rahmen::before { animation: none; }
+}
 .marquee-container:hover .marquee-arrow { opacity: 1; }
 .marquee-arrow:hover { transform: translateY(-50%) scale(1.1); }
 

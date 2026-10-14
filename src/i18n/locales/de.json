@@ -8,8 +8,8 @@
    },
    "nav": {
       "highlights": "Highlights",
+      "firstLook": "First Look",
       "features": "Features",
-      "formats": "Formate",
       "roadmap": "Roadmap",
       "download": "Download",
       "pricing": "Preise",
@@ -355,6 +355,138 @@
                "Lizenz",
                "Aktivierung",
                "7 Tage offline"
+            ]
+         }
+      }
+   },
+   "firstLook": {
+      "title": "First Look",
+      "subtitle": "So sieht VidiVerify 1.5 aus",
+      "vergroessern": "Vergrössern",
+      "schliessen": "Schliessen",
+      "zurueck": "Vorheriges Bild",
+      "weiter": "Nächstes Bild",
+      "kapitelLabel": "Kapitel",
+      "kapitel": {
+         "pruefung": {
+            "titel": "Prüfung",
+            "text": "Drei Stufen, ein Blick: Integritätsprüfung, Vollprüfung und Diagnose melden sich mit klarer Ampel.",
+            "tags": [
+               "3 Prüfstufen",
+               "Ampel-Urteil",
+               "Magika-ML"
+            ]
+         },
+         "analyse": {
+            "titel": "Media Analyse",
+            "text": "Container, Codec, Bitrate und Bildformat auf einen Blick, mit eigenem Urteil für Video und Audio.",
+            "tags": [
+               "Video- und Audio-Urteil",
+               "Atmos und DTS:X",
+               "Bewertungsdetails"
+            ]
+         },
+         "audio": {
+            "titel": "Audio-Detail",
+            "text": "Spektrum, Pegel und Wellenform. Erkennt, ob eine Bitrate echt ist oder nur hochgerechnet.",
+            "tags": [
+               "Upcoding-Erkennung",
+               "Dropouts",
+               "Spektrogramm"
+            ]
+         },
+         "stapel": {
+            "titel": "Media Stapel",
+            "text": "Ganze Ordner in einem Lauf prüfen, mit Live-Status je Datei und Restzeit.",
+            "tags": [
+               "Ganze Ordner",
+               "Live-Restzeit",
+               "Stapel-Protokoll"
+            ]
+         },
+         "repair": {
+            "titel": "Media Repair",
+            "text": "Benennt die Schäden und schlägt eine Reparaturmethode mit ehrlicher Erfolgsaussicht vor.",
+            "tags": [
+               "Methodenwahl",
+               "Erfolgsaussicht",
+               "Verifizierung"
+            ]
+         },
+         "lab": {
+            "titel": "Media Lab",
+            "text": "Wird die Datei überall abgespielt? Ampel-Urteil gegen sechs Zielprofile von Universal bis Broadcast.",
+            "tags": [
+               "6 Zielprofile",
+               "Ampel-Urteil",
+               "Regelwerk"
+            ]
+         },
+         "map": {
+            "titel": "MAP-Protokoll",
+            "text": "Der Befund als ablagefähiges PDF: alle Kernwerte und Prüfergebnisse auf einer Seite.",
+            "tags": [
+               "PDF",
+               "Revisionssicher",
+               "DE · EN · ES · 中文"
+            ]
+         },
+         "quick": {
+            "titel": "Quick-Check",
+            "text": "Rechtsklick im Windows-Explorer genügt: Befund und Mediadaten in Sekunden, ohne die App zu starten.",
+            "tags": [
+               "Explorer-Rechtsklick",
+               "Sekunden",
+               "Ohne App-Start"
+            ]
+         },
+         "windows": {
+            "titel": "Design Windows",
+            "text": "Hell und klar wie Windows selbst - vom ersten Klick an vertraut und auch bei Tageslicht bestens lesbar.",
+            "tags": [
+               "Hell",
+               "Windows-Stil"
+            ]
+         },
+         "plex": {
+            "titel": "Design Plex",
+            "text": "Anthrazit mit orangen Akzenten - fühlt sich neben Plex, Jellyfin oder Emby sofort zuhause.",
+            "tags": [
+               "Dunkel",
+               "Orange Akzente"
+            ]
+         },
+         "video": {
+            "titel": "Video-Detail",
+            "text": "Bildgenaue Vorschau, Frametypen und GOP, perzeptuelle Analyse und Bitratenverlauf - alles in der App, kein Zweit-Player nötig.",
+            "tags": [
+               "Bildgenau",
+               "GOP-Analyse",
+               "Bitratenverlauf"
+            ]
+         },
+         "codeclab": {
+            "titel": "CodecLab",
+            "text": "Drei Fragen zu Ziel, Geräten und Verwendung - und eine begründete Codec-Empfehlung samt Alternative.",
+            "tags": [
+               "Empfehlung",
+               "H.264 · H.265 · VP9 · AV1"
+            ]
+         },
+         "bitratelab": {
+            "titel": "Bitrate ÄquivalenzLab",
+            "text": "Eine Bitrate eingeben und ablesen, was ihr in den anderen Codecs entspricht - inklusive CRF-Startwerten.",
+            "tags": [
+               "Codec-Vergleich",
+               "CRF-Startwerte"
+            ]
+         },
+         "sizelab": {
+            "titel": "Video SizeLab",
+            "text": "Schätzt die Dateigrösse für jede Zielauflösung und jeden Codec, auch beim Hoch- und Herunterskalieren.",
+            "tags": [
+               "Dateigrösse",
+               "Up- und Downscaling"
             ]
          }
       }
