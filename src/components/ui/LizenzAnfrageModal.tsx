@@ -420,7 +420,13 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
       // gesperrt (Codex-Review 15.09.2026).
       setLaeuft(false);
       window.setTimeout(() => {
-         window.scrollTo({ top: 0, behavior: "smooth" });
+         /* Zurück auf die Preise, nicht an den Seitenanfang (Anwender
+          * 16.10.2026): Wer das Fenster schliesst, will meist die andere
+          * Lizenz ansehen oder doch anfragen. Gesprungen wird wie in der
+          * Navigation; fehlt der Abschnitt, geht es an den Anfang. */
+         const preise = document.getElementById("preise");
+         if (preise) preise.scrollIntoView({ behavior: "smooth" });
+         else window.scrollTo({ top: 0, behavior: "smooth" });
          setFehler("");
          if (fertigRef.current) {
             /* Nach einer abgeschickten Anfrage ist das Fenster beim

@@ -320,9 +320,8 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     *    `?vvid=…&ver=…#pro` stehen - ein Neuladen öffnete das Kauffenster
     *    erneut, und die Gerätekennung stünde dauerhaft sichtbar in der
     *    Adresse und im Verlauf des Browsers.
-    * 2. **Der Blick geht auf die Seite.** Wer aus der Anwendung kam, hat die
-    *    Website nie gesehen; hinter dem Fenster steht sie ab dem
-    *    Seitenanfang.
+    * 2. **Der Blick geht auf die Seite**, und zwar auf die Preise (seit
+    *    16.10.2026; vorher an den Seitenanfang).
     * 3. **Ein erledigter Kauf bleibt nicht als Zustand liegen.** Nach dem
     *    Schliessen steht das Fenster wieder auf der Wahl - sonst begrüsst es
     *    beim nächsten Öffnen mit einem Lizenzschlüssel von vorgestern statt
@@ -351,7 +350,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
          // offen zu lassen.
       }
       window.setTimeout(() => {
-         window.scrollTo({ top: 0, behavior: "smooth" });
+         /* Zurück auf die Preise, nicht an den Seitenanfang (Anwender
+          * 16.10.2026): Wer das Fenster schliesst, will meist die andere
+          * Lizenz ansehen oder doch anfragen. Gesprungen wird wie in der
+          * Navigation; fehlt der Abschnitt, geht es an den Anfang. */
+         const preise = document.getElementById("preise");
+         if (preise) preise.scrollIntoView({ behavior: "smooth" });
+         else window.scrollTo({ top: 0, behavior: "smooth" });
          setPhase("wahl");
          setToken("");
          setTransaktion("");
