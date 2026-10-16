@@ -583,7 +583,7 @@
       "priceProLabel": "PRO · one major version",
       "priceLifetimeLabel": "LIFETIME · every major version",
       "priceExplainer": "A new PRO major version roughly once a year; LIFETIME covers every major version of the line.",
-      "priceNote": "Total prices, no further costs. When you buy online, our reseller Paddle applies the VAT of your country and shows the final amount at checkout. Order requests paid by invoice show no VAT (small business rule, § 19 UStG). One payment, no subscription.",
+      "priceNote": "Final prices including VAT, no further costs. When you buy online, our reseller Paddle only lists the VAT already included as a separate line at checkout and on the invoice; the price stays the same. Only in countries where net prices are customary (such as the USA and Canada) is local sales tax added. Order requests paid by invoice show no VAT (small business rule, § 19 UStG). One payment, no subscription.",
       "orderCta": "Request a licence",
       "commercialLabel": "Commercial & professional",
       "commercialTitle": "PRO",
