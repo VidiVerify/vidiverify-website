@@ -28,7 +28,7 @@ Videodateien altern. Codecs werden obsolet. Container reissen — meistens, **oh
 
 **VidiVerify findet die Probleme, bevor sie zum Problem werden.**
 
-Per Drag-&-Drop oder 1-Klick prüft die App Containerstruktur, Codec-Eigenschaften, Bitraten, Frame-Integrität und Metadaten — und dokumentiert das Ergebnis im proprietären **Media-Analyse-Protokoll (MAP)**: revisionssicher, ablagefähig, in DE · EN · ES · 中文.
+Per Drag-&-Drop oder 1-Klick prüft die App Containerstruktur, Codec-Eigenschaften, Bitraten, Frame-Integrität und Metadaten — und dokumentiert das Ergebnis im proprietären **Media-Analyse-Protokoll (MAP)**: revisionssicher, ablagefähig, in DE · EN · ES · RU · 中文.
 
 Entwickelt für **Archivare, Kuratoren und Postproduktions-Profis** — und genauso für alle, die ihre **Plex-, Jellyfin- oder Emby-Mediathek** nicht dem Zufall überlassen wollen.
 
@@ -44,18 +44,20 @@ Entwickelt für **Archivare, Kuratoren und Postproduktions-Profis** — und gena
 | 📋 **Formatprüfung** | **70+ unterstützte Formate** · AVC, HEVC, AV1, MPEG-1/2/4, ProRes, DNxHD · AAC, AC3, EAC3, DTS, TrueHD, FLAC |
 | 📑 **MAP-Protokoll** | Strukturierter, revisionssicherer Befundbericht · Diagnose-Tiefenanalyse-Sektion · Magika-Sub-Block |
 | 🧪 **Media Lab** | CodecLab, Bitrate ÄquivalenzLab und Video SizeLab zum Anfassen · Kompatibilitätsbewertung gegen 6 Zielprofile mit Ampel-Urteil |
+| 🛠️ **Media Repair** (PRO) | Reparatur aus dem Prüfbefund · 16 Methoden, verlustfreie zuerst · Pflicht-Verifizierung · RepairMAP |
+| 📚 **Media Stapel** (PRO) | Ganze Ordner prüfen · Pause und Fortsetzen · Ergebnisfenster mit Filter · StapelMAP |
 | 🎞️ **Media Test** | Bildgenaues Video-Detailfenster mit Hochleistungs-Vorschau, KPI-Kacheln und Bitratenverlauf · eigenes Audio-Detailfenster mit Wellenform, Dropout- und Cutoff-/Upcoding-Erkennung |
 | 📡 **Live-Telemetrie** | CPU · RAM · Netzwerk · Leserate während der Prüfung sichtbar |
-| 🌍 **Mehrsprachig** | App: DE · EN · ES · 中文 · Website: DE · EN |
+| 🌍 **Mehrsprachig** | App: DE · EN · ES · RU · 中文 · Website: DE · EN |
 | 🔐 **Verifizierbar** | Signierte Builds · SHA-256-Prüfwert je Release · lokale Verarbeitung, **keine Cloud** |
 
-## 🆕 Neu in v1.4.9
+## 🆕 Neu in v1.5.0
 
-- **Kompatibilitätsbewertung — wird deine Datei wirklich überall abgespielt?** Neuer Tab „Media Lab": VidiVerify bewertet die Wiedergabe-Wahrscheinlichkeit gegen sechs Zielprofile (Universal, Streaming, Smart-TV, Mobil, Archiv, Broadcast) mit klarer Ampel — Fallstricke wie problematische Codec-Profile oder Farbräume werden benannt, bevor sie beim Zuschauer zum schwarzen Bild werden.
-- **Drei Video-Laboratorien zum Anfassen.** CodecLab empfiehlt live den passenden Codec für Ziel und Gerät, das Bitrate ÄquivalenzLab rechnet Bitraten fair zwischen Codecs um, das Video SizeLab schätzt die Dateigrösse bei jeder Auflösung — inklusive Up- und Downscaling.
-- **Neues Video-Detailfenster für echte Videoprofis.** KPI-Kacheln für Bild, Farbe und Bitrate, Hochleistungs-Vorschau mit bildgenauer Wiedergabe, perzeptuelle Analyse als Zebra-Tabelle und ein DAW-artiger Bitratenverlauf — alles direkt in der App, kein Zweit-Player nötig.
-- **Erstmals: eigenes Audio-Detailfenster mit Cutoff- und Upcoding-Erkennung.** Frequenzspektrum, Pegel, Wellenform und Dropout-Erkennung — plus das Flaggschiff-Feature: erkennt anhand des Frequenz-Cutoffs, ob eine Datei tatsächlich in der angegebenen Bitrate codiert wurde oder nur hochgerechnet ist („Upcoding"/Fake-Bitrate).
-- **Spanisch als vierte Sprache.** VidiVerify spricht jetzt auch Español — App und alle Detailfenster.
+- **Media Repair (PRO): defekte Videos reparieren statt neu beschaffen.** Aus dem Prüfbefund heraus empfiehlt VidiVerify die passende von 16 Reparaturmethoden, verlustfreie zuerst, und verifiziert das Ergebnis danach selbst. Das Revisionsblatt RepairMAP dokumentiert jede Reparatur lückenlos, bis zur Prüfsumme.
+- **Media Stapel (PRO): ganze Ordner in einem Lauf.** Beliebig viele Dateien nacheinander prüfen, pausieren und fortsetzen, sogar nach einem Neustart. Am Ende stehen ein filterbares Ergebnisfenster und die StapelMAP als Bericht.
+- **PRO und LIFETIME direkt aus der App.** Bezahlt wird über Paddle, die signierte Lizenz kommt danach von selbst in die App. Wer PRO hat, bekommt es beim Upgrade auf LIFETIME voll angerechnet.
+- **Bewertung zum Nachlesen.** Jede Ampel folgt einem versionierten Regelwerk, einsehbar im Fenster „Bewertungsdetails & Symbole", und jeder Bericht nennt den Stand, nach dem geprüft wurde.
+- **Russisch als fünfte Sprache.** Dazu ein Setup, das alle Sprachen der App spricht.
 
 ## 🚀 Bezugsquellen
 
@@ -93,7 +95,7 @@ Modernes Glassmorphism-Design mit Aurora-Akzenten, 3D-Hero-Szene via React Three
 
 ## 💛 Unterstützung
 
-VidiVerify wird von einem unabhängigen Team mit hohem Anspruch entwickelt. **Die private Nutzung ist und bleibt kostenfrei.** Wer die Weiterentwicklung mittragen möchte, kann das [freiwillig per Spende](https://vidiverify.de/#spenden) tun — keine Verpflichtung, kein Abo.
+VidiVerify wird von einem unabhängigen Team mit hohem Anspruch entwickelt. **Die Prüfung mit VidiVerify FREE ist und bleibt kostenlos.** Wer mehr braucht und die Weiterentwicklung mittragen möchte, findet Media Repair und Media Stapel in [PRO und LIFETIME](https://vidiverify.de/pro/): einmal zahlen, kein Abo.
 
 ---
 
@@ -110,7 +112,7 @@ Video files age. Codecs go obsolete. Containers break — usually **before you n
 
 **VidiVerify catches the problems before they become problems.**
 
-Drag & drop or 1-click verifies container structure, codec attributes, bitrates, frame integrity and metadata — and documents the result in the proprietary **Media Analysis Protocol (MAP)**: audit-ready, archive-grade, available in DE · EN · ES · 中文.
+Drag & drop or 1-click verifies container structure, codec attributes, bitrates, frame integrity and metadata — and documents the result in the proprietary **Media Analysis Protocol (MAP)**: audit-ready, archive-grade, available in DE · EN · ES · RU · 中文.
 
 Built for **archivists, curators, post-production professionals** — and equally for anyone who refuses to leave their **Plex, Jellyfin or Emby library** to chance.
 
@@ -126,18 +128,20 @@ Built for **archivists, curators, post-production professionals** — and equall
 | 📋 **Format verification** | **70+ supported formats** · AVC, HEVC, AV1, MPEG-1/2/4, ProRes, DNxHD · AAC, AC3, EAC3, DTS, TrueHD, FLAC |
 | 📑 **MAP protocol** | Structured, audit-ready finding report · Diagnostic deep analysis section · Magika sub-block |
 | 🧪 **Media Lab** | Hands-on CodecLab, Bitrate Equivalence Lab and Video SizeLab · compatibility scoring against 6 target profiles with a clear traffic-light verdict |
+| 🛠️ **Media Repair** (PRO) | Repair from the check result · 16 methods, lossless first · mandatory verification · RepairMAP |
+| 📚 **Media Batch** (PRO) | Check whole folders · pause and resume · filterable results window · StapelMAP |
 | 🎞️ **Media Test** | Frame-accurate video detail window with high-performance preview, KPI tiles and bitrate timeline · dedicated audio detail window with waveform, dropout and cutoff/upcoding detection |
 | 📡 **Live telemetry** | CPU · RAM · Network · Read rate visible during the check |
-| 🌍 **Multilingual** | App: DE · EN · ES · 中文 · Website: DE · EN |
+| 🌍 **Multilingual** | App: DE · EN · ES · RU · 中文 · Website: DE · EN |
 | 🔐 **Verifiable** | Signed builds · SHA-256 hash per release · Local processing, **no cloud** |
 
-### 🆕 New in v1.4.9
+### 🆕 New in v1.5.0
 
-- **Compatibility scoring — will your file actually play everywhere?** New "Media Lab" tab: VidiVerify scores playback likelihood against six target profiles (Universal, Streaming, Smart TV, Mobile, Archive, Broadcast) with a clear traffic-light verdict — naming pitfalls like problematic codec profiles or color spaces before they turn into a black screen for your viewer.
-- **Three hands-on video labs.** CodecLab recommends the right codec live for your target and device, the Bitrate Equivalence Lab converts bitrates fairly between codecs, and Video SizeLab estimates file size at any resolution — including upscaling and downscaling.
-- **A new video detail window built for video professionals.** KPI tiles for image, color and bitrate, a high-performance preview with frame-accurate playback, perceptual analysis as a zebra table, and a DAW-style bitrate timeline — all directly in the app, no second player needed.
-- **First time ever: a dedicated audio detail window with cutoff and upcoding detection.** Frequency spectrum, levels, waveform and dropout detection — plus the flagship feature: detects from the frequency cutoff whether a file was genuinely encoded at its stated bitrate or merely upsampled ("upcoding"/fake bitrate).
-- **Spanish as a fourth language.** VidiVerify now speaks Español too — the app and every detail window.
+- **Media Repair (PRO): repair damaged videos instead of replacing them.** Based on the check result, VidiVerify recommends the right one of 16 repair methods, lossless ones first, and then verifies the result itself. The RepairMAP audit sheet documents every repair in full, down to the checksum.
+- **Media Batch (PRO): whole folders in one run.** Check any number of files in a row, pause and resume, even after a restart. At the end you get a filterable results window and the StapelMAP report.
+- **PRO and LIFETIME straight from the app.** Payment is handled by Paddle, and the signed license arrives in the app on its own. If you already own PRO, its full price is credited when you upgrade to LIFETIME.
+- **Ratings you can look up.** Every traffic light follows a versioned rule set, viewable in the "Rating details & symbols" window, and every report names the rule set it was checked against.
+- **Russian as a fifth language.** Plus a setup that speaks every language of the app.
 
 ### 🚀 Where to get it
 
@@ -157,7 +161,7 @@ Built for **archivists, curators, post-production professionals** — and equall
 
 ### 💛 Support us
 
-VidiVerify is developed by an independent team with high standards. **Personal use is and remains free.** If you'd like to help the project move forward, you can [donate voluntarily](https://vidiverify.de/#spenden) — no obligation, no subscription.
+VidiVerify is developed by an independent team with high standards. **Checking with VidiVerify FREE is and remains free of charge.** If you need more and want to support further development, [PRO and LIFETIME](https://vidiverify.com/pro/) add Media Repair and Media Batch: pay once, no subscription.
 
 ---
 
