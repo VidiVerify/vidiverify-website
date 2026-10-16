@@ -5,6 +5,35 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) · Versionierun
 
 ---
 
+## [1.5.0] – 2026-10-16
+
+### Neu
+- **Media Repair (PRO): defekte Videos retten** - VidiVerify findet nicht mehr nur, was mit einer Datei nicht stimmt, sondern repariert sie auch. Aus dem Prüfbefund heraus empfiehlt die App die passende von 16 Methoden, verlustfreie zuerst, und prüft das Ergebnis danach selbst nach. Das Revisionsblatt RepairMAP dokumentiert jede Reparatur lückenlos, bis zur Prüfsumme.
+- **Media Stapel (PRO): ganze Ordner in einem Lauf** - Beliebig viele Dateien nacheinander prüfen, jederzeit pausieren und später fortsetzen, sogar nach einem Neustart. Am Ende stehen ein filterbares Ergebnisfenster und die StapelMAP als Bericht. In FREE lässt sich der Ablauf an der ersten Datei ausprobieren.
+- **PRO mit einem Klick** - „Online Freischaltung" führt direkt zur Kaufseite. Bezahlt wird sicher über Paddle mit Karte, PayPal und weiteren Zahlarten, die Lizenz landet danach von selbst in der App. Wer PRO hat, bekommt es beim Upgrade auf LIFETIME voll angerechnet: 70,00 statt 99,90 €.
+- **Fälschungssichere Lizenzen** - Lizenzen sind jetzt digital signiert und kommen per „Lizenz abrufen" ohne Abtippen in die App. Ein Schlüssel im alten Format wird nicht mehr angenommen, „Lizenz abrufen" holt die neue Lizenz.
+- **Bewertung zum Nachlesen** - Jede Ampel folgt einem versionierten Regelwerk. Das Fenster „Bewertungsdetails & Symbole" zeigt alle Regeln mit Suche, und jeder Bericht nennt den Stand, nach dem geprüft wurde.
+- **Diagnose-Bericht im eigenen Fenster** - Urteil, Messwerte und jeder Befund auf einen Blick, mit allen technischen Meldungen statt nur der ersten fünf.
+- **Russisch als fünfte Sprache** - Dazu ein Setup, das alle Sprachen der App spricht und sich dem Hell- oder Dunkelmodus von Windows anpasst.
+- **Genauer bei Ton und Bild** - Eigene Qualitätsschwellen für HE-AAC und das Bildformat in fünf Formen, vom Hochformat bis Cinemascope.
+
+### Verbessert
+- **Ein frischer Look** - Hauptfenster, Dialoge und Lizenzfenster in einer einheitlichen, modernen Kartensprache, der Start läuft ohne Flackern.
+- **Schärfere Fake-Bitraten-Erkennung** - Das Audio-Detailfenster findet die Spur, die ein verlustbehafteter Encoder hinterlässt, und entlarvt hochgerechnete Tonspuren noch zuverlässiger.
+- **Lange Prüfungen ohne Standby** - Während Vollprüfung, Stapel, Reparatur oder Download geht Windows nicht mehr schlafen.
+- **Detailfenster öffnen schneller** - Mittig, vorgewärmt und mit sichtbarer Rückmeldung.
+- **QuickCheck spricht deine Sprache** - „Mit VidiVerify prüfen" erscheint im Explorer jetzt in der Sprache der App.
+
+### Behoben
+- **Mehr Sicherheit bei Updates und Plug-ins** - Updates werden nur noch mit geprüfter Prüfsumme installiert, das Plug-in-Verzeichnis ist gegen untergeschobene Programme geschützt, und ein unterbrochenes Update hinterlässt keine kaputte Installation mehr.
+- **Jedes Windows-Konto, voller Funktionsumfang** - Plug-ins und QuickCheck funktionieren jetzt für jedes Benutzerkonto, auch mit getrenntem Administratorkonto.
+- **Audiodateien zuverlässiger erkannt** - FLAC und AAC mit ID3-Tag, der Ton älterer Handyvideos und Dateien mit Coverbild werden korrekt geprüft.
+- **Richtige Auflösungsklasse** - Kinofilme ohne Balken und Hochformat-Videos werden jetzt korrekt eingestuft.
+- **Reibungsloser Erst-Start** - Auch auf einem frisch eingerichteten Windows lädt VidiVerify seine Werkzeuge zuverlässig.
+- **Viele Details geschliffen** - Wiedergabe in den Detailfenstern, Zahlen und Texte in allen Sprachen, Startmeldungen und Update-Fenster.
+
+---
+
 ## [1.4.9] – 2026-07-16
 
 ### Neu
