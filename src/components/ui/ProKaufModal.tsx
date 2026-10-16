@@ -258,8 +258,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
    /* Beim Upgrade ist der Preis schon um die Anrechnung gesenkt. Ist ein
     * Code im Spiel und greift trotzdem die Anrechnung, war der Code der
     * teurere Weg - dann darf die Zeile keinen Nachlass „aus dem Code" nennen. */
-   const codeVerliert = wahl === "lifetime" && upgradeGreift;
-   const nachlassCent = codeVerliert ? 0
+   const codeGiltHier = Boolean(rabatt && rabatt.gilt_fuer.includes(wahl));
+   const upgradeHier = wahl === "lifetime" && upgradeGreift;
+   // Ein Code, der für LIFETIME gar nicht gilt, „verliert" nicht - er gilt
+   // nicht (Anwenderbefund 16.10.2026: ein PRO-Code meldete beim Upgrade,
+   // die Anrechnung sei günstiger).
+   const codeVerliert = upgradeHier && codeGiltHier;
+   const nachlassCent = upgradeHier ? 0
       : Math.max(0, listenpreise[wahl] - preise[wahl]);
    const rabattWert = rabatt && rabatt.art === "prozent"
       ? `${rabatt.wert} % (-${preisText(nachlassCent, sprache)})`
@@ -1012,13 +1017,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  color: rabatt && nachlassCent > 0 ? GREEN
                                     : rabatt ? AMBER : "#fca5a5",
                               }}>
-                                 {rabatt ? (codeVerliert
+                                 {rabatt ? (!codeGiltHier
+                                       ? t.rabattNichtFuerWahl
+                                       : codeVerliert
                                        ? t.rabattUpgradeGuenstiger
                                        : nachlassCent > 0
                                        ? t.rabattGilt.replace("{wert}", rabattWert)
-                                       : rabatt.gilt_fuer.includes(wahl)
-                                          ? t.rabattOhneAbzug
-                                          : t.rabattNichtFuerWahl)
+                                       : t.rabattOhneAbzug)
                                     : !codeGrund ? "\u00a0"
                                     : codeGrund === "abgelaufen" ? t.rabattAbgelaufen
                                     : codeGrund === "aufgebraucht" ? t.rabattAufgebraucht
