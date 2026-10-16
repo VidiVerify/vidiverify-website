@@ -45,6 +45,7 @@ const de = {
     *    (`festpreis_ohne_abzug`). */
    rabattNichtFuerWahl: "Dieser Code gilt nicht für die gewählte Lizenz.",
    rabattOhneAbzug: "Dieser Code senkt den Preis dieser Lizenz nicht.",
+   rabattUpgradeGuenstiger: "Die Anrechnung deines PRO ist günstiger als dieser Code - es gilt der Upgrade-Preis.",
    rabattUnbekannt: "Diesen Code kennen wir nicht.",
    rabattAbgelaufen: "Dieser Code ist abgelaufen.",
    rabattAufgebraucht: "Dieser Code ist bereits ausgeschöpft.",
@@ -55,6 +56,7 @@ const de = {
    proText: "Alle PRO-Funktionen einer Hauptversion.",
    lifetimeTitel: "LIFETIME",
    lifetimeText: "Alle PRO-Funktionen aller Hauptversionen dieser Produktlinie.",
+   lifetimeUpgradeText: "Alle PRO-Funktionen aller Hauptversionen. Dein PRO wird angerechnet: {abzug}.",
    erklaerzeile:
       "Eine neue PRO Hauptversion etwa jährlich, LIFETIME umfasst alle "
       + "Hauptversionen der Linie.",
@@ -200,6 +202,7 @@ const en: typeof de = {
    rabattGilt: "Code applied - a discount of {wert} is included in your order.",
    rabattNichtFuerWahl: "This code does not apply to the selected licence.",
    rabattOhneAbzug: "This code does not lower the price of this licence.",
+   rabattUpgradeGuenstiger: "Crediting your PRO is cheaper than this code - the upgrade price applies.",
    rabattUnbekannt: "We do not know this code.",
    rabattAbgelaufen: "This code has expired.",
    rabattAufgebraucht: "This code is already used up.",
@@ -210,6 +213,7 @@ const en: typeof de = {
    proText: "All PRO features of one major version.",
    lifetimeTitel: "LIFETIME",
    lifetimeText: "All PRO features of every major version of this product line.",
+   lifetimeUpgradeText: "All PRO features of every major version. Your PRO is credited: {abzug}.",
    erklaerzeile:
       "A new PRO major version roughly once a year; LIFETIME covers every "
       + "major version of the line.",

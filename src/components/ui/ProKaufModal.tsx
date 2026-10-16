@@ -215,9 +215,14 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * und nie zu niedrig. Eine Kaufseite ganz ohne Preis wäre der schlechtere
     * Tausch.
     */
+   /* Mit vollständiger VV-ID kennt der Worker den Upgrade-Preis: Wer PRO
+    * hat, bekommt es auf LIFETIME angerechnet (16.10.2026). */
+   const vvidFuerPreis = VVID_RE.test(vvid.trim().toUpperCase())
+      ? vvid.trim().toUpperCase() : "";
    const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
-           codeLaeuft, gesperrteLaender, pruefen, verwerfen }
-      = usePreise(open, aufbau?.basis || "/api", "kauf");
+           codeLaeuft, gesperrteLaender, pruefen, verwerfen, upgrade }
+      = usePreise(open, aufbau?.basis || "/api", "kauf", vvidFuerPreis);
+   const upgradeGreift = Boolean(upgrade && upgrade.greift);
 
    /* Steht im Feld ein Land, aus dem der Zahlungsanbieter nicht annimmt?
     *
@@ -250,7 +255,12 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * gerechneter Betrag läge irgendwann einen Cent daneben. Ist er null,
     * gilt der Code für die andere Lizenz - dann sagt die Zeile das, statt
     * einen Nachlass zu behaupten, den der Preis nicht zeigt. */
-   const nachlassCent = Math.max(0, listenpreise[wahl] - preise[wahl]);
+   /* Beim Upgrade ist der Preis schon um die Anrechnung gesenkt. Ist ein
+    * Code im Spiel und greift trotzdem die Anrechnung, war der Code der
+    * teurere Weg - dann darf die Zeile keinen Nachlass „aus dem Code" nennen. */
+   const codeVerliert = wahl === "lifetime" && upgradeGreift;
+   const nachlassCent = codeVerliert ? 0
+      : Math.max(0, listenpreise[wahl] - preise[wahl]);
    const rabattWert = rabatt && rabatt.art === "prozent"
       ? `${rabatt.wert} % (-${preisText(nachlassCent, sprache)})`
       : `-${preisText(nachlassCent, sprache)}`;
@@ -282,13 +292,16 @@ const ProKaufModal = ({ open, onClose }: Props) => {
     * gewinnt Paddle, weil dort die Steuer des Käuferlandes eingerechnet ist.
     * Verbindlich ist in beiden Fällen, was das Bezahlfenster zeigt.
     */
+   /* Dasselbe beim Upgrade: Paddles Vorschau kennt nur den Listenpreis. */
+   const eigenerPreis = (welche: Wahl) =>
+      Boolean(rabatt) || (welche === "lifetime" && upgradeGreift);
    const anzeigePreis = (welche: Wahl) =>
-      (rabatt ? preisText(preise[welche], sprache) : "")
+      (eigenerPreis(welche) ? preisText(preise[welche], sprache) : "")
       || paddlePreise[welche] || preisText(preise[welche], sprache);
 
    /** Der durchgestrichene Listenpreis - nur, wenn der Code hier greift. */
    const stattPreis = (welche: Wahl) =>
-      rabatt && preise[welche] !== listenpreise[welche]
+      eigenerPreis(welche) && preise[welche] !== listenpreise[welche]
          ? t.statt + " " + preisText(listenpreise[welche], sprache)
          : "";
 
@@ -925,7 +938,11 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  <Kachel gewaehlt={wahl === "lifetime"} onClick={() => setWahl("lifetime")}
                                          titel={t.lifetimeTitel} preis={anzeigePreis("lifetime")}
                                          statt={stattPreis("lifetime")}
-                                         text={t.lifetimeText} farbe={AMBER} />
+                                         text={upgradeGreift && upgrade
+                                            ? t.lifetimeUpgradeText.replace(
+                                               "{abzug}", "-" + preisText(upgrade.abzug, sprache))
+                                            : t.lifetimeText}
+                                         farbe={AMBER} />
                               </div>
                               {/* Die Erklärzeile ist im Preisplan zwingend
                                   gesetzt. Ohne sie kann ein Käufer den Wert
@@ -995,7 +1012,9 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                                  color: rabatt && nachlassCent > 0 ? GREEN
                                     : rabatt ? AMBER : "#fca5a5",
                               }}>
-                                 {rabatt ? (nachlassCent > 0
+                                 {rabatt ? (codeVerliert
+                                       ? t.rabattUpgradeGuenstiger
+                                       : nachlassCent > 0
                                        ? t.rabattGilt.replace("{wert}", rabattWert)
                                        : rabatt.gilt_fuer.includes(wahl)
                                           ? t.rabattOhneAbzug

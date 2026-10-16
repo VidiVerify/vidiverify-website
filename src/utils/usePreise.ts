@@ -62,9 +62,16 @@ export interface RabattBefund {
    bemerkung: string | null;
 }
 
+/** Anrechnung von PRO beim Upgrade auf LIFETIME (Worker, 16.10.2026).
+ *  `greift` ist falsch, wenn ein Code für LIFETIME günstiger ist. */
+export interface UpgradeBefund { abzug: number; greift: boolean }
+
 export interface Preisstand {
    preise: { pro: number; lifetime: number };
    listenpreise: { pro: number; lifetime: number };
+   /** Die Preise ohne Code, mit Anrechnung - dahin führt „Entfernen". */
+   grundpreise: { pro: number; lifetime: number };
+   upgrade: UpgradeBefund | null;
    rabatt: RabattBefund | null;
    /** Warum ein eingegebener Code nicht greift: unbekannt, abgelaufen,
     *  aufgebraucht - oder leer, wenn alles in Ordnung ist. */
@@ -86,6 +93,8 @@ export interface Preisstand {
 const LEER: Preisstand = {
    preise: PREISE_RUECKFALL,
    listenpreise: PREISE_RUECKFALL,
+   grundpreise: PREISE_RUECKFALL,
+   upgrade: null,
    rabatt: null,
    codeGrund: "",
    laeuft: false,
@@ -113,7 +122,10 @@ export function preisText(cent: number, sprache: "de" | "en"): string {
  * kennt - sonst zeigte die Seite einen Nachlass, den das Bezahlfenster nicht
  * gewährt (Worker `preiseAusgeben`, 18.09.2026). Die Bestellanfrage fragt
  * ohne und sieht jeden gültigen Code. */
-export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
+/* `vvid`: Mit einer vollständigen VV-ID nennt der Worker den Upgrade-Preis,
+ * wenn die Installation PRO hat. Der Aufrufer reicht sie erst durch, wenn sie
+ * vollständig ist - sonst fragte jeder Tastendruck neu. */
+export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "", vvid = "") {
    const [stand, setStand] = useState<Preisstand>(LEER);
    /* Nur die jüngste Abfrage darf den Stand setzen. Sonst käme eine Prüfung,
     * die noch unterwegs war, nach dem Entfernen des Codes zurück und setzte
@@ -134,15 +146,22 @@ export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
          const frage = new URLSearchParams();
          if (code) frage.set("code", code);
          if (weg) frage.set("weg", weg);
+         if (vvid) frage.set("vvid", vvid);
          const suche = frage.toString();
          const adresse = basis + "/preise" + (suche ? "?" + suche : "");
          const antwort = await fetch(adresse, { signal: steuerung.signal });
          if (!antwort.ok) throw new Error(String(antwort.status));
          const daten = await antwort.json();
          if (nummer !== abfrage.current) return;
+         const listen = daten.listenpreise || PREISE_RUECKFALL;
+         const upgrade: UpgradeBefund | null = daten.upgrade || null;
          setStand({
             preise: daten.preise || PREISE_RUECKFALL,
-            listenpreise: daten.listenpreise || PREISE_RUECKFALL,
+            listenpreise: listen,
+            grundpreise: upgrade
+               ? { ...listen, lifetime: listen.lifetime - upgrade.abzug }
+               : listen,
+            upgrade,
             rabatt: daten.rabatt || null,
             codeGrund: daten.code_grund || "",
             laeuft: false,
@@ -167,7 +186,7 @@ export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
       } finally {
          window.clearTimeout(frist);
       }
-   }, [basis, weg]);
+   }, [basis, weg, vvid]);
 
    /* Einen eingelösten Code zurücknehmen (Anwenderbefund 14.09.2026).
     *
@@ -179,7 +198,8 @@ export function usePreise(aktiv = true, basis = "/api", weg: "" | "kauf" = "") {
    const verwerfen = useCallback(() => {
       ++abfrage.current;
       setStand((alt) => ({
-         ...alt, preise: alt.listenpreise, rabatt: null, codeGrund: "",
+         ...alt, preise: alt.grundpreise, rabatt: null, codeGrund: "",
+         upgrade: alt.upgrade ? { ...alt.upgrade, greift: true } : null,
          laeuft: false, codeLaeuft: false,
       }));
    }, []);

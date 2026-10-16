@@ -234,11 +234,6 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
     * PLZ und Stadt. */
    const schmal = useMediaQuery("(max-width: 640px)");
 
-   // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
-   // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
-   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
-           codeLaeuft, pruefen, verwerfen }
-      = usePreise(open, apiBasis());
 
    const sitekey = turnstileSchluessel();
    const parameter = new URLSearchParams(window.location.search);
@@ -249,6 +244,14 @@ const LizenzAnfrageModal = ({ open, onClose }: Props) => {
    const appVersion = kennungLesen().version.slice(0, 32);
 
    const [vvid, setVvid] = useState(entwurf.vvid ?? kennungLesen().vvid);
+   // Die Preise kommen vom Worker - er ist die Quelle, und er ist derselbe,
+   // der die Anfrage entgegennimmt und den Betrag in den Vorgang schreibt.
+   // Mit vollständiger VV-ID nennt er beim Upgrade den angerechneten Preis.
+   const vvidFuerPreis = VVID_RE.test(vvid.trim().toUpperCase())
+      ? vvid.trim().toUpperCase() : "";
+   const { preise, listenpreise, rabatt, codeGrund, laeuft: preisLaeuft,
+           codeLaeuft, pruefen, verwerfen }
+      = usePreise(open, apiBasis(), "", vvidFuerPreis);
    /* Beim Upgrade steht nur LIFETIME zur Wahl - die Anwendung hängt
     * `nur=lifetime` an, wenn PRO bereits läuft. FREE und PRO wären dort
     * Angebote, die dem Kunden nichts bringen. */
