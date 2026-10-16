@@ -21,6 +21,7 @@ const FLAGS = [
    { code: "de", label: "Deutsch" },
    { code: "us", label: "English" },
    { code: "es", label: "Español" },
+   { code: "ru", label: "Русский" },
    { code: "cn", label: "中文" },
 ];
 
