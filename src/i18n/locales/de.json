@@ -432,7 +432,7 @@
             ]
          },
          "quick": {
-            "titel": "Quick-Check",
+            "titel": "QuickCheck",
             "text": "Rechtsklick im Windows-Explorer genügt: Befund und Mediadaten in Sekunden, ohne die App zu starten.",
             "tags": [
                "Explorer-Rechtsklick",

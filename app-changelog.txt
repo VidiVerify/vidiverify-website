@@ -59,7 +59,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/) · Versionierun
 ## [1.4.8] – 2026-06-14
 
 ### Neu
-- **Quick-Check – Prüfen per Rechtsklick** – Sekundenschnelle Vorab-Prüfung direkt im Windows-Explorer, ohne die App zu öffnen: Status, Befund und Mediadaten in einem schlanken Hinweisfenster.
+- **QuickCheck – Prüfen per Rechtsklick** – Sekundenschnelle Vorab-Prüfung direkt im Windows-Explorer, ohne die App zu öffnen: Status, Befund und Mediadaten in einem schlanken Hinweisfenster.
 - **„Öffnen mit"-Integration** – Videodateien lassen sich aus dem Explorer-Kontextmenü direkt in VidiVerify öffnen; die Vorprüfung startet sofort, der Standard-Player bleibt unangetastet.
 - **Kompatibilitäts-Hinweise** – Erkennt typische Player-Stolpersteine (fragmentiertes Streaming-MP4 ohne Index, z. B. von IP-Kameras, sowie HEVC/H.265) und erklärt sie, statt eine intakte Datei fälschlich als defekt zu melden.
 - **Cleanup-Center „Speicher & Wartung"** – Neuer Einstellungs-Tab und automatische Aufräum-Routine beim Start: alte Update-Backups, Vorschau-Cache und temporäre Dateien bleiben konfigurierbar im Griff.

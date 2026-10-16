@@ -37,7 +37,7 @@ const TAKT_MS = 6500;
 
 // Die Bühne hat das Format der meisten Hauptfenster-Screenshots (1252×683),
 // damit die Seite beim Blättern nicht springt. Hochformate (Protokollseite)
-// und kleine Dialoge (Quick-Check) stehen mittig darin.
+// und kleine Dialoge (QuickCheck) stehen mittig darin.
 //
 // Die Höhe richtet sich nach dem Bildschirm: Überschrift, Bild, Erklärung und
 // Filmstreifen sollen zusammen sichtbar sein. Was dabei an Grösse fehlt,

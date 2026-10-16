@@ -432,7 +432,7 @@
             ]
          },
          "quick": {
-            "titel": "Quick Check",
+            "titel": "QuickCheck",
             "text": "Just right-click in Windows Explorer: findings and media data in seconds, without starting the app.",
             "tags": [
                "Explorer right-click",

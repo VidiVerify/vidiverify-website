@@ -37,7 +37,7 @@ Entwickelt für **Archivare, Kuratoren und Postproduktions-Profis** — und gena
 | | |
 |---|---|
 | 🔍 **Vorprüfung** | Drag & Drop · Magic-Bytes-Validierung · Magika-ML-Tiefenprüfung optional |
-| ⚡ **Quick-Check** | Rechtsklick im Windows-Explorer · Sekunden-Vorabprüfung ohne App-Start · Status-Orb + Befund + Mediadaten |
+| ⚡ **QuickCheck** | Rechtsklick im Windows-Explorer · Sekunden-Vorabprüfung ohne App-Start · Status-Orb + Befund + Mediadaten |
 | 🛡️ **Integritätsprüfung** | Plug-in-basierte Frame-Analyse via FFmpeg · Auto-Eskalation bei Auffälligkeiten |
 | 🩺 **Diagnosemodus** | Streamcopy + ffprobe-Tiefenanalyse + Decode-Layer · Ursachen-Attribution für DVD-, DTS- und Container-Anomalien |
 | 📊 **Media Analyse** | Container · Codec · Bitrate · Auflösung · Atmos- & DTS:X-Erkennung · Bittiefe · Channel-Layout |
@@ -121,7 +121,7 @@ Built for **archivists, curators, post-production professionals** — and equall
 | | |
 |---|---|
 | 🔍 **Pre-check** | Drag & drop · Magic-bytes validation · Magika ML deep check (optional) |
-| ⚡ **Quick-Check** | Right-click in Windows Explorer · seconds-fast pre-inspection without launching the app · status orb + finding + media data |
+| ⚡ **QuickCheck** | Right-click in Windows Explorer · seconds-fast pre-inspection without launching the app · status orb + finding + media data |
 | 🛡️ **Integrity check** | Plug-in-based frame analysis via FFmpeg · Auto-escalation on anomalies |
 | 🩺 **Diagnostic mode** | Streamcopy + ffprobe deep analysis + decode layer · Cause attribution for DVD, DTS and container anomalies |
 | 📊 **Media analysis** | Container · Codec · Bitrate · Resolution · Atmos & DTS:X detection · Bit depth · Channel layout |
