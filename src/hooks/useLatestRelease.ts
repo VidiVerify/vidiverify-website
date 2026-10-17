@@ -53,9 +53,15 @@ export function useLatestRelease(
 
             const mainAsset = assets.find((a) => a.name === assetName);
 
-            const downloadUrl =
-               mainAsset?.browser_download_url ??
-               `https://github.com/${owner}/${repo}/releases/latest/download/${assetName}`;
+            // Über die zählende Weiterleitung des Lizenzdienstes (seit
+            // 17.10.2026). Sie leitet auf R2 weiter, wo die Datei unverändert
+            // und mit fester Grösse liegt, und zählt den Abruf als Website-
+            // Download. Nur für eine saubere Version; sonst GitHub wie bisher.
+            const viaCounter = mainAsset !== undefined && /^v\d+(\.\d+){1,3}$/.test(version);
+            const downloadUrl = viaCounter
+               ? `https://vidiverify.de/dl/${version}/${assetName}`
+               : mainAsset?.browser_download_url ??
+                 `https://github.com/${owner}/${repo}/releases/latest/download/${assetName}`;
 
             let sha256: string | null = null;
             if (mainAsset?.digest?.startsWith("sha256:")) {
