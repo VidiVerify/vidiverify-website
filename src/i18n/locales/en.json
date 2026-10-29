@@ -555,6 +555,9 @@
       "x": "X",
       "xSub": "Real-time updates",
       "xAction": "Follow",
+      "tiktok": "TikTok",
+      "tiktokSub": "Short videos & insights",
+      "tiktokAction": "Follow",
       "supportDivider": "Support",
       "supportHeading": "Support package",
       "supportItems": [

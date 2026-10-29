@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import { MdVerified } from "react-icons/md";
 import { FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
-import { SiX } from "react-icons/si";
+import { SiX, SiTiktok } from "react-icons/si";
 import { Mail, ArrowUpRight, PackageSearch } from "lucide-react";
 import { getGitHubUsername } from "@data/dataLoader";
 import PageSection from "@components/layout/PageSection";
@@ -70,8 +70,8 @@ const Contact = () => {
                   </div>
                </motion.div>
 
-               {/* GitHub + Facebook + Instagram + X - 4-column grid (1 on mobile) */}
-               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 14 }}>
+               {/* GitHub + Facebook + Instagram + X + TikTok - 5-column grid (1 on mobile) */}
+               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(5, 1fr)", gap: 14 }}>
                   <motion.a
                      href={`https://github.com/${githubUsername}`}
                      target="_blank" rel="noopener noreferrer"
@@ -133,6 +133,22 @@ const Contact = () => {
                      <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.xSub")}</span>
                      <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#e7e7ea", marginTop: 4 }}>
                         {t("contact.xAction")} <ArrowUpRight size={12} />
+                     </span>
+                  </motion.a>
+
+                  <motion.a
+                     href="https://www.tiktok.com/@vidiverify"
+                     target="_blank" rel="noopener noreferrer"
+                     className="glass-card" variants={staggerItemSlow}
+                     whileHover={{ y: -4, borderColor: "rgba(37,244,238,0.3)" }}
+                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
+                  >
+                     <SiTiktok size={20} color="#25F4EE" />
+                     <span style={{ fontSize: 11, fontWeight: 600, color: "#25F4EE", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.tiktok")}</span>
+                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>vidiverify</span>
+                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.tiktokSub")}</span>
+                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#25F4EE", marginTop: 4 }}>
+                        {t("contact.tiktokAction")} <ArrowUpRight size={12} />
                      </span>
                   </motion.a>
                </div>
