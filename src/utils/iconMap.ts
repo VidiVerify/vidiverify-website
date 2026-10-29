@@ -1,5 +1,5 @@
 import { FaLinkedin, FaGithub, FaInstagram, FaFacebook } from "react-icons/fa6";
-import { SiX } from "react-icons/si";
+import { SiX, SiTiktok } from "react-icons/si";
 import type { IconMap } from "@/types";
 
 const ICON_MAP: IconMap = {
@@ -8,6 +8,7 @@ const ICON_MAP: IconMap = {
    FaInstagram: FaInstagram,
    FaFacebook: FaFacebook,
    SiX: SiX,
+   SiTiktok: SiTiktok,
 };
 
 export default ICON_MAP;

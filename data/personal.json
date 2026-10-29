@@ -46,6 +46,12 @@
          "name": "X",
          "link": "https://x.com/VidiVerif",
          "icon": "SiX"
+      },
+      {
+         "id": 5,
+         "name": "TikTok",
+         "link": "https://www.tiktok.com/@vidiverify",
+         "icon": "SiTiktok"
       }
    ],
    "site": {
