@@ -39,6 +39,7 @@ export interface Summe {
    gesamt: string;
    /** Die im Zahlbetrag enthaltene Umsatzsteuer. */
    steuer: string;
+   steuerCent: number;
    waehrung: string;
    /** Gilt ein Nachlass? Den Betrag liefert erst `preisZeilen`. */
    rabatt: boolean;
@@ -97,12 +98,14 @@ export function summeAus(
    if (!posten.length) return null;
 
    const gesamtCent = Math.round(gesamt * 100);
+   const steuerCent = Math.round(steuer * 100);
    const rabatt = zahl(summen.discount);
    return {
       posten,
       gesamtCent,
       gesamt: format(gesamtCent, waehrung, sprache),
-      steuer: format(Math.round(steuer * 100), waehrung, sprache),
+      steuer: format(steuerCent, waehrung, sprache),
+      steuerCent,
       waehrung,
       rabatt: rabatt !== null && rabatt > 0,
    };
@@ -130,6 +133,37 @@ export function preisZeilen(
    return {
       brutto: format(bruttoCent, summe.waehrung, sprache),
       nachlass: format(bruttoCent - summe.gesamtCent, summe.waehrung, sprache),
+   };
+}
+
+/**
+ * Länder, in denen Preise netto ausgeschrieben werden und Paddle die örtliche
+ * Steuer obendrauf rechnet (Sales Tax). Bei einer US-Anschrift standen 32,29 €
+ * statt der 29,90 € aus der Lizenzkachel als Preis da, und die Übersicht
+ * nannte die Differenz „including VAT" - für diesen Käufer falsch
+ * (Anwenderbefund 29.10.2026). Dieselben Länder nennt die Preisseite.
+ */
+export const NETTO_LAENDER: ReadonlySet<string> = new Set(["US", "CA"]);
+
+export function istNettoLand(land: string): boolean {
+   return NETTO_LAENDER.has((land || "").toUpperCase());
+}
+
+/**
+ * Die Übersicht für ein Netto-Land: Preis ohne Steuer, Steuer als Zuschlag.
+ *
+ * Nur ohne Nachlass - dann ist der Preis schlicht Zahlbetrag minus Steuer,
+ * zwei Paddle-Beträge, nichts geschätzt. Mit Nachlass liefert die Funktion
+ * `null`, und die Seite bleibt bei der Bruttodarstellung mit dem Steuerwort
+ * des Landes.
+ */
+export function nettoZeilen(
+   summe: Summe, sprache: "de" | "en",
+): { netto: string; steuer: string } | null {
+   if (summe.rabatt || summe.steuerCent > summe.gesamtCent) return null;
+   return {
+      netto: format(summe.gesamtCent - summe.steuerCent, summe.waehrung, sprache),
+      steuer: format(summe.steuerCent, summe.waehrung, sprache),
    };
 }
 

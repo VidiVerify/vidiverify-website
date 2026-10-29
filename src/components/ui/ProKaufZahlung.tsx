@@ -23,7 +23,9 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { GREEN, TEXT_MUTED, TEXT_PRIMARY, TEXT_SECONDARY } from "@/constants/theme";
 import { einbettung, paddleLaden, type PaddleAufbau } from "@utils/paddle";
-import { bruttoAusVorschau, preisZeilen, type Summe } from "@utils/paddleSumme";
+import {
+   bruttoAusVorschau, istNettoLand, nettoZeilen, preisZeilen, type Summe,
+} from "@utils/paddleSumme";
 import type { TEXTE } from "./proKaufTexte";
 
 /* Paddle sucht den Rahmen über den KLASSENNAMEN, nicht über eine Referenz.
@@ -78,6 +80,10 @@ const ProKaufZahlung = ({
    }, [aufbau, priceId, land, plz, waehrung, mitRabatt]);
 
    const zeilen = summe ? preisZeilen(summe, bruttoCent, sprache) : null;
+   /* USA und Kanada: Preis netto, Sales Tax als eigene Zeile darunter -
+    * so, wie es der Käufer dort von jeder Kasse kennt (29.10.2026). */
+   const nettoLand = istNettoLand(land);
+   const netto = summe && nettoLand ? nettoZeilen(summe, sprache) : null;
 
    /* Öffnen, sobald der Rahmen im Dokument steht - vorher fände Paddle kein
     * Ziel. Schliessen beim Aushängen: Wer zurück zu den Angaben geht, soll
@@ -128,7 +134,7 @@ const ProKaufZahlung = ({
                      {/* Der Preis steht beim ersten Posten - es gibt je Kauf
                          genau einen. */}
                      <span style={{ fontSize: 13, color: TEXT_PRIMARY }}>
-                        {i === 0 ? zeilen?.brutto : ""}
+                        {i === 0 ? (netto ? netto.netto : zeilen?.brutto) : ""}
                      </span>
                   </div>
                ))}
@@ -156,6 +162,11 @@ const ProKaufZahlung = ({
                   </div>
                </div>
             )}
+            {netto && (
+               <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 8 }}>
+                  <Betrag titel={t.steuerZuschlag} wert={`+ ${netto.steuer}`} />
+               </div>
+            )}
             <div style={{
                ...zeile, borderTop: "1px solid rgba(255,255,255,0.06)",
                marginTop: 6, paddingTop: 8,
@@ -171,9 +182,12 @@ const ProKaufZahlung = ({
                   {summe?.gesamt || " "}
                </motion.span>
             </div>
-            <div style={{ marginTop: 4 }}>
-               <Betrag titel={t.steuer} wert={summe?.steuer} />
-            </div>
+            {!netto && (
+               <div style={{ marginTop: 4 }}>
+                  <Betrag titel={nettoLand ? t.steuerNettoLand : t.steuer}
+                          wert={summe?.steuer} />
+               </div>
+            )}
          </div>
          <p style={{ ...hinweis, marginTop: 8 }}>{t.bestellungHinweis}</p>
 

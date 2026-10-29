@@ -63,7 +63,12 @@ const de = {
    preisHinweis:
       "Endpreis einschliesslich Umsatzsteuer. Einmalzahlung, kein Abonnement. "
       + "Der endgültige Betrag richtet sich nach deinem Land und steht im "
-      + "nächsten Schritt.",
+      + "nächsten Schritt. In den USA und in Kanada kommt die örtliche "
+      + "Sales Tax hinzu.",
+   preisHinweisNetto:
+      "Preis ohne Steuer: In den USA und in Kanada kommt die örtliche Sales "
+      + "Tax hinzu, je nach Bundesstaat oder Provinz. Den genauen Betrag "
+      + "zeigt der nächste Schritt. Einmalzahlung, kein Abonnement.",
 
    anschriftTitel: "Rechnungsanschrift",
    firma: "Firmenname",
@@ -144,6 +149,9 @@ const de = {
    nachlass: "Rabatt oder Nachlass",
    nachlassEnthalten: "berücksichtigt",
    steuer: "darin enthaltene Umsatzsteuer",
+   // USA und Kanada: Preis netto, die Steuer kommt obendrauf (29.10.2026).
+   steuerZuschlag: "zuzüglich Sales Tax",
+   steuerNettoLand: "darin enthaltene Sales Tax",
    gesamt: "Zahlbetrag",
    zahlungTitel: "Zahlung",
 
@@ -219,7 +227,12 @@ const en: typeof de = {
       + "major version of the line.",
    preisHinweis:
       "Final price including VAT. One-time payment, no subscription. The exact "
-      + "amount depends on your country and is shown in the next step.",
+      + "amount depends on your country and is shown in the next step. In the "
+      + "USA and Canada, local sales tax is added.",
+   preisHinweisNetto:
+      "Price before tax: in the USA and Canada, local sales tax is added "
+      + "depending on your state or province. The exact amount is shown in "
+      + "the next step. One-time payment, no subscription.",
 
    anschriftTitel: "Billing address",
    firma: "Company name",
@@ -292,6 +305,8 @@ const en: typeof de = {
    nachlass: "Discount",
    nachlassEnthalten: "applied",
    steuer: "including VAT",
+   steuerZuschlag: "Sales tax",
+   steuerNettoLand: "including sales tax",
    gesamt: "Amount due",
    zahlungTitel: "Payment",
 

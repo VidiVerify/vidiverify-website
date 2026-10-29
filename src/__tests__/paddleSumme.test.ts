@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { bruttoAusVorschau, preisZeilen, summeAus } from "@utils/paddleSumme";
+import {
+   bruttoAusVorschau, istNettoLand, nettoZeilen, preisZeilen, summeAus,
+} from "@utils/paddleSumme";
 
 /* Intl setzt vor das Währungszeichen ein geschütztes Leerzeichen. Verglichen
  * wird der Text, den der Leser sieht - nicht die Art des Leerzeichens. */
@@ -87,6 +89,38 @@ describe("Bestellübersicht aus Paddle-Ereignissen", () => {
    it("verlangt mindestens einen Posten", () => {
       const leer = { ...geladen, data: { ...geladen.data, items: [] } };
       expect(summeAus(leer, "de")).toBeNull();
+   });
+});
+
+/**
+ * USA und Kanada: Paddle rechnet die Sales Tax obendrauf. Die Beträge sind die
+ * der Probe vom 29.10.2026 mit US-Anschrift: PRO 29,90 netto, 2,39 Steuer,
+ * gesamt 32,29.
+ */
+describe("Netto-Länder (Sales Tax obendrauf)", () => {
+   const us = {
+      name: "checkout.loaded",
+      data: {
+         ...geladen.data,
+         totals: { subtotal: 29.9, discount: 0, tax: 2.39, total: 32.29 },
+      },
+   };
+
+   it("kennt USA und Kanada, sonst niemanden", () => {
+      expect(istNettoLand("US")).toBe(true);
+      expect(istNettoLand("ca")).toBe(true);
+      expect(istNettoLand("DE")).toBe(false);
+      expect(istNettoLand("")).toBe(false);
+   });
+
+   it("zeigt den Preis der Lizenzkachel und die Steuer als Zuschlag", () => {
+      const summe = summeAus(us, "en")!;
+      expect(n(nettoZeilen(summe, "en"))).toEqual({ netto: "€29.90", steuer: "€2.39" });
+      expect(n(summe.gesamt)).toBe("€32.29");
+   });
+
+   it("rechnet mit Nachlass nicht selbst, sondern bleibt bei brutto", () => {
+      expect(nettoZeilen(summeAus(geladen, "en")!, "en")).toBeNull();
    });
 });
 

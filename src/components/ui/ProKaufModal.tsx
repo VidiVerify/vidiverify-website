@@ -55,7 +55,7 @@ import {
    paddleAufbau, paddleHorchen, paddleLaden,
    type PaddleAufbau, type PaddleEreignis,
 } from "@utils/paddle";
-import { summeAus, type Summe } from "@utils/paddleSumme";
+import { istNettoLand, summeAus, type Summe } from "@utils/paddleSumme";
 import { nachsperreGilt, nachsperreSetzen } from "@utils/kaufNachsperre";
 import { tokenPasst } from "@utils/lizenzToken";
 import ProKaufZahlung from "./ProKaufZahlung";
@@ -1038,7 +1038,13 @@ const ProKaufModal = ({ open, onClose }: Props) => {
                               </p>
 
                               <p style={{ ...hinweis, marginTop: 10 }}>{t.erklaerzeile}</p>
-                              <p style={{ ...hinweis, marginTop: 6 }}>{t.preisHinweis}</p>
+                              {/* Mit USA oder Kanada als Land sagt der Hinweis
+                                  ausdrücklich, dass die Steuer obendrauf
+                                  kommt (Anwenderbefund 29.10.2026). */}
+                              <p style={{ ...hinweis, marginTop: 6 }}>
+                                 {istNettoLand(laenderCode(land, sprache) || "")
+                                    ? t.preisHinweisNetto : t.preisHinweis}
+                              </p>
 
                               {/* ── Die Rechnungsanschrift ──
                                   Sie steht hier, seit der Worker die
