@@ -1,0 +1,70 @@
+# Website-Wache: prüft stündlich, ob Website und Lizenz-Worker antworten.
+#
+# Schlägt ein Lauf fehl, schickt GitHub eine Email an das Konto, das diese
+# Datei zuletzt geändert hat. Der Betreff enthält den Namen unten, daher
+# steht "WARNUNG" vorn.
+#
+# Anlass: Ausfall 526 vom 14. bis 22.11.2026 (Zertifikat von GitHub Pages
+# hinter dem Cloudflare-Proxy nicht erneuert), acht Tage unbemerkt.
+#
+# Achtung: GitHub schaltet geplante Läufe in öffentlichen Repos nach
+# 60 Tagen ohne Commit ab und schickt dazu eine Email.
+
+name: "WARNUNG: Website vidiverify nicht erreichbar"
+
+on:
+   schedule:
+      - cron: "17 * * * *"
+   workflow_dispatch:
+
+permissions:
+   contents: read
+
+concurrency:
+   group: website-wache
+   cancel-in-progress: false
+
+jobs:
+   pruefen:
+      runs-on: ubuntu-latest
+      timeout-minutes: 10
+      steps:
+         - name: Adressen prüfen
+           shell: bash
+           run: |
+              # Adresse | Text, der in der Antwort stehen muss
+              ziele=(
+                "https://vidiverify.de/|VidiVerify"
+                "https://www.vidiverify.de/|VidiVerify"
+                "https://vidiverify.com/|VidiVerify"
+                "https://vidiverify.de/api/status|\"ok\":true"
+              )
+
+              fehler=0
+              echo "| Adresse | Status | Ergebnis |" >> "$GITHUB_STEP_SUMMARY"
+              echo "|---|---|---|" >> "$GITHUB_STEP_SUMMARY"
+
+              for eintrag in "${ziele[@]}"; do
+                url="${eintrag%%|*}"
+                muss="${eintrag#*|}"
+                ok=0
+                # Drei Versuche, damit ein kurzer Aussetzer keinen Alarm auslöst
+                for versuch in 1 2 3; do
+                  code=$(curl -sL -o body.txt -w "%{http_code}" --max-time 20 "$url" || echo "000")
+                  if [ "$code" = "200" ] && grep -qF "$muss" body.txt; then
+                    ok=1
+                    break
+                  fi
+                  sleep 30
+                done
+                if [ "$ok" = "1" ]; then
+                  echo "OK      $code  $url"
+                  echo "| $url | $code | ok |" >> "$GITHUB_STEP_SUMMARY"
+                else
+                  echo "::error::$url antwortet mit $code (erwartet 200 mit '$muss')"
+                  echo "| $url | $code | **AUSFALL** |" >> "$GITHUB_STEP_SUMMARY"
+                  fehler=1
+                fi
+              done
+
+              exit $fehler
