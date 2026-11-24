@@ -52,13 +52,15 @@
                "q": "Isn't it all just ffmpeg under the hood?",
                "a": [
                   "Clearly not. ffmpeg is the foundation, and an excellent one. But VidiVerify is what is built on top of it. Five specialised tools work hand in hand:",
-                  { "ul": [
-                     "**FFmpeg** decodes every frame and every audio track.",
-                     "**Magika**, Google's AI-powered file recognition, looks inside and exposes files whose extension is lying.",
-                     "**MediaInfo** reads every technical detail from the container and the stream.",
-                     "**MKVToolNix** rebuilds Matroska files cleanly during repair.",
-                     "**VLC** powers the preview right inside the app."
-                  ] },
+                  {
+                     "ul": [
+                        "**FFmpeg** decodes every frame and every audio track.",
+                        "**Magika**, Google's AI-powered file recognition, looks inside and exposes files whose extension is lying.",
+                        "**MediaInfo** reads every technical detail from the container and the stream.",
+                        "**MKVToolNix** rebuilds Matroska files cleanly during repair.",
+                        "**VLC** powers the preview right inside the app."
+                     ]
+                  },
                   "On top of that sits the heart of it all: VidiVerify's own rule set, which turns raw data into a clear verdict, with thresholds for bitrates, aspect ratios and codecs, diagnostic findings, compatibility profiles and the rating of every repair method. Every one of these tools is under constant watch: when a new version comes out, we test it and bring it to you with an update."
                ]
             },
@@ -87,11 +89,13 @@
                "q": "Integrity check, full check, diagnostic: what is the difference?",
                "a": [
                   "Three levels, one question: is the file healthy?",
-                  { "ul": [
-                     "**Integrity check:** in seconds, VidiVerify X-rays the structure of the file and finds damage to the container.",
-                     "**Full check:** VidiVerify plays the entire film in the background, frame by frame. No error can hide, not even in minute 97.",
-                     "**Diagnostic:** the look inside: timestamps, audio tracks, data stream. This is where you find out why a file is acting up."
-                  ] }
+                  {
+                     "ul": [
+                        "**Integrity check:** in seconds, VidiVerify X-rays the structure of the file and finds damage to the container.",
+                        "**Full check:** VidiVerify plays the entire film in the background, frame by frame. No error can hide, not even in minute 97.",
+                        "**Diagnostic:** the look inside: timestamps, audio tracks, data stream. This is where you find out why a file is acting up."
+                     ]
+                  }
                ]
             },
             {
@@ -199,9 +203,10 @@
             },
             {
                "slug": "erstattung",
-               "q": "Can I get my money back?",
+               "q": "Is VidiVerify right for me?",
                "a": [
-                  "Yes. Within 14 days of purchase you can request a refund through Paddle, our payment partner. And since FREE costs nothing, you can get to know VidiVerify at your leisure before you buy."
+                  "Find out before you spend a cent: VidiVerify **FREE** costs nothing and shows you the complete check on your own videos. In **Media Batch** you can even watch how checking entire folders works. So you know exactly what PRO gives you.",
+                  "And if something still does not fit after you buy, write to us at support@vidiverify.de and we will take care of it. Within 14 days you can also request a refund through Paddle, our payment partner."
                ]
             }
          ]

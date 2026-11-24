@@ -52,13 +52,15 @@
                "q": "Ihr verwendet doch eh nur ffmpeg, oder?",
                "a": [
                   "Ganz klar: nein. ffmpeg ist das Fundament, und ein hervorragendes. Aber VidiVerify ist das, was darauf steht. Fünf spezialisierte Werkzeuge arbeiten Hand in Hand:",
-                  { "ul": [
-                     "**FFmpeg** dekodiert jedes Bild und jede Tonspur.",
-                     "**Magika**, die KI-gestützte Dateierkennung von Google, schaut ins Innere und entlarvt Dateien, deren Endung lügt.",
-                     "**MediaInfo** liest jedes technische Detail aus Container und Datenstrom.",
-                     "**MKVToolNix** baut Matroska-Dateien bei der Reparatur sauber neu auf.",
-                     "**VLC** sorgt für die Vorschau direkt in der App."
-                  ] },
+                  {
+                     "ul": [
+                        "**FFmpeg** dekodiert jedes Bild und jede Tonspur.",
+                        "**Magika**, die KI-gestützte Dateierkennung von Google, schaut ins Innere und entlarvt Dateien, deren Endung lügt.",
+                        "**MediaInfo** liest jedes technische Detail aus Container und Datenstrom.",
+                        "**MKVToolNix** baut Matroska-Dateien bei der Reparatur sauber neu auf.",
+                        "**VLC** sorgt für die Vorschau direkt in der App."
+                     ]
+                  },
                   "Darüber liegt das Herzstück: das eigene VidiVerify-Regelwerk, das aus Rohdaten ein klares Urteil macht, mit Schwellenwerten für Bitraten, Bildformate und Codecs, Diagnose-Befunden, Kompatibilitätsprofilen und der Bewertung jeder Reparaturmethode. Alle Werkzeuge stehen unter ständiger Beobachtung: Erscheint eine neue Version, prüfen wir sie und bringen sie per Update zu dir."
                ]
             },
@@ -87,11 +89,13 @@
                "q": "Integritätsprüfung, Vollprüfung, Diagnose: Was ist der Unterschied?",
                "a": [
                   "Drei Stufen, eine Frage: Ist die Datei gesund?",
-                  { "ul": [
-                     "**Integritätsprüfung:** In Sekunden durchleuchtet VidiVerify den Aufbau der Datei und findet Schäden am Container.",
-                     "**Vollprüfung:** VidiVerify spielt den kompletten Film im Hintergrund durch, Bild für Bild. Kein Fehler kann sich verstecken, auch nicht in Minute 97.",
-                     "**Diagnose:** Der Blick ins Innere: Zeitstempel, Tonspuren, Datenstrom. Hier findest du heraus, warum eine Datei zickt."
-                  ] }
+                  {
+                     "ul": [
+                        "**Integritätsprüfung:** In Sekunden durchleuchtet VidiVerify den Aufbau der Datei und findet Schäden am Container.",
+                        "**Vollprüfung:** VidiVerify spielt den kompletten Film im Hintergrund durch, Bild für Bild. Kein Fehler kann sich verstecken, auch nicht in Minute 97.",
+                        "**Diagnose:** Der Blick ins Innere: Zeitstempel, Tonspuren, Datenstrom. Hier findest du heraus, warum eine Datei zickt."
+                     ]
+                  }
                ]
             },
             {
@@ -199,9 +203,10 @@
             },
             {
                "slug": "erstattung",
-               "q": "Kann ich vom Kauf zurücktreten?",
+               "q": "Passt VidiVerify überhaupt zu mir?",
                "a": [
-                  "Ja. Innerhalb von 14 Tagen nach dem Kauf kannst du über Paddle, unseren Zahlungspartner, eine Erstattung beantragen. Und weil FREE kostenlos ist, kannst du VidiVerify vorher in aller Ruhe kennenlernen."
+                  "Finde es heraus, bevor du einen Cent ausgibst: VidiVerify **FREE** ist kostenlos und zeigt dir die komplette Prüfung an deinen eigenen Videos. Im **Media Stapel** siehst du sogar schon, wie die Prüfung ganzer Ordner abläuft. So weisst du genau, was du mit PRO bekommst.",
+                  "Und sollte nach dem Kauf doch etwas nicht passen, schreib uns an support@vidiverify.de, wir kümmern uns. Innerhalb von 14 Tagen kannst du ausserdem über Paddle, unseren Zahlungspartner, eine Erstattung beantragen."
                ]
             }
          ]
