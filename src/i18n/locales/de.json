@@ -611,7 +611,8 @@
       "privacy": "Datenschutzerklärung",
       "eula": "Lizenzvereinbarung (EULA)",
       "terms": "AGB",
-      "withdrawal": "Widerrufsbelehrung"
+      "withdrawal": "Widerrufsbelehrung",
+      "faq": "FAQ"
    },
    "modal": {
       "close": "Schliessen",

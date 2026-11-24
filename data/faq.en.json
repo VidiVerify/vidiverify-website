@@ -1,0 +1,230 @@
+{
+   "title": "Frequently asked questions",
+   "subtitle": "FAQ",
+   "date": "As of November 2026",
+   "searchPlaceholder": "Search for a question or keyword …",
+   "searchAria": "Search the FAQ",
+   "hits": "{n} matches",
+   "noResults": "We have no answer for that yet. Write to us at support@vidiverify.de and we will reply personally.",
+   "tocTitle": "Topics",
+   "sections": [
+      {
+         "id": 1,
+         "title": "Getting to know VidiVerify",
+         "items": [
+            {
+               "slug": "was-ist-vidiverify",
+               "q": "What is VidiVerify?",
+               "a": [
+                  "Your video lab, right on your own computer. VidiVerify looks inside every file, down to the very last frame, and tells you in clear traffic-light colours whether it is sound. If it is not, you learn why, exactly where, and how to get it back on track. With PRO, VidiVerify repairs it for you as well."
+               ]
+            },
+            {
+               "slug": "kein-upload",
+               "q": "Do I have to upload my videos anywhere?",
+               "a": [
+                  "No, never. VidiVerify runs entirely on your computer. No upload, no cloud, not even a snippet ever leaves your drive. Your private footage stays where it belongs: with you."
+               ]
+            },
+            {
+               "slug": "formate",
+               "q": "Which formats does VidiVerify understand?",
+               "a": [
+                  "Pretty much everything you will come across: more than 30 container formats, from MP4, MKV, MOV and AVI to MPEG-TS, DVD VOB and MXF, with all common video and audio formats from H.264, H.265 and AV1 to ProRes, AAC, AC-3 and DTS. VidiVerify takes old treasures from the camcorder and DVD era just as seriously."
+               ]
+            },
+            {
+               "slug": "systemvoraussetzungen",
+               "q": "What do I need?",
+               "a": [
+                  "A PC running the 64-bit edition of Windows 10 or 11, which means practically any computer from recent years. Install, launch, drop in a file, done. The more processor cores and memory you have, the faster full checks and repairs run, especially with 4K footage and large batches."
+               ]
+            },
+            {
+               "slug": "sprachen",
+               "q": "Which languages does VidiVerify speak?",
+               "a": [
+                  "The interface already speaks English, German, Spanish, Russian and Chinese, switchable with a single click. And we are far from done: Hindi, French, Portuguese, Japanese and more languages are already in the pipeline."
+               ]
+            },
+            {
+               "slug": "nur-ffmpeg",
+               "q": "Isn't it all just ffmpeg under the hood?",
+               "a": [
+                  "Clearly not. ffmpeg is the foundation, and an excellent one. But VidiVerify is what is built on top of it. Five specialised tools work hand in hand:",
+                  { "ul": [
+                     "**FFmpeg** decodes every frame and every audio track.",
+                     "**Magika**, Google's AI-powered file recognition, looks inside and exposes files whose extension is lying.",
+                     "**MediaInfo** reads every technical detail from the container and the stream.",
+                     "**MKVToolNix** rebuilds Matroska files cleanly during repair.",
+                     "**VLC** powers the preview right inside the app."
+                  ] },
+                  "On top of that sits the heart of it all: VidiVerify's own rule set, which turns raw data into a clear verdict, with thresholds for bitrates, aspect ratios and codecs, diagnostic findings, compatibility profiles and the rating of every repair method. Every one of these tools is under constant watch: when a new version comes out, we test it and bring it to you with an update."
+               ]
+            },
+            {
+               "slug": "sicherheit",
+               "q": "Is VidiVerify safe?",
+               "a": [
+                  "Yes. Every version is signed with a Sectigo certificate, and every download comes with a SHA-256 checksum so you can verify that the file comes from us and nobody else. If Windows shows a SmartScreen notice on the very first launch, that is only because a new version still has to collect downloads. A click on “More info” and “Run anyway” is all it takes."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Checking videos",
+         "items": [
+            {
+               "slug": "kaputt-erkennen",
+               "q": "How can I tell whether my video is broken?",
+               "a": [
+                  "VidiVerify tells you. Green means all good. Yellow means take a look. Red means something is wrong, together with the cause and the position in the film. Instead of technical jargon you get a clear assessment and a recommendation for what to do next."
+               ]
+            },
+            {
+               "slug": "pruefstufen",
+               "q": "Integrity check, full check, diagnostic: what is the difference?",
+               "a": [
+                  "Three levels, one question: is the file healthy?",
+                  { "ul": [
+                     "**Integrity check:** in seconds, VidiVerify X-rays the structure of the file and finds damage to the container.",
+                     "**Full check:** VidiVerify plays the entire film in the background, frame by frame. No error can hide, not even in minute 97.",
+                     "**Diagnostic:** the look inside: timestamps, audio tracks, data stream. This is where you find out why a file is acting up."
+                  ] }
+               ]
+            },
+            {
+               "slug": "player-probleme",
+               "q": "My player struggles with a video. Can VidiVerify tell me why?",
+               "a": [
+                  "That is exactly what it is for. Besides hunting for errors, VidiVerify checks in the **Media Lab** whether your file suits its destination, across six profiles from smart TV and smartphone to browser streaming, archive and broadcast. If a film starts stuttering after half an hour, the culprit is often an audio format your device cannot play directly, and VidiVerify shows you that in black and white."
+               ]
+            },
+            {
+               "slug": "ganze-ordner",
+               "q": "Can I check entire folders in one go?",
+               "a": [
+                  "Yes, with **Media Batch** (PRO). Give VidiVerify a folder, an entire drive or a list of files, and it works through them one by one while you do something else. Pause today, continue tomorrow, no problem at all. At the end you see at a glance what is fine and what is not, with a PDF report on top."
+               ]
+            },
+            {
+               "slug": "defekte-festplatte",
+               "q": "I have videos on an old or failing hard drive. Can VidiVerify help?",
+               "a": [
+                  "Absolutely. Copy the videos to a healthy drive, and Media Batch tells you in a single run which files came through unharmed and which ones suffered. Media Repair then brings the damaged ones back into shape. After a drive failure, you know where you stand in no time."
+               ]
+            },
+            {
+               "slug": "nachweis",
+               "q": "Do I get a record of the check?",
+               "a": [
+                  "Yes, and one worth showing. Every check can be captured as a **MAP**, a PDF dossier with all findings, tool versions and the rule set it was checked against. Batches get their own batch report, repairs get the **RepairMAP** with the SHA-256 fingerprint of both the original and the result. Ideal for archives, clients and anyone who wants to know for sure."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Repairing videos",
+         "items": [
+            {
+               "slug": "reparieren",
+               "q": "Can VidiVerify repair my video?",
+               "a": [
+                  "Yes. **Media Repair** (PRO) gets damaged videos running again: scrambled timestamps, broken containers, files that stutter, freeze or stop halfway through. 16 repair methods are ready to go, and VidiVerify picks the best one for you: lossless first, without re-encoding a single frame. Only when there is no other way does VidiVerify re-encode, so that your video plays again."
+               ]
+            },
+            {
+               "slug": "methode-waehlen",
+               "q": "Do I need to know which repair is the right one?",
+               "a": [
+                  "No, that is our job. VidiVerify reads the findings for your file, rates every suitable method and recommends the one with the best prospects. You click Start and watch."
+               ]
+            },
+            {
+               "slug": "reparatur-geprueft",
+               "q": "How do I know the repair worked?",
+               "a": [
+                  "Because VidiVerify checks, every single time. After the repair, VidiVerify automatically checks the result as thoroughly as the original and compares before and after, right down to the audio track. You will never get a tick just because the tool finished running. You get a verdict based on measurement, and the RepairMAP to prove it."
+               ]
+            },
+            {
+               "slug": "original-sicher",
+               "q": "Is my original safe?",
+               "a": [
+                  "One hundred percent. VidiVerify never touches your original. The repair is always written as a new file next to it. If a method brings no improvement, VidiVerify clears its result away by itself, and you simply try the next one."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Buying and licensing",
+         "items": [
+            {
+               "slug": "preise",
+               "q": "How much does VidiVerify cost?",
+               "a": [
+                  "For private use, VidiVerify **FREE** is free for good, with no registration and no expiry date. **PRO** with Media Batch and Media Repair costs {PRO} for the entire major version, meaning every 1.x update. **LIFETIME** at {LIFETIME} is yours forever, including every future major version."
+               ]
+            },
+            {
+               "slug": "beruflich",
+               "q": "May I use FREE at work?",
+               "a": [
+                  "FREE is meant for private use. As soon as VidiVerify works for your job, your company or an institution, you need a licence, and with PRO you also get the tools for entire collections right away."
+               ]
+            },
+            {
+               "slug": "pro-oder-lifetime",
+               "q": "PRO or LIFETIME?",
+               "a": [
+                  "PRO covers the current major version, with every update and every new feature still to come within it. LIFETIME is the worry-free option: pay once, every future major version included. Already have PRO? Then its price counts towards your upgrade to LIFETIME."
+               ]
+            },
+            {
+               "slug": "lizenz-erhalten",
+               "q": "How do I get my licence?",
+               "a": [
+                  "No typing required. You buy inside VidiVerify under **Help → Licensing … → Online activation**, and right after payment VidiVerify fetches the licence by itself. PRO is active immediately. Prefer an invoice? Use **Request activation** instead."
+               ]
+            },
+            {
+               "slug": "neuer-rechner",
+               "q": "I am getting a new computer. Will I lose my licence?",
+               "a": [
+                  "No. Drop us a line and we will move your licence to the new computer. After reinstalling on the same computer, one click on **Retrieve license** brings it back."
+               ]
+            },
+            {
+               "slug": "erstattung",
+               "q": "Can I get my money back?",
+               "a": [
+                  "Yes. Within 14 days of purchase you can request a refund through Paddle, our payment partner. And since FREE costs nothing, you can get to know VidiVerify at your leisure before you buy."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Help",
+         "items": [
+            {
+               "slug": "support",
+               "q": "I am stuck. How do I reach you?",
+               "a": [
+                  "Write to support@vidiverify.de and we will reply personally. The fastest way for us to help is a support package: check the affected file, then choose **Help → Create Support Package** and attach the package to your email. Your video itself stays with you."
+               ]
+            },
+            {
+               "slug": "weiterentwicklung",
+               "q": "Is VidiVerify still being developed?",
+               "a": [
+                  "Constantly. Updates arrive regularly and install with a single click if you wish. What comes next is out in the open on our roadmap, and many improvements go straight back to suggestions from our users."
+               ]
+            }
+         ]
+      }
+   ]
+}

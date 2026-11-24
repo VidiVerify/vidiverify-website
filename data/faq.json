@@ -1,0 +1,230 @@
+{
+   "title": "Häufige Fragen",
+   "subtitle": "FAQ",
+   "date": "Stand: November 2026",
+   "searchPlaceholder": "Frage oder Stichwort suchen …",
+   "searchAria": "FAQ durchsuchen",
+   "hits": "{n} Treffer",
+   "noResults": "Dazu haben wir noch keine Antwort. Schreib uns an support@vidiverify.de, wir antworten persönlich.",
+   "tocTitle": "Themen",
+   "sections": [
+      {
+         "id": 1,
+         "title": "VidiVerify kennenlernen",
+         "items": [
+            {
+               "slug": "was-ist-vidiverify",
+               "q": "Was ist VidiVerify?",
+               "a": [
+                  "Dein Prüflabor für Videos, direkt auf deinem Rechner. VidiVerify schaut in jede Datei hinein, bis zum letzten Bild, und sagt dir in klaren Ampelfarben, ob sie in Ordnung ist. Ist sie es nicht, erfährst du warum, wo genau, und wie du sie wieder hinbekommst. Mit PRO repariert VidiVerify sie gleich selbst."
+               ]
+            },
+            {
+               "slug": "kein-upload",
+               "q": "Muss ich meine Videos irgendwo hochladen?",
+               "a": [
+                  "Nein, niemals. VidiVerify arbeitet vollständig auf deinem Rechner. Kein Upload, keine Cloud, nicht einmal ein Ausschnitt verlässt deine Festplatte. Deine privaten Aufnahmen bleiben, wo sie hingehören: bei dir."
+               ]
+            },
+            {
+               "slug": "formate",
+               "q": "Welche Formate versteht VidiVerify?",
+               "a": [
+                  "So gut wie alles, was dir begegnet: über 30 Containerformate, von MP4, MKV, MOV und AVI über MPEG-TS und DVD-VOB bis MXF, mit allen gängigen Video- und Tonformaten von H.264, H.265 und AV1 bis ProRes, AAC, AC-3 und DTS. Auch alte Schätze aus der Camcorder- und DVD-Zeit nimmt VidiVerify ernst."
+               ]
+            },
+            {
+               "slug": "systemvoraussetzungen",
+               "q": "Was brauche ich dafür?",
+               "a": [
+                  "Einen PC mit Windows 10 oder 11 in der 64-Bit-Fassung, also praktisch jeden Rechner der letzten Jahre. Installieren, starten, Datei hineinziehen, fertig. Je mehr Prozessorkerne und Arbeitsspeicher, desto schneller laufen Vollprüfung und Reparatur, gerade bei 4K-Material und grossen Stapeln."
+               ]
+            },
+            {
+               "slug": "sprachen",
+               "q": "In welchen Sprachen gibt es VidiVerify?",
+               "a": [
+                  "Die Oberfläche spricht schon heute Deutsch, Englisch, Spanisch, Russisch und Chinesisch, umschaltbar mit einem Klick. Und wir sind noch lange nicht fertig: Hindi, Französisch, Portugiesisch, Japanisch und weitere Sprachen sind bereits in Planung."
+               ]
+            },
+            {
+               "slug": "nur-ffmpeg",
+               "q": "Ihr verwendet doch eh nur ffmpeg, oder?",
+               "a": [
+                  "Ganz klar: nein. ffmpeg ist das Fundament, und ein hervorragendes. Aber VidiVerify ist das, was darauf steht. Fünf spezialisierte Werkzeuge arbeiten Hand in Hand:",
+                  { "ul": [
+                     "**FFmpeg** dekodiert jedes Bild und jede Tonspur.",
+                     "**Magika**, die KI-gestützte Dateierkennung von Google, schaut ins Innere und entlarvt Dateien, deren Endung lügt.",
+                     "**MediaInfo** liest jedes technische Detail aus Container und Datenstrom.",
+                     "**MKVToolNix** baut Matroska-Dateien bei der Reparatur sauber neu auf.",
+                     "**VLC** sorgt für die Vorschau direkt in der App."
+                  ] },
+                  "Darüber liegt das Herzstück: das eigene VidiVerify-Regelwerk, das aus Rohdaten ein klares Urteil macht, mit Schwellenwerten für Bitraten, Bildformate und Codecs, Diagnose-Befunden, Kompatibilitätsprofilen und der Bewertung jeder Reparaturmethode. Alle Werkzeuge stehen unter ständiger Beobachtung: Erscheint eine neue Version, prüfen wir sie und bringen sie per Update zu dir."
+               ]
+            },
+            {
+               "slug": "sicherheit",
+               "q": "Ist VidiVerify sicher?",
+               "a": [
+                  "Ja. Jede Version ist mit einem Sectigo-Zertifikat signiert, und zu jedem Download gibt es einen SHA-256-Prüfwert, mit dem du nachprüfen kannst, dass die Datei genau von uns stammt. Zeigt Windows beim allerersten Start einen SmartScreen-Hinweis, liegt das nur daran, dass eine neue Version erst Downloads sammeln muss. Ein Klick auf „Weitere Informationen“ und „Trotzdem ausführen“ genügt."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 2,
+         "title": "Videos prüfen",
+         "items": [
+            {
+               "slug": "kaputt-erkennen",
+               "q": "Woran erkenne ich, ob mein Video kaputt ist?",
+               "a": [
+                  "Daran, dass VidiVerify es dir sagt. Grün heisst: alles bestens. Gelb heisst: Schau mal hin. Rot heisst: Hier stimmt etwas nicht, und zwar mit Ursache und Stelle im Film. Statt Fachchinesisch bekommst du eine klare Einordnung und eine Empfehlung, was jetzt zu tun ist."
+               ]
+            },
+            {
+               "slug": "pruefstufen",
+               "q": "Integritätsprüfung, Vollprüfung, Diagnose: Was ist der Unterschied?",
+               "a": [
+                  "Drei Stufen, eine Frage: Ist die Datei gesund?",
+                  { "ul": [
+                     "**Integritätsprüfung:** In Sekunden durchleuchtet VidiVerify den Aufbau der Datei und findet Schäden am Container.",
+                     "**Vollprüfung:** VidiVerify spielt den kompletten Film im Hintergrund durch, Bild für Bild. Kein Fehler kann sich verstecken, auch nicht in Minute 97.",
+                     "**Diagnose:** Der Blick ins Innere: Zeitstempel, Tonspuren, Datenstrom. Hier findest du heraus, warum eine Datei zickt."
+                  ] }
+               ]
+            },
+            {
+               "slug": "player-probleme",
+               "q": "Mein Player hat Probleme mit dem Video. Kann VidiVerify mir sagen, warum?",
+               "a": [
+                  "Genau dafür ist es da. Neben der Fehlersuche prüft VidiVerify im **Media Lab**, ob deine Datei zu deinem Ziel passt, in sechs Profilen von Smart-TV und Smartphone über Browser-Streaming bis Archiv und Broadcast. Ruckelt ein Film nach einer halben Stunde, steckt oft ein Tonformat dahinter, das dein Gerät nicht direkt abspielen kann, und das zeigt dir VidiVerify schwarz auf weiss."
+               ]
+            },
+            {
+               "slug": "ganze-ordner",
+               "q": "Kann ich ganze Ordner auf einmal prüfen?",
+               "a": [
+                  "Ja, mit **Media Stapel** (PRO). Du gibst VidiVerify einen Ordner, eine ganze Festplatte oder eine Dateiliste, und es arbeitet sich Datei für Datei durch, während du etwas anderes machst. Pausieren, morgen weitermachen, alles kein Problem. Am Ende siehst du auf einen Blick, was in Ordnung ist und was nicht, und bekommst alles als PDF-Bericht dazu."
+               ]
+            },
+            {
+               "slug": "defekte-festplatte",
+               "q": "Ich habe Videos auf einer alten oder defekten Festplatte. Hilft mir VidiVerify?",
+               "a": [
+                  "Unbedingt. Kopiere die Videos auf ein gesundes Laufwerk, und VidiVerify sagt dir mit Media Stapel in einem Durchgang, welche Dateien heil geblieben sind und welche gelitten haben. Die beschädigten bringt Media Repair wieder in Form. So weisst du nach einem Festplattenschaden in kürzester Zeit, wo du stehst."
+               ]
+            },
+            {
+               "slug": "nachweis",
+               "q": "Bekomme ich einen Nachweis über die Prüfung?",
+               "a": [
+                  "Ja, und zwar einen, der sich sehen lassen kann. Jede Prüfung lässt sich als **MAP** festhalten, ein PDF-Dossier mit allen Befunden, Werkzeugversionen und dem Regelwerk, nach dem geprüft wurde. Für Stapel gibt es die **StapelMAP**, für Reparaturen die **RepairMAP** mit dem SHA-256-Fingerabdruck von Original und Ergebnis. Ideal für Archive, Kunden und alle, die es genau wissen wollen."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 3,
+         "title": "Videos reparieren",
+         "items": [
+            {
+               "slug": "reparieren",
+               "q": "Kann VidiVerify mein Video reparieren?",
+               "a": [
+                  "Ja. **Media Repair** (PRO) bringt beschädigte Videos wieder zum Laufen: zerschossene Zeitstempel, defekte Container, Dateien, die ruckeln, hängen oder mittendrin abbrechen. 16 Reparaturmethoden stehen bereit, und VidiVerify wählt für dich die beste: zuerst verlustfrei, ohne ein einziges Bild neu zu berechnen. Erst wenn es nicht anders geht, kodiert VidiVerify neu, damit dein Video wieder abspielbar wird."
+               ]
+            },
+            {
+               "slug": "methode-waehlen",
+               "q": "Muss ich wissen, welche Reparatur die richtige ist?",
+               "a": [
+                  "Nein, das ist unsere Aufgabe. VidiVerify liest den Befund deiner Datei, bewertet jede passende Methode und empfiehlt dir die mit den besten Aussichten. Du klickst auf Start und schaust zu."
+               ]
+            },
+            {
+               "slug": "reparatur-geprueft",
+               "q": "Woher weiss ich, dass die Reparatur geklappt hat?",
+               "a": [
+                  "Weil VidiVerify es nachprüft, jedes Mal. Nach der Reparatur prüft VidiVerify das Ergebnis automatisch mit derselben Gründlichkeit wie das Original und vergleicht vorher und nachher, bis hin zur Tonspur. Ein Häkchen, weil das Werkzeug durchgelaufen ist, gibt es bei uns nicht. Du bekommst ein Urteil, das auf Messung beruht, und die RepairMAP als Beleg."
+               ]
+            },
+            {
+               "slug": "original-sicher",
+               "q": "Ist mein Original dabei sicher?",
+               "a": [
+                  "Zu hundert Prozent. VidiVerify fasst dein Original nicht an. Die Reparatur entsteht immer als neue Datei daneben. Bringt eine Methode keine Verbesserung, räumt VidiVerify ihr Ergebnis von selbst wieder weg, und du probierst einfach die nächste."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 4,
+         "title": "Kaufen und Lizenz",
+         "items": [
+            {
+               "slug": "preise",
+               "q": "Was kostet VidiVerify?",
+               "a": [
+                  "Für den privaten Gebrauch ist VidiVerify **FREE** dauerhaft kostenlos, ohne Registrierung und ohne Ablaufdatum. **PRO** mit Media Stapel und Media Repair gibt es für {PRO} für die ganze Hauptversion, also für alle 1.x-Updates. **LIFETIME** für {LIFETIME} gilt für immer, für alle künftigen Hauptversionen."
+               ]
+            },
+            {
+               "slug": "beruflich",
+               "q": "Darf ich FREE auch beruflich nutzen?",
+               "a": [
+                  "FREE ist für den privaten Gebrauch gedacht. Sobald VidiVerify im Beruf, im Unternehmen oder in einer Einrichtung arbeitet, brauchst du eine Lizenz, und mit PRO hast du dann auch gleich die Werkzeuge für ganze Bestände."
+               ]
+            },
+            {
+               "slug": "pro-oder-lifetime",
+               "q": "PRO oder LIFETIME?",
+               "a": [
+                  "PRO deckt die aktuelle Hauptversion ab, mit allen Updates und allen neuen Funktionen, die in ihr noch kommen. LIFETIME ist der Rundum-sorglos-Weg: einmal zahlen, jede künftige Hauptversion inklusive. Du hast schon PRO? Dann wird dir der Preis beim Wechsel auf LIFETIME angerechnet."
+               ]
+            },
+            {
+               "slug": "lizenz-erhalten",
+               "q": "Wie bekomme ich meine Lizenz?",
+               "a": [
+                  "Ganz ohne Abtippen. Du kaufst in VidiVerify unter **Hilfe → Lizenzierung … → Online Freischaltung**, und direkt nach der Zahlung holt sich VidiVerify die Lizenz selbst ab. PRO ist sofort aktiv. Auf Rechnung geht es auch: über **Freischaltung anfordern**."
+               ]
+            },
+            {
+               "slug": "neuer-rechner",
+               "q": "Ich bekomme einen neuen Rechner. Ist meine Lizenz dann weg?",
+               "a": [
+                  "Nein. Schreib uns kurz, und wir ziehen deine Lizenz auf den neuen Rechner um. Nach einer Neuinstallation auf demselben Rechner holst du sie mit einem Klick auf **Lizenz abrufen** zurück."
+               ]
+            },
+            {
+               "slug": "erstattung",
+               "q": "Kann ich vom Kauf zurücktreten?",
+               "a": [
+                  "Ja. Innerhalb von 14 Tagen nach dem Kauf kannst du über Paddle, unseren Zahlungspartner, eine Erstattung beantragen. Und weil FREE kostenlos ist, kannst du VidiVerify vorher in aller Ruhe kennenlernen."
+               ]
+            }
+         ]
+      },
+      {
+         "id": 5,
+         "title": "Hilfe",
+         "items": [
+            {
+               "slug": "support",
+               "q": "Ich komme nicht weiter. Wie erreiche ich euch?",
+               "a": [
+                  "Schreib an support@vidiverify.de, wir antworten persönlich. Am schnellsten helfen wir dir mit einem Support-Paket: Prüfe die betroffene Datei, dann **Hilfe → Support-Paket erstellen** und das Paket an deine Email hängen. Dein Video selbst bleibt dabei bei dir."
+               ]
+            },
+            {
+               "slug": "weiterentwicklung",
+               "q": "Wird VidiVerify weiterentwickelt?",
+               "a": [
+                  "Ständig. Updates kommen regelmässig und installieren sich auf Wunsch mit einem Klick. Was als Nächstes kommt, steht offen auf unserer Roadmap, und viele Verbesserungen gehen direkt auf Hinweise unserer Anwender zurück."
+               ]
+            }
+         ]
+      }
+   ]
+}

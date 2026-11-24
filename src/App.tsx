@@ -15,6 +15,7 @@ import AuroraBlobs from "@components/ui/AuroraBlobs";
 import ShootingStars from "@components/ui/ShootingStars";
 import EulaModal from "@components/ui/EulaModal";
 import DatenschutzModal from "@components/ui/DatenschutzModal";
+import FaqModal from "@components/ui/FaqModal";
 import ImpressumModal from "@components/ui/ImpressumModal";
 import AgbModal from "@components/ui/AgbModal";
 import WiderrufModal from "@components/ui/WiderrufModal";
@@ -62,6 +63,11 @@ const App = () => {
    const [impressumOpen, setImpressumOpen] = useState(() => window.location.hash === "#impressum");
    const [agbOpen, setAgbOpen] = useState(() => window.location.hash === "#agb");
    const [widerrufOpen, setWiderrufOpen] = useState(() => window.location.hash === "#widerruf");
+   // Die FAQ. `#faq-<slug>` öffnet sie mit dieser Frage aufgeklappt - so lässt
+   // sich aus einer Support-Email auf genau eine Antwort verweisen.
+   const [faqOpen, setFaqOpen] = useState(() => /^#faq(-|$)/.test(window.location.hash));
+   const [faqZiel, setFaqZiel] = useState(() =>
+      window.location.hash.startsWith("#faq-") ? window.location.hash.slice(5) : "");
    // Die Bestellanfrage. Sie kommt meist aus der Anwendung: Der Knopf dort
    // fuehrt auf `/lizenz-anfrage?vvid=…`, und `public/404.html` leitet das
    // hierher um - Abfrage inbegriffen, denn ohne sie müsste der Kunde seine
@@ -98,7 +104,7 @@ const App = () => {
    useEffect(() => {
       globalThis.history.scrollRestoration = "manual";
       const hash = window.location.hash.slice(1);
-      const modalHashes = ["eula", "datenschutz", "impressum", "agb", "widerruf", "lizenz-anfrage", "pro"];
+      const modalHashes = ["eula", "datenschutz", "impressum", "agb", "widerruf", "lizenz-anfrage", "pro", "faq"];
       // Wer bestellen will, soll HINTER dem Fenster die Preise sehen.
       //
       // Die Bestellanfrage kommt aus der Anwendung, und der erste Griff nach
@@ -106,7 +112,9 @@ const App = () => {
       // Unterschied zwischen PRO und LIFETIME? Steht dahinter der Seitenkopf,
       // muss er erst suchen; steht dort die Preistafel, hat er die Antwort,
       // sobald er das Fenster schliesst.
-      const zielAnker = (hash === "lizenz-anfrage" || hash === "pro") ? "preise" : hash;
+      // `faq-<slug>` ist kein Anker der Seite, sondern eine Frage im Fenster.
+      const zielAnker = (hash === "lizenz-anfrage" || hash === "pro") ? "preise"
+         : hash.startsWith("faq-") ? "faq" : hash;
       if (zielAnker && (!modalHashes.includes(zielAnker) || zielAnker === "preise")) {
          const deadline = Date.now() + 4000;
          const tryScroll = () => {
@@ -133,6 +141,7 @@ const App = () => {
          if (href === "#impressum") { e.preventDefault(); setImpressumOpen(true); }
          if (href === "#agb") { e.preventDefault(); setAgbOpen(true); }
          if (href === "#widerruf") { e.preventDefault(); setWiderrufOpen(true); }
+         if (href && /^#faq(-|$)/.test(href)) { e.preventDefault(); setFaqZiel(href.slice(5)); setFaqOpen(true); }
          if (href === "#lizenz-anfrage") { e.preventDefault(); setAnfrageOpen(true); }
          if (href === "#pro") { e.preventDefault(); setProOpen(true); }
       };
@@ -148,7 +157,7 @@ const App = () => {
    // erhebt eine Anschrift, lädt Paddle nach und wartet danach auf die
    // Lizenz, während hinter dem Fenster unsichtbar eine Szene weiterlief.
    const fensterOffen = eulaOpen || datenschutzOpen || impressumOpen || agbOpen
-      || widerrufOpen || anfrageOpen || proOpen;
+      || widerrufOpen || anfrageOpen || proOpen || faqOpen;
 
    /* Die Zielseite der Zahlungslinks steht FÜR SICH, ohne die Landeseite
     * dahinter.
@@ -179,6 +188,7 @@ const App = () => {
             <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
             <WiderrufModal open={widerrufOpen}
                            onClose={() => setWiderrufOpen(false)} />
+            <FaqModal open={faqOpen} ziel={faqZiel} onClose={() => setFaqOpen(false)} />
          </ErrorBoundary>
       );
    }
@@ -202,6 +212,7 @@ const App = () => {
             <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
             <WiderrufModal open={widerrufOpen}
                            onClose={() => setWiderrufOpen(false)} />
+            <FaqModal open={faqOpen} ziel={faqZiel} onClose={() => setFaqOpen(false)} />
          </ErrorBoundary>
       );
    }
@@ -272,6 +283,7 @@ const App = () => {
             <ImpressumModal open={impressumOpen} onClose={() => setImpressumOpen(false)} />
             <AgbModal open={agbOpen} onClose={() => setAgbOpen(false)} />
             <WiderrufModal open={widerrufOpen} onClose={() => setWiderrufOpen(false)} />
+            <FaqModal open={faqOpen} ziel={faqZiel} onClose={() => setFaqOpen(false)} />
             <LizenzAnfrageModal open={anfrageOpen} onClose={() => setAnfrageOpen(false)} />
             <ProKaufModal open={proOpen} onClose={() => setProOpen(false)} />
          </ErrorBoundary>

@@ -611,7 +611,8 @@
       "privacy": "Privacy policy",
       "eula": "License agreement (EULA)",
       "terms": "Terms",
-      "withdrawal": "Refund policy"
+      "withdrawal": "Refund policy",
+      "faq": "FAQ"
    },
    "modal": {
       "close": "Close",

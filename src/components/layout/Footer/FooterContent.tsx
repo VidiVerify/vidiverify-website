@@ -12,6 +12,7 @@ const FooterContent = () => {
    const name = useMemo(() => getName(), []);
 
    const LEGAL_LINKS = [
+      { label: t("footer.faq"), href: "#faq" },
       { label: t("footer.terms"), href: "#agb" },
       { label: t("footer.privacy"), href: "#datenschutz" },
       { label: t("footer.eula"), href: "#eula" },
