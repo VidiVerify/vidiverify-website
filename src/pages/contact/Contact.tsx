@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { MdVerified } from "react-icons/md";
 import { FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { SiX, SiTiktok } from "react-icons/si";
 import { Mail, ArrowUpRight, PackageSearch } from "lucide-react";
@@ -11,17 +10,24 @@ import NeuralNetAnim from "@pages/services/animations/NeuralNetAnim";
 import { staggerContainerSlow, staggerItemSlow } from "@utils/animations";
 import { CYAN, TEXT_PRIMARY, TEXT_SECONDARY, TEXT_MUTED, GLASS_BORDER } from "@/constants/theme";
 import useMediaQuery from "@utils/useMediaQuery";
+import FaqKarte from "./FaqKarte";
 import contactData from "../../../data/contact.json";
 
 const SUPPORT_GREEN = "#22c55e";
 
-// Compact inline network animation for support card
 
 const Contact = () => {
    const { t } = useTranslation();
    const isMobile = useMediaQuery("(max-width: 768px)");
    const isShortDesktop = useMediaQuery("(max-height: 820px) and (min-width: 1024px)");
    const githubUsername = getGitHubUsername();
+   const SOCIAL = [
+      { href: `https://github.com/${githubUsername}`, Icon: FaGithub, farbe: "#a5a5c0", name: t("contact.github"), handle: githubUsername },
+      { href: "https://www.facebook.com/VidiVerify", Icon: FaFacebook, farbe: "#1877f2", name: t("contact.facebook"), handle: "VidiVerify" },
+      { href: "https://instagram.com/vidiverify", Icon: FaInstagram, farbe: "#E1306C", name: t("contact.instagram"), handle: "vidiverify" },
+      { href: "https://x.com/VidiVerif", Icon: SiX, farbe: "#e7e7ea", name: t("contact.x"), handle: "VidiVerif" },
+      { href: "https://www.tiktok.com/@vidiverify", Icon: SiTiktok, farbe: "#25F4EE", name: t("contact.tiktok"), handle: "vidiverify" },
+   ];
    const email = `${contactData.email.user}@${contactData.email.domain}`;
 
    const tileStyle = {
@@ -34,8 +40,6 @@ const Contact = () => {
       alignItems: "center",
       gap: 6,
    };
-   const tileMinHeight = isShortDesktop ? 100 : 120;
-   const trustPadding = isMobile ? "16px 16px" : isShortDesktop ? "10px 28px" : "18px 28px";
    const supportContentPadding = isShortDesktop ? "10px 18px" : "14px 18px";
 
    return (
@@ -47,112 +51,8 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "0px 0px -80px 0px" }}
          >
-            {/* ── Trust card + GitHub + Facebook ── */}
-            <motion.div variants={staggerContainerSlow} style={{ display: "flex", flexDirection: "column", gap: isShortDesktop ? 10 : 15 }}>
-               {/* Trust card - full width on mobile */}
-               <motion.div
-                  variants={staggerItemSlow}
-                  className="glass-card"
-                  style={{
-                     padding: trustPadding,
-                     display: "flex", gap: 16, alignItems: "flex-start",
-                     borderLeft: `3px solid ${CYAN}`, borderRadius: "0 16px 16px 0",
-                  }}
-               >
-                  <div style={{ width: 38, height: 38, borderRadius: 10, flexShrink: 0, background: "rgba(106,172,204,0.08)", border: "1px solid rgba(106,172,204,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                     <MdVerified size={20} color={CYAN} />
-                  </div>
-                  <div>
-                     <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600, marginBottom: 4 }}>
-                        {t("contact.trustHeading")}
-                     </p>
-                     <p style={{ fontSize: 13, lineHeight: 1.6, color: TEXT_SECONDARY }}>{t("contact.trustText")}</p>
-                  </div>
-               </motion.div>
-
-               {/* GitHub + Facebook + Instagram + X + TikTok - 5-column grid (1 on mobile) */}
-               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(5, 1fr)", gap: 14 }}>
-                  <motion.a
-                     href={`https://github.com/${githubUsername}`}
-                     target="_blank" rel="noopener noreferrer"
-                     className="glass-card" variants={staggerItemSlow}
-                     whileHover={{ y: -4, borderColor: "rgba(165,165,192,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
-                  >
-                     <FaGithub size={22} color="#a5a5c0" />
-                     <span style={{ fontSize: 11, fontWeight: 600, color: "#a5a5c0", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.github")}</span>
-                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>{githubUsername}</span>
-                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.githubSub")}</span>
-                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#a5a5c0", marginTop: 4 }}>
-                        {t("contact.githubAction")} <ArrowUpRight size={12} />
-                     </span>
-                  </motion.a>
-
-                  <motion.a
-                     href="https://www.facebook.com/VidiVerify"
-                     target="_blank" rel="noopener noreferrer"
-                     className="glass-card" variants={staggerItemSlow}
-                     whileHover={{ y: -4, borderColor: "rgba(24,119,242,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
-                  >
-                     <FaFacebook size={22} color="#1877f2" />
-                     <span style={{ fontSize: 11, fontWeight: 600, color: "#1877f2", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.facebook")}</span>
-                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>VidiVerify</span>
-                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.facebookSub")}</span>
-                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#1877f2", marginTop: 4 }}>
-                        {t("contact.facebookAction")} <ArrowUpRight size={12} />
-                     </span>
-                  </motion.a>
-
-                  <motion.a
-                     href="https://instagram.com/vidiverify"
-                     target="_blank" rel="noopener noreferrer"
-                     className="glass-card" variants={staggerItemSlow}
-                     whileHover={{ y: -4, borderColor: "rgba(225,48,108,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
-                  >
-                     <FaInstagram size={22} color="#E1306C" />
-                     <span style={{ fontSize: 11, fontWeight: 600, color: "#E1306C", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.instagram")}</span>
-                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>vidiverify</span>
-                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.instagramSub")}</span>
-                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#E1306C", marginTop: 4 }}>
-                        {t("contact.instagramAction")} <ArrowUpRight size={12} />
-                     </span>
-                  </motion.a>
-
-                  <motion.a
-                     href="https://x.com/VidiVerif"
-                     target="_blank" rel="noopener noreferrer"
-                     className="glass-card" variants={staggerItemSlow}
-                     whileHover={{ y: -4, borderColor: "rgba(231,231,234,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
-                  >
-                     <SiX size={20} color="#e7e7ea" />
-                     <span style={{ fontSize: 11, fontWeight: 600, color: "#e7e7ea", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.x")}</span>
-                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>VidiVerif</span>
-                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.xSub")}</span>
-                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#e7e7ea", marginTop: 4 }}>
-                        {t("contact.xAction")} <ArrowUpRight size={12} />
-                     </span>
-                  </motion.a>
-
-                  <motion.a
-                     href="https://www.tiktok.com/@vidiverify"
-                     target="_blank" rel="noopener noreferrer"
-                     className="glass-card" variants={staggerItemSlow}
-                     whileHover={{ y: -4, borderColor: "rgba(37,244,238,0.3)" }}
-                     style={{ ...tileStyle, justifyContent: "center", minHeight: tileMinHeight }}
-                  >
-                     <SiTiktok size={20} color="#25F4EE" />
-                     <span style={{ fontSize: 11, fontWeight: 600, color: "#25F4EE", textTransform: "uppercase", letterSpacing: "0.05em" }}>{t("contact.tiktok")}</span>
-                     <span style={{ fontSize: 18, fontWeight: 700, color: TEXT_PRIMARY }}>vidiverify</span>
-                     <span style={{ fontSize: 11, color: TEXT_MUTED }}>{t("contact.tiktokSub")}</span>
-                     <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, color: "#25F4EE", marginTop: 4 }}>
-                        {t("contact.tiktokAction")} <ArrowUpRight size={12} />
-                     </span>
-                  </motion.a>
-               </div>
-            </motion.div>
+            {/* ── FAQ zuerst: Wer Kontakt sucht, hat meist eine Frage ── */}
+            <FaqKarte isMobile={isMobile} />
 
             {/* ── Support divider ── */}
             <motion.div variants={staggerItemSlow} style={{ paddingTop: 4 }}>
@@ -222,6 +122,38 @@ const Contact = () => {
                      {t("contact.emailAction")} <ArrowUpRight size={12} />
                   </span>
                </motion.a>
+            </motion.div>
+            {/* ── Folgen: gedämpft auf eine Zeile ── */}
+            <motion.div variants={staggerItemSlow} style={{ paddingTop: 2 }}>
+               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ flex: 1, height: 1, background: GLASS_BORDER }} />
+                  <span style={{ fontSize: 11, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>{t("contact.followDivider")}</span>
+                  <div style={{ flex: 1, height: 1, background: GLASS_BORDER }} />
+               </div>
+            </motion.div>
+            <motion.div variants={staggerContainerSlow} style={{
+               display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(5, 1fr)", gap: 10,
+            }}>
+               {SOCIAL.map(({ href, Icon, farbe, name, handle }) => (
+                  <motion.a
+                     key={name}
+                     href={href}
+                     target="_blank" rel="noopener noreferrer"
+                     className="glass-card" variants={staggerItemSlow}
+                     whileHover={{ y: -3, borderColor: `${farbe}55` }}
+                     aria-label={`${name}: ${handle}`}
+                     style={{
+                        display: "flex", alignItems: "center", gap: 10,
+                        padding: "10px 12px", textDecoration: "none", cursor: "pointer",
+                     }}
+                  >
+                     <Icon size={17} color={farbe} style={{ flexShrink: 0 }} />
+                     <span style={{ minWidth: 0, display: "flex", flexDirection: "column" }}>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: farbe, textTransform: "uppercase", letterSpacing: "0.05em" }}>{name}</span>
+                        <span style={{ fontSize: 12.5, fontWeight: 600, color: TEXT_SECONDARY, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{handle}</span>
+                     </span>
+                  </motion.a>
+               ))}
             </motion.div>
          </motion.div>
       </PageSection>

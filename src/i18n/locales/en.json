@@ -568,7 +568,13 @@
       ],
       "emailLabel": "Email",
       "emailSub": "Support & inquiries",
-      "emailAction": "Write us"
+      "emailAction": "Write us",
+      "faqLabel": "Frequently asked",
+      "faqHeading": "Your answer may already be here",
+      "faqText": "{{n}} answers on checking, repair, formats, licensing and buying, searchable in seconds. Around the clock, no waiting.",
+      "faqAction": "Open FAQ",
+      "faqPopular": "Popular questions",
+      "followDivider": "Follow us"
    },
    "pricing": {
       "title": "Pricing & licensing",

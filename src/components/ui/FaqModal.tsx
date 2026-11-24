@@ -44,6 +44,13 @@ interface Faq {
 
 const SUPPORT_EMAIL = "support@vidiverify.de";
 
+/* Zweiter Ton neben Cyan: das Gelb des SmartScreen-Hinweises auf der
+ * Downloadseite (Wunsch des Anwenders 24.11.2026 - nicht zu dunkel, nicht
+ * einfarbig). */
+const GELB = "#f5c542";
+const gelb = (a: number) => `rgba(245,197,66,${a})`;
+const cyan = (a: number) => `rgba(106,172,204,${a})`;
+
 const frageId = (slug: string) => `faq-${slug}`;
 
 /** Für den Vergleich: klein, ohne Akzente (Suche „prufung" findet „Prüfung"). */
@@ -78,7 +85,7 @@ function markiere(text: string, begriffe: string[], schluessel: string): ReactNo
       if (von > ab) teile.push(text.slice(ab, von));
       teile.push(
          <mark key={`${schluessel}-m${i}`} style={{
-            background: "rgba(106,172,204,0.28)", color: TEXT_PRIMARY,
+            background: gelb(0.32), color: "#fff",
             borderRadius: 3, padding: "0 1px",
          }}>
             {text.slice(von, bis)}
@@ -168,6 +175,12 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
       if (!open) return;
       const box = scrollRef.current;
       if (box) box.scrollTop = 0;
+      // Ohne Zielfrage gleich ins Suchfeld - nur mit Maus, auf dem Telefon
+      // schöbe die Tastatur sonst das halbe Fenster weg.
+      if (!ziel && window.matchMedia("(pointer: fine)").matches) {
+         const zeit = window.setTimeout(() => suchRef.current?.focus(), 300);
+         return () => window.clearTimeout(zeit);
+      }
       if (ziel) {
          // Erst nach dem Aufklappen springen, sonst stimmt die Höhe nicht.
          const zeit = window.setTimeout(() => springe(scrollRef, frageId(ziel)), 350);
@@ -228,8 +241,11 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
       return (
          <div key={f.slug} id={frageId(f.slug)} style={{
             borderRadius: 12,
-            background: aufgeklappt ? "rgba(106,172,204,0.05)" : "rgba(10,12,28,0.45)",
-            border: `1px solid ${aufgeklappt ? "rgba(106,172,204,0.24)" : "rgba(106,172,204,0.1)"}`,
+            background: aufgeklappt
+               ? `linear-gradient(135deg, ${gelb(0.10)}, ${cyan(0.06)} 70%)`
+               : "rgba(255,255,255,0.035)",
+            border: `1px solid ${aufgeklappt ? gelb(0.38) : cyan(0.13)}`,
+            boxShadow: aufgeklappt ? `0 6px 22px ${gelb(0.07)}` : "none",
             transition: "background 0.15s, border-color 0.15s",
          }}>
             <button
@@ -245,7 +261,7 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                <span style={{ flex: 1, fontSize: 13, fontWeight: 700, color: TEXT_PRIMARY, lineHeight: 1.45 }}>
                   {markiere(f.q, begriffe, `${f.slug}-q`)}
                </span>
-               <ChevronDown size={15} color={CYAN} style={{
+               <ChevronDown size={15} color={aufgeklappt ? GELB : CYAN} style={{
                   flexShrink: 0, transition: "transform 0.2s",
                   transform: aufgeklappt ? "rotate(180deg)" : "none",
                }} />
@@ -291,8 +307,8 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                      width: "100%", maxWidth: 720,
                      height: "88vh",
                      display: "flex", flexDirection: "column",
-                     background: "rgba(14,16,36,0.97)",
-                     border: "1px solid rgba(106,172,204,0.18)",
+                     background: "linear-gradient(170deg, rgba(32,32,60,0.98), rgba(21,23,48,0.98) 50%, rgba(24,28,54,0.98))",
+                     border: `1px solid ${gelb(0.22)}`,
                      borderRadius: 20,
                      boxShadow: "0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(106,172,204,0.06)",
                      pointerEvents: "auto",
@@ -301,20 +317,21 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                      {/* Kopf */}
                      <div style={{
                         padding: "22px 28px 16px",
-                        borderBottom: "1px solid rgba(106,172,204,0.12)",
+                        borderBottom: `1px solid ${gelb(0.16)}`,
                         flexShrink: 0,
-                        background: "rgba(106,172,204,0.03)",
+                        background: `linear-gradient(115deg, ${gelb(0.11)}, ${cyan(0.06)} 55%, transparent)`,
                      }}>
                         <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
                            <div style={{
                               width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-                              background: "rgba(106,172,204,0.08)", border: "1px solid rgba(106,172,204,0.2)",
+                              background: gelb(0.13), border: `1px solid ${gelb(0.38)}`,
+                              boxShadow: `0 0 18px ${gelb(0.15)}`,
                               display: "flex", alignItems: "center", justifyContent: "center",
                            }}>
-                              <HelpCircle size={18} color={CYAN} />
+                              <HelpCircle size={18} color={GELB} />
                            </div>
                            <div style={{ flex: 1, minWidth: 0 }}>
-                              <p style={{ fontSize: 10, color: TEXT_MUTED, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, margin: 0, lineHeight: 1.4 }}>
+                              <p style={{ fontSize: 10, color: GELB, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 700, margin: 0, lineHeight: 1.4 }}>
                                  {daten.subtitle}
                               </p>
                               <h2 style={{ fontSize: 16, fontWeight: 800, color: TEXT_PRIMARY, margin: "4px 0 0" }}>
@@ -342,11 +359,12 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                         <div style={{
                            marginTop: 16, display: "flex", alignItems: "center", gap: 10,
                            padding: "0 12px", height: 40, borderRadius: 11,
-                           background: "rgba(10,12,28,0.7)",
-                           border: `1px solid ${sucht ? "rgba(106,172,204,0.45)" : "rgba(106,172,204,0.18)"}`,
-                           transition: "border-color 0.15s",
+                           background: `linear-gradient(90deg, ${gelb(0.09)}, ${cyan(0.07)})`,
+                           border: `1px solid ${sucht ? gelb(0.6) : gelb(0.28)}`,
+                           boxShadow: sucht ? `0 0 0 3px ${gelb(0.10)}` : "none",
+                           transition: "border-color 0.15s, box-shadow 0.15s",
                         }}>
-                           <Search size={15} color={sucht ? CYAN : TEXT_MUTED} style={{ flexShrink: 0 }} />
+                           <Search size={15} color={GELB} style={{ flexShrink: 0 }} />
                            <input
                               ref={suchRef}
                               type="text"
@@ -365,7 +383,7 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                               }}
                            />
                            {sucht && (
-                              <span style={{ fontSize: 11, color: CYAN, fontWeight: 600, whiteSpace: "nowrap" }}>
+                              <span style={{ fontSize: 11, color: GELB, fontWeight: 700, whiteSpace: "nowrap" }}>
                                  {daten.hits.replace("{n}", String(trefferzahl))}
                               </span>
                            )}
@@ -408,16 +426,22 @@ const FaqModal = ({ open, onClose, ziel }: Props) => {
                            </p>
                         )}
 
-                        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                            {sichtbar.map((sec) => (
-                              <div key={sec.id} id={abschnittId(sec.id)} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                              <div key={sec.id} id={abschnittId(sec.id)} style={{
+                                 display: "flex", flexDirection: "column", gap: 10,
+                                 padding: "16px 16px 12px", borderRadius: 16,
+                                 background: `linear-gradient(160deg, ${gelb(0.07)}, ${cyan(0.04)} 55%, rgba(255,255,255,0.015))`,
+                                 border: `1px solid ${gelb(0.15)}`,
+                              }}>
                                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 2 }}>
                                     <div style={{
                                        flexShrink: 0, width: 28, height: 28, borderRadius: 8,
-                                       background: "rgba(106,172,204,0.07)", border: "1px solid rgba(106,172,204,0.15)",
+                                       background: `linear-gradient(135deg, ${GELB}, #e0a526)`,
+                                       boxShadow: `0 0 14px ${gelb(0.25)}`,
                                        display: "flex", alignItems: "center", justifyContent: "center",
                                     }}>
-                                       <span style={{ fontSize: 10, fontWeight: 800, color: CYAN }}>{sec.id}</span>
+                                       <span style={{ fontSize: 11, fontWeight: 900, color: "#1a1a2e" }}>{sec.id}</span>
                                     </div>
                                     <h3 style={{ fontSize: 14, fontWeight: 800, color: TEXT_PRIMARY, margin: 0 }}>
                                        {sec.title}

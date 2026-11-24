@@ -568,7 +568,13 @@
       ],
       "emailLabel": "Email",
       "emailSub": "Support & Anfragen",
-      "emailAction": "Schreiben"
+      "emailAction": "Schreiben",
+      "faqLabel": "Häufige Fragen",
+      "faqHeading": "Die Antwort ist oft schon da",
+      "faqText": "{{n}} Antworten zu Prüfung, Reparatur, Formaten, Lizenz und Kauf, durchsuchbar in Sekunden. Rund um die Uhr und ohne Wartezeit.",
+      "faqAction": "FAQ öffnen",
+      "faqPopular": "Oft gefragt",
+      "followDivider": "Folgen"
    },
    "pricing": {
       "title": "Preise & Lizenzen",
